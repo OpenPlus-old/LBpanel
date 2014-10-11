@@ -1,0 +1,15 @@
+#!/bin/sh
+ echo " ----- script de control para emu mbox.04.0023.4 -----" 
+
+  while [ 1 ] ; do
+  pidof mbox.04.0023.4 >/dev/null
+  if [ $? -eq 0 ] ; then
+    echo " OK"
+  else
+    DATE=$(date) 
+    echo "Restarting mbox.04.0023.4 : " >> /tmp/check_mbox.04.0023.4.log
+    /usr/CamEmu/camemu.mbox.04.0023.4 restart
+ fi
+
+ sleep 60
+ done

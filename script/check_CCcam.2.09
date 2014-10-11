@@ -1,0 +1,15 @@
+#!/bin/sh
+ echo " ----- script de control para emu CCcam.2.09 -----" 
+
+  while [ 1 ] ; do
+  pidof CCcam.2.09 >/dev/null
+  if [ $? -eq 0 ] ; then
+    echo " OK"
+  else
+    DATE=$(date) 
+    echo "Restarting CCcam.2.09 : " >> /tmp/check_CCcam.2.09.log
+    /usr/CamEmu/camemu.CCcam.2.09 restart
+ fi
+
+ sleep 60
+ done
