@@ -83,32 +83,32 @@ def _(txt):
 		t = gettext.gettext(txt)
 	return t
 ######################################################################################
-config.plugins.epanel = ConfigSubsection()
-config.plugins.epanel.scriptpath = ConfigSelection(default = "/usr/CamEmu/script/", choices = [
+config.plugins.lbpanel = ConfigSubsection()
+config.plugins.lbpanel.scriptpath = ConfigSelection(default = "/usr/CamEmu/script/", choices = [
 		("/usr/CamEmu/script/", _("/usr/CamEmu/script/")),
 		("/media/hdd/script/", _("/media/hdd/script/")),
 		("/media/usb/script/", _("/media/usb/script/")),
 ])
-config.plugins.epanel.scriptpath1 = ConfigSelection(default = "/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/script/libmem/", choices = [
+config.plugins.lbpanel.scriptpath1 = ConfigSelection(default = "/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/script/libmem/", choices = [
 		("/usr/script/", _("/usr/script/")),
 		("/media/hdd/script/", _("/media/hdd/script/")),
 		("/media/usb/script/", _("/media/usb/script/")),
 ])
-config.plugins.epanel.direct = ConfigSelection(default = "/media/hdd/", choices = [
+config.plugins.lbpanel.direct = ConfigSelection(default = "/media/hdd/", choices = [
 		("/media/hdd/", _("/media/hdd/")),
 		("/media/usb/", _("/media/usb/")),
 		("/usr/share/enigma2/", _("/usr/share/enigma2/")),
 		("/media/cf/", _("/media/cf/")),
 ])
-config.plugins.epanel.auto = ConfigSelection(default = "no", choices = [
+config.plugins.lbpanel.auto = ConfigSelection(default = "no", choices = [
 		("no", _("no")),
 		("yes", _("yes")),
 		])
-config.plugins.epanel.lang = ConfigSelection(default = "es", choices = [
+config.plugins.lbpanel.lang = ConfigSelection(default = "es", choices = [
 		("es", _("spain d+")),
 		])
-config.plugins.epanel.epgtime = ConfigClock(default = ((16*60) + 15) * 60) # 18:15
-#config.plugins.epanel.weekday = ConfigSelection(default = "01", choices = [
+config.plugins.lbpanel.epgtime = ConfigClock(default = ((16*60) + 15) * 60) # 18:15
+#config.plugins.lbpanel.weekday = ConfigSelection(default = "01", choices = [
 #		("00", _("Mo")),
 #		("01", _("Tu")),
 #		("02", _("We")),
@@ -118,7 +118,7 @@ config.plugins.epanel.epgtime = ConfigClock(default = ((16*60) + 15) * 60) # 18:
 #		("06", _("Su")),
 #		])
 ######################################################################
-config.plugins.epanel.min = ConfigSelection(default = "*", choices = [
+config.plugins.lbpanel.min = ConfigSelection(default = "*", choices = [
 		("*", "*"),
 		("5", "5"),
 		("10", "10"),
@@ -132,7 +132,7 @@ config.plugins.epanel.min = ConfigSelection(default = "*", choices = [
 		("50", "50"),
 		("55", "55"),
 		])
-config.plugins.epanel.hour = ConfigSelection(default = "*", choices = [
+config.plugins.lbpanel.hour = ConfigSelection(default = "*", choices = [
 		("*", "*"),
 		("0", "0"),
 		("1", "1"),
@@ -159,7 +159,7 @@ config.plugins.epanel.hour = ConfigSelection(default = "*", choices = [
 		("22", "22"),
 		("23", "23"),
 		])
-config.plugins.epanel.dayofmonth = ConfigSelection(default = "*", choices = [
+config.plugins.lbpanel.dayofmonth = ConfigSelection(default = "*", choices = [
 		("*", "*"),
 		("1", "1"),
 		("2", "2"),
@@ -193,7 +193,7 @@ config.plugins.epanel.dayofmonth = ConfigSelection(default = "*", choices = [
 		("30", "30"),
 		("31", "31"),
 		])
-config.plugins.epanel.month = ConfigSelection(default = "*", choices = [
+config.plugins.lbpanel.month = ConfigSelection(default = "*", choices = [
 		("*", "*"),
 		("1", _("Jan.")),
 		("2", _("Feb.")),
@@ -208,7 +208,7 @@ config.plugins.epanel.month = ConfigSelection(default = "*", choices = [
 		("11", _("Nov.")),
 		("12", _("Dec.")),
 		])
-config.plugins.epanel.dayofweek = ConfigSelection(default = "*", choices = [
+config.plugins.lbpanel.dayofweek = ConfigSelection(default = "*", choices = [
 		("*", "*"),
 		("0", _("Su")),
 		("1", _("Mo")),
@@ -218,8 +218,8 @@ config.plugins.epanel.dayofweek = ConfigSelection(default = "*", choices = [
 		("5", _("Fr")),
 		("6", _("Sa")),
 		])
-config.plugins.epanel.command = ConfigText(default="/usr/bin/", visible_width = 70, fixed_size = False)
-config.plugins.epanel.every = ConfigSelection(default = "0", choices = [
+config.plugins.lbpanel.command = ConfigText(default="/usr/bin/", visible_width = 70, fixed_size = False)
+config.plugins.lbpanel.every = ConfigSelection(default = "0", choices = [
 		("0", _("No")),
 		("1", _("Min")),
 		("2", _("Hour")),
@@ -228,12 +228,12 @@ config.plugins.epanel.every = ConfigSelection(default = "0", choices = [
 		("5", _("Day of week")),
 		])
 ######################################################################################
-config.plugins.epanel.manual = ConfigSelection(default = "0", choices = [
+config.plugins.lbpanel.manual = ConfigSelection(default = "0", choices = [
 		("0", _("Auto")),
 		("1", _("Manual")),
 		])
-config.plugins.epanel.manualserver = ConfigText(default="ntp.ubuntu.com", visible_width = 70, fixed_size = False)
-config.plugins.epanel.server = ConfigSelection(default = "es.pool.ntp.org", choices = [
+config.plugins.lbpanel.manualserver = ConfigText(default="ntp.ubuntu.com", visible_width = 70, fixed_size = False)
+config.plugins.lbpanel.server = ConfigSelection(default = "es.pool.ntp.org", choices = [
 		("ao.pool.ntp.org",_("Angola")),
 		("mg.pool.ntp.org",_("Madagascar")),
 		("za.pool.ntp.org",_("South Africa")),
@@ -301,26 +301,26 @@ config.plugins.epanel.server = ConfigSelection(default = "es.pool.ntp.org", choi
 		("br.pool.ntp.org",_("Brazil")),
 		("cl.pool.ntp.org",_("Chile")),
 		])
-config.plugins.epanel.onoff = ConfigSelection(default = "0", choices = [
+config.plugins.lbpanel.onoff = ConfigSelection(default = "0", choices = [
 		("0", _("No")),
 		("1", _("Yes")),
 		])
-config.plugins.epanel.time = ConfigSelection(default = "30", choices = [
+config.plugins.lbpanel.time = ConfigSelection(default = "30", choices = [
 		("30", _("30 min")),
 		("1", _("60 min")),
 		("2", _("120 min")),
 		("3", _("180 min")),
 		("4", _("240 min")),
 		])
-config.plugins.epanel.TransponderTime = ConfigSelection(default = "0", choices = [
+config.plugins.lbpanel.TransponderTime = ConfigSelection(default = "0", choices = [
 		("0", _("Off")),
 		("1", _("On")),
 		])
-config.plugins.epanel.cold = ConfigSelection(default = "0", choices = [
+config.plugins.lbpanel.cold = ConfigSelection(default = "0", choices = [
 		("0", _("No")),
 		("1", _("Yes")),
 		])
-config.plugins.epanel.autosave = ConfigSelection(default = '0', choices = [
+config.plugins.lbpanel.autosave = ConfigSelection(default = '0', choices = [
 		('0', _("Off")),
 		('29', _("30 min")),
 		('59', _("60 min")),
@@ -328,38 +328,38 @@ config.plugins.epanel.autosave = ConfigSelection(default = '0', choices = [
 		('179', _("180 min")),
 		('239', _("240 min")),
 		])
-config.plugins.epanel.autobackup = ConfigYesNo(default = False)
+config.plugins.lbpanel.autobackup = ConfigYesNo(default = False)
 ######################################################################################
 ## lbscan section
-config.plugins.epanel.checkauto = ConfigSelection(default = "no", choices = [
+config.plugins.lbpanel.checkauto = ConfigSelection(default = "no", choices = [
                ("yes", _("Yes")),
                ("no", _("No")), 
 ])
-config.plugins.epanel.autocheck = ConfigSelection(default = "yes", choices = [
+config.plugins.lbpanel.autocheck = ConfigSelection(default = "yes", choices = [
                ("yes", _("Yes")),   
                ("no", _("No")),    
  ])
 
-config.plugins.epanel.checktype = ConfigSelection(default = "fast", choices = [
+config.plugins.lbpanel.checktype = ConfigSelection(default = "fast", choices = [
                ("fast", _("Fast")),   
                ("full", _("Full")),    
                ])
                               
-config.plugins.epanel.checkhour = ConfigClock(default = ((18*60) + 30) * 60) # 20:30
+config.plugins.lbpanel.checkhour = ConfigClock(default = ((18*60) + 30) * 60) # 20:30
 
-config.plugins.epanel.checkoff = ConfigSelection(default = "yes", choices = [
+config.plugins.lbpanel.checkoff = ConfigSelection(default = "yes", choices = [
                ("yes", _("Yes")),
                ("no", _("No")), 
 ])
-config.plugins.epanel.lbemail = ConfigYesNo(default = False)
-config.plugins.epanel.warnonlyemail = ConfigSelection(default = "yes", choices = [
+config.plugins.lbpanel.lbemail = ConfigYesNo(default = False)
+config.plugins.lbpanel.warnonlyemail = ConfigSelection(default = "yes", choices = [
                ("yes", _("Yes")),   
                ("no", _("No")), 
 ])                              
-config.plugins.epanel.lbemailto = ConfigText(default = "correo@gmail.com",fixed_size = False, visible_width=30) 
-config.plugins.epanel.smtpserver = ConfigText(default = "smtp.gmail.com:587",fixed_size = False, visible_width=30)
-config.plugins.epanel.smtpuser = ConfigText(default = "yo@gmail.com",fixed_size = False, visible_width=30)
-config.plugins.epanel.smtppass = ConfigPassword(default = "mailpass",fixed_size = False, visible_width=15)
+config.plugins.lbpanel.lbemailto = ConfigText(default = "correo@gmail.com",fixed_size = False, visible_width=30) 
+config.plugins.lbpanel.smtpserver = ConfigText(default = "smtp.gmail.com:587",fixed_size = False, visible_width=30)
+config.plugins.lbpanel.smtpuser = ConfigText(default = "yo@gmail.com",fixed_size = False, visible_width=30)
+config.plugins.lbpanel.smtppass = ConfigPassword(default = "mailpass",fixed_size = False, visible_width=15)
 
 #####################################################################################
 
@@ -769,7 +769,7 @@ class ScriptScreen(Screen):
 	def scrpit_menu(self):
 		list = []
 		try:
-			list = os.listdir("%s" % config.plugins.epanel.scriptpath.value[:-1])
+			list = os.listdir("%s" % config.plugins.lbpanel.scriptpath.value[:-1])
 			list = [x[:-3] for x in list if x.endswith('.sh')]
 		except:
 			list = []
@@ -779,7 +779,7 @@ class ScriptScreen(Screen):
 	def run(self):
 		script = self["list"].getCurrent()
 		if script is not None:
-			name = ("%s%s.sh" % (config.plugins.epanel.scriptpath.value, script))
+			name = ("%s%s.sh" % (config.plugins.lbpanel.scriptpath.value, script))
 			os.chmod(name, 0755)
 			self.session.open(Console, script.replace("_", " "), cmdlist=[name])
 			
@@ -804,7 +804,7 @@ class ConfigScript(ConfigListScreen, Screen):
 		Screen.__init__(self, session)
 		self.setTitle(_("Config script Executer"))
 		self.list = []
-		self.list.append(getConfigListEntry(_("Set script path"), config.plugins.epanel.scriptpath))
+		self.list.append(getConfigListEntry(_("Set script path"), config.plugins.lbpanel.scriptpath))
 		ConfigListScreen.__init__(self, self.list)
 		self["key_red"] = StaticText(_("Close"))
 		self["key_green"] = StaticText(_("Save"))
@@ -820,12 +820,12 @@ class ConfigScript(ConfigListScreen, Screen):
 		self.close()
 		
 	def save(self):
-		if not os.path.exists(config.plugins.epanel.scriptpath.value):
+		if not os.path.exists(config.plugins.lbpanel.scriptpath.value):
 			try:
-				os.system("mkdir %s" % config.plugins.epanel.scriptpath.value)
+				os.system("mkdir %s" % config.plugins.lbpanel.scriptpath.value)
 			except:
 				pass
-		config.plugins.epanel.scriptpath.save()
+		config.plugins.lbpanel.scriptpath.save()
 		configfile.save()
 		self.mbox = self.session.open(MessageBox,(_("configuration is saved")), MessageBox.TYPE_INFO, timeout = 4 )
 ########################################################################
@@ -865,13 +865,13 @@ class NTPScreen(ConfigListScreen, Screen):
 		
 	def cfgMenu(self):
 		self.list = []
-		self.list.append(getConfigListEntry(_("Actualizar NTP"), config.plugins.epanel.onoff))
-		self.list.append(getConfigListEntry(_("Ajustar Hora Actualizacion"), config.plugins.epanel.time))
-		self.list.append(getConfigListEntry(_("Ajustar Hora Transpondedor"), config.plugins.epanel.TransponderTime))
-		self.list.append(getConfigListEntry(_("Sincronizacion en arranque"), config.plugins.epanel.cold))
-		self.list.append(getConfigListEntry(_("Modo Servidor"), config.plugins.epanel.manual))
-		self.list.append(getConfigListEntry(_("Seleccionar zona horaria"), config.plugins.epanel.server))
-		self.list.append(getConfigListEntry(_("Elejir Servidor ntp"), config.plugins.epanel.manualserver))
+		self.list.append(getConfigListEntry(_("Actualizar NTP"), config.plugins.lbpanel.onoff))
+		self.list.append(getConfigListEntry(_("Ajustar Hora Actualizacion"), config.plugins.lbpanel.time))
+		self.list.append(getConfigListEntry(_("Ajustar Hora Transpondedor"), config.plugins.lbpanel.TransponderTime))
+		self.list.append(getConfigListEntry(_("Sincronizacion en arranque"), config.plugins.lbpanel.cold))
+		self.list.append(getConfigListEntry(_("Modo Servidor"), config.plugins.lbpanel.manual))
+		self.list.append(getConfigListEntry(_("Seleccionar zona horaria"), config.plugins.lbpanel.server))
+		self.list.append(getConfigListEntry(_("Elejir Servidor ntp"), config.plugins.lbpanel.manualserver))
 		ConfigListScreen.__init__(self, self.list)
 		
 	def cancel(self):
@@ -884,41 +884,41 @@ class NTPScreen(ConfigListScreen, Screen):
 	
 	def save(self):
 		path = "/etc/cron/crontabs/root"
-		if config.plugins.epanel.onoff.value == "0":
+		if config.plugins.lbpanel.onoff.value == "0":
 			if fileExists(path):
 				os.system("sed -i '/ntp./d' %s" % path)
-		if config.plugins.epanel.onoff.value == "1":
+		if config.plugins.lbpanel.onoff.value == "1":
 			if fileExists(path):
 				os.system("sed -i '/ntp./d' %s" % path)
-			if config.plugins.epanel.manual.value == "0":
-				if config.plugins.epanel.time.value == "30":
-					os.system("echo -e '/%s * * * * /usr/bin/ntpdate -s -u %s' >> %s" % (config.plugins.epanel.time.value, config.plugins.epanel.server.value, path))
+			if config.plugins.lbpanel.manual.value == "0":
+				if config.plugins.lbpanel.time.value == "30":
+					os.system("echo -e '/%s * * * * /usr/bin/ntpdate -s -u %s' >> %s" % (config.plugins.lbpanel.time.value, config.plugins.lbpanel.server.value, path))
 				else:
-					os.system("echo -e '* /%s * * * /usr/bin/ntpdate -s -u %s' >> %s" % (config.plugins.epanel.time.value, config.plugins.epanel.server.value, path))
+					os.system("echo -e '* /%s * * * /usr/bin/ntpdate -s -u %s' >> %s" % (config.plugins.lbpanel.time.value, config.plugins.lbpanel.server.value, path))
 			else:
-				if config.plugins.epanel.time.value == "30":
-					os.system("echo -e '/%s * * * * /usr/bin/ntpdate -s -u %s' >> %s" % (config.plugins.epanel.time.value, config.plugins.epanel.manualserver.value, path))
+				if config.plugins.lbpanel.time.value == "30":
+					os.system("echo -e '/%s * * * * /usr/bin/ntpdate -s -u %s' >> %s" % (config.plugins.lbpanel.time.value, config.plugins.lbpanel.manualserver.value, path))
 				else:
-					os.system("echo -e '* /%s * * * /usr/bin/ntpdate -s -u %s' >> %s" % (config.plugins.epanel.time.value, config.plugins.epanel.manualserver.value, path))
+					os.system("echo -e '* /%s * * * /usr/bin/ntpdate -s -u %s' >> %s" % (config.plugins.lbpanel.time.value, config.plugins.lbpanel.manualserver.value, path))
 		os.system("echo -e 'root' >> /etc/cron/crontabs/cron.update")
 		if fileExists(path):
 			os.chmod("%s" % path, 0644)
-		if config.plugins.epanel.TransponderTime.value == "0": 
+		if config.plugins.lbpanel.TransponderTime.value == "0": 
 			config.misc.useTransponderTime.value = False
 			config.misc.useTransponderTime.save()
 		else:
 			config.misc.useTransponderTime.value = True
 			config.misc.useTransponderTime.save()
-		if config.plugins.epanel.cold.value == "0":
+		if config.plugins.lbpanel.cold.value == "0":
 			if fileExists("/etc/rcS.d/S42ntpdate.sh"):
 				os.unlink("/etc/rcS.d/S42ntpdate.sh")
 		else:
 			os.system("tar -C/ -xzpvf /usr/lib/enigma2/python/Plugins/Extensions/LBpanel/ntpdate.tar.gz")
 			if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/ntpdate.sh"):
-				if config.plugins.epanel.manual.value == "0":
-					os.system("sed -i 's/ntp_server/%s/g' /usr/lib/enigma2/python/Plugins/Extensions/LBpanel/ntpdate.sh" % config.plugins.epanel.server.value)
+				if config.plugins.lbpanel.manual.value == "0":
+					os.system("sed -i 's/ntp_server/%s/g' /usr/lib/enigma2/python/Plugins/Extensions/LBpanel/ntpdate.sh" % config.plugins.lbpanel.server.value)
 				else:
-					os.system("sed -i 's/ntp_server/%s/g' /usr/lib/enigma2/python/Plugins/Extensions/LBpanel/ntpdate.sh" % config.plugins.epanel.manualserver.value)
+					os.system("sed -i 's/ntp_server/%s/g' /usr/lib/enigma2/python/Plugins/Extensions/LBpanel/ntpdate.sh" % config.plugins.lbpanel.manualserver.value)
 			if not fileExists("/etc/rcS.d/S42ntpdate.sh"):
 				os.symlink("/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/ntpdate.sh", "/etc/rcS.d/S42ntpdate.sh")
 				os.chmod("/etc/rcS.d/S42ntpdate.sh", 0777)
@@ -1373,12 +1373,12 @@ class epgdn(ConfigListScreen, Screen):
 		Screen.__init__(self, session)
 		self.setTitle(_("EPG D+ LINUX-BOX.ES"))
 		self.list = []
-		self.list.append(getConfigListEntry(_("Seleccione donde guardar epg.dat"), config.plugins.epanel.direct))
-		self.list.append(getConfigListEntry(_("Seleccion D+ epg"), config.plugins.epanel.lang))
-		self.list.append(getConfigListEntry(_("Activar Autodescarga epg.dat"), config.plugins.epanel.auto))
-		self.list.append(getConfigListEntry(_("Hora de autodescarga"), config.plugins.epanel.epgtime))
-		self.list.append(getConfigListEntry(_("Guardar y carga EPG automatica"), config.plugins.epanel.autosave))
-		self.list.append(getConfigListEntry(_("Guardar copia en ../epgtmp.gz"), config.plugins.epanel.autobackup))
+		self.list.append(getConfigListEntry(_("Seleccione donde guardar epg.dat"), config.plugins.lbpanel.direct))
+		self.list.append(getConfigListEntry(_("Seleccion D+ epg"), config.plugins.lbpanel.lang))
+		self.list.append(getConfigListEntry(_("Activar Autodescarga epg.dat"), config.plugins.lbpanel.auto))
+		self.list.append(getConfigListEntry(_("Hora de autodescarga"), config.plugins.lbpanel.epgtime))
+		self.list.append(getConfigListEntry(_("Guardar y carga EPG automatica"), config.plugins.lbpanel.autosave))
+		self.list.append(getConfigListEntry(_("Guardar copia en ../epgtmp.gz"), config.plugins.lbpanel.autobackup))
 		ConfigListScreen.__init__(self, self.list)
 		self["key_red"] = StaticText(_("Close"))
 		self["key_green"] = StaticText(_("Save"))
@@ -1396,15 +1396,15 @@ class epgdn(ConfigListScreen, Screen):
 		
 	def downepg(self):
 		try:
-			os.system("wget -q http://www.linux-box.es/epg/epg.dat.gz -O %sepg.dat.gz" % (config.plugins.epanel.direct.value))
-			if fileExists("%sepg.dat" % config.plugins.epanel.direct.value):
-				os.unlink("%sepg.dat" % config.plugins.epanel.direct.value)
-				os.system("rm -f %sepg.dat" % config.plugins.epanel.direct.value)
-			if not os.path.exists("%sepgtmp" % config.plugins.epanel.direct.value):
-				os.system("mkdir -p %sepgtmp" % config.plugins.epanel.direct.value)
-			os.system("cp -f %sepg.dat.gz %sepgtmp" % (config.plugins.epanel.direct.value, config.plugins.epanel.direct.value))
-			os.system("gzip -df %sepg.dat.gz" % config.plugins.epanel.direct.value)
-			os.chmod("%sepg.dat" % config.plugins.epanel.direct.value, 0644)
+			os.system("wget -q http://www.linux-box.es/epg/epg.dat.gz -O %sepg.dat.gz" % (config.plugins.lbpanel.direct.value))
+			if fileExists("%sepg.dat" % config.plugins.lbpanel.direct.value):
+				os.unlink("%sepg.dat" % config.plugins.lbpanel.direct.value)
+				os.system("rm -f %sepg.dat" % config.plugins.lbpanel.direct.value)
+			if not os.path.exists("%sepgtmp" % config.plugins.lbpanel.direct.value):
+				os.system("mkdir -p %sepgtmp" % config.plugins.lbpanel.direct.value)
+			os.system("cp -f %sepg.dat.gz %sepgtmp" % (config.plugins.lbpanel.direct.value, config.plugins.lbpanel.direct.value))
+			os.system("gzip -df %sepg.dat.gz" % config.plugins.lbpanel.direct.value)
+			os.chmod("%sepg.dat" % config.plugins.lbpanel.direct.value, 0644)
 			self.mbox = self.session.open(MessageBox,(_("EPG downloaded")), MessageBox.TYPE_INFO, timeout = 4 )
 			epgcache = new.instancemethod(_enigma.eEPGCache_load,None,eEPGCache)
 			epgcache = eEPGCache.getInstance().load()
@@ -1417,14 +1417,14 @@ class epgdn(ConfigListScreen, Screen):
 		self.close(False)
 	
 	def save(self):
-		config.misc.epgcache_filename.value = ("%sepg.dat" % config.plugins.epanel.direct.value)
+		config.misc.epgcache_filename.value = ("%sepg.dat" % config.plugins.lbpanel.direct.value)
 		config.misc.epgcache_filename.save()
-		config.plugins.epanel.epgtime.save()
-		config.plugins.epanel.lang.save()
-		config.plugins.epanel.direct.save()
-		config.plugins.epanel.auto.save()
-		config.plugins.epanel.autosave.save()
-		config.plugins.epanel.autobackup.save()
+		config.plugins.lbpanel.epgtime.save()
+		config.plugins.lbpanel.lang.save()
+		config.plugins.lbpanel.direct.save()
+		config.plugins.lbpanel.auto.save()
+		config.plugins.lbpanel.autosave.save()
+		config.plugins.lbpanel.autobackup.save()
 		configfile.save()
 		self.mbox = self.session.open(MessageBox,(_("configuration is saved")), MessageBox.TYPE_INFO, timeout = 4 )
 ################################################################################################################
@@ -1466,10 +1466,10 @@ class epgdmanual(Screen):
 ################################################################################################################
 	def reload(self):
 		try:
-			if fileExists("%sepgtmp/epg.dat.gz" % config.plugins.epanel.direct.value):
-				os.system("cp -f %sepgtmp/epg.dat.gz %s" % (config.plugins.epanel.direct.value, config.plugins.epanel.direct.value))
-				os.system("gzip -df %sepg.dat.gz" % config.plugins.epanel.direct.value)
-				os.chmod("%sepg.dat" % config.plugins.epanel.direct.value, 0644)
+			if fileExists("%sepgtmp/epg.dat.gz" % config.plugins.lbpanel.direct.value):
+				os.system("cp -f %sepgtmp/epg.dat.gz %s" % (config.plugins.lbpanel.direct.value, config.plugins.lbpanel.direct.value))
+				os.system("gzip -df %sepg.dat.gz" % config.plugins.lbpanel.direct.value)
+				os.chmod("%sepg.dat" % config.plugins.lbpanel.direct.value, 0644)
 			epgcache = new.instancemethod(_enigma.eEPGCache_load,None,eEPGCache)
 			epgcache = eEPGCache.getInstance().load()
 			self.mbox = self.session.open(MessageBox,(_("epg.dat reloaded")), MessageBox.TYPE_INFO, timeout = 4 )
@@ -1578,13 +1578,13 @@ class CrontabManAdd(ConfigListScreen, Screen):
 		Screen.__init__(self, session)
 		self.setTitle(_("add tabs"))
 		self.list = []
-		self.list.append(getConfigListEntry(_("Min"), config.plugins.epanel.min))
-		self.list.append(getConfigListEntry(_("Hour"), config.plugins.epanel.hour))
-		self.list.append(getConfigListEntry(_("Day of month"), config.plugins.epanel.dayofmonth))
-		self.list.append(getConfigListEntry(_("Month"), config.plugins.epanel.month))
-		self.list.append(getConfigListEntry(_("Day of week"), config.plugins.epanel.dayofweek))
-		self.list.append(getConfigListEntry(_("Command"), config.plugins.epanel.command))
-		self.list.append(getConfigListEntry(_("Every"), config.plugins.epanel.every))
+		self.list.append(getConfigListEntry(_("Min"), config.plugins.lbpanel.min))
+		self.list.append(getConfigListEntry(_("Hour"), config.plugins.lbpanel.hour))
+		self.list.append(getConfigListEntry(_("Day of month"), config.plugins.lbpanel.dayofmonth))
+		self.list.append(getConfigListEntry(_("Month"), config.plugins.lbpanel.month))
+		self.list.append(getConfigListEntry(_("Day of week"), config.plugins.lbpanel.dayofweek))
+		self.list.append(getConfigListEntry(_("Command"), config.plugins.lbpanel.command))
+		self.list.append(getConfigListEntry(_("Every"), config.plugins.lbpanel.every))
 		ConfigListScreen.__init__(self, self.list)
 		self["key_red"] = StaticText(_("Close"))
 		self["key_green"] = StaticText(_("Add"))
@@ -1608,26 +1608,26 @@ class CrontabManAdd(ConfigListScreen, Screen):
 		everydayofmonth = ""
 		everymonth = ""
 		everydayofweek = ""
-		if config.plugins.epanel.min.value != '*' and config.plugins.epanel.every.value == '1':
+		if config.plugins.lbpanel.min.value != '*' and config.plugins.lbpanel.every.value == '1':
 			everymin = '/'
-		elif config.plugins.epanel.hour.value != '*' and config.plugins.epanel.every.value == '2':
+		elif config.plugins.lbpanel.hour.value != '*' and config.plugins.lbpanel.every.value == '2':
 			everyhour = '/'
-		elif config.plugins.epanel.dayofmonth.value != '*' and config.plugins.epanel.every.value == '3':
+		elif config.plugins.lbpanel.dayofmonth.value != '*' and config.plugins.lbpanel.every.value == '3':
 			everydayofmonth = '/'
-		elif config.plugins.epanel.month.value != '*' and config.plugins.epanel.every.value == '4':
+		elif config.plugins.lbpanel.month.value != '*' and config.plugins.lbpanel.every.value == '4':
 			everymonth = '/'
-		elif config.plugins.epanel.dayofweek.value != '*' and config.plugins.epanel.every.value == '5':
+		elif config.plugins.lbpanel.dayofweek.value != '*' and config.plugins.lbpanel.every.value == '5':
 			everydayofweek = '/'
 			
-		if config.plugins.epanel.min.value == '*' and config.plugins.epanel.hour.value == '*' and config.plugins.epanel.dayofmonth.value == '*' and config.plugins.epanel.month.value == '*' and  config.plugins.epanel.dayofweek.value == '*':
+		if config.plugins.lbpanel.min.value == '*' and config.plugins.lbpanel.hour.value == '*' and config.plugins.lbpanel.dayofmonth.value == '*' and config.plugins.lbpanel.month.value == '*' and  config.plugins.lbpanel.dayofweek.value == '*':
 			print ("error")
 		else:
-			os.system("echo -e '%s%s %s%s %s%s %s%s %s%s    %s' >> /etc/cron/crontabs/root" % (everymin, config.plugins.epanel.min.value,
-																				everyhour, config.plugins.epanel.hour.value, 
-																				everydayofmonth, config.plugins.epanel.dayofmonth.value,
-																				everymonth, config.plugins.epanel.month.value,
-																				everydayofweek, config.plugins.epanel.dayofweek.value,
-																				config.plugins.epanel.command.value))
+			os.system("echo -e '%s%s %s%s %s%s %s%s %s%s    %s' >> /etc/cron/crontabs/root" % (everymin, config.plugins.lbpanel.min.value,
+																				everyhour, config.plugins.lbpanel.hour.value, 
+																				everydayofmonth, config.plugins.lbpanel.dayofmonth.value,
+																				everymonth, config.plugins.lbpanel.month.value,
+																				everydayofweek, config.plugins.lbpanel.dayofweek.value,
+																				config.plugins.lbpanel.command.value))
 		os.system("echo -e 'root' >> /etc/cron/crontabs/cron.update")
 		for i in self["config"].list:
 			i[1].cancel()
@@ -1693,7 +1693,7 @@ class Libermen(Screen):
 	def scrpit_menu(self):
 		list = []
 		try:
-			list = os.listdir("%s" % config.plugins.epanel.scriptpath1.value[:-1])
+			list = os.listdir("%s" % config.plugins.lbpanel.scriptpath1.value[:-1])
 			list = [x[:-3] for x in list if x.endswith('.sh')]
 		except:
 			list = []
@@ -1703,7 +1703,7 @@ class Libermen(Screen):
 	def run(self):
 		script = self["list"].getCurrent()
 		if script is not None:
-			name = ("%s%s.sh" % (config.plugins.epanel.scriptpath1.value, script))
+			name = ("%s%s.sh" % (config.plugins.lbpanel.scriptpath1.value, script))
 			os.chmod(name, 0755)
 			self.session.open(Console, script.replace("_", " "), cmdlist=[name])
 			
@@ -1735,17 +1735,17 @@ class scanhost(ConfigListScreen, Screen):
 		Screen.__init__(self, session)
 		self.setTitle(_("SCAN PEER LINUX-BOX.ES"))
 		self.list = []
-		self.list.append(getConfigListEntry(_("Test diario automatico"), config.plugins.epanel.checkauto))
-		self.list.append(getConfigListEntry(_("Hora test"), config.plugins.epanel.checkhour))
-		self.list.append(getConfigListEntry(_("Desactivar lineas con fallos"), config.plugins.epanel.checkoff))
-		self.list.append(getConfigListEntry(_("Tipo de scan"), config.plugins.epanel.checktype))
-		self.list.append(getConfigListEntry(_("Auto scan localhost"), config.plugins.epanel.autocheck))
-		self.list.append(getConfigListEntry(_("Enviar email con resultados"), config.plugins.epanel.lbemail))
-		self.list.append(getConfigListEntry(_("Email solo si hay peligros"), config.plugins.epanel.warnonlyemail))
-		self.list.append(getConfigListEntry(_("Enviar el reporte a: (email)"), config.plugins.epanel.lbemailto))
-		self.list.append(getConfigListEntry(_("Servidor smtp"), config.plugins.epanel.smtpserver))
-		self.list.append(getConfigListEntry(_("Usuario smtp"), config.plugins.epanel.smtpuser))
-		self.list.append(getConfigListEntry(_("Password smtp"), config.plugins.epanel.smtppass))
+		self.list.append(getConfigListEntry(_("Test diario automatico"), config.plugins.lbpanel.checkauto))
+		self.list.append(getConfigListEntry(_("Hora test"), config.plugins.lbpanel.checkhour))
+		self.list.append(getConfigListEntry(_("Desactivar lineas con fallos"), config.plugins.lbpanel.checkoff))
+		self.list.append(getConfigListEntry(_("Tipo de scan"), config.plugins.lbpanel.checktype))
+		self.list.append(getConfigListEntry(_("Auto scan localhost"), config.plugins.lbpanel.autocheck))
+		self.list.append(getConfigListEntry(_("Enviar email con resultados"), config.plugins.lbpanel.lbemail))
+		self.list.append(getConfigListEntry(_("Email solo si hay peligros"), config.plugins.lbpanel.warnonlyemail))
+		self.list.append(getConfigListEntry(_("Enviar el reporte a: (email)"), config.plugins.lbpanel.lbemailto))
+		self.list.append(getConfigListEntry(_("Servidor smtp"), config.plugins.lbpanel.smtpserver))
+		self.list.append(getConfigListEntry(_("Usuario smtp"), config.plugins.lbpanel.smtpuser))
+		self.list.append(getConfigListEntry(_("Password smtp"), config.plugins.lbpanel.smtppass))
 		ConfigListScreen.__init__(self, self.list)
 		self["key_red"] = StaticText(_("Close"))
 		self["key_green"] = StaticText(_("Save"))
@@ -1765,7 +1765,7 @@ class scanhost(ConfigListScreen, Screen):
         def check(self):
 	        try:   
 			self["LabelStatus"].setText("Scan init")                     
-        		os.system("/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/lbscan.py %s %s %s %s" % (config.plugins.epanel.checktype.value, config.plugins.epanel.autocheck.value, config.plugins.epanel.checkoff.value, config.plugins.epanel.warnonlyemail.value))
+        		os.system("/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/lbscan.py %s %s %s %s" % (config.plugins.lbpanel.checktype.value, config.plugins.lbpanel.autocheck.value, config.plugins.lbpanel.checkoff.value, config.plugins.lbpanel.warnonlyemail.value))
         		self["LabelStatus"].setText("Scan end")
         		self.session.open(showScan)
                 except IOError:
@@ -1774,7 +1774,7 @@ class scanhost(ConfigListScreen, Screen):
         def checkt(self):
 	        try:   
 	        	self["LabelStatus"].setText("Scan init")
-        		self.session.open(Console,_("Scan peer"),["/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/lbscan.py " + config.plugins.epanel.checktype.value + " " + config.plugins.epanel.autocheck.value + " " + config.plugins.epanel.checkoff.value + " " + config.plugins.epanel.warnonlyemail.value])
+        		self.session.open(Console,_("Scan peer"),["/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/lbscan.py " + config.plugins.lbpanel.checktype.value + " " + config.plugins.lbpanel.autocheck.value + " " + config.plugins.lbpanel.checkoff.value + " " + config.plugins.lbpanel.warnonlyemail.value])
         		self["LabelStatus"].setText("Scan end")
         		# Send email with result by cron
         		
@@ -1793,17 +1793,17 @@ class scanhost(ConfigListScreen, Screen):
 		self.close(False)
 	
 	def save(self):
-		config.plugins.epanel.checkauto.save()
-		config.plugins.epanel.checkhour.save()
-		config.plugins.epanel.checkoff.save()
-		config.plugins.epanel.checktype.save()
-		config.plugins.epanel.autocheck.save()
-		config.plugins.epanel.lbemail.save()
-		config.plugins.epanel.warnonlyemail.save()
-		config.plugins.epanel.lbemailto.save()
-		config.plugins.epanel.smtpserver.save()
-		config.plugins.epanel.smtpuser.save()
-		config.plugins.epanel.smtppass.save()
+		config.plugins.lbpanel.checkauto.save()
+		config.plugins.lbpanel.checkhour.save()
+		config.plugins.lbpanel.checkoff.save()
+		config.plugins.lbpanel.checktype.save()
+		config.plugins.lbpanel.autocheck.save()
+		config.plugins.lbpanel.lbemail.save()
+		config.plugins.lbpanel.warnonlyemail.save()
+		config.plugins.lbpanel.lbemailto.save()
+		config.plugins.lbpanel.smtpserver.save()
+		config.plugins.lbpanel.smtpuser.save()
+		config.plugins.lbpanel.smtppass.save()
 		configfile.save()
 		self.mbox = self.session.open(MessageBox,(_("Configuration is saved")), MessageBox.TYPE_INFO, timeout = 4 )
 

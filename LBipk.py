@@ -202,7 +202,7 @@ class DownloadFeed(Screen):
 		softpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/ipkmini.png"))
 		if camdlist:
 			for line in camdlist:
-				if config.plugins.epanel.filtername.value:
+				if config.plugins.lbpanel.filtername.value:
 					if line.find("enigma2-plugin-") > -1:
 						try:
 							self.list.append(("%s %s" % (line.split(' - ')[0], line.split(' - ')[1]), line.split(' - ')[-1], softpng))

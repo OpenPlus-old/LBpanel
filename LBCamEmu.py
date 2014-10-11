@@ -78,30 +78,30 @@ def _(txt):
 		t = gettext.gettext(txt)
 	return t
 ####################################################################
-config.plugins.epanel.activeserver = ConfigText(default = "NotSelected")
-config.plugins.epanel.activeconf = ConfigText(default = "NotSelected")
-config.plugins.epanel.activeemu = ConfigText(default = "NotSelected")
+config.plugins.lbpanel.activeserver = ConfigText(default = "NotSelected")
+config.plugins.lbpanel.activeconf = ConfigText(default = "NotSelected")
+config.plugins.lbpanel.activeemu = ConfigText(default = "NotSelected")
 ####################################################################
-config.plugins.epanel.serveredit = ConfigText(default="xxx.xxx.xxx.xxx", visible_width = 200, fixed_size = False)
-config.plugins.epanel.port = ConfigText(default="00000", visible_width = 200, fixed_size = False)
-config.plugins.epanel.login = ConfigText(default="login", visible_width = 200, fixed_size = False)
-config.plugins.epanel.passw = ConfigText(default="******", visible_width = 200, fixed_size = False)
-config.plugins.epanel.timeout = ConfigText(default="000", visible_width = 200, fixed_size = False)
-config.plugins.epanel.keepalive = ConfigText(default="no", visible_width = 200, fixed_size = False)
-config.plugins.epanel.incoming = ConfigText(default="00000", visible_width = 200, fixed_size = False)
-config.plugins.epanel.debug = ConfigText(default="00000", visible_width = 200, fixed_size = False)
+config.plugins.lbpanel.serveredit = ConfigText(default="xxx.xxx.xxx.xxx", visible_width = 200, fixed_size = False)
+config.plugins.lbpanel.port = ConfigText(default="00000", visible_width = 200, fixed_size = False)
+config.plugins.lbpanel.login = ConfigText(default="login", visible_width = 200, fixed_size = False)
+config.plugins.lbpanel.passw = ConfigText(default="******", visible_width = 200, fixed_size = False)
+config.plugins.lbpanel.timeout = ConfigText(default="000", visible_width = 200, fixed_size = False)
+config.plugins.lbpanel.keepalive = ConfigText(default="no", visible_width = 200, fixed_size = False)
+config.plugins.lbpanel.incoming = ConfigText(default="00000", visible_width = 200, fixed_size = False)
+config.plugins.lbpanel.debug = ConfigText(default="00000", visible_width = 200, fixed_size = False)
 ######################################################################################
-config.plugins.epanel.addbiss = ConfigSelection(default = "No", choices = [
+config.plugins.lbpanel.addbiss = ConfigSelection(default = "No", choices = [
 		("0", _("No")),
 		("1", _("Yes")),
 		])
-config.plugins.epanel.path = ConfigSelection(default = "/usr/keys/", choices = [
+config.plugins.lbpanel.path = ConfigSelection(default = "/usr/keys/", choices = [
 		("/usr/keys/", "/usr/keys/"),
 		("/etc/keys/", "/etc/keys/"),
 		("/var/tuxbox/config/", "/var/tuxbox/config/"),
 		("/var/tuxbox/config/oscam-stable/", "/var/tuxbox/config/oscam-stable/"),
 		])
-config.plugins.epanel.keyname = ConfigSelection(default = "SoftCam.Key", choices = [
+config.plugins.lbpanel.keyname = ConfigSelection(default = "SoftCam.Key", choices = [
 		("SoftCam.Key", "SoftCam.Key"),
 		("oscam.keys", "oscam.keys"),
 		("oscam.biss", "oscam.biss"),
@@ -137,7 +137,7 @@ class emuSel2(Screen):
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		self.setTitle(_("CamEmu Funcionando: - %s") % config.plugins.epanel.activeemu.value)
+		self.setTitle(_("CamEmu Funcionando: - %s") % config.plugins.lbpanel.activeemu.value)
 		self.session = session
 		self.list = []
 		self.indexpos = None
@@ -240,9 +240,9 @@ class emuSel2(Screen):
 			os.system("/usr/CamEmu/%s start" % emutype)
 			self.mbox = self.session.open(MessageBox, _("Please wait, starting %s") % self["menu"].getCurrent()[0], MessageBox.TYPE_INFO, timeout = 4 )
 			self.indexpos = self["menu"].getIndex()
-			config.plugins.epanel.activeemu.value = self.emuversion(emutype)
-			config.plugins.epanel.activeemu.save()
-			self.setTitle(_("Select SoftCam or CardServer: - %s") % config.plugins.epanel.activeemu.value)
+			config.plugins.lbpanel.activeemu.value = self.emuversion(emutype)
+			config.plugins.lbpanel.activeemu.save()
+			self.setTitle(_("Select SoftCam or CardServer: - %s") % config.plugins.lbpanel.activeemu.value)
 			self.selemulist()
 		
 	def stop(self):
@@ -463,9 +463,9 @@ class SoftcamUpd(ConfigListScreen, Screen):
 		Screen.__init__(self, session)
 		self.setTitle(_("SoftCam.Key Updater"))
 		self.list = []
-		self.list.append(getConfigListEntry(_("Path to save keyfile"), config.plugins.epanel.path))
-		self.list.append(getConfigListEntry(_("Name of keyfile"), config.plugins.epanel.keyname))
-		self.list.append(getConfigListEntry(_("Add own biss in keyfile"), config.plugins.epanel.addbiss))
+		self.list.append(getConfigListEntry(_("Path to save keyfile"), config.plugins.lbpanel.path))
+		self.list.append(getConfigListEntry(_("Name of keyfile"), config.plugins.lbpanel.keyname))
+		self.list.append(getConfigListEntry(_("Add own biss in keyfile"), config.plugins.lbpanel.addbiss))
 		ConfigListScreen.__init__(self, self.list)
 		self["key_red"] = StaticText(_("Close"))
 		self["key_green"] = StaticText(_("Save"))
@@ -487,9 +487,9 @@ class SoftcamUpd(ConfigListScreen, Screen):
 		self.close(False)
 	
 	def save(self):
-		config.plugins.epanel.addbiss.save()
-		config.plugins.epanel.path.save()
-		config.plugins.epanel.keyname.save()
+		config.plugins.lbpanel.addbiss.save()
+		config.plugins.lbpanel.path.save()
+		config.plugins.lbpanel.keyname.save()
 		configfile.save()
 		self.mbox = self.session.open(MessageBox,(_("configuration is saved")), MessageBox.TYPE_INFO, timeout = 4 )
 		
@@ -499,27 +499,27 @@ class SoftcamUpd(ConfigListScreen, Screen):
 	def downkey(self):
 		try:
 			os.system("wget -P /tmp %s" % ( address))
-			if config.plugins.epanel.addbiss.value == "1":
+			if config.plugins.lbpanel.addbiss.value == "1":
 				if fileExists("%s%s" % (pluginpath,ownbiss)):
 					os.system("cp %s%s /tmp/%s" % (pluginpath, ownbiss, ownbiss))
 					os.system("cat /tmp/%s /tmp/SoftCam.Key > /tmp/keyfile.tmp" % (ownbiss))
 					os.system("rm /tmp/SoftCam.Key")
 			else:
 				os.system("mv /tmp/SoftCam.Key /tmp/keyfile.tmp")
-			if fileExists("%s%s" % (config.plugins.epanel.path.value, config.plugins.epanel.keyname.value)):
-				if config.plugins.epanel.keyname.value == "SoftCam.Key":
-					os.system("cp %s%s %s%s.old" % (config.plugins.epanel.path.value, config.plugins.epanel.keyname.value, config.plugins.epanel.path.value, config.plugins.epanel.keyname.value[:-4]))
+			if fileExists("%s%s" % (config.plugins.lbpanel.path.value, config.plugins.lbpanel.keyname.value)):
+				if config.plugins.lbpanel.keyname.value == "SoftCam.Key":
+					os.system("cp %s%s %s%s.old" % (config.plugins.lbpanel.path.value, config.plugins.lbpanel.keyname.value, config.plugins.lbpanel.path.value, config.plugins.lbpanel.keyname.value[:-4]))
 				else:
-					os.system("cp %s%s %s%s.old" % (config.plugins.epanel.path.value, config.plugins.epanel.keyname.value, config.plugins.epanel.path.value, config.plugins.epanel.keyname.value[:-5]))
-				os.system("rm %s%s" % (config.plugins.epanel.path.value, config.plugins.epanel.keyname.value))
-			os.system("cp /tmp/keyfile.tmp %s%s" % (config.plugins.epanel.path.value, config.plugins.epanel.keyname.value))
-			os.chmod(("%s%s" % (config.plugins.epanel.path.value, config.plugins.epanel.keyname.value)), 0644)
+					os.system("cp %s%s %s%s.old" % (config.plugins.lbpanel.path.value, config.plugins.lbpanel.keyname.value, config.plugins.lbpanel.path.value, config.plugins.lbpanel.keyname.value[:-5]))
+				os.system("rm %s%s" % (config.plugins.lbpanel.path.value, config.plugins.lbpanel.keyname.value))
+			os.system("cp /tmp/keyfile.tmp %s%s" % (config.plugins.lbpanel.path.value, config.plugins.lbpanel.keyname.value))
+			os.chmod(("%s%s" % (config.plugins.lbpanel.path.value, config.plugins.lbpanel.keyname.value)), 0644)
 			os.system("rm /tmp/keyfile.tmp")
 			os.system("rm /tmp/%s" % (ownbiss))
-			self.mbox = self.session.open(MessageBox,(_("%s downloaded Successfull" % config.plugins.epanel.keyname.value)), MessageBox.TYPE_INFO, timeout = 4 )
+			self.mbox = self.session.open(MessageBox,(_("%s downloaded Successfull" % config.plugins.lbpanel.keyname.value)), MessageBox.TYPE_INFO, timeout = 4 )
 		except:
 			os.system("cp /usr/keys/SoftCam.old /usr/keys/SoftCam.Key")
-			self.mbox = self.session.open(MessageBox,(_("%s downloaded UnSuccessfull" % config.plugins.epanel.keyname.value)), MessageBox.TYPE_INFO, timeout = 4 )
+			self.mbox = self.session.open(MessageBox,(_("%s downloaded UnSuccessfull" % config.plugins.lbpanel.keyname.value)), MessageBox.TYPE_INFO, timeout = 4 )
 ######################################################################################
 class ChangelogScreen(Screen):
 	skin = """
@@ -596,7 +596,7 @@ class wicconfsw(Screen):
 	def __init__(self, session, args=None):
 		Screen.__init__(self, session)
 		self.skin = wicconfsw.skin
-		self.setTitle(_("oscam.conf Switcher: - %s") % config.plugins.epanel.activeconf.value)
+		self.setTitle(_("oscam.conf Switcher: - %s") % config.plugins.lbpanel.activeconf.value)
 		self.session = session
 		self.list = []
 		self["list"] = List(self.list)
@@ -648,7 +648,7 @@ class wicconfsw(Screen):
 		list = os.listdir("/var/tuxbox/config")
 		for line in list:
 			if line.find(".wc") > -1:
-				if line[:-3] == config.plugins.epanel.activeconf.value:
+				if line[:-3] == config.plugins.lbpanel.activeconf.value:
 					self.list.append((line[:-3],self.Adress(line), servactpng))
 				else:
 					self.list.append((line[:-3],self.Adress(line), servinactpng))
@@ -656,9 +656,9 @@ class wicconfsw(Screen):
 		self["list"].setList(self.list)
 		
 	def run(self):
-		config.plugins.epanel.activeconf.value = self["list"].getCurrent()[0]
-		config.plugins.epanel.activeconf.save()
-		self.setTitle(_("oscam.conf Switcher: - %s") % config.plugins.epanel.activeconf.value)
+		config.plugins.lbpanel.activeconf.value = self["list"].getCurrent()[0]
+		config.plugins.lbpanel.activeconf.save()
+		self.setTitle(_("oscam.conf Switcher: - %s") % config.plugins.lbpanel.activeconf.value)
 		if  fileExists("/var/tuxbox/config/oscam.conf"):
 			os.system("cp -f /var/tuxbox/config/oscam.conf /var/tuxbox/config/previous.wc")
 			os.chmod("/var/tuxbox/config/previous.wc", 0644)
@@ -864,16 +864,16 @@ class NCLAdd(ConfigListScreen, Screen):
 		Screen.__init__(self, session)
 		self.setTitle(_("Editor Servidores"))
 		if self.line != None:
-			config.plugins.epanel.serveredit.value = self.line.split()[2]
-			config.plugins.epanel.port.value = self.line.split()[3]
-			config.plugins.epanel.login.value = self.line.split()[4]
-			config.plugins.epanel.passw.value = self.line.split()[5]
+			config.plugins.lbpanel.serveredit.value = self.line.split()[2]
+			config.plugins.lbpanel.port.value = self.line.split()[3]
+			config.plugins.lbpanel.login.value = self.line.split()[4]
+			config.plugins.lbpanel.passw.value = self.line.split()[5]
 		
 		self.list = []
-		self.list.append(getConfigListEntry(_("Servidor (ip o host)"), config.plugins.epanel.serveredit))
-		self.list.append(getConfigListEntry(_("Puerto"), config.plugins.epanel.port))
-		self.list.append(getConfigListEntry(_("usuario"), config.plugins.epanel.login))
-		self.list.append(getConfigListEntry(_("Password"), config.plugins.epanel.passw))
+		self.list.append(getConfigListEntry(_("Servidor (ip o host)"), config.plugins.lbpanel.serveredit))
+		self.list.append(getConfigListEntry(_("Puerto"), config.plugins.lbpanel.port))
+		self.list.append(getConfigListEntry(_("usuario"), config.plugins.lbpanel.login))
+		self.list.append(getConfigListEntry(_("Password"), config.plugins.lbpanel.passw))
 		ConfigListScreen.__init__(self, self.list)
 		self["key_red"] = StaticText(_("Close"))
 		self["key_green"] = StaticText(_("Update"))
@@ -898,13 +898,13 @@ class NCLAdd(ConfigListScreen, Screen):
 	def ok(self):
 		if self.line != None:
 			lineold = "%s %s %s %s" % (self.line.split()[2], self.line.split()[3], self.line.split()[4], self.line.split()[5])
-			linenew = "%s %s %s %s" % (config.plugins.epanel.serveredit.value, config.plugins.epanel.port.value, config.plugins.epanel.login.value, config.plugins.epanel.passw.value)
+			linenew = "%s %s %s %s" % (config.plugins.lbpanel.serveredit.value, config.plugins.lbpanel.port.value, config.plugins.lbpanel.login.value, config.plugins.lbpanel.passw.value)
 			os.system("sed -i 's/%s/%s/w' /usr/keys/newcamd.list" % (lineold, linenew))
 		else:
-			if config.plugins.epanel.port.value.find(':') > -1:
-				os.system("echo -e 'CWS_MULTIPLE = %s %s %s %s 01 02 03 04 05 06 07 08 09 10 11 12 13 14' >> /usr/keys/newcamd.list" % (config.plugins.epanel.serveredit.value, config.plugins.epanel.port.value, config.plugins.epanel.login.value, config.plugins.epanel.passw.value))
+			if config.plugins.lbpanel.port.value.find(':') > -1:
+				os.system("echo -e 'CWS_MULTIPLE = %s %s %s %s 01 02 03 04 05 06 07 08 09 10 11 12 13 14' >> /usr/keys/newcamd.list" % (config.plugins.lbpanel.serveredit.value, config.plugins.lbpanel.port.value, config.plugins.lbpanel.login.value, config.plugins.lbpanel.passw.value))
 			else:
-				os.system("echo -e 'CWS = %s %s %s %s 01 02 03 04 05 06 07 08 09 10 11 12 13 14' >> /usr/keys/newcamd.list" % (config.plugins.epanel.serveredit.value, config.plugins.epanel.port.value, config.plugins.epanel.login.value, config.plugins.epanel.passw.value))
+				os.system("echo -e 'CWS = %s %s %s %s 01 02 03 04 05 06 07 08 09 10 11 12 13 14' >> /usr/keys/newcamd.list" % (config.plugins.lbpanel.serveredit.value, config.plugins.lbpanel.port.value, config.plugins.lbpanel.login.value, config.plugins.lbpanel.passw.value))
 		for i in self["config"].list:
 			i[1].cancel()
 		self.close()
@@ -927,20 +927,20 @@ class NCLEditGlobal(ConfigListScreen, Screen):
 		for line in open("/usr/keys/newcamd.list"):
 			if line.find("CWS_CONNECT_TIMEOUT") > -1:
 				timeout = line.split('=')[-1]
-				config.plugins.epanel.timeout.value = timeout.lstrip()
-				self.list.append(getConfigListEntry(_("CWS_CONNECT_TIMEOUT"), config.plugins.epanel.timeout))
+				config.plugins.lbpanel.timeout.value = timeout.lstrip()
+				self.list.append(getConfigListEntry(_("CWS_CONNECT_TIMEOUT"), config.plugins.lbpanel.timeout))
 			elif line.find("CWS_KEEPALIVE") > -1:
 				keepalive = line.split('=')[-1]
-				config.plugins.epanel.keepalive.value = keepalive.lstrip()
-				self.list.append(getConfigListEntry(_("CWS_KEEPALIVE"), config.plugins.epanel.keepalive))
+				config.plugins.lbpanel.keepalive.value = keepalive.lstrip()
+				self.list.append(getConfigListEntry(_("CWS_KEEPALIVE"), config.plugins.lbpanel.keepalive))
 			elif line.find("CWS_INCOMING_PORT") > -1:
 				incoming = line.split('=')[-1]
-				config.plugins.epanel.incoming.value = incoming.lstrip()
-				self.list.append(getConfigListEntry(_("CWS_INCOMING_PORT"), config.plugins.epanel.incoming))
+				config.plugins.lbpanel.incoming.value = incoming.lstrip()
+				self.list.append(getConfigListEntry(_("CWS_INCOMING_PORT"), config.plugins.lbpanel.incoming))
 			elif line.find("CWS_DEBUG_PORT") > -1:
 				debug = line.split('=')[-1]
-				config.plugins.epanel.debug.value = debug.lstrip()
-				self.list.append(getConfigListEntry(_("CWS_DEBUG_PORT"), config.plugins.epanel.debug))
+				config.plugins.lbpanel.debug.value = debug.lstrip()
+				self.list.append(getConfigListEntry(_("CWS_DEBUG_PORT"), config.plugins.lbpanel.debug))
 		ConfigListScreen.__init__(self, self.list)
 		self["key_red"] = StaticText(_("Close"))
 		self["key_green"] = StaticText(_("Update"))
@@ -961,16 +961,16 @@ class NCLEditGlobal(ConfigListScreen, Screen):
 		for line in open("/usr/keys/newcamd.list"):
 			if line.find("CWS_CONNECT_TIMEOUT") > -1:
 				os.system("sed -i '/CWS_CONNECT_TIMEOUT/d' /usr/keys/newcamd.list")
-				os.system("echo -e 'CWS_CONNECT_TIMEOUT = %s' >> /usr/keys/newcamd.list" % config.plugins.epanel.timeout.value)
+				os.system("echo -e 'CWS_CONNECT_TIMEOUT = %s' >> /usr/keys/newcamd.list" % config.plugins.lbpanel.timeout.value)
 			elif line.find("CWS_KEEPALIVE") > -1:
 				os.system("sed -i '/CWS_KEEPALIVE/d' /usr/keys/newcamd.list")
-				os.system("echo -e 'CWS_KEEPALIVE = %s' >> /usr/keys/newcamd.list" % config.plugins.epanel.keepalive.value)
+				os.system("echo -e 'CWS_KEEPALIVE = %s' >> /usr/keys/newcamd.list" % config.plugins.lbpanel.keepalive.value)
 			elif line.find("CWS_INCOMING_PORT") > -1:
 				os.system("sed -i '/CWS_INCOMING_PORT/d' /usr/keys/newcamd.list")
-				os.system("echo -e 'CWS_INCOMING_PORT = %s' >> /usr/keys/newcamd.list" % config.plugins.epanel.incoming.value)
+				os.system("echo -e 'CWS_INCOMING_PORT = %s' >> /usr/keys/newcamd.list" % config.plugins.lbpanel.incoming.value)
 			elif line.find("CWS_DEBUG_PORT") > -1:
 				os.system("sed -i '/CWS_DEBUG_PORT/d' /usr/keys/newcamd.list")
-				os.system("echo -e 'CWS_DEBUG_PORT = %s' >> /usr/keys/newcamd.list" % config.plugins.epanel.debug.value)
+				os.system("echo -e 'CWS_DEBUG_PORT = %s' >> /usr/keys/newcamd.list" % config.plugins.lbpanel.debug.value)
 		os.system("sed -i sed '/./!d' /usr/keys/newcamd.list")
 		for i in self["config"].list:
 			i[1].cancel()

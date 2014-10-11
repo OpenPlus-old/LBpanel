@@ -87,17 +87,17 @@ def _(txt):
 	return t
 
 ##################################################################
-config.plugins.epanel.showmain = ConfigYesNo(default = True)
-config.plugins.epanel.showepanelmenu = ConfigYesNo(default = True)
-config.plugins.epanel.showextsoft = ConfigYesNo(default = True)
-config.plugins.epanel.shownclsw = ConfigYesNo(default = False)
-config.plugins.epanel.showwcsw = ConfigYesNo(default = False)
-config.plugins.epanel.showclviewer = ConfigYesNo(default = False)
-config.plugins.epanel.showscriptex = ConfigYesNo(default = False)
-config.plugins.epanel.showusbunmt = ConfigYesNo(default = False)
-config.plugins.epanel.showsetupipk = ConfigYesNo(default = False)
-config.plugins.epanel.showpbmain = ConfigYesNo(default = False)
-config.plugins.epanel.filtername = ConfigYesNo(default = False)
+config.plugins.lbpanel.showmain = ConfigYesNo(default = True)
+config.plugins.lbpanel.showepanelmenu = ConfigYesNo(default = True)
+config.plugins.lbpanel.showextsoft = ConfigYesNo(default = True)
+config.plugins.lbpanel.shownclsw = ConfigYesNo(default = False)
+config.plugins.lbpanel.showwcsw = ConfigYesNo(default = False)
+config.plugins.lbpanel.showclviewer = ConfigYesNo(default = False)
+config.plugins.lbpanel.showscriptex = ConfigYesNo(default = False)
+config.plugins.lbpanel.showusbunmt = ConfigYesNo(default = False)
+config.plugins.lbpanel.showsetupipk = ConfigYesNo(default = False)
+config.plugins.lbpanel.showpbmain = ConfigYesNo(default = False)
+config.plugins.lbpanel.filtername = ConfigYesNo(default = False)
 ##################################################################
 
 # Generic function to send email
@@ -445,17 +445,17 @@ class ConfigExtentions(ConfigListScreen, Screen):
 		Screen.__init__(self, session)
 		self.setTitle(_("LBpanel Menu/Extensionmenu config"))
 		self.list = []
-		self.list.append(getConfigListEntry(_("Show E-Panel in MainMenu"), config.plugins.epanel.showmain))
-		self.list.append(getConfigListEntry(_("Show E-Panel in ExtensionMenu"), config.plugins.epanel.showepanelmenu))
-		self.list.append(getConfigListEntry(_("Show CamEmu Manager in ExtensionMenu"), config.plugins.epanel.showextsoft))
-		self.list.append(getConfigListEntry(_("Show E-NewCamd.list switcher in ExtensionMenu"), config.plugins.epanel.shownclsw))
-		self.list.append(getConfigListEntry(_("Show E-Wicardd.conf switcher in ExtensionMenu"), config.plugins.epanel.showwcsw))
-		self.list.append(getConfigListEntry(_("Show E-CrashLog viewr in ExtensionMenu"), config.plugins.epanel.showclviewer))
-		self.list.append(getConfigListEntry(_("Show E-Script Executter in ExtensionMenu"), config.plugins.epanel.showscriptex))
-		self.list.append(getConfigListEntry(_("Show E-Usb Unmount in ExtensionMenu"), config.plugins.epanel.showusbunmt))
-		self.list.append(getConfigListEntry(_("Show E-Installer in ExtensionMenu"), config.plugins.epanel.showsetupipk))
-		self.list.append(getConfigListEntry(_("Show PluginBrowser in E-Panel MainMenu"), config.plugins.epanel.showpbmain))
-		self.list.append(getConfigListEntry(_("Filter by Name in download extentions"), config.plugins.epanel.filtername))
+		self.list.append(getConfigListEntry(_("Show E-Panel in MainMenu"), config.plugins.lbpanel.showmain))
+		self.list.append(getConfigListEntry(_("Show E-Panel in ExtensionMenu"), config.plugins.lbpanel.showepanelmenu))
+		self.list.append(getConfigListEntry(_("Show CamEmu Manager in ExtensionMenu"), config.plugins.lbpanel.showextsoft))
+		self.list.append(getConfigListEntry(_("Show E-NewCamd.list switcher in ExtensionMenu"), config.plugins.lbpanel.shownclsw))
+		self.list.append(getConfigListEntry(_("Show E-Wicardd.conf switcher in ExtensionMenu"), config.plugins.lbpanel.showwcsw))
+		self.list.append(getConfigListEntry(_("Show E-CrashLog viewr in ExtensionMenu"), config.plugins.lbpanel.showclviewer))
+		self.list.append(getConfigListEntry(_("Show E-Script Executter in ExtensionMenu"), config.plugins.lbpanel.showscriptex))
+		self.list.append(getConfigListEntry(_("Show E-Usb Unmount in ExtensionMenu"), config.plugins.lbpanel.showusbunmt))
+		self.list.append(getConfigListEntry(_("Show E-Installer in ExtensionMenu"), config.plugins.lbpanel.showsetupipk))
+		self.list.append(getConfigListEntry(_("Show PluginBrowser in E-Panel MainMenu"), config.plugins.lbpanel.showpbmain))
+		self.list.append(getConfigListEntry(_("Filter by Name in download extentions"), config.plugins.lbpanel.filtername))
 		ConfigListScreen.__init__(self, self.list)
 		self["key_red"] = StaticText(_("Close"))
 		self["key_green"] = StaticText(_("Save"))
@@ -476,17 +476,17 @@ class ConfigExtentions(ConfigListScreen, Screen):
 		self.session.open(TryQuitMainloop, 3)
 	
 	def save(self):
-		config.plugins.epanel.showmain.save()
-		config.plugins.epanel.showepanelmenu.save()
-		config.plugins.epanel.showextsoft.save()
-		config.plugins.epanel.shownclsw.save()
-		config.plugins.epanel.showwcsw.save()
-		config.plugins.epanel.showclviewer.save()
-		config.plugins.epanel.showscriptex.save()
-		config.plugins.epanel.showusbunmt.save()
-		config.plugins.epanel.showsetupipk.save()
-		config.plugins.epanel.showpbmain.save()
-		config.plugins.epanel.filtername.save()
+		config.plugins.lbpanel.showmain.save()
+		config.plugins.lbpanel.showepanelmenu.save()
+		config.plugins.lbpanel.showextsoft.save()
+		config.plugins.lbpanel.shownclsw.save()
+		config.plugins.lbpanel.showwcsw.save()
+		config.plugins.lbpanel.showclviewer.save()
+		config.plugins.lbpanel.showscriptex.save()
+		config.plugins.lbpanel.showusbunmt.save()
+		config.plugins.lbpanel.showsetupipk.save()
+		config.plugins.lbpanel.showpbmain.save()
+		config.plugins.lbpanel.filtername.save()
 		configfile.save()
 		self.mbox = self.session.open(MessageBox,(_("configuration is saved")), MessageBox.TYPE_INFO, timeout = 4 )
 ####################################################################
@@ -505,13 +505,13 @@ class lbCron():
 		self.timer.stop()
 		now = time.localtime(time.time())
 		# cron control epg
-		if (config.plugins.epanel.auto.value == "yes" and config.plugins.epanel.epgtime.value[0] == now.tm_hour and config.plugins.epanel.epgtime.value[1] == now.tm_min):
+		if (config.plugins.lbpanel.auto.value == "yes" and config.plugins.lbpanel.epgtime.value[0] == now.tm_hour and config.plugins.lbpanel.epgtime.value[1] == now.tm_min):
 			self.dload()
 		# cron control scan peer
-		if (config.plugins.epanel.checkauto.value == "yes" and config.plugins.epanel.checkhour.value[0] == now.tm_hour and config.plugins.epanel.checkhour.value[1] == now.tm_min):
+		if (config.plugins.lbpanel.checkauto.value == "yes" and config.plugins.lbpanel.checkhour.value[0] == now.tm_hour and config.plugins.lbpanel.checkhour.value[1] == now.tm_min):
 			self.scanpeer()
                 #cron for send email
-                if (config.plugins.epanel.lbemail.value and os.path.isfile("/tmp/.lbscan.end")):
+                if (config.plugins.lbpanel.lbemail.value and os.path.isfile("/tmp/.lbscan.end")):
                 	os.remove("/tmp/.lbscan.end")
                 	msg = ""
                         scaninfo = open("/tmp/.lbscan.log", "r")
@@ -519,14 +519,14 @@ class lbCron():
                                msg += line  
 			
 			scaninfo.close()
-                	sendemail(config.plugins.epanel.smtpuser.value, config.plugins.epanel.lbemailto.value,"", "Scan report from LBpanel",msg,config.plugins.epanel.smtpuser.value,config.plugins.epanel.smtppass.value)
+                	sendemail(config.plugins.lbpanel.smtpuser.value, config.plugins.lbpanel.lbemailto.value,"", "Scan report from LBpanel",msg,config.plugins.lbpanel.smtpuser.value,config.plugins.lbpanel.smtppass.value)
                                                                			
-		if config.plugins.epanel.autosave.value != '0':
-			if min > int(config.plugins.epanel.autosave.value) and config.plugins.epanel.epgtime.value[1] != now.tm_min:
+		if config.plugins.lbpanel.autosave.value != '0':
+			if min > int(config.plugins.lbpanel.autosave.value) and config.plugins.lbpanel.epgtime.value[1] != now.tm_min:
 				global min
 				min = 0
 				self.save_load_epg()
-				if config.plugins.epanel.autobackup.value:
+				if config.plugins.lbpanel.autobackup.value:
 					self.autobackup()
 			else:
 				global min
@@ -534,7 +534,7 @@ class lbCron():
 		self.timer.start(60000, True)
 		
 	def autobackup(self):
-		os.system("gzip -c %sepg.dat > %sepgtmp/epg.dat.gz" % (config.plugins.epanel.direct.value, config.plugins.epanel.direct.value))
+		os.system("gzip -c %sepg.dat > %sepgtmp/epg.dat.gz" % (config.plugins.lbpanel.direct.value, config.plugins.lbpanel.direct.value))
 		
 	def save_load_epg(self):
 		epgcache = new.instancemethod(_enigma.eEPGCache_save,None,eEPGCache)
@@ -543,33 +543,33 @@ class lbCron():
 		epgcache = eEPGCache.getInstance().load()
 
 	def scanpeer(self):
-		os.system("/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/lbscan.py %s %s %s %s &" % (config.plugins.epanel.checktype.value, config.plugins.epanel.autocheck.value, config.plugins.epanel.checkoff.value, config.plugins.epanel.warnonlyemail.value))
+		os.system("/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/lbscan.py %s %s %s %s &" % (config.plugins.lbpanel.checktype.value, config.plugins.lbpanel.autocheck.value, config.plugins.lbpanel.checkoff.value, config.plugins.lbpanel.warnonlyemail.value))
 	
 	def dload(self):
 		try:
-                        os.system("wget -q http://www.linux-box.es/epg/epg.dat.gz -O %sepg.dat.gz" % (config.plugins.epanel.direct.value))
-                        if fileExists("%sepg.dat" % config.plugins.epanel.direct.value):
-                                os.unlink("%sepg.dat" % config.plugins.epanel.direct.value)
-                                os.system("rm -f %sepg.dat" % config.plugins.epanel.direct.value)
-                        if not os.path.exists("%sepgtmp" % config.plugins.epanel.direct.value):  
-                                os.system("mkdir -p %sepgtmp" % config.plugins.epanel.direct.value)
-                        os.system("cp -f %sepg.dat.gz %sepgtmp" % (config.plugins.epanel.direct.value, config.plugins.epanel.direct.value))
-                        os.system("gzip -df %sepg.dat.gz" % config.plugins.epanel.direct.value)
-                        os.chmod("%sepg.dat" % config.plugins.epanel.direct.value, 0644)
+                        os.system("wget -q http://www.linux-box.es/epg/epg.dat.gz -O %sepg.dat.gz" % (config.plugins.lbpanel.direct.value))
+                        if fileExists("%sepg.dat" % config.plugins.lbpanel.direct.value):
+                                os.unlink("%sepg.dat" % config.plugins.lbpanel.direct.value)
+                                os.system("rm -f %sepg.dat" % config.plugins.lbpanel.direct.value)
+                        if not os.path.exists("%sepgtmp" % config.plugins.lbpanel.direct.value):  
+                                os.system("mkdir -p %sepgtmp" % config.plugins.lbpanel.direct.value)
+                        os.system("cp -f %sepg.dat.gz %sepgtmp" % (config.plugins.lbpanel.direct.value, config.plugins.lbpanel.direct.value))
+                        os.system("gzip -df %sepg.dat.gz" % config.plugins.lbpanel.direct.value)
+                        os.chmod("%sepg.dat" % config.plugins.lbpanel.direct.value, 0644)
                         self.mbox = self.session.open(MessageBox,(_("EPG downloaded")), MessageBox.TYPE_INFO, timeout = 4 )
                         epgcache = new.instancemethod(_enigma.eEPGCache_load,None,eEPGCache)
                         epgcache = eEPGCache.getInstance().load()
 
-#			os.system("wget -q http://www.xmltvepg.be/dplus/epg.dat.gz -O %sepg.dat.gz" % (config.plugins.epanel.lang.value, config.plugins.epanel.direct.value))
-#			if fileExists("%sepg.dat" % config.plugins.epanel.direct.value):
-#				os.unlink("%sepg.dat" % config.plugins.epanel.direct.value)
-#				os.system("rm -f %sepg.dat" % config.plugins.epanel.direct.value)
-#			if not os.path.exists("%sepgtmp" % config.plugins.epanel.direct.value):
-#				os.system("mkdir -p %sepgtmp" % config.plugins.epanel.direct.value)
-#			os.system("cp -f %sepg.dat.gz %sepgtmp" % (config.plugins.epanel.direct.value, config.plugins.epanel.direct.value))
-#			os.system("gzip -df %sepg.dat.gz" % config.plugins.epanel.direct.value)
-#			if fileExists("%sepg.dat" % config.plugins.epanel.direct.value):
-#				os.chmod("%sepg.dat" % config.plugins.epanel.direct.value, 0644)
+#			os.system("wget -q http://www.xmltvepg.be/dplus/epg.dat.gz -O %sepg.dat.gz" % (config.plugins.lbpanel.lang.value, config.plugins.lbpanel.direct.value))
+#			if fileExists("%sepg.dat" % config.plugins.lbpanel.direct.value):
+#				os.unlink("%sepg.dat" % config.plugins.lbpanel.direct.value)
+#				os.system("rm -f %sepg.dat" % config.plugins.lbpanel.direct.value)
+#			if not os.path.exists("%sepgtmp" % config.plugins.lbpanel.direct.value):
+#				os.system("mkdir -p %sepgtmp" % config.plugins.lbpanel.direct.value)
+#			os.system("cp -f %sepg.dat.gz %sepgtmp" % (config.plugins.lbpanel.direct.value, config.plugins.lbpanel.direct.value))
+#			os.system("gzip -df %sepg.dat.gz" % config.plugins.lbpanel.direct.value)
+#			if fileExists("%sepg.dat" % config.plugins.lbpanel.direct.value):
+#				os.chmod("%sepg.dat" % config.plugins.lbpanel.direct.value, 0644)
 #			epgcache = new.instancemethod(_enigma.eEPGCache_load,None,eEPGCache)
 #			epgcache = eEPGCache.getInstance().load()
 #			self.mbox = self.session.open(MessageBox,(_("EPG downloaded")), MessageBox.TYPE_INFO, timeout = 4 )
@@ -615,26 +615,26 @@ def setupipk(session, **kwargs):
 	session.open(LBipk.InstallAll)
 	
 def Plugins(**kwargs):
-	list = [PluginDescriptor(name=_("LBpanel"), description=_("simple tools para LBTEAM"), where = [PluginDescriptor.WHERE_PLUGINMENU], icon="LBpanel.png", fnc=main)]
-	if config.plugins.epanel.showepanelmenu.value:
-		list.append(PluginDescriptor(name=_("LBpanel"), description=_("simple tools for Pli image"), where = [PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=main))
-	if config.plugins.epanel.showextsoft.value:
+	list = [PluginDescriptor(name=_("LBpanel"), description=_("Linux-Box PAnel by LBTEAM"), where = [PluginDescriptor.WHERE_PLUGINMENU], icon="LBpanel.png", fnc=main)]
+	if config.plugins.lbpanel.showepanelmenu.value:
+		list.append(PluginDescriptor(name=_("LBpanel"), description=_("Linux-Box Panel"), where = [PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=main))
+	if config.plugins.lbpanel.showextsoft.value:
 		list.append(PluginDescriptor(name=_("CamEmu Manager"), description=_("Start, Stop, Restart Sofcam/Cardserver"), where = [PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=extsoft))
-	if config.plugins.epanel.shownclsw.value:
+	if config.plugins.lbpanel.shownclsw.value:
 		list.append(PluginDescriptor(name=_("E-Newcamd.list switcher"), description=_("Switch newcamd.list with remote conrol"), where = [PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=nclsw))
-	if config.plugins.epanel.showwcsw.value:
+	if config.plugins.lbpanel.showwcsw.value:
 		list.append(PluginDescriptor(name=_("E-Wicardd.conf switcher"), description=_("Switch wicardd.conf with remote conrol"), where = [PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=wcsw))
-	if config.plugins.epanel.showclviewer.value:
+	if config.plugins.lbpanel.showclviewer.value:
 		list.append(PluginDescriptor(name=_("E-Crashlog viewer"), description=_("Switch newcamd.list with remote conrol"), where = [PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=clviewer))
-	if config.plugins.epanel.showscriptex.value:
+	if config.plugins.lbpanel.showscriptex.value:
 		list.append(PluginDescriptor(name=_("E-Script Executer"), description=_("Start scripts from /usr/script"), where = [PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=scriptex))
-	if config.plugins.epanel.showusbunmt.value:
+	if config.plugins.lbpanel.showusbunmt.value:
 		list.append(PluginDescriptor(name=_("E-Unmount USB"), description=_("Unmount usb devices"), where = [PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=usbunmt))
-	if config.plugins.epanel.showsetupipk.value:
+	if config.plugins.lbpanel.showsetupipk.value:
 		list.append(PluginDescriptor(name=_("E-Installer"), description=_("install & forced install ipk, bh.tgz, tar.gz, nab.tgz from /tmp"), where = [PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=setupipk))
-	if config.plugins.epanel.showmain.value:
-		list.append(PluginDescriptor(name=_("LBPanel"), description=_("LBTEAM EXTENSION 2.0"), where = [PluginDescriptor.WHERE_MENU], fnc=menu))
-	list.append(PluginDescriptor(name=_("LBPanel"), description=_("LBTEAM EXTENSION 2.0"), where = [PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc = sessionstart))
+	if config.plugins.lbpanel.showmain.value:
+		list.append(PluginDescriptor(name=_("LBPanel"), description=_("LBTeam Panel Plugin 2.0"), where = [PluginDescriptor.WHERE_MENU], fnc=menu))
+	list.append(PluginDescriptor(name=_("LBPanel"), description=_("LBTeam Panel Plugin 2.0"), where = [PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc = sessionstart))
 	return list
 
 
