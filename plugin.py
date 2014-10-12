@@ -81,7 +81,7 @@ gettext.textdomain("enigma2")
 gettext.bindtextdomain("messages", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/LBpanel/locale/"))
 
 def _(txt):
-	t = gettext.dgettext("LBpanel", txt)
+	t = gettext.dgettext("messages", txt)
 	if t == txt:
 		t = gettext.gettext(txt)
 	return t
@@ -143,7 +143,7 @@ class easyPanel2(Screen):
 	def __init__(self, session):
 		self.session = session
 		Screen.__init__(self, session)
-		self.setTitle(_("LBpanel"))
+		self.setTitle(_("LBpanel - Red Bee"))
 		self["shortcuts"] = ActionMap(["ShortcutActions", "WizardActions", "EPGSelectActions"],
 		{
 			"ok": self.keyOK,
@@ -232,7 +232,7 @@ class easyPanel2(Screen):
 ##########################################################################################
 class info(Screen):
 	skin = """
-<screen name="info" position="center,105" size="600,570" title="LBpanel">
+<screen name="info" position="center,105" size="600,570" title="lb_title">
 	<ePixmap position="20,562" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
 	<widget source="key_red" render="Label" position="20,532" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
 	<widget source="MemoryLabel" render="Label" position="20,375" size="150,22" font="Regular; 20" halign="right" foregroundColor="#aaaaaa" />
@@ -269,6 +269,7 @@ class info(Screen):
 	<widget source="softcamLabel" render="Label" position="215,503" zPosition="2" size="130,22" font="Regular;20" halign="right" valign="center" backgroundColor="background" foregroundColor="#aaaaaa" transparent="1" />
  </screen>"""
 
+ 	skin = skin.replace("lb_title", _("Linux Box Panel Red Bee Edition"))
 	def __init__(self, session):
 		self.session = session
 		Screen.__init__(self, session)
@@ -430,7 +431,7 @@ class info(Screen):
 ####################################################################
 class ConfigExtentions(ConfigListScreen, Screen):
 	skin = """
-<screen name="ConfigExtentions" position="center,160" size="750,370" title="LBpanel Menu/Extensionmenu config">
+<screen name="ConfigExtentions" position="center,160" size="750,370" title="lb_title">
 		<widget position="15,10" size="720,300" name="config" scrollbarMode="showOnDemand" />
 		<ePixmap position="10,358" zPosition="1" size="165,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
 		<widget source="key_red" render="Label" position="10,328" zPosition="2" size="165,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
@@ -440,21 +441,22 @@ class ConfigExtentions(ConfigListScreen, Screen):
 		<widget source="key_yellow" render="Label" position="340,328" zPosition="2" size="230,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
 </screen>"""
 
+	skin = skin.replace("lb_title", _("LBpanel Menu/Extension Menu Config"))
 	def __init__(self, session):
 		self.session = session
 		Screen.__init__(self, session)
 		self.setTitle(_("LBpanel Menu/Extensionmenu config"))
 		self.list = []
-		self.list.append(getConfigListEntry(_("Show E-Panel in MainMenu"), config.plugins.lbpanel.showmain))
-		self.list.append(getConfigListEntry(_("Show E-Panel in ExtensionMenu"), config.plugins.lbpanel.showepanelmenu))
+		self.list.append(getConfigListEntry(_("Show LBPanel in MainMenu"), config.plugins.lbpanel.showmain))
+		self.list.append(getConfigListEntry(_("Show LBPanel in ExtensionMenu"), config.plugins.lbpanel.showepanelmenu))
 		self.list.append(getConfigListEntry(_("Show CamEmu Manager in ExtensionMenu"), config.plugins.lbpanel.showextsoft))
-		self.list.append(getConfigListEntry(_("Show E-NewCamd.list switcher in ExtensionMenu"), config.plugins.lbpanel.shownclsw))
-		self.list.append(getConfigListEntry(_("Show E-Wicardd.conf switcher in ExtensionMenu"), config.plugins.lbpanel.showwcsw))
-		self.list.append(getConfigListEntry(_("Show E-CrashLog viewr in ExtensionMenu"), config.plugins.lbpanel.showclviewer))
-		self.list.append(getConfigListEntry(_("Show E-Script Executter in ExtensionMenu"), config.plugins.lbpanel.showscriptex))
-		self.list.append(getConfigListEntry(_("Show E-Usb Unmount in ExtensionMenu"), config.plugins.lbpanel.showusbunmt))
-		self.list.append(getConfigListEntry(_("Show E-Installer in ExtensionMenu"), config.plugins.lbpanel.showsetupipk))
-		self.list.append(getConfigListEntry(_("Show PluginBrowser in E-Panel MainMenu"), config.plugins.lbpanel.showpbmain))
+		self.list.append(getConfigListEntry(_("Show LB-NewCamd.list switcher in ExtensionMenu"), config.plugins.lbpanel.shownclsw))
+		self.list.append(getConfigListEntry(_("Show LB-Wicardd.conf switcher in ExtensionMenu"), config.plugins.lbpanel.showwcsw))
+		self.list.append(getConfigListEntry(_("Show LB-CrashLog viewr in ExtensionMenu"), config.plugins.lbpanel.showclviewer))
+		self.list.append(getConfigListEntry(_("Show LB-Script Executter in ExtensionMenu"), config.plugins.lbpanel.showscriptex))
+		self.list.append(getConfigListEntry(_("Show LB-Usb Unmount in ExtensionMenu"), config.plugins.lbpanel.showusbunmt))
+		self.list.append(getConfigListEntry(_("Show LB-Installer in ExtensionMenu"), config.plugins.lbpanel.showsetupipk))
+		self.list.append(getConfigListEntry(_("Show PluginBrowser in LBPanel MainMenu"), config.plugins.lbpanel.showpbmain))
 		self.list.append(getConfigListEntry(_("Filter by Name in download extentions"), config.plugins.lbpanel.filtername))
 		ConfigListScreen.__init__(self, self.list)
 		self["key_red"] = StaticText(_("Close"))
@@ -488,7 +490,7 @@ class ConfigExtentions(ConfigListScreen, Screen):
 		config.plugins.lbpanel.showpbmain.save()
 		config.plugins.lbpanel.filtername.save()
 		configfile.save()
-		self.mbox = self.session.open(MessageBox,(_("configuration is saved")), MessageBox.TYPE_INFO, timeout = 4 )
+		self.mbox = self.session.open(MessageBox,(_("Configuration is saved")), MessageBox.TYPE_INFO, timeout = 4 )
 ####################################################################
 ## Cron especific function for lbpanel
 class lbCron():
@@ -574,7 +576,7 @@ class lbCron():
 #			epgcache = eEPGCache.getInstance().load()
 #			self.mbox = self.session.open(MessageBox,(_("EPG downloaded")), MessageBox.TYPE_INFO, timeout = 4 )
 		except:
-			self.mbox = self.session.open(MessageBox,(_("Sorry, the EPG download error")), MessageBox.TYPE_INFO, timeout = 4 )
+			self.mbox = self.session.open(MessageBox,(_("Sorry, EPG download error")), MessageBox.TYPE_INFO, timeout = 4 )
 #####################################################
 def main(session, **kwargs):
 	session.open(epgdn2)
@@ -590,7 +592,7 @@ def main(session, **kwargs):
 
 def menu(menuid, **kwargs):
 	if menuid == "mainmenu":
-		return [(_("LBpanel"), main, _("e-panel_for_pli"), 48)]
+		return [(_("LBpanel"), main, _("Linux_Box_Panel"), 48)]
 	return []
 
 def extsoft(session, **kwargs):
@@ -615,23 +617,23 @@ def setupipk(session, **kwargs):
 	session.open(LBipk.InstallAll)
 	
 def Plugins(**kwargs):
-	list = [PluginDescriptor(name=_("LBpanel"), description=_("Linux-Box PAnel by LBTEAM"), where = [PluginDescriptor.WHERE_PLUGINMENU], icon="LBpanel.png", fnc=main)]
+	list = [PluginDescriptor(name=_("LBpanel - Red Bee"), description=_("Linux-Box Panel by LBTEAM"), where = [PluginDescriptor.WHERE_PLUGINMENU], icon="images/LBPanel.png", fnc=main)]
 	if config.plugins.lbpanel.showepanelmenu.value:
 		list.append(PluginDescriptor(name=_("LBpanel"), description=_("Linux-Box Panel"), where = [PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=main))
 	if config.plugins.lbpanel.showextsoft.value:
 		list.append(PluginDescriptor(name=_("CamEmu Manager"), description=_("Start, Stop, Restart Sofcam/Cardserver"), where = [PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=extsoft))
 	if config.plugins.lbpanel.shownclsw.value:
-		list.append(PluginDescriptor(name=_("E-Newcamd.list switcher"), description=_("Switch newcamd.list with remote conrol"), where = [PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=nclsw))
+		list.append(PluginDescriptor(name=_("LB-Newcamd.list switcher"), description=_("Switch newcamd.list with remote conrol"), where = [PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=nclsw))
 	if config.plugins.lbpanel.showwcsw.value:
-		list.append(PluginDescriptor(name=_("E-Wicardd.conf switcher"), description=_("Switch wicardd.conf with remote conrol"), where = [PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=wcsw))
+		list.append(PluginDescriptor(name=_("LB-Wicardd.conf switcher"), description=_("Switch wicardd.conf with remote conrol"), where = [PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=wcsw))
 	if config.plugins.lbpanel.showclviewer.value:
-		list.append(PluginDescriptor(name=_("E-Crashlog viewer"), description=_("Switch newcamd.list with remote conrol"), where = [PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=clviewer))
+		list.append(PluginDescriptor(name=_("LB-Crashlog viewer"), description=_("Switch newcamd.list with remote conrol"), where = [PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=clviewer))
 	if config.plugins.lbpanel.showscriptex.value:
-		list.append(PluginDescriptor(name=_("E-Script Executer"), description=_("Start scripts from /usr/script"), where = [PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=scriptex))
+		list.append(PluginDescriptor(name=_("LB-Script Executer"), description=_("Start scripts from /usr/script"), where = [PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=scriptex))
 	if config.plugins.lbpanel.showusbunmt.value:
-		list.append(PluginDescriptor(name=_("E-Unmount USB"), description=_("Unmount usb devices"), where = [PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=usbunmt))
+		list.append(PluginDescriptor(name=_("LB-Unmount USB"), description=_("Unmount usb devices"), where = [PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=usbunmt))
 	if config.plugins.lbpanel.showsetupipk.value:
-		list.append(PluginDescriptor(name=_("E-Installer"), description=_("install & forced install ipk, bh.tgz, tar.gz, nab.tgz from /tmp"), where = [PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=setupipk))
+		list.append(PluginDescriptor(name=_("LB-Installer"), description=_("install & forced install ipk, bh.tgz, tar.gz, nab.tgz from /tmp"), where = [PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=setupipk))
 	if config.plugins.lbpanel.showmain.value:
 		list.append(PluginDescriptor(name=_("LBPanel"), description=_("LBTeam Panel Plugin 2.0"), where = [PluginDescriptor.WHERE_MENU], fnc=menu))
 	list.append(PluginDescriptor(name=_("LBPanel"), description=_("LBTeam Panel Plugin 2.0"), where = [PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc = sessionstart))

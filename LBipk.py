@@ -67,7 +67,7 @@ def _(txt):
 	
 class IPKToolsScreen(Screen):
 	skin = """
-	<screen name="IPKToolsScreen" position="70,35" size="1150,650" title="Herramientas IPK LBTeam">
+	<screen name="IPKToolsScreen" position="70,35" size="1150,650" title="LBpanel Ipk Tools">
 		<ePixmap position="700,10" zPosition="1" size="450,700" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo19.png" alphatest="blend" transparent="1" />
 	<ePixmap position="20,638" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" transparent="1" alphatest="on" />
 	<ePixmap position="190,638" zPosition="1" size="230,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" transparent="1" alphatest="on" />
@@ -88,11 +88,11 @@ class IPKToolsScreen(Screen):
 			</convert>
 		</widget>
 	</screen>"""
-
+	 
 	def __init__(self, session):
 		self.session = session
 		Screen.__init__(self, session)
-		self.setTitle(_("INSTALADOR PAQUETES"))
+		self.setTitle(_("LBpanel Ipk Tools"))
 		self["shortcuts"] = ActionMap(["ShortcutActions", "WizardActions"],
 
 		{
@@ -117,11 +117,11 @@ class IPKToolsScreen(Screen):
 		sixpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/ipk.png"))
 		fivepng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/ipk.png"))
 		dospng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/ipk.png"))
-		self.list.append((_("Instalacion ipk paquetes, bh.tgz, tar.gz, nab.tgz"),"one", _("Instalacion ipk, bh.tgz, tar.gz, nab.tgz en /tmp"), onepng ))
-		self.list.append((_("Instalacion Extensiones"),"six", _("Instalar extensiones para feed"), sixpng ))
-		self.list.append((_("download extensions"),"five", _("descarga extensiones para feed"), fivepng))
-		self.list.append((_("Borrar paquetes ipk"),"four", _("Borrar paquetes ipk"), treepng ))
-		self.list.append((_("Listas Canales Sorys"),"dos", _("Descarga listas canales Sorys"), dospng ))
+		self.list.append((_("IPK installer"),"one", _("Install ipk, bh.tgz, tar.gz, nab.tgz in /tmp"), onepng ))
+		self.list.append((_("Feed installer"),"six", _("Feed installer"), sixpng ))
+		self.list.append((_("Download extensions"),"five", _("Download feeds packages"), fivepng))
+		self.list.append((_("IPK delete packages"),"four", _("Delete IPK packages"), treepng ))
+		self.list.append((_("Sorys Channel List"),"dos", _("Download Sorys Channel List"), dospng ))
 		self["menu"].setList(self.list)
 		
 	def exit(self):
@@ -173,7 +173,7 @@ class DownloadFeed(Screen):
 	  
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		self.setTitle(_("Descarga extension servidor feed"))
+		self.setTitle(_("Download extensions from feed"))
 		self.session = session
 		self.list = []
 		self["menu"] = List(self.list)
@@ -237,7 +237,7 @@ class DownloadFeed(Screen):
 #####################################################################################################
 class installsorys(Screen):
 	skin = """
-<screen name="installsorys" position="center,160" size="1150,500" title="DESCARGA PAQUETES LBTeam">
+<screen name="installsorys" position="center,160" size="1150,500" title="LBpanel-Download Sorys Settings">
     <ePixmap position="715,10" zPosition="1" size="450,700" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo10.png" alphatest="blend" transparent="1" />
 <widget source="menu" render="Listbox" position="15,10" size="660,450" scrollbarMode="showOnDemand">
 	<convert type="TemplatedMultiContent">
@@ -259,7 +259,7 @@ class installsorys(Screen):
 	  
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		self.setTitle(_("DESCARGA Listas Sorys"))
+		self.setTitle(_("LBpanel-Download Sorys Settings"))
 		self.session = session
 		self.list = []
 		self["menu"] = List(self.list)
@@ -292,7 +292,7 @@ class installsorys(Screen):
 		self.setup()
 		
 	def setup(self):
-		self.session.open(Console,title = _("Instalando listas sorys"), cmdlist = ["opkg install -force-overwrite %s" % self["menu"].getCurrent()[0]])
+		self.session.open(Console,title = _("Installing Sorys Settings"), cmdlist = ["opkg install -force-overwrite %s" % self["menu"].getCurrent()[0]])
 		
 		
 	def cancel(self):
@@ -300,7 +300,7 @@ class installsorys(Screen):
 #################################################
 class InstallAll(Screen):
 	skin = """
-<screen name="InstallAll" position="center,160" size="750,370" title="Select install files">
+<screen name="InstallAll" position="center,160" size="750,370" title="LBpanel-Select files to install">
 <widget source="menu" render="Listbox" position="15,10" size="720,300" scrollbarMode="showOnDemand">
 	<convert type="TemplatedMultiContent">
 		{"template": [
@@ -323,7 +323,7 @@ class InstallAll(Screen):
 	  
 	def __init__(self, session, args=None):
 		Screen.__init__(self, session)
-		self.setTitle(_("Seleccionar archivos /tmp"))
+		self.setTitle(_("LBpanel - Select files to install from /tmp"))
 		self.session = session
 		self.list = []
 		self["menu"] = List(self.list)
@@ -390,7 +390,7 @@ class InstallAll(Screen):
 ########################################################################################################
 class RemoveIPK(Screen):
 	skin = """
-<screen name="RemoveIPK" position="center,100" size="750,570" title="Ipk remove">
+<screen name="RemoveIPK" position="center,100" size="750,570" title="LBpanel - Ipk remove">
 <widget source="menu" position="15,10" render="Listbox" size="720,500">
 	<convert type="TemplatedMultiContent">
 		{"template": [
@@ -413,7 +413,7 @@ class RemoveIPK(Screen):
 	  
 	def __init__(self, session, args=None):
 		Screen.__init__(self, session)
-		self.setTitle(_("Desistalar IPK"))
+		self.setTitle(_("LBpanel - Ipk Remove"))
 		self.session = session
 		self["key_red"] = StaticText(_("Close"))
 		self["key_green"] = StaticText(_("UnInstall"))
@@ -466,7 +466,7 @@ class RemoveIPK(Screen):
 #####################################################################################
 class downfeed(Screen):
 	skin = """
-<screen name="downfeed" position="center,110" size="850,520" title="Insatall extensions from feed">
+<screen name="downfeed" position="center,110" size="850,520" title="LBpanel-Install extensions from feed">
 <widget source="menu" render="Listbox" position="15,10" size="820,455" scrollbarMode="showOnDemand">
 	<convert type="TemplatedMultiContent">
 		{"template": [
@@ -487,7 +487,7 @@ class downfeed(Screen):
 	  
 	def __init__(self, session, args=None):
 		Screen.__init__(self, session)
-		self.setTitle(_("Instalar extensiones servidor feed"))
+		self.setTitle(_("LBpanel-Install extensions from feed"))
 		self.session = session
 		self.list = []
 		self["menu"] = List(self.list)

@@ -118,7 +118,7 @@ class LBDaemonsList(Screen):
 					self["key_green"].setText("")
 		
 	def drawList(self, ret = None):
-		self.session.open(ExtraActionBox, "Comprobando el estado daemons...", "Daemons", self.actionDrawList)
+		self.session.open(ExtraActionBox, _("Testing daemons status..."), _("Daemons"), self.actionDrawList)
 
 
 	def actionDrawList(self):
@@ -175,9 +175,9 @@ class LBDaemonsList(Screen):
 		if len(self.daemons) > 0:
 			index = self["menu"].getIndex()
 			if self.running[index]:
-				self.session.openWithCallback(self.drawList, ExtraActionBox, "Deteniendo %s..." % self.daemons[index][0], "Daemons", self.startstop)
+				self.session.openWithCallback(self.drawList, ExtraActionBox, _("Stoping %s...") % self.daemons[index][0], _("Daemons"), self.startstop)
 			else:
-				self.session.openWithCallback(self.drawList, ExtraActionBox, "Iniciando %s..." % self.daemons[index][0], "Daemons", self.startstop)
+				self.session.openWithCallback(self.drawList, ExtraActionBox, _("Starting %s...") % self.daemons[index][0], _("Daemons"), self.startstop)
 			
 	def startstop(self):
 		if len(self.daemons) > 0:

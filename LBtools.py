@@ -356,16 +356,16 @@ config.plugins.lbpanel.warnonlyemail = ConfigSelection(default = "yes", choices 
                ("yes", _("Yes")),   
                ("no", _("No")), 
 ])                              
-config.plugins.lbpanel.lbemailto = ConfigText(default = "correo@gmail.com",fixed_size = False, visible_width=30) 
+config.plugins.lbpanel.lbemailto = ConfigText(default = "mail@gmail.com",fixed_size = False, visible_width=30) 
 config.plugins.lbpanel.smtpserver = ConfigText(default = "smtp.gmail.com:587",fixed_size = False, visible_width=30)
-config.plugins.lbpanel.smtpuser = ConfigText(default = "yo@gmail.com",fixed_size = False, visible_width=30)
+config.plugins.lbpanel.smtpuser = ConfigText(default = "I@gmail.com",fixed_size = False, visible_width=30)
 config.plugins.lbpanel.smtppass = ConfigPassword(default = "mailpass",fixed_size = False, visible_width=15)
 
 #####################################################################################
 
 class ToolsScreen(Screen):
 	skin = """
-		<screen name="ToolsScreen" position="70,35" size="1150,650" title="PANEL SERVICIOS">
+		<screen name="ToolsScreen" position="70,35" size="1150,650" title="LBpanel - Services">
 		<ePixmap position="700,10" zPosition="1" size="450,700" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo7.png" alphatest="blend" transparent="1" />
 	<ePixmap position="705, 640" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
 	<widget source="key_red" render="Label" position="705, 610" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
@@ -389,7 +389,7 @@ class ToolsScreen(Screen):
 	def __init__(self, session):
 		self.session = session
 		Screen.__init__(self, session)
-		self.setTitle(_("PANEL SERVICIOS"))
+		self.setTitle(_("LBpanel - Services"))
 		self["shortcuts"] = ActionMap(["ShortcutActions", "WizardActions"],
 
 		{
@@ -415,14 +415,14 @@ class ToolsScreen(Screen):
 		sevenpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/libmemoria.png"))
 		dospng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/net1.png"))
 		eightpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/scan.png"))
-		self.list.append((_("Tools Crashlog"),"com_one", _("ver y borrar crashlog archivos"), onepng ))
-		self.list.append((_("Info Sistema"),"com_two", _("Ver info sistema (free, dh -f)"), twopng ))
-		self.list.append((_("EPG Descarga D+"),"com_tree", _("Descarga EPG D+"), treepng ))
+		self.list.append((_("Tools Crashlog"),"com_one", _("Manage crashlog files"), onepng ))
+		self.list.append((_("System Info"),"com_two", _("System info (free, dh -f)"), twopng ))
+		self.list.append((_("Download D+ EPG"),"com_tree", _("Download D+ EPG"), treepng ))
 		self.list.append((_("Scan Peer Security"),"com_scan", _("Check host security"), eightpng ))
-		self.list.append((_("Sincronizacion NTP"),"com_six", _("Sincronizacion ntp 30 min,60 min,120 min, 240"), sixpng ))
-		self.list.append((_("Scripts Usuario"),"com_five", _("Scripts Usuario"), fivepng ))
-		self.list.append((_("Liberar memoria"),"com_seven", _("Lanzador liberar memoria"), sevenpng ))
-		self.list.append((_("Network"),"com_dos", _("Reiniciar Red"), dospng ))
+		self.list.append((_("NTP Sync"),"com_six", _("Ntp sync: 30 min,60 min,120 min, 240"), sixpng ))
+		self.list.append((_("User Scripts"),"com_five", _("User Scripts"), fivepng ))
+		self.list.append((_("Free Memory"),"com_seven", _("Launcher free memory"), sevenpng ))
+		self.list.append((_("Network"),"com_dos", _("Restart network"), dospng ))
 		self["menu"].setList(self.list)
 
 	def exit(self):
@@ -461,7 +461,7 @@ class ToolsScreen(Screen):
 ###############################################################################
 class SwapScreen2(Screen):
 	skin = """
-		<screen name="SwapScreen2" position="center,160" size="1150,500" title="SWAP MANAGER">
+		<screen name="SwapScreen2" position="center,160" size="1150,500" title="LBpanel - Swap Manager">
 				  #<ePixmap position="700,10" zPosition="1" size="450,700" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo17.png" alphatest="blend" transparent="1" />
 	<ePixmap position="20,488" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
 	<widget source="key_red" render="Label" position="20,458" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
@@ -482,7 +482,7 @@ class SwapScreen2(Screen):
 	def __init__(self, session):
 		self.session = session
 		Screen.__init__(self, session)
-		self.setTitle(_("SWAP MANAGER"))
+		self.setTitle(_("LBpanel - Swap Manager"))
 		self["shortcuts"] = ActionMap(["ShortcutActions", "WizardActions"],
 		{
 			"ok": self.Menu,
@@ -528,7 +528,7 @@ class SwapScreen2(Screen):
 ####################################################################
 class SwapScreen(Screen):
 	skin = """
-		<screen name="SwapScreen" position="center,160" size="1150,500" title="SWAP MANAGER">
+		<screen name="SwapScreen" position="center,160" size="1150,500" title="LBpanel - Swap Manager">
 		  #<ePixmap position="700,10" zPosition="1" size="450,700" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo17.png" alphatest="blend" transparent="1" />
 	<ePixmap position="20,488" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
 	<widget source="key_red" render="Label" position="20,458" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
@@ -550,7 +550,7 @@ class SwapScreen(Screen):
 		self.swapfile = swapdirect
 		self.session = session
 		Screen.__init__(self, session)
-		self.setTitle(_("SWAP MANAGER"))
+		self.setTitle(_("LBpanel - Swap Manager"))
 		self["shortcuts"] = ActionMap(["ShortcutActions", "WizardActions"],
 		{
 			"ok": self.CfgMenuDo,
@@ -654,7 +654,7 @@ class SwapScreen(Screen):
 ####################################################################
 class UsbScreen(Screen):
 	skin = """
-<screen name="UsbScreen" position="center,160" size="1150,500" title="Unmount manager">
+<screen name="UsbScreen" position="center,160" size="1150,500" title="LBpanel - Unmount manager">
   #<ePixmap position="700,10" zPosition="1" size="450,700" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo18.png" alphatest="blend" transparent="1" />
 	<ePixmap position="20,488" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
 	<widget source="key_red" render="Label" position="20,458" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
@@ -679,7 +679,7 @@ class UsbScreen(Screen):
 	def __init__(self, session):
 		self.session = session
 		Screen.__init__(self, session)
-		self.setTitle(_("Unmount manager"))
+		self.setTitle(_("LBpanel - Unmount manager"))
 		self["shortcuts"] = ActionMap(["ShortcutActions", "WizardActions"],
 
 		{
@@ -748,7 +748,7 @@ class UsbScreen(Screen):
 ####################################################################
 class ScriptScreen(Screen):
 	skin = """
-	<screen name="ScriptScreen" position="center,160" size="1150,500" title="Script Usuario" >
+	<screen name="ScriptScreen" position="center,160" size="1150,500" title="LBpanel - User Script" >
 	    <ePixmap position="710,10" zPosition="1" size="450,700" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo11.png" alphatest="blend" transparent="1" />
 		<widget name="list" position="20,10" size="660,450" scrollbarMode="showOnDemand" />
 		<ePixmap position="20,488" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
@@ -760,7 +760,7 @@ class ScriptScreen(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.session = session
-		self.setTitle(_("Script Usuario"))
+		self.setTitle(_("LBpanel - User Script"))
 		self.scrpit_menu()
 		self["key_red"] = StaticText(_("Close"))
 		self["key_green"] = StaticText(_("Config"))
@@ -791,7 +791,7 @@ class ScriptScreen(Screen):
 ########################################################################
 class ConfigScript(ConfigListScreen, Screen):
 	skin = """
-<screen name="ConfigScript" position="center,160" size="750,370" title="Config script Executer">
+<screen name="ConfigScript" position="center,160" size="750,370" title="LBpanel - Config script Executer">
 		<widget position="15,10" size="720,300" name="config" scrollbarMode="showOnDemand" />
 		<ePixmap position="20,358" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
 		<widget source="key_red" render="Label" position="20,328" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
@@ -802,7 +802,7 @@ class ConfigScript(ConfigListScreen, Screen):
 	def __init__(self, session):
 		self.session = session
 		Screen.__init__(self, session)
-		self.setTitle(_("Config script Executer"))
+		self.setTitle(_("LBpanel - Config script Executer"))
 		self.list = []
 		self.list.append(getConfigListEntry(_("Set script path"), config.plugins.lbpanel.scriptpath))
 		ConfigListScreen.__init__(self, self.list)
@@ -831,7 +831,7 @@ class ConfigScript(ConfigListScreen, Screen):
 ########################################################################
 class NTPScreen(ConfigListScreen, Screen):
 	skin = """
-<screen name="NTPScreen" position="center,160" size="1150,500" title="SINCRONIZACION NTP">
+<screen name="NTPScreen" position="center,160" size="1150,500" title="LBpanel - NTP Sync">
     #<ePixmap position="720,10" zPosition="1" size="450,700" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo14.png" alphatest="blend" transparent="1" />
 		<widget position="15,10" size="690,450" name="config" scrollbarMode="showOnDemand" />
 		<ePixmap position="10,488" zPosition="1" size="165,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
@@ -847,7 +847,7 @@ class NTPScreen(ConfigListScreen, Screen):
 	def __init__(self, session):
 		self.session = session
 		Screen.__init__(self, session)
-		self.setTitle(_("SINCRONIZACION NTP"))
+		self.setTitle(_("LBpanel - NTP Sync"))
 		self.cfgMenu()
 		self["key_red"] = StaticText(_("Close"))
 		self["key_green"] = StaticText(_("Save"))
@@ -865,13 +865,13 @@ class NTPScreen(ConfigListScreen, Screen):
 		
 	def cfgMenu(self):
 		self.list = []
-		self.list.append(getConfigListEntry(_("Actualizar NTP"), config.plugins.lbpanel.onoff))
-		self.list.append(getConfigListEntry(_("Ajustar Hora Actualizacion"), config.plugins.lbpanel.time))
-		self.list.append(getConfigListEntry(_("Ajustar Hora Transpondedor"), config.plugins.lbpanel.TransponderTime))
-		self.list.append(getConfigListEntry(_("Sincronizacion en arranque"), config.plugins.lbpanel.cold))
-		self.list.append(getConfigListEntry(_("Modo Servidor"), config.plugins.lbpanel.manual))
-		self.list.append(getConfigListEntry(_("Seleccionar zona horaria"), config.plugins.lbpanel.server))
-		self.list.append(getConfigListEntry(_("Elejir Servidor ntp"), config.plugins.lbpanel.manualserver))
+		self.list.append(getConfigListEntry(_("Sync NTP"), config.plugins.lbpanel.onoff))
+		self.list.append(getConfigListEntry(_("Set time of upgrade"), config.plugins.lbpanel.time))
+		self.list.append(getConfigListEntry(_("Set time of transponder"), config.plugins.lbpanel.TransponderTime))
+		self.list.append(getConfigListEntry(_("Sync on boot"), config.plugins.lbpanel.cold))
+		self.list.append(getConfigListEntry(_("Server mode"), config.plugins.lbpanel.manual))
+		self.list.append(getConfigListEntry(_("Select time zone"), config.plugins.lbpanel.server))
+		self.list.append(getConfigListEntry(_("Select ntp server"), config.plugins.lbpanel.manualserver))
 		ConfigListScreen.__init__(self, self.list)
 		
 	def cancel(self):
@@ -925,7 +925,7 @@ class NTPScreen(ConfigListScreen, Screen):
 		for i in self["config"].list:
 			i[1].save()
 		configfile.save()
-		self.mbox = self.session.open(MessageBox,(_("configuration is saved")), MessageBox.TYPE_INFO, timeout = 4 )
+		self.mbox = self.session.open(MessageBox,(_("Configuration is saved")), MessageBox.TYPE_INFO, timeout = 4 )
 			
 	def UpdateNow(self):
 		list =""
@@ -991,7 +991,7 @@ class ManualSetTime(Screen):
 ####################################################################
 class SystemScreen(Screen):
 	skin = """
-		<screen name="SystemScreen" position="70,35" size="1150,650" title="Panel Sistema">
+		<screen name="SystemScreen" position="70,35" size="1150,650" title="LBpanel - System utils">
 	<ePixmap position="700,10" zPosition="1" size="450,700" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo13.png" alphatest="blend" transparent="1" />
 	<ePixmap position="705, 640" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
 	<widget source="key_red" render="Label" position="705, 610" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
@@ -1012,7 +1012,7 @@ class SystemScreen(Screen):
 	def __init__(self, session):
 		self.session = session
 		Screen.__init__(self, session)
-		self.setTitle(_("Panel Sistema"))
+		self.setTitle(_("LBpanel - System Utils"))
 		self["shortcuts"] = ActionMap(["ShortcutActions", "WizardActions"],
 
 		{
@@ -1033,10 +1033,10 @@ class SystemScreen(Screen):
 		fivepng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/cron.png"))
 		seispng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/disco.png"))
 		treepng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/unusb.png"))
-		self.list.append((_("Manager Kernel Modulo"),"1", _("load & unload Modulos Kernel"), onepng))
-		self.list.append((_("Cron Manager"),"5", _("Activar tareas programadas"), fivepng))
-		self.list.append((_("Mount Manager"),"6", _("Manager Disco Duro"), seispng))
-		self.list.append((_("Swap Manager"),"4", _("Start, Stop, Create, Remove archivos Swap"), fourpng ))
+		self.list.append((_("Manager Kernel Modules"),"1", _("Load & unload Kernel Modules"), onepng))
+		self.list.append((_("Cron Manager"),"5", _("Cron Manager"), fivepng))
+		self.list.append((_("Mount Manager"),"6", _("HArd Disc Manager"), seispng))
+		self.list.append((_("Swap Manager"),"4", _("Start, Stop, Create, Remove Swap Files"), fourpng ))
 		self.list.append((_("UnMount USB"),"3", _("Unmount usb devices"), treepng ))
 		self["menu"].setList(self.list)
 
@@ -1062,7 +1062,7 @@ class SystemScreen(Screen):
 ###############################################################################
 class KernelScreen(Screen):
 	skin = """
-<screen name="KernelScreen" position="center,100" size="1150,500" title="Kernel Modules Manager">
+<screen name="KernelScreen" position="center,100" size="1150,500" title="LBpanel - Kernel Modules Manager">
   #<ePixmap position="710,10" zPosition="1" size="450,700" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo15.png" alphatest="blend" transparent="1" />
 	<ePixmap position="20,488" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
 	<widget source="key_red" render="Label" position="20,458" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
@@ -1089,7 +1089,7 @@ class KernelScreen(Screen):
 	def __init__(self, session):
 		self.session = session
 		Screen.__init__(self, session)
-		self.setTitle(_("Manager Kernel Modulo"))
+		self.setTitle(_("LBpanel - Kernel Modules Manager"))
 		self["shortcuts"] = ActionMap(["ShortcutActions", "WizardActions"],
 
 		{
@@ -1159,7 +1159,7 @@ class KernelScreen(Screen):
 ####################################################################
 class lsmodScreen(Screen):
 	skin = """
-<screen name="lsmodScreen" position="center,100" size="750,570" title="Kernel Drivers in Memory">
+<screen name="lsmodScreen" position="center,100" size="750,570" title="LBpanel - List Kernel Drivers in Memory">
 	<ePixmap position="20,558" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
 	<widget source="key_red" render="Label" position="20,528" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
 	<widget source="menu" render="Listbox" position="20,10" size="710,500" scrollbarMode="showOnDemand">
@@ -1179,7 +1179,7 @@ class lsmodScreen(Screen):
 	def __init__(self, session):
 		self.session = session
 		Screen.__init__(self, session)
-		self.setTitle(_("Kernel Drivers en Memoria"))
+		self.setTitle(_("LBpanel - List Kernel Drivers in Memory"))
 		self["shortcuts"] = ActionMap(["ShortcutActions", "WizardActions"],
 
 		{
@@ -1210,7 +1210,7 @@ class lsmodScreen(Screen):
 ####################################################################
 class CrashLogScreen(Screen):
 	skin = """
-<screen name="CrashLogScreen" position="center,160" size="1150,500" title="Ver archivos crashlog">
+<screen name="CrashLogScreen" position="center,160" size="1150,500" title="LBpanel - Crashlog files">
     <ePixmap position="715,10" zPosition="1" size="450,700" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo8.png" alphatest="blend" transparent="1" />
 	<ePixmap position="20,488" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
 	<widget source="key_red" render="Label" position="20,458" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
@@ -1237,7 +1237,7 @@ class CrashLogScreen(Screen):
 	def __init__(self, session):
 		self.session = session
 		Screen.__init__(self, session)
-		self.setTitle(_("Ver archivos Crashlog"))
+		self.setTitle(_("LBpanel - Crashlog files"))
 		self["shortcuts"] = ActionMap(["ShortcutActions", "WizardActions"],
 
 		{
@@ -1300,7 +1300,7 @@ class CrashLogScreen(Screen):
 ####################################################################
 class LogScreen(Screen):
 	skin = """
-<screen name="LogScreen" position="center,80" size="1170,600" title="View Crashlog file">
+<screen name="LogScreen" position="center,80" size="1170,600" title="LBpanel - View Crashlog file">
 	<ePixmap position="20,590" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
 	<widget source="key_red" render="Label" position="20,560" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
 	<ePixmap position="190,590" zPosition="1" size="200,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
@@ -1314,7 +1314,7 @@ class LogScreen(Screen):
 		self.session = session
 		Screen.__init__(self, session)
 		self.crashfile = what
-		self.setTitle(_("View Crashlog file"))
+		self.setTitle(_("LBpanel - View Crashlog file"))
 		self["shortcuts"] = ActionMap(["ShortcutActions", "WizardActions"],
 		{
 			"cancel": self.exit,
@@ -1355,7 +1355,7 @@ class LogScreen(Screen):
 ######################################################################################
 class epgdn(ConfigListScreen, Screen):
 	skin = """
-<screen name="epgdn" position="center,160" size="1150,500" title="EPG D+ LINUX-BOX.ES">
+<screen name="epgdn" position="center,160" size="1150,500" title="LBpanel - EPG D+">
     <ePixmap position="715,10" zPosition="1" size="450,700" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo9.png" alphatest="blend" transparent="1" />
   <widget position="15,10" size="690,450" name="config" scrollbarMode="showOnDemand" />
    <ePixmap position="10,488" zPosition="1" size="165,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
@@ -1371,18 +1371,18 @@ class epgdn(ConfigListScreen, Screen):
 	def __init__(self, session):
 		self.session = session
 		Screen.__init__(self, session)
-		self.setTitle(_("EPG D+ LINUX-BOX.ES"))
+		self.setTitle(_("LBpanel - D+ EPG"))
 		self.list = []
-		self.list.append(getConfigListEntry(_("Seleccione donde guardar epg.dat"), config.plugins.lbpanel.direct))
-		self.list.append(getConfigListEntry(_("Seleccion D+ epg"), config.plugins.lbpanel.lang))
-		self.list.append(getConfigListEntry(_("Activar Autodescarga epg.dat"), config.plugins.lbpanel.auto))
-		self.list.append(getConfigListEntry(_("Hora de autodescarga"), config.plugins.lbpanel.epgtime))
-		self.list.append(getConfigListEntry(_("Guardar y carga EPG automatica"), config.plugins.lbpanel.autosave))
-		self.list.append(getConfigListEntry(_("Guardar copia en ../epgtmp.gz"), config.plugins.lbpanel.autobackup))
+		self.list.append(getConfigListEntry(_("Select where to save epg.dat"), config.plugins.lbpanel.direct))
+		self.list.append(getConfigListEntry(_("Select D+ epg"), config.plugins.lbpanel.lang))
+		self.list.append(getConfigListEntry(_("Auto download epg.dat"), config.plugins.lbpanel.auto))
+		self.list.append(getConfigListEntry(_("Auto download hour"), config.plugins.lbpanel.epgtime))
+		self.list.append(getConfigListEntry(_("Auto load and save EPG"), config.plugins.lbpanel.autosave))
+		self.list.append(getConfigListEntry(_("Save copy in ../epgtmp.gz"), config.plugins.lbpanel.autobackup))
 		ConfigListScreen.__init__(self, self.list)
 		self["key_red"] = StaticText(_("Close"))
 		self["key_green"] = StaticText(_("Save"))
-		self["key_yellow"] = StaticText(_("Descarga EPG"))
+		self["key_yellow"] = StaticText(_("EPG Download"))
 		self["key_blue"] = StaticText(_("Manual"))
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
@@ -1437,7 +1437,7 @@ class epgdn(ConfigListScreen, Screen):
 ################################################################################################################
 class epgdmanual(Screen):
 	skin = """
-<screen name="epgdmanual" position="center,260" size="850,50" title="EPG D+ de LINUX-BOX.ES">
+<screen name="epgdmanual" position="center,260" size="850,50" title="LBpanel - EPG D+">
   <ePixmap position="10,40" zPosition="1" size="165,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
   <widget source="key_red" render="Label" position="10,10" zPosition="2" size="165,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
   <ePixmap position="175,40" zPosition="1" size="200,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
@@ -1450,11 +1450,11 @@ class epgdmanual(Screen):
 	def __init__(self, session):
 		self.session = session
 		Screen.__init__(self, session)
-		self.setTitle(_("EPG D+ de LinuxBox"))
+		self.setTitle(_("LBpanel - EPG D+"))
 		self["key_red"] = StaticText(_("Close"))
-		self["key_green"] = StaticText(_("Guardar epg.dat"))
-		self["key_yellow"] = StaticText(_("Restaurar epg.dat"))
-		self["key_blue"] = StaticText(_("Releer epg.dat"))
+		self["key_green"] = StaticText(_("Save epg.dat"))
+		self["key_yellow"] = StaticText(_("Restore epg.dat"))
+		self["key_blue"] = StaticText(_("Reload epg.dat"))
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
 			"red": self.cancel,
@@ -1491,7 +1491,7 @@ class epgdmanual(Screen):
 ##############################################################################
 class CrontabMan(Screen):
 	skin = """
-<screen name="CrontabMan" position="center,160" size="1150,500" title="CRON MANAGER">
+<screen name="CrontabMan" position="center,160" size="1150,500" title="LBpanel - Cron Manager">
   #<ePixmap position="700,10" zPosition="1" size="450,700" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo16.png" alphatest="blend" transparent="1" />
 	<ePixmap position="20,488" zPosition="1" size="175,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
 	<widget source="key_red" render="Label" position="20,458" zPosition="2" size="175,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
@@ -1514,7 +1514,7 @@ class CrontabMan(Screen):
 	def __init__(self, session):
 		self.session = session
 		Screen.__init__(self, session)
-		self.setTitle(_("CRON MANAGER"))
+		self.setTitle(_("LBpanel - Cron Manager"))
 		self["shortcuts"] = ActionMap(["ShortcutActions", "WizardActions"],
 
 		{
@@ -1564,7 +1564,7 @@ class CrontabMan(Screen):
 ####################################################################
 class CrontabManAdd(ConfigListScreen, Screen):
 	skin = """
-<screen name="CrontabManAdd" position="center,160" size="750,370" title="add tabs" >
+<screen name="CrontabManAdd" position="center,160" size="750,370" title="LBpanel - Add tabs" >
 		<widget position="15,10" size="720,300" name="config" scrollbarMode="showOnDemand" />
 		<ePixmap position="10,358" zPosition="1" size="165,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
 		<widget source="key_red" render="Label" position="10,328" zPosition="2" size="165,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
@@ -1576,7 +1576,7 @@ class CrontabManAdd(ConfigListScreen, Screen):
 	def __init__(self, session):
 		self.session = session
 		Screen.__init__(self, session)
-		self.setTitle(_("add tabs"))
+		self.setTitle(_("LBpanel - Add tabs"))
 		self.list = []
 		self.list.append(getConfigListEntry(_("Min"), config.plugins.lbpanel.min))
 		self.list.append(getConfigListEntry(_("Hour"), config.plugins.lbpanel.hour))
@@ -1635,7 +1635,7 @@ class CrontabManAdd(ConfigListScreen, Screen):
 ###############################################################################
 class Info2Screen(Screen):
 	skin = """
-<screen name="Info2Screen" position="center,100" size="890,560" title="System Info">
+<screen name="Info2Screen" position="center,100" size="890,560" title="LBpanel - System Info">
 	<ePixmap position="20,548" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
 	<widget source="key_red" render="Label" position="20,518" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
 	<widget name="text" position="15,10" size="860,500" font="Console;20" />
@@ -1644,7 +1644,7 @@ class Info2Screen(Screen):
 	def __init__(self, session):
 		self.session = session
 		Screen.__init__(self, session)
-		self.setTitle(_("System Info"))
+		self.setTitle(_("LBpanel - System Info"))
 		self["shortcuts"] = ActionMap(["ShortcutActions", "WizardActions"],
 		{
 			"cancel": self.exit,
@@ -1675,7 +1675,7 @@ class Info2Screen(Screen):
 ######################################################################################
 class Libermen(Screen):
 	skin = """
-	<screen name="ScriptScreen" position="center,160" size="1150,500" title="Liberar Memoria" >
+	<screen name="ScriptScreen" position="center,160" size="1150,500" title="LBpanel - Free Memory" >
 	    <ePixmap position="715,10" zPosition="1" size="450,700" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo12.png" alphatest="blend" transparent="1" />
 			<widget name="list" position="20,10" size="660,450" scrollbarMode="showOnDemand" />
 		<ePixmap position="20,488" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
@@ -1685,7 +1685,7 @@ class Libermen(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.session = session
-		self.setTitle(_("Liberar Memoria"))
+		self.setTitle(_("LBpanel - Free Memory"))
 		self.scrpit_menu()
 		self["key_red"] = StaticText(_("Close"))
 		self["actions"] = ActionMap(["OkCancelActions","ColorActions"], {"ok": self.run, "red": self.exit, "cancel": self.close}, -1)
@@ -1716,7 +1716,7 @@ class Libermen(Screen):
 ######################################################################################
 class scanhost(ConfigListScreen, Screen):
 	skin = """
-<screen name="scanhost" position="center,160" size="1150,500" title="Check Host LINUX-BOX.ES">
+<screen name="scanhost" position="center,160" size="1150,500" title="LBpanel - Check Hosts">
     <ePixmap position="715,10" zPosition="1" size="450,700" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo100.png" alphatest="blend" transparent="1" />
   <widget position="15,10" size="690,450" name="config" scrollbarMode="showOnDemand" />
    <ePixmap position="10,488" zPosition="1" size="165,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
@@ -1733,19 +1733,19 @@ class scanhost(ConfigListScreen, Screen):
 	def __init__(self, session):
 		self.session = session
 		Screen.__init__(self, session)
-		self.setTitle(_("SCAN PEER LINUX-BOX.ES"))
+		self.setTitle(_("LBpanel - Check Host"))
 		self.list = []
-		self.list.append(getConfigListEntry(_("Test diario automatico"), config.plugins.lbpanel.checkauto))
-		self.list.append(getConfigListEntry(_("Hora test"), config.plugins.lbpanel.checkhour))
-		self.list.append(getConfigListEntry(_("Desactivar lineas con fallos"), config.plugins.lbpanel.checkoff))
-		self.list.append(getConfigListEntry(_("Tipo de scan"), config.plugins.lbpanel.checktype))
+		self.list.append(getConfigListEntry(_("Auto Daily Test"), config.plugins.lbpanel.checkauto))
+		self.list.append(getConfigListEntry(_("Hour"), config.plugins.lbpanel.checkhour))
+		self.list.append(getConfigListEntry(_("Disable Faulty Lines?"), config.plugins.lbpanel.checkoff))
+		self.list.append(getConfigListEntry(_("Scan type"), config.plugins.lbpanel.checktype))
 		self.list.append(getConfigListEntry(_("Auto scan localhost"), config.plugins.lbpanel.autocheck))
-		self.list.append(getConfigListEntry(_("Enviar email con resultados"), config.plugins.lbpanel.lbemail))
-		self.list.append(getConfigListEntry(_("Email solo si hay peligros"), config.plugins.lbpanel.warnonlyemail))
-		self.list.append(getConfigListEntry(_("Enviar el reporte a: (email)"), config.plugins.lbpanel.lbemailto))
-		self.list.append(getConfigListEntry(_("Servidor smtp"), config.plugins.lbpanel.smtpserver))
-		self.list.append(getConfigListEntry(_("Usuario smtp"), config.plugins.lbpanel.smtpuser))
-		self.list.append(getConfigListEntry(_("Password smtp"), config.plugins.lbpanel.smtppass))
+		self.list.append(getConfigListEntry(_("Send email with log?"), config.plugins.lbpanel.lbemail))
+		self.list.append(getConfigListEntry(_("Send email only in danger lines?"), config.plugins.lbpanel.warnonlyemail))
+		self.list.append(getConfigListEntry(_("Send report to: (email)"), config.plugins.lbpanel.lbemailto))
+		self.list.append(getConfigListEntry(_("Smtp server"), config.plugins.lbpanel.smtpserver))
+		self.list.append(getConfigListEntry(_("Smtp user"), config.plugins.lbpanel.smtpuser))
+		self.list.append(getConfigListEntry(_("Smtp password"), config.plugins.lbpanel.smtppass))
 		ConfigListScreen.__init__(self, self.list)
 		self["key_red"] = StaticText(_("Close"))
 		self["key_green"] = StaticText(_("Save"))
@@ -1814,7 +1814,7 @@ class scanhost(ConfigListScreen, Screen):
 ################################################################################################################
 class showScan(Screen):
 	skin = """
-<screen name="Show Scan" position="center,100" size="890,560" title="Show Scan Results">
+<screen name="Show Scan" position="center,100" size="890,560" title="LBpanel - Scan Results">
 	<ePixmap position="20,548" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
 	<widget source="key_red" render="Label" position="20,518" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
 	<widget name="text" position="15,10" size="860,500" font="Console;20" />
@@ -1823,7 +1823,7 @@ class showScan(Screen):
 	def __init__(self, session):
 		self.session = session
 		Screen.__init__(self, session)
-		self.setTitle(_("Scan Results"))
+		self.setTitle(_("LBpanel - Scan Results"))
 		self["shortcuts"] = ActionMap(["ShortcutActions", "WizardActions"],
 		{
 			"cancel": self.exit,
