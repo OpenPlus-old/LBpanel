@@ -1,18 +1,22 @@
-#!/bin/bash
+#!/bin/sh
 # Utils for LBPanel 
 # GNU GPL2+
 
 case $1 in
 # Test updates for LBpanel and LBpanel Settings
 testupdate)
-	opkg update
-	if (opkg list-upgradable | grep enigma2-plugin-extensions-lbpanel); then
+	#opkg update
+	echo  "Testing update"
+	opkg list-upgradable | grep enigma2-plugin-extensions-lbpanel | awk '{print $1}'  > /tmp/.lbupdate.log
+        if [ $? -eq 0 ]; then
         	echo "LBpanel Update";
                 opkg install enigma2-plugin-extensions-lbpanel
                 echo "." > /tmp/.lbpanel.update
         fi
+        echo "Sigo por aqui"
                        
-        if (opkg list-upgradable | grep enigma2-plugin-settings-sorys); then    
+        opkg list-upgradable | grep  enigma2-plugin-settings-sorys | awk '{print $1}'  > /tmp/.lbsettings.log 
+        if [ $? -eq 0 ]; then
         	echo "LBsettings Update";
                 echo "." > /tmp/.lbsettings.update
                 for arg in `opkg list-installed | grep enigma2-plugin-settings-sorys | awk '{print $1}'` ; do

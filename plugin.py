@@ -511,7 +511,8 @@ class lbCron():
 		self.timer.stop()
 		now = time.localtime(time.time())
 		# cron update control, test every hour, execute a script to test.
-		if (now.tm_min == 0 and now.tm_sec == 0):
+		if (now.tm_min == 18 ):
+		#and now.tm_sec == 0):
 			os.system("/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/lbutils.sh testupdate &")
 		## Check for updates
 		if (os.path.isfile("/tmp/.lbpanel.update")):
