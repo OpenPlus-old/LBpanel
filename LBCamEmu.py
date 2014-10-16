@@ -189,6 +189,10 @@ class emuSel2(Screen):
 	def selemulist(self):
 		self.list = []
 		typeemu = ' '
+		
+		if not os.path.exists("/usr/CamEmu"):
+			os.makedirs("/usr/CamEmu")
+			
 		camdlist = os.listdir("/usr/CamEmu/")
 		for line in camdlist:
 			if line.find(".None") == -1:

@@ -100,6 +100,10 @@ config.plugins.lbpanel.showpbmain = ConfigYesNo(default = False)
 config.plugins.lbpanel.filtername = ConfigYesNo(default = False)
 ##################################################################
 
+# Check if feed is active
+if not os.path.isfile("/etc/opkg/lbappstore.conf"):
+	with open ('/etc/opkg/lbappstore.conf', 'a') as f: f.write ("src/gz lbutils http://appstore.linux-box.es/files" + '\n')
+                                
 # Generic function to send email
 def sendemail(from_addr, to_addr, cc_addr,
               subject, message,
@@ -506,6 +510,20 @@ class lbCron():
 	def update(self):
 		self.timer.stop()
 		now = time.localtime(time.time())
+		# cron update control, test every hour, execute a script to test.
+		if (now.tm_min == 0 and now.tm_sec == 0):
+			os.system("/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/lbutils.sh testupdate &")
+		## Check for updates
+		if (os.path.isfile("/tmp/.lbpanel.update")):
+			print "LBpanel updated"
+			self.mbox = self.session.open(MessageBox,(_("LBpanel has been updated, restart Enigma2 to activate your changes.")), MessageBox.TYPE_INFO, timeout = 30 )
+			os.remove("/tmp/.lbpanel.update")
+			
+		if (os.path.isfile("/tmp/.lbsettings.update")):
+			print "LBpanel settings updated"
+			self.mbox = self.session.open(MessageBox,(_("LBpanel settings has been updated, restart Enigma2 to activate your changes.")), MessageBox.TYPE_INFO, timeout = 30 )
+			os.remove("/tmp/.lbsettings.update")
+
 		# cron control epg
 		if (config.plugins.lbpanel.auto.value == "yes" and config.plugins.lbpanel.epgtime.value[0] == now.tm_hour and config.plugins.lbpanel.epgtime.value[1] == now.tm_min):
 			self.dload()
