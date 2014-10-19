@@ -542,20 +542,18 @@ class lbCron():
                 	msg = ""
                         scaninfo = open("/tmp/.lbscan.log", "r")
                         for line in scaninfo:
-                               msg += line  
-			
+                               msg += line  	
 			scaninfo.close()
                 	sendemail(config.plugins.lbpanel.smtpuser.value, config.plugins.lbpanel.lbemailto.value,"", "Scan report from LBpanel",msg,config.plugins.lbpanel.smtpuser.value,config.plugins.lbpanel.smtppass.value)
                                                                			
 		if config.plugins.lbpanel.autosave.value != '0':
+			global min
 			if min > int(config.plugins.lbpanel.autosave.value) and config.plugins.lbpanel.epgtime.value[1] != now.tm_min:
-				global min
 				min = 0
 				self.save_load_epg()
 				if config.plugins.lbpanel.autobackup.value:
 					self.autobackup()
 			else:
-				global min
 				min = min + 1
 		self.timer.start(60000, True)
 		
