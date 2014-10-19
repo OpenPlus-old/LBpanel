@@ -73,6 +73,8 @@ import smtplib
 
 global min
 min = 0
+global cronvar
+cronvar = 85
 
 lang = language.getLanguage()
 environ["LANGUAGE"] = lang[:2]
@@ -180,12 +182,12 @@ class easyPanel2(Screen):
 		sevenpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/addon.png"))
 		cuatropng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/daemons.png"))
 		cincopng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/infop.png"))
-		self.list.append((_("PANEL EMULADORAS"),"com_one", _("CamEmu start-stop, Test Emu Control, Info Emus"), onepng))
-		self.list.append((_("PANEL SERVICIOS"),"com_two", _("Epg,Ntp,script,info ..."), twopng ))
-		self.list.append((_("PANEL SISTEMA"),"com_six", _("modulos Kernel,swap,ftp,samba,crond,usb"), sixpng ))
-		#self.list.append((_("Skins LCD Selector"),"com_tres", _("Seleccioanar Skins LCD"), trespng ))
-		self.list.append((_("INSTALADOR PAQUETES"),"com_four", _("Instalar,desistalar ipk,tar.gz en /tmp"), treepng))
-		self.list.append((_("COMPLEMENTOS"),"com_seven", _("Interfaz Plugin"), sevenpng))
+		self.list.append((_("SoftEmus"),"com_one", _("CamEmu start-stop, Test Emu Control, Info Emus"), onepng))
+		self.list.append((_("Services"),"com_two", _("Epg,Ntp,scripts,info ..."), twopng ))
+		self.list.append((_("System"),"com_six", _("Kernel modules,swap,ftp,samba,crond,usb"), sixpng ))
+		#self.list.append((_("Skins LCD Selector"),"com_tres", _("LCD Skins selector"), trespng ))
+		self.list.append((_("Package install"),"com_four", _("Install /uninstall ipk,tar.gz en /tmp"), treepng))
+		self.list.append((_("Add-ons"),"com_seven", _("Plugins"), sevenpng))
 		#self.list.append((_("LB Daemons"),"com_cuatro", _("Lista Daemons"), cuatropng))
 		#self.list.append((_("Info Panel"),"com_cinco", _("Informacion Panel"), cincopng))
 		self["menu"].setList(self.list)
@@ -511,10 +513,13 @@ class lbCron():
 		self.timer.stop()
 		now = time.localtime(time.time())
 		# cron update control, test every hour, execute a script to test.
-		if (now.tm_min == 18 ):
-		#and now.tm_sec == 0):
-			os.system("/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/lbutils.sh testupdate &")
+                global cronvar
+		cronvar += 1
 		## Check for updates
+		print "Executing update LBpanel in %s minutes" % (90 - cronvar)
+		if (cronvar == 90 ):
+			cronvar = 0
+			os.system("/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/script/lbutils.sh testupdate &")
 		if (os.path.isfile("/tmp/.lbpanel.update")):
 			print "LBpanel updated"
 			self.mbox = self.session.open(MessageBox,(_("LBpanel has been updated, restart Enigma2 to activate your changes.")), MessageBox.TYPE_INFO, timeout = 30 )
