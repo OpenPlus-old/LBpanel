@@ -67,23 +67,23 @@ def _(txt):
 	
 class IPKToolsScreen(Screen):
 	skin = """
-	<screen name="IPKToolsScreen" position="70,35" size="1150,650" title="LBpanel Ipk Tools">
-		<ePixmap position="700,10" zPosition="1" size="450,700" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo19.png" alphatest="blend" transparent="1" />
-	<ePixmap position="20,638" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" transparent="1" alphatest="on" />
-	<ePixmap position="190,638" zPosition="1" size="230,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" transparent="1" alphatest="on" />
-	<ePixmap position="420,638" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/yellow.png" transparent="1" alphatest="on" />
-	<widget source = "key_red" render="Label" position="20,608" zPosition="2" size="170,30" valign="center" halign="center" font="Regular;22" transparent="1" />
-	<widget source = "key_green" render="Label" position="190,608" zPosition="2" size="230,30" valign="center" halign="center" font="Regular;22" transparent="1" />
-	<widget source = "key_yellow" render="Label" position="420,608" zPosition="2" size="170,30" valign="center" halign="center" font="Regular;22" transparent="1" />
-	<widget source="menu" render="Listbox" position="15,10" size="660,600" >
+	<screen name="IPKToolsScreen" position="center,center" size="1150,600" title="LBpanel Ipk Tools">
+	<ePixmap position="700,10" zPosition="1" size="450,590" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo19.png" alphatest="blend" transparent="1" />
+	<ePixmap position="705,580" zPosition="1" size="150,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" transparent="1" alphatest="on" />
+	<ePixmap position="855,580" zPosition="1" size="150,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" transparent="1" alphatest="on" />
+	<ePixmap position="1005,580" zPosition="1" size="150,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/yellow.png" transparent="1" alphatest="on" />
+	<widget source = "key_red" render="Label" position="705,530" zPosition="2" size="150,50" valign="center" halign="center" font="Regular;22" transparent="1" />
+	<widget source = "key_green" render="Label" position="855,530" zPosition="2" size="150,50" valign="center" halign="center" font="Regular;22" transparent="1" />
+	<widget source = "key_yellow" render="Label" position="1005,530" zPosition="2" size="150,50" valign="center" halign="center" font="Regular;22" transparent="1" />
+	<widget source="menu" render="Listbox" position="15,10" size="660,580" >
 	<convert type="TemplatedMultiContent">
 	{"template": [
 		MultiContentEntryText(pos = (200, 25), size = (600, 65), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 2 is the Menu Titel
 		MultiContentEntryText(pos = (210, 75), size = (600, 18), font=1, flags = RT_HALIGN_LEFT, text = 2), # index 3 is the Description
-		MultiContentEntryPixmapAlphaTest(pos = (7, 7), size = (115, 115), png = 3), # index 4 is the pixmap
+		MultiContentEntryPixmapAlphaTest(pos = (7, 7), size = (105, 105), png = 3), # index 4 is the pixmap
 			],
 	"fonts": [gFont("Regular", 30),gFont("Regular", 16)],
-	"itemHeight": 125
+	"itemHeight": 105
 	}
 			</convert>
 		</widget>

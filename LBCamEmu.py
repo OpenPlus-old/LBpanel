@@ -103,6 +103,10 @@ config.plugins.lbpanel.keyname = ConfigSelection(default = "SoftCam.Key", choice
 		("oscam.keys", "oscam.keys"),
 		("oscam.biss", "oscam.biss"),
 		])
+		
+# Start init emu
+print ("Init/restart SoftCam %s restart" % config.plugins.lbpanel.activeemu.value)
+os.system("/usr/CamEmu/%s restart &" % config.plugins.lbpanel.activeemu.value )
 ######################################################################################
 class emuSel2(Screen):
 	skin = """
@@ -135,7 +139,7 @@ class emuSel2(Screen):
   	skin = skin.replace("lb_title", _("LBpanel CamEmu"))
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		self.setTitle(_("LBpanel CamEmu:%s") % config.plugins.lbpanel.activeemu.value)
+		self.setTitle(_("LBpanel CamEmu: %s") % config.plugins.lbpanel.activeemu.value)
 		self.session = session
 		self.list = []
 		self.indexpos = None
@@ -241,8 +245,9 @@ class emuSel2(Screen):
 			os.chmod("/usr/CamEmu//%s" % emutype, 0777)
 			os.system("/usr/CamEmu/%s start" % emutype)
 			self.mbox = self.session.open(MessageBox, _("Please wait, starting %s") % self["menu"].getCurrent()[0], MessageBox.TYPE_INFO, timeout = 4 )
+			config.plugins.lbpanel.activeemu.value = self["menu"].getCurrent()[0]
 			self.indexpos = self["menu"].getIndex()
-			config.plugins.lbpanel.activeemu.value = self.emuversion(emutype)
+			#self.emuversion(emutype)
 			config.plugins.lbpanel.activeemu.save()
 			self.setTitle(_("Select SoftCam or CardServer: - %s") % config.plugins.lbpanel.activeemu.value)
 			self.selemulist()
@@ -344,21 +349,21 @@ class installCam(Screen):
 #################################################
 class CamEmuPanel(Screen):
 	skin = """
-<screen name="CamEmuPanel" position="70,35" size="1150,650">
-<ePixmap position="705,640" zPosition="2" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
-<ePixmap position="885,640" zPosition="2" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
-<ePixmap position="700,10" zPosition="1" size="450,700" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo1.png" alphatest="blend" transparent="1" />
-<widget source="key_red" render="Label" position="705,610" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-<widget source="key_green" render="Label" position="875,610" zPosition="2" size="170,30" valign="center" halign="center" font="Regular;22" transparent="1" />
-<widget source="menu" render="Listbox" position="15,10" size="660,630" scrollbarMode="showOnDemand">
-<convert type="TemplatedMultiContent">
+<screen name="CamEmuPanel" position="center,center" size="1150,600">
+<ePixmap position="705,580" zPosition="2" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
+<ePixmap position="885,580" zPosition="2" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
+<ePixmap position="700,10" zPosition="1" size="450,590" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo1.png" alphatest="blend" transparent="1" />
+<widget source="key_red" render="Label" position="705,550" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
+<widget source="key_green" render="Label" position="875,550" zPosition="2" size="170,30" valign="center" halign="center" font="Regular;22" transparent="1" />
+<widget source="menu" render="Listbox" position="15,10" size="660,580" scrollbarMode="showOnDemand">
+<convert type="TemplatedMultiContent">	
 	{"template": [
 		MultiContentEntryText(pos = (200, 25), size = (600, 65), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 2 is the Menu Titel
 		MultiContentEntryText(pos = (210, 75), size = (600, 18), font=1, flags = RT_HALIGN_LEFT, text = 2), # index 3 is the Description
-		MultiContentEntryPixmapAlphaTest(pos = (7, 7), size = (115, 115), png = 3), # index 4 is the pixmap
+		MultiContentEntryPixmapAlphaTest(pos = (7, 7), size = (105, 105), png = 3), # index 4 is the pixmap
 			],
 	"fonts": [gFont("Regular", 30),gFont("Regular", 16)],
-	"itemHeight": 125
+	"itemHeight": 105
 	}
 	</convert>
 		</widget>
@@ -394,15 +399,15 @@ class CamEmuPanel(Screen):
 		cincopng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/acj.png"))
 		seispng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/mgcami.png"))
 		sietepng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/mgcamedi.png"))
-		self.list.append((_("CAMEMU"),"com_one", _("Iniciar, Parar, Reiniciar Emuladoras"), onepng))
-		self.list.append((_("CONTROL EMUS"),"com_five", _("Comprobacion funcionamiento emuladoras"), fivepng))
+		self.list.append((_("Softcam"),"com_one", _("Softcam Init, Stop and Restart"), onepng))
+		self.list.append((_("Softcam control"),"com_five", _("Testin Softcam status"), fivepng))
 		#self.list.append((_("Descarga SoftCam.Key"),"com_tree", _("Descarga Softcam.key de internet"), treepng))
-		self.list.append((_("CCCAM INFO"),"com_dos", _("Plugin informacion emu CCcam"), dospng))
-		self.list.append((_("OSCAM STATUS"),"com_tres", _("Plugin Status emu Oscam"), trespng))
-		self.list.append((_("GBOX SUITE"),"com_cuatro", _("Plugin Status emu Gbox-Mbox"), cuatropng))
-		self.list.append((_("MBOX SCRIPTS"),"com_cinco", _("Script Mbox ACJ"), cincopng))
-		self.list.append((_("MGCAMD INFO"),"com_seis", _("Informacion status mgcamd"), seispng))
-		self.list.append((_("MGCAMD EDITOR"),"com_siete", _("Editor Lineas Newcamd"), sietepng))
+		self.list.append((_("CCcam Info"),"com_dos", _("Plugin CCcam Info"), dospng))
+		self.list.append((_("Oscam Info"),"com_tres", _("Plugin Status emu Oscam"), trespng))
+		self.list.append((_("Gbox Suite"),"com_cuatro", _("Plugin Status emu Gbox-Mbox"), cuatropng))
+		self.list.append((_("Mbox scripts"),"com_cinco", _("ACJ Mbox Script"), cincopng))
+		self.list.append((_("Mgcamd Info"),"com_seis", _("Mgcamd status information"), seispng))
+		self.list.append((_("Mgcamd Editor"),"com_siete", _("Newcamd Line Editor"), sietepng))
 		self["menu"].setList(self.list)
 
 	def exit(self):

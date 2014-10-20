@@ -365,22 +365,22 @@ config.plugins.lbpanel.smtppass = ConfigPassword(default = "mailpass",fixed_size
 
 class ToolsScreen(Screen):
 	skin = """
-		<screen name="ToolsScreen" position="70,35" size="1150,650" title="LBpanel - Services">
-		<ePixmap position="700,10" zPosition="1" size="450,700" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo7.png" alphatest="blend" transparent="1" />
-	<ePixmap position="705, 640" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
-	<widget source="key_red" render="Label" position="705, 610" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-	<widget source="key_green" render="Label" position="875, 610" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-	<ePixmap position="885, 640" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
+		<screen name="ToolsScreen" position="center,center" size="1150,600" title="LBpanel - Services">
+		<ePixmap position="700,10" zPosition="1" size="450,590" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo7.png" alphatest="blend" transparent="1" />
+	<ePixmap position="705, 580" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
+	<widget source="key_red" render="Label" position="705, 550" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
+	<widget source="key_green" render="Label" position="875, 550" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
+	<ePixmap position="885, 580" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
 
-	<widget source="menu" render="Listbox" position="15,10" size="660,630" scrollbarMode="showOnDemand">
+	<widget source="menu" render="Listbox" position="15,10" size="660,580" scrollbarMode="showOnDemand">
 	<convert type="TemplatedMultiContent">
 	{"template": [
 		MultiContentEntryText(pos = (200, 25), size = (600, 65), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 2 is the Menu Titel
 		MultiContentEntryText(pos = (210, 75), size = (600, 18), font=1, flags = RT_HALIGN_LEFT, text = 2), # index 3 is the Description
-		MultiContentEntryPixmapAlphaTest(pos = (7, 7), size = (115, 115), png = 3), # index 4 is the pixmap
+		MultiContentEntryPixmapAlphaTest(pos = (7, 7), size = (105, 105), png = 3), # index 4 is the pixmap
 			],
 	"fonts": [gFont("Regular", 30),gFont("Regular", 16)],
-	"itemHeight": 125
+	"itemHeight": 105
 	}
 			</convert>
 		</widget>
@@ -991,8 +991,8 @@ class ManualSetTime(Screen):
 ####################################################################
 class SystemScreen(Screen):
 	skin = """
-		<screen name="SystemScreen" position="70,35" size="1150,650" title="LBpanel - System utils">
-	<ePixmap position="700,10" zPosition="1" size="450,700" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo13.png" alphatest="blend" transparent="1" />
+		<screen name="SystemScreen" position="center,center" size="1150,600" title="LBpanel - System utils">
+	<ePixmap position="700,10" zPosition="1" size="450,590" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo13.png" alphatest="blend" transparent="1" />
 	<ePixmap position="705, 640" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
 	<widget source="key_red" render="Label" position="705, 610" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
 	<widget source="menu" render="Listbox" position="15,10" size="660,630" scrollbarMode="showOnDemand">
@@ -1000,10 +1000,10 @@ class SystemScreen(Screen):
 	{"template": [
 		MultiContentEntryText(pos = (200, 25), size = (600, 65), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 2 is the Menu Titel
 		MultiContentEntryText(pos = (210, 75), size = (600, 18), font=1, flags = RT_HALIGN_LEFT, text = 2), # index 3 is the Description
-		MultiContentEntryPixmapAlphaTest(pos = (7, 7), size = (115, 115), png = 3), # index 4 is the pixmap
+		MultiContentEntryPixmapAlphaTest(pos = (7, 7), size = (105, 105), png = 3), # index 4 is the pixmap
 			],
 	"fonts": [gFont("Regular", 30),gFont("Regular", 16)],
-	"itemHeight": 125
+	"itemHeight": 105
 	}
 			</convert>
 		</widget>

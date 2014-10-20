@@ -124,23 +124,23 @@ def sendemail(from_addr, to_addr, cc_addr,
     server.quit()
 
 
-class easyPanel2(Screen):
+class LBPanel2(Screen):
 	skin = """
-<screen name="easyPanel2" position="70,35" size="1150,650">
-#<ePixmap position="705,640" zPosition="2" size="165,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
-#<widget source="key_red" render="Label" position="705,610" zPosition="2" size="165,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-#<ePixmap position="885,640" zPosition="2" size="165,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
-#<widget source="key_green" render="Label" position="875,610" zPosition="2" size="165,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-#<ePixmap position="700,10" zPosition="1" size="450,700" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo.png" alphatest="blend" transparent="1" />
-<widget source="menu" render="Listbox" position="15,10" size="660,650" scrollbarMode="showOnDemand">
+<screen name="LBPanel2" position="center,center" size="1150,600" >
+<ePixmap position="705,580" zPosition="2" size="165,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
+<widget source="key_red" render="Label" position="705,550" zPosition="2" size="165,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
+<ePixmap position="885,580" zPosition="2" size="165,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
+<widget source="key_green" render="Label" position="875,550" zPosition="2" size="165,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
+<ePixmap position="700,10" zPosition="1" size="450,590" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo.png" alphatest="blend" transparent="1" />
+<widget source="menu" render="Listbox" position="15,10" size="660,580" scrollbarMode="showOnDemand">
 <convert type="TemplatedMultiContent">
 	{"template": [
 		MultiContentEntryText(pos = (200, 25), size = (600, 65), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 2 is the Menu Titel
 		MultiContentEntryText(pos = (210, 75), size = (600, 18), font=1, flags = RT_HALIGN_LEFT, text = 2), # index 3 is the Description
-		MultiContentEntryPixmapAlphaTest(pos = (7, 7), size = (115, 115), png = 3), # index 4 is the pixmap
+		MultiContentEntryPixmapAlphaTest(pos = (7, 7), size = (105, 105), png = 3), # index 4 is the pixmap
 			],
 	"fonts": [gFont("Regular", 30),gFont("Regular", 16)],
-	"itemHeight": 125
+	"itemHeight": 105
 	}
 	</convert>
 	</widget>
@@ -421,7 +421,7 @@ class info(Screen):
 		package = 0
 		self["panelver"].text = " "
 		for line in open(self.status()):
-			if line.find("easyLBpanel") > -1:
+			if line.find("LBpanel") > -1:
 				package = 1
 			if line.find("Version:") > -1 and package == 1:
 				package = 0
@@ -453,16 +453,16 @@ class ConfigExtentions(ConfigListScreen, Screen):
 		Screen.__init__(self, session)
 		self.setTitle(_("LBpanel Menu/Extensionmenu config"))
 		self.list = []
-		self.list.append(getConfigListEntry(_("Show LBPanel in MainMenu"), config.plugins.lbpanel.showmain))
-		self.list.append(getConfigListEntry(_("Show LBPanel in ExtensionMenu"), config.plugins.lbpanel.showepanelmenu))
-		self.list.append(getConfigListEntry(_("Show CamEmu Manager in ExtensionMenu"), config.plugins.lbpanel.showextsoft))
-		self.list.append(getConfigListEntry(_("Show LB-NewCamd.list switcher in ExtensionMenu"), config.plugins.lbpanel.shownclsw))
-		self.list.append(getConfigListEntry(_("Show LB-Wicardd.conf switcher in ExtensionMenu"), config.plugins.lbpanel.showwcsw))
+		self.list.append(getConfigListEntry(_("Show LBPanel in Main Menu"), config.plugins.lbpanel.showmain))
+		self.list.append(getConfigListEntry(_("Show LBPanel in Extension Menu"), config.plugins.lbpanel.showepanelmenu))
+		self.list.append(getConfigListEntry(_("Show CamEmu Manager in Extension Menu"), config.plugins.lbpanel.showextsoft))
+		self.list.append(getConfigListEntry(_("Show LB-NewCamd.list switcher in Extension Menu"), config.plugins.lbpanel.shownclsw))
+		self.list.append(getConfigListEntry(_("Show LB-Wicardd.conf switcher in Extension Menu"), config.plugins.lbpanel.showwcsw))
 		self.list.append(getConfigListEntry(_("Show LB-CrashLog viewr in ExtensionMenu"), config.plugins.lbpanel.showclviewer))
-		self.list.append(getConfigListEntry(_("Show LB-Script Executter in ExtensionMenu"), config.plugins.lbpanel.showscriptex))
-		self.list.append(getConfigListEntry(_("Show LB-Usb Unmount in ExtensionMenu"), config.plugins.lbpanel.showusbunmt))
-		self.list.append(getConfigListEntry(_("Show LB-Installer in ExtensionMenu"), config.plugins.lbpanel.showsetupipk))
-		self.list.append(getConfigListEntry(_("Show PluginBrowser in LBPanel MainMenu"), config.plugins.lbpanel.showpbmain))
+		self.list.append(getConfigListEntry(_("Show LB-Script Executter in Extension Menu"), config.plugins.lbpanel.showscriptex))
+		self.list.append(getConfigListEntry(_("Show LB-Usb Unmount in Extension Menu"), config.plugins.lbpanel.showusbunmt))
+		self.list.append(getConfigListEntry(_("Show LB-Installer in Extension Menu"), config.plugins.lbpanel.showsetupipk))
+		self.list.append(getConfigListEntry(_("Show PluginBrowser in LBPanel Main Menu"), config.plugins.lbpanel.showpbmain))
 		self.list.append(getConfigListEntry(_("Filter by Name in download extentions"), config.plugins.lbpanel.filtername))
 		ConfigListScreen.__init__(self, self.list)
 		self["key_red"] = StaticText(_("Close"))
@@ -571,7 +571,7 @@ class lbCron():
 	
 	def dload(self):
 		try:
-                        os.system("wget -q http://www.linux-box.es/epg/epg.dat.gz -O %sepg.dat.gz" % (config.plugins.lbpanel.direct.value))
+                        os.system("wget -q http://appstore.linux-box.es/epg/epg.dat.gz -O %sepg.dat.gz" % (config.plugins.lbpanel.direct.value))
                         if fileExists("%sepg.dat" % config.plugins.lbpanel.direct.value):
                                 os.unlink("%sepg.dat" % config.plugins.lbpanel.direct.value)
                                 os.system("rm -f %sepg.dat" % config.plugins.lbpanel.direct.value)
@@ -610,7 +610,7 @@ def sessionstart(reason,session=None, **kwargs):
 		pEmu.gotSession(session)
 ##############################################################################
 def main(session, **kwargs):
-	session.open(easyPanel2)
+	session.open(LBPanel2)
 
 def menu(menuid, **kwargs):
 	if menuid == "mainmenu":
@@ -657,8 +657,8 @@ def Plugins(**kwargs):
 	if config.plugins.lbpanel.showsetupipk.value:
 		list.append(PluginDescriptor(name=_("LB-Installer"), description=_("install & forced install ipk, bh.tgz, tar.gz, nab.tgz from /tmp"), where = [PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=setupipk))
 	if config.plugins.lbpanel.showmain.value:
-		list.append(PluginDescriptor(name=_("LBPanel"), description=_("LBTeam Panel Plugin 2.0"), where = [PluginDescriptor.WHERE_MENU], fnc=menu))
-	list.append(PluginDescriptor(name=_("LBPanel"), description=_("LBTeam Panel Plugin 2.0"), where = [PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc = sessionstart))
+		list.append(PluginDescriptor(name=_("LBPanel"), description=_("LBTeam Panel Plugin"), where = [PluginDescriptor.WHERE_MENU], fnc=menu))
+	list.append(PluginDescriptor(name=_("LBPanel"), description=_("LBTeam Panel Plugin"), where = [PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc = sessionstart))
 	return list
 
 
