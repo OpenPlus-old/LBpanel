@@ -1,0 +1,16 @@
+#--------------------------------------------------------------
+#
+#    mhw2epgdownloader INSTALL file
+#  
+#    EPG Data collector - Aplicación en línea de comandos
+#
+#--------------------------------------------------------------
+
+1) Copia los ejecutables a cualquier carpeta del disco duro. La
+aplicación solo necesita espacio para guardar la guía.
+2) Configura el mhw2epgdownloader.conf
+3) Ejecutar con ./run.e2.sh
+
+NOTA: Van incluidos distintos ejecutables para distintas plataformas.
+Elimina los que no se ejecuten en tu plataforma.
+

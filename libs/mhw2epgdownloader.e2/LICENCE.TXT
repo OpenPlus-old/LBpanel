@@ -1,0 +1,27 @@
+#--------------------------------------------------------------
+#
+#    mhw2epgdownloader LICENCE file
+#  
+#    EPG Data collector
+#
+#--------------------------------------------------------------
+
+VERSION DE LINEA DE COMANDOS
+
+LICENCIA: ================================
+- Este software ha sido creado solo para fines educativos
+- Este software es gratuito y se puede copiar y distribuir de forma gratuita respetando los derechos de autor.
+- Este software no tiene garantia de ningún tipo
+- Usa este software bajo tu exclusiva responsabilidad. Si hubiera daños el usuario final es el responsable por su uso.
+- El autor no se hace responsable de daños de cualquier tipo que su uso pudiera ocasionar.
+
+translation
+
+LICENCE: ================================
+- This software has been created only for educational purposes
+- This software is free and can be copied and distributed for free respecting copyrights
+- No warrantee of any kind, express or implied, is included with this software
+- Use at your risk, responsability for damages (if any) to anyone resulting from the use of this
+software rest entirely with the user
+- The author is not responsible for any damage that its use could cause.
+

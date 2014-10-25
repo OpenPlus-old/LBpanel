@@ -46,6 +46,7 @@ from Components.ScrollLabel import ScrollLabel
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_LANGUAGE
 from Components.config import config, getConfigListEntry, ConfigText, ConfigPassword, ConfigSelection, ConfigSubsection, ConfigYesNo
 from Components.ConfigList import ConfigListScreen
+from ServiceReference import ServiceReference
 from time import *
 from enigma import eEPGCache
 from types import *
@@ -104,10 +105,16 @@ config.plugins.lbpanel.auto = ConfigSelection(default = "no", choices = [
 		("no", _("no")),
 		("yes", _("yes")),
 		])
+config.plugins.lbpanel.auto2 = ConfigSelection(default = "no", choices = [
+                ("no", _("no")),
+		("yes", _("yes")),
+		])
+                                                
 config.plugins.lbpanel.lang = ConfigSelection(default = "es", choices = [
 		("es", _("spain d+")),
 		])
 config.plugins.lbpanel.epgtime = ConfigClock(default = ((16*60) + 15) * 60) # 18:15
+config.plugins.lbpanel.epgtime2 = ConfigClock(default = ((16*60) + 15) * 60)
 #config.plugins.lbpanel.weekday = ConfigSelection(default = "01", choices = [
 #		("00", _("Mo")),
 #		("01", _("Tu")),
@@ -418,6 +425,7 @@ class ToolsScreen(Screen):
 		self.list.append((_("Tools Crashlog"),"com_one", _("Manage crashlog files"), onepng ))
 		self.list.append((_("System Info"),"com_two", _("System info (free, dh -f)"), twopng ))
 		self.list.append((_("Download D+ EPG"),"com_tree", _("Download D+ EPG"), treepng ))
+		self.list.append((_("SAT Down D+ EPG"),"com_four", _("Download D+ EPG"), treepng ))
 		self.list.append((_("Scan Peer Security"),"com_scan", _("Check host security"), eightpng ))
 		self.list.append((_("NTP Sync"),"com_six", _("Ntp sync: 30 min,60 min,120 min, 240"), sixpng ))
 		self.list.append((_("User Scripts"),"com_five", _("User Scripts"), fivepng ))
@@ -445,6 +453,8 @@ class ToolsScreen(Screen):
 				self.session.openWithCallback(self.mList,Info2Screen)
 			elif returnValue is "com_tree":
 				self.session.open(epgdn)
+			elif returnValue is "com_four":
+				self.session.open(epgscript)
 			elif returnValue is "com_five":
 				self.session.openWithCallback(self.mList, ScriptScreen)
 			elif returnValue is "com_six":
@@ -1396,7 +1406,7 @@ class epgdn(ConfigListScreen, Screen):
 		
 	def downepg(self):
 		try:
-			os.system("wget -q http://www.linux-box.es/epg/epg.dat.gz -O %sepg.dat.gz" % (config.plugins.lbpanel.direct.value))
+			os.system("wget -q http://appstore.linux-box.es/epg/epg.dat.gz -O %sepg.dat.gz" % (config.plugins.lbpanel.direct.value))
 			if fileExists("%sepg.dat" % config.plugins.lbpanel.direct.value):
 				os.unlink("%sepg.dat" % config.plugins.lbpanel.direct.value)
 				os.system("rm -f %sepg.dat" % config.plugins.lbpanel.direct.value)
@@ -1435,6 +1445,96 @@ class epgdn(ConfigListScreen, Screen):
 		self.session.open(TryQuitMainloop, 3)
 #####################################################
 ################################################################################################################
+
+class epgscript(ConfigListScreen, Screen):
+	skin = """
+<screen name="epgdn" position="center,160" size="1150,500" title="LBpanel - EPG D+">
+    <ePixmap position="715,10" zPosition="1" size="450,700" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo9.png" alphatest="blend" transparent="1" />
+  <widget position="15,10" size="690,450" name="config" scrollbarMode="showOnDemand" />
+   <ePixmap position="10,488" zPosition="1" size="165,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
+  <widget source="key_red" render="Label" position="10,458" zPosition="2" size="165,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
+  <ePixmap position="175,488" zPosition="1" size="165,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
+  <widget source="key_green" render="Label" position="175,458" zPosition="2" size="165,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
+  <ePixmap position="340,488" zPosition="1" size="200,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/yellow.png" alphatest="blend" />
+  <widget source="key_yellow" render="Label" position="340,458" zPosition="2" size="200,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
+	<ePixmap position="540,488" zPosition="1" size="200,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/blue.png" alphatest="blend" />
+  <widget source="key_blue" render="Label" position="540,458" zPosition="2" size="200,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
+</screen>"""
+
+	def __init__(self, session):
+		self.session = session
+		Screen.__init__(self, session)
+		self.setTitle(_("LBpanel - D+ SAT EPG"))
+		self.list = []
+		self.list.append(getConfigListEntry(_("Select where to save epg.dat"), config.plugins.lbpanel.direct))
+		self.list.append(getConfigListEntry(_("Select D+ epg"), config.plugins.lbpanel.lang))
+		self.list.append(getConfigListEntry(_("Auto download epg.dat"), config.plugins.lbpanel.auto2))
+		self.list.append(getConfigListEntry(_("Auto download hour"), config.plugins.lbpanel.epgtime2))
+		self.list.append(getConfigListEntry(_("Auto load and save EPG"), config.plugins.lbpanel.autosave))
+		self.list.append(getConfigListEntry(_("Save copy in ../epgtmp.gz"), config.plugins.lbpanel.autobackup))
+		ConfigListScreen.__init__(self, self.list)
+		self["key_red"] = StaticText(_("Close"))
+		self["key_green"] = StaticText(_("Save"))
+		self["key_yellow"] = StaticText(_("EPG Download"))
+		self["key_blue"] = StaticText(_("Manual"))
+		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
+		{
+			"red": self.cancel,
+			"cancel": self.cancel,
+			"green": self.save,
+			"yellow": self.downepg,
+			"blue": self.manual,
+			"ok": self.save
+		}, -2)
+		
+	def downepg(self):
+		try:
+			epgservice='1:0:1:75c6:422:1:c00000:0:0:0'
+			#epgservice='1:0:1:759C:422:1:C00000:0:0:0:' 
+			self.oldService = self.session.nav.getCurrentlyPlayingServiceReference().toString()
+			self.session.nav.playService(eServiceReference(epgservice))
+			os.system("/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/libs/mhw2epgdownloader.e2/cchannel.sh &")
+			os.system("/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/libs/mhw2epgdownloader.e2/run.e2.sh")
+			self.session.nav.playService(self.oldService)
+			#if fileExists("%sepg.dat" % config.plugins.lbpanel.direct.value):
+			#	os.unlink("%sepg.dat" % config.plugins.lbpanel.direct.value)
+			#	os.system("rm -f %sepg.dat" % config.plugins.lbpanel.direct.value)
+			#if not os.path.exists("%sepgtmp" % config.plugins.lbpanel.direct.value):
+			#	os.system("mkdir -p %sepgtmp" % config.plugins.lbpanel.direct.value)
+			#os.system("cp -f %sepg.dat.gz %sepgtmp" % (config.plugins.lbpanel.direct.value, config.plugins.lbpanel.direct.value))
+			#os.system("gzip -df %sepg.dat.gz" % config.plugins.lbpanel.direct.value)
+			#os.chmod("%sepg.dat" % config.plugins.lbpanel.direct.value, 0644)
+			#self.mbox = self.session.open(MessageBox,(_("EPG downloaded")), MessageBox.TYPE_INFO, timeout = 4 )
+			#epgcache = new.instancemethod(_enigma.eEPGCache_load,None,eEPGCache)
+			#epgcache = eEPGCache.getInstance().load()
+		except:
+			self.mbox = self.session.open(MessageBox,(_("Sorry, the EPG download error")), MessageBox.TYPE_INFO, timeout = 4 )
+
+	def cancel(self):
+		for i in self["config"].list:
+			i[1].cancel()
+		self.close(False)
+	
+	def save(self):
+		config.misc.epgcache_filename.value = ("%sepg.dat" % config.plugins.lbpanel.direct.value)
+		config.misc.epgcache_filename.save()
+		config.plugins.lbpanel.epgtime2.save()
+		config.plugins.lbpanel.lang.save()
+		config.plugins.lbpanel.direct.save()
+		config.plugins.lbpanel.auto2.save()
+		config.plugins.lbpanel.autosave.save()
+		config.plugins.lbpanel.autobackup.save()
+		configfile.save()
+		self.mbox = self.session.open(MessageBox,(_("configuration is saved")), MessageBox.TYPE_INFO, timeout = 4 )
+################################################################################################################
+	def manual(self):
+		self.session.open(epgdmanual)
+################################################################################################################
+	def restart(self):
+		self.session.open(TryQuitMainloop, 3)
+#####################################################
+################################################################################################################
+
 class epgdmanual(Screen):
 	skin = """
 <screen name="epgdmanual" position="center,260" size="850,50" title="LBpanel - EPG D+">

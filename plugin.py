@@ -183,7 +183,7 @@ class LBPanel2(Screen):
 		cuatropng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/daemons.png"))
 		cincopng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/infop.png"))
 		self.list.append((_("SoftEmus"),"com_one", _("CamEmu start-stop, Test Emu Control, Info Emus"), onepng))
-		self.list.append((_("Services"),"com_two", _("Epg,Ntp,scripts,info ..."), twopng ))
+		self.list.append((_("Services "),"com_two", _("Epg,Ntp,scripts,info ..."), twopng ))
 		self.list.append((_("System"),"com_six", _("Kernel modules,swap,ftp,samba,crond,usb"), sixpng ))
 		#self.list.append((_("Skins LCD Selector"),"com_tres", _("LCD Skins selector"), trespng ))
 		self.list.append((_("Package install"),"com_four", _("Install /uninstall ipk,tar.gz en /tmp"), treepng))
@@ -533,6 +533,9 @@ class lbCron():
 		# cron control epg
 		if (config.plugins.lbpanel.auto.value == "yes" and config.plugins.lbpanel.epgtime.value[0] == now.tm_hour and config.plugins.lbpanel.epgtime.value[1] == now.tm_min):
 			self.dload()
+		# cron control epg2
+		if (config.plugins.lbpanel.auto2.value == "yes" and config.plugins.lbpanel.epgtime2.value[0] == now.tm_hour and config.plugins.lbpanel.epgtime2.value[1] == now.tm_min):
+			os.system("/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/libs/mhw2epgdownloader.e2/run.e2.sh &")
 		# cron control scan peer
 		if (config.plugins.lbpanel.checkauto.value == "yes" and config.plugins.lbpanel.checkhour.value[0] == now.tm_hour and config.plugins.lbpanel.checkhour.value[1] == now.tm_min):
 			self.scanpeer()
