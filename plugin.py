@@ -100,6 +100,8 @@ config.plugins.lbpanel.showusbunmt = ConfigYesNo(default = False)
 config.plugins.lbpanel.showsetupipk = ConfigYesNo(default = False)
 config.plugins.lbpanel.showpbmain = ConfigYesNo(default = False)
 config.plugins.lbpanel.filtername = ConfigYesNo(default = False)
+config.plugins.lbpanel.update = ConfigYesNo(default = True)
+config.plugins.lbpanel.updatesettings = ConfigYesNo(default = True)
 ##################################################################
 
 # Check if feed is active
@@ -182,11 +184,13 @@ class LBPanel2(Screen):
 		sevenpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/addon.png"))
 		cuatropng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/daemons.png"))
 		cincopng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/infop.png"))
+		settings = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/settings.png"))
 		self.list.append((_("SoftEmus"),"com_one", _("CamEmu start-stop, Test Emu Control, Info Emus"), onepng))
 		self.list.append((_("Services "),"com_two", _("Epg,Ntp,scripts,info ..."), twopng ))
 		self.list.append((_("System"),"com_six", _("Kernel modules,swap,ftp,samba,crond,usb"), sixpng ))
 		#self.list.append((_("Skins LCD Selector"),"com_tres", _("LCD Skins selector"), trespng ))
 		self.list.append((_("Package install"),"com_four", _("Install /uninstall ipk,tar.gz en /tmp"), treepng))
+		self.list.append((_("Settings"),"com_settings", _("Settings of LBpanel"), settings))
 		self.list.append((_("Add-ons"),"com_seven", _("Plugins"), sevenpng))
 		#self.list.append((_("LB Daemons"),"com_cuatro", _("Lista Daemons"), cuatropng))
 		#self.list.append((_("Info Panel"),"com_cinco", _("Informacion Panel"), cincopng))
@@ -215,6 +219,8 @@ class LBPanel2(Screen):
 				self.session.open(LBtools.SystemScreen)
 			elif returnValue is "com_seven":
 				self.session.open(PluginBrowser)
+			elif returnValue is "com_settings":
+				self.session.open(LBsettings)
 			#elif returnValue is "com_cuatro":
 				#self.session.open(LBDaemonsList.LBDaemonsList)
 			#elif returnValue is "com_cinco":
@@ -497,6 +503,54 @@ class ConfigExtentions(ConfigListScreen, Screen):
 		config.plugins.lbpanel.filtername.save()
 		configfile.save()
 		self.mbox = self.session.open(MessageBox,(_("Configuration is saved")), MessageBox.TYPE_INFO, timeout = 4 )
+
+
+######################################################################################
+class LBsettings(ConfigListScreen, Screen):
+	skin = """
+<screen name="scanhost" position="center,160" size="1150,500" title="LBpanel - Check Hosts">
+    <ePixmap position="715,10" zPosition="1" size="450,700" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondosettings.png" alphatest="blend" transparent="1" />
+  <widget position="15,10" size="690,450" name="config" scrollbarMode="showOnDemand" />
+   <ePixmap position="10,488" zPosition="1" size="165,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
+  <widget source="key_red" render="Label" position="10,458" zPosition="2" size="165,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
+  <ePixmap position="175,488" zPosition="1" size="165,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
+  <widget source="key_green" render="Label" position="175,458" zPosition="2" size="165,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
+  <widget source="key_yellow" render="Label" position="340,458" zPosition="2" size="200,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
+  <widget source="key_blue" render="Label" position="540,458" zPosition="2" size="200,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
+</screen>"""
+
+	def __init__(self, session):
+		self.session = session
+		Screen.__init__(self, session)
+		self.setTitle(_("LBpanel - Check Host"))
+		self.list = []
+		self.list.append(getConfigListEntry(_("Auto Update LBpanel"), config.plugins.lbpanel.update))
+		self.list.append(getConfigListEntry(_("Auto Update Settings"), config.plugins.lbpanel.updatesettings))
+		ConfigListScreen.__init__(self, self.list)
+		self["key_red"] = StaticText(_("Close"))
+		self["key_green"] = StaticText(_("Save"))
+		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
+		{
+			"red": self.cancel,
+			"cancel": self.cancel,
+			"green": self.save,
+			"ok": self.save
+		}, -2)
+		
+		
+	def cancel(self):
+		for i in self["config"].list:
+			i[1].cancel()
+		self.close(False)
+	
+	def save(self):
+		config.plugins.lbpanel.update.save()
+		config.plugins.lbpanel.updatesettings.save()
+		configfile.save()
+		self.mbox = self.session.open(MessageBox,(_("Configuration is saved")), MessageBox.TYPE_INFO, timeout = 4 )
+
+################################################################################################################
+
 ####################################################################
 ## Cron especific function for lbpanel
 class lbCron():
@@ -519,8 +573,11 @@ class lbCron():
 		print "Executing update LBpanel in %s minutes" % (90 - cronvar)
 		if (cronvar == 90 ):
 			cronvar = 0
-			os.system("/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/script/lbutils.sh testupdate &")
-		if (os.path.isfile("/tmp/.lbpanel.update")):
+			if (config.plugins.lbpanel.update.value):
+				os.system("/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/script/lbutils.sh testupdate &")
+			if (config.plugins.lbpanel.updatesettings.value):
+				os.system("/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/script/lbutils.sh testsettings &")
+		if (os.path.isfile("/tmp/.lbpanel.update") and config.plugins.lbpanel.update.value):
 			print "LBpanel updated"
 			self.mbox = self.session.open(MessageBox,(_("LBpanel has been updated, restart Enigma2 to activate your changes.")), MessageBox.TYPE_INFO, timeout = 30 )
 			os.remove("/tmp/.lbpanel.update")

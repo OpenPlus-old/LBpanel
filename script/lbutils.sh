@@ -12,8 +12,13 @@ testupdate)
              echo "." > /tmp/.lbpanel.update
              echo "Installing $arg";
         done;
+        rm -f /tmp/list-upgradable
+                                                                
+	exit 0
+	;;
 
-
+testsettings)
+	opkg update
         for arg in `awk '/enigma2-plugin-settings-sorys/{print $1}' /tmp/.list-upgradable` ; do
                 echo "Installing $arg";
                 opkg install $arg;
