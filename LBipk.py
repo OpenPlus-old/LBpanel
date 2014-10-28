@@ -117,11 +117,15 @@ class IPKToolsScreen(Screen):
 		sixpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/ipk.png"))
 		fivepng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/ipk.png"))
 		dospng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/ipk.png"))
+		cuatropng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/ipk.png"))
+		cincopng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/ipk.png"))
 		self.list.append((_("IPK installer"),"one", _("Install ipk, bh.tgz, tar.gz, nab.tgz in /tmp"), onepng ))
 		self.list.append((_("Feed installer"),"six", _("Feed installer"), sixpng ))
 		self.list.append((_("Download extensions"),"five", _("Download feeds packages"), fivepng))
 		self.list.append((_("IPK delete packages"),"four", _("Delete IPK packages"), treepng ))
 		self.list.append((_("Sorys Channel List"),"dos", _("Download Sorys Channel List"), dospng ))
+		self.list.append((_("Download config emus"),"cuatro", _("Download Config Emus"), cuatropng ))
+		self.list.append((_("Download Picon"),"cinco", _("Download Picon"), cincopng ))
 		self["menu"].setList(self.list)
 		
 	def exit(self):
@@ -146,6 +150,10 @@ class IPKToolsScreen(Screen):
 			self.session.openWithCallback(self.mList,downfeed)
 		elif item is "dos":
 			self.session.openWithCallback(self.mList,installsorys)
+		elif item is "cuatro":
+			self.session.openWithCallback(self.mList,installconfigemus)
+		elif item is "cinco":
+			self.session.openWithCallback(self.mList,installpicon)
 			
 ###############################################
 class DownloadFeed(Screen):
@@ -293,6 +301,149 @@ class installsorys(Screen):
 		
 	def setup(self):
 		self.session.open(Console,title = _("Installing Sorys Settings"), cmdlist = ["opkg install -force-overwrite %s" % self["menu"].getCurrent()[0]])
+		
+		
+	def cancel(self):
+		self.close()
+#################################################
+class installconfigemus(Screen):
+	skin = """
+
+<screen name="installconfigemus" position="center,160" size="1150,500" title="LBpanel-Download Config-Emus">
+    <ePixmap position="715,10" zPosition="1" size="450,700" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo10.png" alphatest="blend" transparent="1" />
+<widget source="menu" render="Listbox" position="15,10" size="660,450" scrollbarMode="showOnDemand">
+
+	<convert type="TemplatedMultiContent">
+
+		{"template": [
+
+			MultiContentEntryText(pos = (70, 2), size = (630, 25), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 2 is the Menu Titel
+
+			MultiContentEntryText(pos = (80, 29), size = (630, 18), font=1, flags = RT_HALIGN_LEFT, text = 1), # index 3 is the Description
+
+			MultiContentEntryPixmapAlphaTest(pos = (5, 5), size = (50, 40), png = 2), # index 4 is the pixmap
+				],
+	"fonts": [gFont("Regular", 23),gFont("Regular", 16)],
+	"itemHeight": 50
+
+	}
+
+	</convert>
+
+	</widget>
+
+	<ePixmap name="red" position="20,488" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" transparent="1" alphatest="on" />
+
+	<ePixmap name="green" position="190,488" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" transparent="1" alphatest="on" />
+
+	<widget name="key_red" position="20,458" zPosition="2" size="170,30" valign="center" halign="center" font="Regular;22" transparent="1" />
+
+	<widget name="key_green" position="190,458" zPosition="2" size="170,30" valign="center" halign="center" font="Regular;22" transparent="1" />
+
+</screen>"""
+	  
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		self.setTitle(_("LBpanel-Download Config Emus"))
+		self.session = session
+		self.list = []
+		self["menu"] = List(self.list)
+		self.feedlist()
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
+			{
+				"cancel": self.cancel,
+				"ok": self.ok,
+				"green": self.setup,
+				"red": self.cancel,
+			},-1)
+		self.list = [ ]
+		self["key_red"] = Label(_("Close"))
+		self["key_green"] = Label(_("Install"))
+		
+	def feedlist(self):
+		self.list = []
+		os.system("opkg update")
+		camdlist = os.popen("opkg list | grep emucfg")
+		softpng = LoadPixmap(cached = True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/emumini.png"))
+		for line in camdlist.readlines():
+			try:
+				self.list.append(("%s %s" % (line.split(' - ')[0], line.split(' - ')[1]), line.split(' - ')[-1], softpng))
+			except:
+				pass
+		camdlist.close()
+		self["menu"].setList(self.list)
+		
+	def ok(self):
+		self.setup()
+		
+	def setup(self):
+		self.session.open(Console,title = _("Installing Config Emus"), cmdlist = ["opkg install -force-overwrite %s" % self["menu"].getCurrent()[0]])
+		
+		
+	def cancel(self):
+		self.close()
+#################################################
+class installpicon(Screen):
+	skin = """
+
+<screen name="installpicon" position="center,160" size="1150,500" title="LBpanel-Download Picon">
+    <ePixmap position="715,10" zPosition="1" size="450,700" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo10.png" alphatest="blend" transparent="1" />
+<widget source="menu" render="Listbox" position="15,10" size="660,450" scrollbarMode="showOnDemand">
+	<convert type="TemplatedMultiContent">
+		{"template": [
+			MultiContentEntryText(pos = (70, 2), size = (630, 25), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 2 is the Menu Titel
+			MultiContentEntryText(pos = (80, 29), size = (630, 18), font=1, flags = RT_HALIGN_LEFT, text = 1), # index 3 is the Description
+			MultiContentEntryPixmapAlphaTest(pos = (5, 5), size = (50, 40), png = 2), # index 4 is the pixmap
+				],
+	"fonts": [gFont("Regular", 23),gFont("Regular", 16)],
+	"itemHeight": 50
+	}
+	</convert>
+
+	</widget>
+	<ePixmap name="red" position="20,488" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" transparent="1" alphatest="on" />
+	<ePixmap name="green" position="190,488" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" transparent="1" alphatest="on" />
+
+	<widget name="key_red" position="20,458" zPosition="2" size="170,30" valign="center" halign="center" font="Regular;22" transparent="1" />
+	<widget name="key_green" position="190,458" zPosition="2" size="170,30" valign="center" halign="center" font="Regular;22" transparent="1" />
+</screen>"""
+	  
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		self.setTitle(_("LBpanel-Download picon"))
+		self.session = session
+		self.list = []
+		self["menu"] = List(self.list)
+		self.feedlist()
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
+			{
+				"cancel": self.cancel,
+				"ok": self.ok,
+				"green": self.setup,
+				"red": self.cancel,
+			},-1)
+		self.list = [ ]
+		self["key_red"] = Label(_("Close"))
+		self["key_green"] = Label(_("Install"))
+		
+	def feedlist(self):
+		self.list = []
+		os.system("opkg update")
+		camdlist = os.popen("opkg list | grep piconLB")
+		softpng = LoadPixmap(cached = True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/emumini.png"))
+		for line in camdlist.readlines():
+			try:
+				self.list.append(("%s %s" % (line.split(' - ')[0], line.split(' - ')[1]), line.split(' - ')[-1], softpng))
+			except:
+				pass
+		camdlist.close()
+		self["menu"].setList(self.list)
+		
+	def ok(self):
+		self.setup()
+		
+	def setup(self):
+		self.session.open(Console,title = _("Installing Picon"), cmdlist = ["opkg install -force-overwrite %s" % self["menu"].getCurrent()[0]])
 		
 		
 	def cancel(self):
