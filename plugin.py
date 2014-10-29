@@ -68,6 +68,7 @@ import new
 import _enigma
 import enigma
 import smtplib
+import commands
 #import resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/libs/OscamInfo/oscaminfo.py")
 #from Plugins.Extensions.LCDselector.plugin import *
 
@@ -102,6 +103,13 @@ config.plugins.lbpanel.showpbmain = ConfigYesNo(default = False)
 config.plugins.lbpanel.filtername = ConfigYesNo(default = False)
 config.plugins.lbpanel.update = ConfigYesNo(default = True)
 config.plugins.lbpanel.updatesettings = ConfigYesNo(default = True)
+config.plugins.lbpanel.lbemail = ConfigYesNo(default = False)
+config.plugins.lbpanel.lbemailto = ConfigText(default = "mail@gmail.com",fixed_size = False, visible_width=30)
+config.plugins.lbpanel.smtpserver = ConfigText(default = "smtp.gmail.com:587",fixed_size = False, visible_width=30)
+config.plugins.lbpanel.smtpuser = ConfigText(default = "I@gmail.com",fixed_size = False, visible_width=30)
+config.plugins.lbpanel.smtppass = ConfigPassword(default = "mailpass",fixed_size = False, visible_width=15)
+config.plugins.lbpanel.testcam = ConfigYesNo(default = False)
+config.plugins.lbpanel.activeemu = ConfigText(default = "NotSelected")
 ##################################################################
 
 # Check if feed is active
@@ -125,7 +133,9 @@ def sendemail(from_addr, to_addr, cc_addr,
     problems = server.sendmail(from_addr, to_addr, message)
     server.quit()
 
-
+def lbversion():
+	return ("LBpanel_0.99_Red_Bee_r09")
+	
 class LBPanel2(Screen):
 	skin = """
 <screen name="LBPanel2" position="center,center" size="1150,600" >
@@ -134,6 +144,7 @@ class LBPanel2(Screen):
 <ePixmap position="885,580" zPosition="2" size="165,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
 <widget source="key_green" render="Label" position="875,550" zPosition="2" size="165,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
 <ePixmap position="700,10" zPosition="1" size="450,590" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo.png" alphatest="blend" transparent="1" />
+<widget source="lb_version" render="Label" position="700,10" zPosition="2" size="450,30" font="Regular;15" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
 <widget source="menu" render="Listbox" position="15,10" size="660,580" scrollbarMode="showOnDemand">
 <convert type="TemplatedMultiContent">
 	{"template": [
@@ -152,6 +163,8 @@ class LBPanel2(Screen):
 		self.session = session
 		Screen.__init__(self, session)
 		self.setTitle(_("LBpanel - Red Bee"))
+		#version = (_("Version: %s") % lbversion())
+		#self["LBversion"].setText("version")
 		self["shortcuts"] = ActionMap(["ShortcutActions", "WizardActions", "EPGSelectActions"],
 		{
 			"ok": self.keyOK,
@@ -163,6 +176,7 @@ class LBPanel2(Screen):
 			"blue": self.keyBlue,
 			
 		})
+		self["lb_version"] = StaticText(_("Version: %s") % lbversion())
 		self["key_red"] = StaticText(_("Close"))
 		self["key_green"] = StaticText(_("CamEmu"))
 		self["key_yellow"] = StaticText(_("LBTools"))
@@ -508,7 +522,7 @@ class ConfigExtentions(ConfigListScreen, Screen):
 ######################################################################################
 class LBsettings(ConfigListScreen, Screen):
 	skin = """
-<screen name="scanhost" position="center,160" size="1150,500" title="LBpanel - Check Hosts">
+<screen name="scanhost" position="center,160" size="1150,500" title="LBpanel - Config">
     <ePixmap position="715,10" zPosition="1" size="450,700" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondosettings.png" alphatest="blend" transparent="1" />
   <widget position="15,10" size="690,450" name="config" scrollbarMode="showOnDemand" />
    <ePixmap position="10,488" zPosition="1" size="165,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
@@ -522,10 +536,16 @@ class LBsettings(ConfigListScreen, Screen):
 	def __init__(self, session):
 		self.session = session
 		Screen.__init__(self, session)
-		self.setTitle(_("LBpanel - Check Host"))
+		self.setTitle(_("LBpanel - Configuration"))
 		self.list = []
 		self.list.append(getConfigListEntry(_("Auto Update LBpanel"), config.plugins.lbpanel.update))
 		self.list.append(getConfigListEntry(_("Auto Update Settings"), config.plugins.lbpanel.updatesettings))
+		self.list.append(getConfigListEntry(_("Send email on error/report to user?"), config.plugins.lbpanel.lbemail))
+		self.list.append(getConfigListEntry(_("Send errors/reports to: (email)"), config.plugins.lbpanel.lbemailto))
+		self.list.append(getConfigListEntry(_("Smtp server"), config.plugins.lbpanel.smtpserver))  
+		self.list.append(getConfigListEntry(_("Smtp user"), config.plugins.lbpanel.smtpuser))
+		self.list.append(getConfigListEntry(_("Smtp password"), config.plugins.lbpanel.smtppass))
+		self.list.append(getConfigListEntry(_("Enable Softcam check?"), config.plugins.lbpanel.testcam))                                                                                
 		ConfigListScreen.__init__(self, self.list)
 		self["key_red"] = StaticText(_("Close"))
 		self["key_green"] = StaticText(_("Save"))
@@ -546,6 +566,12 @@ class LBsettings(ConfigListScreen, Screen):
 	def save(self):
 		config.plugins.lbpanel.update.save()
 		config.plugins.lbpanel.updatesettings.save()
+                config.plugins.lbpanel.lbemail.save()  
+		config.plugins.lbpanel.lbemailto.save()
+		config.plugins.lbpanel.smtpserver.save()
+		config.plugins.lbpanel.smtpuser.save()  
+		config.plugins.lbpanel.smtppass.save()
+		config.plugins.lbpanel.testcam.save()
 		configfile.save()
 		self.mbox = self.session.open(MessageBox,(_("Configuration is saved")), MessageBox.TYPE_INFO, timeout = 4 )
 
@@ -605,7 +631,18 @@ class lbCron():
                                msg += line  	
 			scaninfo.close()
                 	sendemail(config.plugins.lbpanel.smtpuser.value, config.plugins.lbpanel.lbemailto.value,"", "Scan report from LBpanel",msg,config.plugins.lbpanel.smtpuser.value,config.plugins.lbpanel.smtppass.value)
-                                                               			
+                #cron for testcam
+                print "Testing softcam  %s" % (config.plugins.lbpanel.activeemu.value)
+                if (config.plugins.lbpanel.testcam.value and config.plugins.lbpanel.testcam.value != "NotSelected" ):
+                	# Test if a cam is live
+                	actcam = config.plugins.lbpanel.activeemu.value
+                	actcam = actcam.replace("camemu.", "")
+                	if ( int(commands.getoutput('pidof %s |wc -w' % actcam)) == 0):
+                		print "Restarting softcam %s" % (config.plugins.lbpanel.activeemu.value)
+                		os.system("/usr/CamEmu/%s restart &" % config.plugins.lbpanel.activeemu.value )
+				if (config.plugins.lbpanel.lbemail.value):
+					msg = _('The cam %s appears to malfunction.\nService has been restarted.\nLBpanel\n') % actcam
+					sendemail(config.plugins.lbpanel.smtpuser.value, config.plugins.lbpanel.lbemailto.value,"", "SoftCam Error",msg,config.plugins.lbpanel.smtpuser.value,config.plugins.lbpanel.smtppass.value)
 		if config.plugins.lbpanel.autosave.value != '0':
 			global min
 			if min > int(config.plugins.lbpanel.autosave.value) and config.plugins.lbpanel.epgtime.value[1] != now.tm_min:
