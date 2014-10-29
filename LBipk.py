@@ -377,7 +377,8 @@ class installconfigemus(Screen):
 		self.setup()
 		
 	def setup(self):
-		self.session.open(Console,title = _("Installing Config Emus"), cmdlist = ["opkg install -force-overwrite %s" % self["menu"].getCurrent()[0]])
+		os.system("opkg install -force-overwrite %s" % self["menu"].getCurrent()[0])
+		self.mbox = self.session.open(MessageBox, _("%s is installed" % self["menu"].getCurrent()[0]), MessageBox.TYPE_INFO, timeout = 4 )
 		
 		
 	def cancel(self):
@@ -443,8 +444,8 @@ class installpicon(Screen):
 		self.setup()
 		
 	def setup(self):
-		self.session.open(Console,title = _("Installing Picon"), cmdlist = ["opkg install -force-overwrite %s" % self["menu"].getCurrent()[0]])
-		
+		os.system("opkg install -force-overwrite %s" % self["menu"].getCurrent()[0])
+		self.mbox = self.session.open(MessageBox, _("%s is installed" % self["menu"].getCurrent()[0]), MessageBox.TYPE_INFO, timeout = 4 )
 		
 	def cancel(self):
 		self.close()
