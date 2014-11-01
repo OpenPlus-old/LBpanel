@@ -105,6 +105,7 @@ config.plugins.lbpanel.filtername = ConfigYesNo(default = False)
 config.plugins.lbpanel.update = ConfigYesNo(default = True)
 config.plugins.lbpanel.updatesettings = ConfigYesNo(default = True)
 config.plugins.lbpanel.lbemail = ConfigYesNo(default = False)
+config.plugins.lbpanel.lbiemail = ConfigYesNo(default = False)
 config.plugins.lbpanel.lbemailto = ConfigText(default = "mail@gmail.com",fixed_size = False, visible_width=30)
 config.plugins.lbpanel.smtpserver = ConfigText(default = "smtp.gmail.com:587",fixed_size = False, visible_width=30)
 config.plugins.lbpanel.smtpuser = ConfigText(default = "I@gmail.com",fixed_size = False, visible_width=30)
@@ -136,8 +137,11 @@ def sendemail(from_addr, to_addr, cc_addr,
     	problems = server.sendmail(from_addr, to_addr, message)
     	server.quit()
     except:
-    	self.mbox = self.session.open(MessageBox,(_("Your system not support send local email, please select internet option")), MessageBox.TYPE_INFO, timeout = 4 )
-    
+        fo = open("/tmp/.lbemail.error","a+")
+        fo.close()
+        config.plugins.lbpanel.lbemail.value = False
+    	config.plugins.lbpanel.lbemail.save()
+    	
 def lbversion():
 	return ("LBpanel_0.99_Red_Bee_r10")
 	
@@ -544,6 +548,7 @@ class LBsettings(ConfigListScreen, Screen):
 		self.list.append(getConfigListEntry(_("Auto Update LBpanel"), config.plugins.lbpanel.update))
 		self.list.append(getConfigListEntry(_("Auto Update Settings"), config.plugins.lbpanel.updatesettings))
 		self.list.append(getConfigListEntry(_("Send email on error/report to user?"), config.plugins.lbpanel.lbemail))
+		self.list.append(getConfigListEntry(_("Send email by inet server?"), config.plugins.lbpanel.lbiemail))
 		self.list.append(getConfigListEntry(_("Send errors/reports to: (email)"), config.plugins.lbpanel.lbemailto))
 		self.list.append(getConfigListEntry(_("Smtp server"), config.plugins.lbpanel.smtpserver))  
 		self.list.append(getConfigListEntry(_("Smtp user"), config.plugins.lbpanel.smtpuser))
@@ -569,7 +574,8 @@ class LBsettings(ConfigListScreen, Screen):
 	def save(self):
 		config.plugins.lbpanel.update.save()
 		config.plugins.lbpanel.updatesettings.save()
-                config.plugins.lbpanel.lbemail.save()  
+                config.plugins.lbpanel.lbemail.save()
+                config.plugins.lbpanel.lbiemail.save()  
 		config.plugins.lbpanel.lbemailto.save()
 		config.plugins.lbpanel.smtpserver.save()
 		config.plugins.lbpanel.smtpuser.save()  
@@ -655,6 +661,11 @@ class lbCron():
 					self.autobackup()
 			else:
 				min = min + 1
+		# Test errors
+		if (os.path.isfile("/tmp/.lbemail.error")):
+			print "LBpanel settings updated"
+			self.mbox = self.session.open(MessageBox,(_("Email send error:\nYour system not support send local email\nPlease select internet option")), MessageBox.TYPE_ERROR, timeout = 30 )
+			os.remove("/tmp/.lbemail.error")
 		self.timer.start(60000, True)
 		
 	def autobackup(self):

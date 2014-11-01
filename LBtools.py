@@ -1004,8 +1004,6 @@ class SystemScreen(Screen):
 		<screen name="SystemScreen" position="center,center" size="1150,600" title="LBpanel - System utils">
 	<ePixmap position="700,10" zPosition="1" size="450,590" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo13.png" alphatest="blend" transparent="1" />
 	<ePixmap position="705, 640" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
-	<widget source="key_green" render="Label" position="705, 550" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-	<ePixmap position="705, 580" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
 	<widget source="key_red" render="Label" position="705, 610" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
 	<widget source="menu" render="Listbox" position="15,10" size="660,630" scrollbarMode="showOnDemand">
 	<convert type="TemplatedMultiContent">
@@ -1032,10 +1030,8 @@ class SystemScreen(Screen):
 			"cancel": self.exit,
 			"back": self.exit,
 			"red": self.exit,
-			"green": self.resetpass,
 		})
 		self["key_red"] = StaticText(_("Close"))
-		self["key_green"] = StaticText(_("Reset Passwd"))
 		self.list = []
 		self["menu"] = List(self.list)
 		self.mList()
@@ -1056,11 +1052,6 @@ class SystemScreen(Screen):
 
 	def exit(self):
 		self.close()
-
-	def resetpass(self):
-		os.system("passwd -d root")
-		self.mbox = self.session.open(MessageBox,_("Your password has been reset"), MessageBox.TYPE_INFO, timeout = 4 )
-
 
 	def keyOK(self, returnValue = None):
 		if returnValue == None:
