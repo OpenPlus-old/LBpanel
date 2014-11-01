@@ -8,3 +8,7 @@ __pycache__/
 *.db
 zap*
 DEADJOE
+*.sh4
+*.ppc
+*.x86
+*.log

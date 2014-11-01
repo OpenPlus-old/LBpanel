@@ -642,7 +642,7 @@ class lbCron():
                 	sendemail(config.plugins.lbpanel.smtpuser.value, config.plugins.lbpanel.lbemailto.value,"", "Scan report from LBpanel",msg,config.plugins.lbpanel.smtpuser.value,config.plugins.lbpanel.smtppass.value)
                 #cron for testcam
                 print "Testing softcam  %s" % (config.plugins.lbpanel.activeemu.value)
-                if (config.plugins.lbpanel.testcam.value and config.plugins.lbpanel.testcam.value != "NotSelected" ):
+                if (config.plugins.lbpanel.testcam.value and config.plugins.lbpanel.activeemu.value != "NotSelected" ):
                 	# Test if a cam is live
                 	actcam = config.plugins.lbpanel.activeemu.value
                 	actcam = actcam.replace("camemu.", "")
