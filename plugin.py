@@ -52,6 +52,7 @@ from Components.Harddisk import harddiskmanager
 from Components.NimManager import nimmanager
 from Components.About import about
 from os import environ
+from OpenSSL import SSL
 import os
 import gettext
 import LBCamEmu
@@ -121,20 +122,24 @@ def sendemail(from_addr, to_addr, cc_addr,
               subject, message,
               login, password,
               smtpserver='smtp.gmail.com:587'):
-    header  = 'From: %s\n' % from_addr
-    header += 'To: %s\n' % to_addr
-    header += 'Cc: %s\n' % cc_addr
-    header += 'Subject: %s\n\n' % subject
-    message = header + message
+    try:
+    	header  = 'From: %s\n' % from_addr
+    	header += 'To: %s\n' % to_addr
+    	header += 'Cc: %s\n' % cc_addr
+    	header += 'Subject: %s\n\n' % subject
+    	message = header + message
  
-    server = smtplib.SMTP(smtpserver)
-    server.starttls()
-    server.login(login,password)
-    problems = server.sendmail(from_addr, to_addr, message)
-    server.quit()
-
+    	server = smtplib.SMTP(smtpserver)
+    	server.ehlo()
+    	server.starttls()
+    	server.login(login,password)
+    	problems = server.sendmail(from_addr, to_addr, message)
+    	server.quit()
+    except:
+    	self.mbox = self.session.open(MessageBox,(_("Your system not support send local email, please select internet option")), MessageBox.TYPE_INFO, timeout = 4 )
+    
 def lbversion():
-	return ("LBpanel_0.99_Red_Bee_r09")
+	return ("LBpanel_0.99_Red_Bee_r10")
 	
 class LBPanel2(Screen):
 	skin = """
