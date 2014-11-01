@@ -444,6 +444,8 @@ class ToolsScreen(Screen):
 				os.system("hdparm -y %s" % (mountpointname[0]))
 				self.mbox = self.session.open(MessageBox,_("HDD go sleep"), MessageBox.TYPE_INFO, timeout = 4 )
 
+	
+		
 	def keyOK(self, returnValue = None):
 		if returnValue == None:
 			returnValue = self["menu"].getCurrent()[1]
@@ -460,7 +462,7 @@ class ToolsScreen(Screen):
 			elif returnValue is "com_six":
 				self.session.openWithCallback(self.mList, NTPScreen)
 			elif returnValue is "com_seven":
-				self.session.openWithCallback(self.mList,Libermen)
+				self.session.open(Console,title = _("Free Memory"), cmdlist = ["sh /usr/lib/enigma2/python/Plugins/Extensions/LBpanel/script/libmem/PULSE_OK.sh"])
 			elif returnValue is "com_dos":
 				self.session.open(RestartNetwork.RestartNetwork)
 			elif returnValue is "com_scan":
@@ -1004,6 +1006,8 @@ class SystemScreen(Screen):
 		<screen name="SystemScreen" position="center,center" size="1150,600" title="LBpanel - System utils">
 	<ePixmap position="700,10" zPosition="1" size="450,590" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo13.png" alphatest="blend" transparent="1" />
 	<ePixmap position="705, 640" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
+	<widget source="key_green" render="Label" position="705, 550" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
+	<ePixmap position="705, 580" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
 	<widget source="key_red" render="Label" position="705, 610" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
 	<widget source="menu" render="Listbox" position="15,10" size="660,630" scrollbarMode="showOnDemand">
 	<convert type="TemplatedMultiContent">
@@ -1030,8 +1034,10 @@ class SystemScreen(Screen):
 			"cancel": self.exit,
 			"back": self.exit,
 			"red": self.exit,
+			"green": self.resetpass,
 		})
 		self["key_red"] = StaticText(_("Close"))
+		self["key_green"] = StaticText(_("Reset Passwd"))
 		self.list = []
 		self["menu"] = List(self.list)
 		self.mList()
@@ -1052,6 +1058,11 @@ class SystemScreen(Screen):
 
 	def exit(self):
 		self.close()
+
+	def resetpass(self):
+		os.system("passwd -d root")
+		self.mbox = self.session.open(MessageBox,_("Your password has been reset"), MessageBox.TYPE_INFO, timeout = 4 )
+
 
 	def keyOK(self, returnValue = None):
 		if returnValue == None:
@@ -1773,45 +1784,45 @@ class Info2Screen(Screen):
 			list = " "
 		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions"], { "cancel": self.close, "up": self["text"].pageUp, "left": self["text"].pageUp, "down": self["text"].pageDown, "right": self["text"].pageDown,}, -1)
 ######################################################################################
-class Libermen(Screen):
-	skin = """
-	<screen name="ScriptScreen" position="center,160" size="1150,500" title="LBpanel - Free Memory" >
-	    <ePixmap position="715,10" zPosition="1" size="450,700" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo12.png" alphatest="blend" transparent="1" />
-			<widget name="list" position="20,10" size="660,450" scrollbarMode="showOnDemand" />
-		<ePixmap position="20,488" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
-		<widget source="key_red" render="Label" position="20,458" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-		</screen>"""
+#class Libermen(Screen):
+#	skin = """
+#	<screen name="ScriptScreen" position="center,160" size="1150,500" title="LBpanel - Free Memory" >
+#	    <ePixmap position="715,10" zPosition="1" size="450,700" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/#fondo12.png" alphatest="blend" transparent="1" />
+#			<widget name="list" position="20,10" size="660,450" scrollbarMode="showOnDemand" />
+#		<ePixmap position="20,488" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
+#		<widget source="key_red" render="Label" position="20,458" zPosition="2" size="170,30" font="Regular;20" halign="center" #valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
+#		</screen>"""
 
-	def __init__(self, session):
-		Screen.__init__(self, session)
-		self.session = session
-		self.setTitle(_("LBpanel - Free Memory"))
-		self.scrpit_menu()
-		self["key_red"] = StaticText(_("Close"))
-		self["actions"] = ActionMap(["OkCancelActions","ColorActions"], {"ok": self.run, "red": self.exit, "cancel": self.close}, -1)
-		
-	def scrpit_menu(self):
-		list = []
-		try:
-			list = os.listdir("%s" % config.plugins.lbpanel.scriptpath1.value[:-1])
-			list = [x[:-3] for x in list if x.endswith('.sh')]
-		except:
-			list = []
-		list.sort()
-		self["list"] = MenuList(list)
-		
-	def run(self):
-		script = self["list"].getCurrent()
-		if script is not None:
-			name = ("%s%s.sh" % (config.plugins.lbpanel.scriptpath1.value, script))
-			os.chmod(name, 0755)
-			self.session.open(Console, script.replace("_", " "), cmdlist=[name])
-			
-	def config_path(self):
-		self.session.open(ConfigScript)
+#	def __init__(self, session):
+#		Screen.__init__(self, session)
+#		self.session = session
+#		self.setTitle(_("LBpanel - Free Memory"))
+#		self.scrpit_menu()
+#		self["key_red"] = StaticText(_("Close"))
+#		self["actions"] = ActionMap(["OkCancelActions","ColorActions"], {"ok": self.run, "red": self.exit, "cancel": self.close}, -1)
+#		
+#	def scrpit_menu(self):
+#		list = []
+#		try:
+#			list = os.listdir("%s" % config.plugins.lbpanel.scriptpath1.value[:-1])
+#			list = [x[:-3] for x in list if x.endswith('.sh')]
+#		except:
+#			list = []
+#		list.sort()
+#		self["list"] = MenuList(list)
+#		
+#	def run(self):
+#		script = self["list"].getCurrent()
+#		if script is not None:
+#			name = ("%s%s.sh" % (config.plugins.lbpanel.scriptpath1.value, script))
+#			os.chmod(name, 0755)
+#			self.session.open(Console, script.replace("_", " "), cmdlist=[name])
+#			
+#	def config_path(self):
+#		self.session.open(ConfigScript)
 
-	def exit(self):
-		self.close()
+#	def exit(self):
+#		self.close()
 
 ######################################################################################
 class scanhost(ConfigListScreen, Screen):
