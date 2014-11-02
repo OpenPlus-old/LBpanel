@@ -143,7 +143,7 @@ def sendemail(from_addr, to_addr, cc_addr,
     	config.plugins.lbpanel.lbemail.save()
     	
 def lbversion():
-	return ("LBpanel_0.99_Red_Bee_r12")
+	return ("LBpanel_0.99_Red_Bee_r13")
 	
 class LBPanel2(Screen):
 	skin = """

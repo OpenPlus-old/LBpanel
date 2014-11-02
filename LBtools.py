@@ -59,6 +59,7 @@ import time
 import datetime
 from os import environ
 import os
+import os.path 
 import gettext
 import MountManager
 import RestartNetwork
@@ -895,7 +896,18 @@ class NTPScreen(ConfigListScreen, Screen):
 		ManualSetTime(self.session)
 	
 	def save(self):
-		path = "/etc/cron/crontabs/root"
+		if os.path.exists("/etc/bhcron"):
+			path = "/etc/bhcron/root"
+			if not os.path.exists("/etc/cron"):
+				 os.system("ln -s /etc/bhcron /etc/cron")
+		else:
+			path = "/etc/cron/root"
+
+		if not os.path.exists("/etc/cron"):	
+			os.makedirs("/etc/cron")
+			if not os.path.exists("/etc/cron/crontabs/"):
+				os.makedirs("/etc/cron/crontabs") 
+
 		if config.plugins.lbpanel.onoff.value == "0":
 			if fileExists(path):
 				os.system("sed -i '/ntp./d' %s" % path)
@@ -912,7 +924,7 @@ class NTPScreen(ConfigListScreen, Screen):
 					os.system("echo -e '/%s * * * * /usr/bin/ntpdate -s -u %s' >> %s" % (config.plugins.lbpanel.time.value, config.plugins.lbpanel.manualserver.value, path))
 				else:
 					os.system("echo -e '* /%s * * * /usr/bin/ntpdate -s -u %s' >> %s" % (config.plugins.lbpanel.time.value, config.plugins.lbpanel.manualserver.value, path))
-		os.system("echo -e 'root' >> /etc/cron/crontabs/cron.update")
+		#os.system("echo -e 'root' >> /etc/cron/crontabs/cron.update")
 		if fileExists(path):
 			os.chmod("%s" % path, 0644)
 		if config.plugins.lbpanel.TransponderTime.value == "0": 
@@ -1146,7 +1158,10 @@ class KernelScreen(Screen):
 		
 	def CfgMenu(self):
 		self.list = []
-		DvrName = os.popen("modprobe -l -t drivers")
+		if  os.path.exists("/etc/modutils"):
+			DvrName = os.popen("modprobe -l -t drivers")
+		else:
+			DvrName = os.popen("modprobe -l | grep  drivers")
 		for line in DvrName:
 			kernDrv = line.split("/")
 			if self.IsRunnigModDig(kernDrv[-1]) == 1:
@@ -1164,13 +1179,19 @@ class KernelScreen(Screen):
 		nlist = item[0]
 		if item[3] == "0":
 			os.system(("modprobe %s" % (nlist[:-4])))
-			os.system(("echo %s>/etc/modutils/%s" % (nlist[:-4],nlist[:-4])))
-			os.chmod(("/etc/modutils/%s" % (nlist[:-4])), 0644)
+			if  os.path.exists("/etc/modutils"):	
+				os.system(("echo %s>/etc/modutils/%s" % (nlist[:-4],nlist[:-4])))
+			else:
+				os.system(("echo %s>/etc/modules-load.d/%s.conf" % (nlist[:-4],nlist[:-4])))
+			os.chmod(("/etc/modules-load.d/%s.conf" % (nlist[:-4])), 0644)
 			os.system("update-modules")
 			self.mbox = self.session.open(MessageBox,(_("Loaded %s") % (nlist)), MessageBox.TYPE_INFO, timeout = 4 )
 		else:
-			os.system(("rmmod%s" % (" " + nlist[:-4])))
-			os.system(("rm /etc/modutils/%s" % (nlist[:-4])))
+			os.system(("rmmod %s" % ( nlist[:-4])))
+			if  os.path.exists("/etc/modutils"):
+				os.system(("rm /etc/modutils/%s" % (nlist[:-4])))
+			else:
+				os.system(("rm /etc/modules-load.d/%s.conf" % (nlist[:-4])))
 			os.system("update-modules")
 			self.mbox = self.session.open(MessageBox,(_("UnLoaded %s") % (nlist)), MessageBox.TYPE_INFO, timeout = 4 )
 		self.CfgMenu()
@@ -1646,8 +1667,22 @@ class CrontabMan(Screen):
 	def cMenu(self):
 		self.list = []
 		count = 0
-		if fileExists("/etc/cron/crontabs/root"):
-			cron = open("/etc/cron/crontabs/root", "r")
+		# Black Hole compatibility
+		if os.path.exists("/etc/bhcron"):
+			path = "/etc/bhcron/root"
+			if not os.path.exists("/etc/cron"):
+				 os.system("ln -s /etc/bhcron /etc/cron")
+		else:
+			path = "/etc/cron/root"
+			# Test if cron is installed                        
+
+		if not os.path.exists("/etc/cron"):	
+			os.makedirs("/etc/cron")
+			if not os.path.exists("/etc/cron/crontabs/"):
+				os.makedirs("/etc/cron/crontabs") 
+		
+		if fileExists(path):
+			cron = open(path, "r")
 			for line in cron:
 				count = count + 1
 				self.list.append((line, count))
@@ -1663,11 +1698,17 @@ class CrontabMan(Screen):
 
 	
 	def YellowKey(self):
-		try:
-			os.system("sed -i %sd /etc/cron/crontabs/root" % str(self["menu"].getCurrent()[1]))
-			os.system("echo -e 'root' >> /etc/cron/crontabs/cron.update")
-		except:
-			pass
+		if os.path.exists("/etc/bhcron"):
+			path = "/etc/bhcron/root"
+		else:
+			path = "/etc/cron/root"                        
+		print "Executing: awk 'NR!=%s' %s > %s" % (str(self["menu"].getCurrent()[1]), path, path)
+		os.system("awk 'NR!=%s' %s > /tmp/.cron" % (str(self["menu"].getCurrent()[1]), path))
+		os.system("mv /tmp/.cron %s" % (path ))
+		ccron = str(self["menu"].getCurrent()[0] [:-1])
+		ccron = ccron.replace("*","\*")
+		print "crontab -l | grep -v '%s' | crontab -" % (ccron)
+		os.system("crontab -l | grep -v '%s' | crontab -" % (ccron))
 		self.cMenu()
 		
 	def exit(self):
@@ -1733,13 +1774,26 @@ class CrontabManAdd(ConfigListScreen, Screen):
 		if config.plugins.lbpanel.min.value == '*' and config.plugins.lbpanel.hour.value == '*' and config.plugins.lbpanel.dayofmonth.value == '*' and config.plugins.lbpanel.month.value == '*' and  config.plugins.lbpanel.dayofweek.value == '*':
 			print ("error")
 		else:
-			os.system("echo -e '%s%s %s%s %s%s %s%s %s%s    %s' >> /etc/cron/crontabs/root" % (everymin, config.plugins.lbpanel.min.value,
-																				everyhour, config.plugins.lbpanel.hour.value, 
-																				everydayofmonth, config.plugins.lbpanel.dayofmonth.value,
-																				everymonth, config.plugins.lbpanel.month.value,
-																				everydayofweek, config.plugins.lbpanel.dayofweek.value,
-																				config.plugins.lbpanel.command.value))
-		os.system("echo -e 'root' >> /etc/cron/crontabs/cron.update")
+			if os.path.exists("/etc/bhcron"):
+				path = "/etc/bhcron/root"
+			else:
+				path = "/etc/cron/root"                        
+
+			os.system("echo -e '%s%s %s%s %s%s %s%s %s%s    %s' >> %s" % (everymin, config.plugins.lbpanel.min.value,
+										everyhour, config.plugins.lbpanel.hour.value, 
+										everydayofmonth, config.plugins.lbpanel.dayofmonth.value,
+										everymonth, config.plugins.lbpanel.month.value,
+										everydayofweek, config.plugins.lbpanel.dayofweek.value,
+										config.plugins.lbpanel.command.value,
+										path))
+			os.system("echo -e '%s%s %s%s %s%s %s%s %s%s    %s'  | crontab -" % (everymin, config.plugins.lbpanel.min.value,
+										everyhour, config.plugins.lbpanel.hour.value, 
+										everydayofmonth, config.plugins.lbpanel.dayofmonth.value,
+										everymonth, config.plugins.lbpanel.month.value,
+										everydayofweek, config.plugins.lbpanel.dayofweek.value,
+										config.plugins.lbpanel.command.value))
+		
+		#os.system("echo -e 'root' >> /etc/cron/crontabs/cron.update")
 		for i in self["config"].list:
 			i[1].cancel()
 		self.close()
