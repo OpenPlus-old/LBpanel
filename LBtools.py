@@ -368,8 +368,19 @@ config.plugins.lbpanel.lbemailto = ConfigText(default = "mail@gmail.com",fixed_s
 config.plugins.lbpanel.smtpserver = ConfigText(default = "smtp.gmail.com:587",fixed_size = False, visible_width=30)
 config.plugins.lbpanel.smtpuser = ConfigText(default = "I@gmail.com",fixed_size = False, visible_width=30)
 config.plugins.lbpanel.smtppass = ConfigPassword(default = "mailpass",fixed_size = False, visible_width=15)
-
+#Compatibility for any image
+config.misc.useTransponderTime = ConfigYesNo(default = False)
 #####################################################################################
+## NTP Server init
+if config.plugins.lbpanel.cold.value == "1":
+	# NTP Server init at start
+	if not fileExists("/usr/bin/ntpdate"):
+		os.system("tar -C/ -xzpvf /usr/lib/enigma2/python/Plugins/Extensions/LBpanel/ntpdate.tar.gz")
+	os.system("killall -9 ntpdate")
+	if config.plugins.lbpanel.manual.value == "0":
+		os.system("/usr/bin/ntpdate -s -u %s" % (config.plugins.lbpanel.server.value))
+	else:
+		os.system("/usr/bin/ntpdate -s -u %s" % (config.plugins.lbpanel.manualserver.value))			                                                                                                                                                                                                                                                                                                                                                                                                                 
 
 class ToolsScreen(Screen):
 	skin = """
@@ -910,21 +921,28 @@ class NTPScreen(ConfigListScreen, Screen):
 
 		if config.plugins.lbpanel.onoff.value == "0":
 			if fileExists(path):
-				os.system("sed -i '/ntp./d' %s" % path)
+				os.system("crontab -l | grep -v '/usr/bin/ntpdate -s -u' | crontab -" )
+				os.system("awk '!/ntpdate/' %s > /tmp/.cronntp" % path)
+				os.system("mv /tmp/.cronntp /etc/cron/root")
 		if config.plugins.lbpanel.onoff.value == "1":
 			if fileExists(path):
-				os.system("sed -i '/ntp./d' %s" % path)
+				os.system("crontab -l | grep -v '/usr/bin/ntpdate -s -u' | crontab -" )
+				os.system("awk '!/ntpdate/' %s > /tmp/.cronntp" % path)
+				os.system("mv /tmp/.cronntp /etc/cron/root")
 			if config.plugins.lbpanel.manual.value == "0":
 				if config.plugins.lbpanel.time.value == "30":
-					os.system("echo -e '/%s * * * * /usr/bin/ntpdate -s -u %s' >> %s" % (config.plugins.lbpanel.time.value, config.plugins.lbpanel.server.value, path))
+					data = "/%s * * * * /usr/bin/ntpdate -s -u %s" % (config.plugins.lbpanel.time.value, config.plugins.lbpanel.server.value)
 				else:
-					os.system("echo -e '* /%s * * * /usr/bin/ntpdate -s -u %s' >> %s" % (config.plugins.lbpanel.time.value, config.plugins.lbpanel.server.value, path))
+					data = "* /%s * * * /usr/bin/ntpdate -s -u %s" % (config.plugins.lbpanel.time.value, config.plugins.lbpanel.server.value)
 			else:
 				if config.plugins.lbpanel.time.value == "30":
-					os.system("echo -e '/%s * * * * /usr/bin/ntpdate -s -u %s' >> %s" % (config.plugins.lbpanel.time.value, config.plugins.lbpanel.manualserver.value, path))
+					data = "/%s * * * * /usr/bin/ntpdate -s -u %s" % (config.plugins.lbpanel.time.value, config.plugins.lbpanel.manualserver.value)
 				else:
-					os.system("echo -e '* /%s * * * /usr/bin/ntpdate -s -u %s' >> %s" % (config.plugins.lbpanel.time.value, config.plugins.lbpanel.manualserver.value, path))
-		#os.system("echo -e 'root' >> /etc/cron/crontabs/cron.update")
+					data = "* /%s * * * /usr/bin/ntpdate -s -u %s" % (config.plugins.lbpanel.time.value, config.plugins.lbpanel.manualserver.value)
+		
+			os.system("echo -e '%s' >> %s" % (data, path))
+			os.system("echo '%s' | crontab -" % (data))
+
 		if fileExists(path):
 			os.chmod("%s" % path, 0644)
 		if config.plugins.lbpanel.TransponderTime.value == "0": 
@@ -933,19 +951,20 @@ class NTPScreen(ConfigListScreen, Screen):
 		else:
 			config.misc.useTransponderTime.value = True
 			config.misc.useTransponderTime.save()
-		if config.plugins.lbpanel.cold.value == "0":
-			if fileExists("/etc/rcS.d/S42ntpdate.sh"):
-				os.unlink("/etc/rcS.d/S42ntpdate.sh")
-		else:
-			os.system("tar -C/ -xzpvf /usr/lib/enigma2/python/Plugins/Extensions/LBpanel/ntpdate.tar.gz")
-			if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/ntpdate.sh"):
-				if config.plugins.lbpanel.manual.value == "0":
-					os.system("sed -i 's/ntp_server/%s/g' /usr/lib/enigma2/python/Plugins/Extensions/LBpanel/ntpdate.sh" % config.plugins.lbpanel.server.value)
-				else:
-					os.system("sed -i 's/ntp_server/%s/g' /usr/lib/enigma2/python/Plugins/Extensions/LBpanel/ntpdate.sh" % config.plugins.lbpanel.manualserver.value)
-			if not fileExists("/etc/rcS.d/S42ntpdate.sh"):
-				os.symlink("/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/ntpdate.sh", "/etc/rcS.d/S42ntpdate.sh")
-				os.chmod("/etc/rcS.d/S42ntpdate.sh", 0777)
+#		if config.plugins.lbpanel.cold.value == "0":
+#			if fileExists("/etc/rcS.d/S42ntpdate.sh"):
+#				os.unlink("/etc/rcS.d/S42ntpdate.sh")
+#		else:
+#			os.system("tar -C/ -xzpvf /usr/lib/enigma2/python/Plugins/Extensions/LBpanel/ntpdate.tar.gz")
+#			if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/ntpdate.sh"):
+#				#Change NTP server in config file
+#				if config.plugins.lbpanel.manual.value == "0":
+#					os.system("sed -i 's/ntp_server/%s/g' /usr/lib/enigma2/python/Plugins/Extensions/LBpanel/ntpdate.sh" % config.plugins.lbpanel.server.value)
+#				else:
+#					os.system("sed -i 's/ntp_server/%s/g' /usr/lib/enigma2/python/Plugins/Extensions/LBpanel/ntpdate.sh" % config.plugins.lbpanel.manualserver.value)
+#			if not fileExists("/etc/rcS.d/S42ntpdate.sh"):
+#				os.symlink("/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/ntpdate.sh", "/etc/rcS.d/S42ntpdate.sh")
+#				os.chmod("/etc/rcS.d/S42ntpdate.sh", 0777)
 		for i in self["config"].list:
 			i[1].save()
 		configfile.save()

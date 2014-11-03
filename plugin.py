@@ -143,7 +143,7 @@ def sendemail(from_addr, to_addr, cc_addr,
     	config.plugins.lbpanel.lbemail.save()
     	
 def lbversion():
-	return ("LBpanel_0.99_Red_Bee_r13")
+	return ("LBpanel_0.99_Red_Bee_r14")
 	
 class LBPanel2(Screen):
 	skin = """
@@ -650,8 +650,17 @@ class lbCron():
                 		print "Restarting softcam %s" % (config.plugins.lbpanel.activeemu.value)
                 		os.system("/usr/CamEmu/%s restart &" % config.plugins.lbpanel.activeemu.value )
 				if (config.plugins.lbpanel.lbemail.value):
-					msg = _('The cam %s appears to malfunction.\nService has been restarted.\nLBpanel\n') % actcam
-					sendemail(config.plugins.lbpanel.smtpuser.value, config.plugins.lbpanel.lbemailto.value,"", "SoftCam Error",msg,config.plugins.lbpanel.smtpuser.value,config.plugins.lbpanel.smtppass.value)
+					if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/templates/errorcam.msg"):
+						f = open("/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/templates/errorcam.msg")
+						subj = f.readline()
+						msg = f.read()
+						f.close
+						subj = subj.replace(".cam.",actcam)
+						msg = msg.replace(".cam.",actcam)
+					else:
+						subj = _("Softcam error")
+						msg = _('The cam %s appears to malfunction.\nService has been restarted.\nLBpanel\n') % actcam
+					sendemail(config.plugins.lbpanel.smtpuser.value, config.plugins.lbpanel.lbemailto.value,"" ,subj ,msg, config.plugins.lbpanel.smtpuser.value,config.plugins.lbpanel.smtppass.value)
 		if config.plugins.lbpanel.autosave.value != '0':
 			global min
 			if min > int(config.plugins.lbpanel.autosave.value) and config.plugins.lbpanel.epgtime.value[1] != now.tm_min:
