@@ -59,6 +59,7 @@ import LBCamEmu
 import LBipk
 import LBtools
 import LBDaemonsList
+import LBAbout
 from enigma import eEPGCache
 from types import *
 from enigma import *
@@ -207,6 +208,7 @@ class LBPanel2(Screen):
 
 	def mList(self):
 		self.list = []
+		zeropng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/softcams.png"))
 		onepng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/softcams.png"))
 		sixpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/cardserver.png"))
 		twopng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/tools.png"))
@@ -219,6 +221,7 @@ class LBPanel2(Screen):
 		cuatropng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/daemons.png"))
 		cincopng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/infop.png"))
 		settings = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/settings.png"))
+		#self.list.append((_("About"),"com_zero", _("About this machine, Info about software and hardware"), zeropng))
 		self.list.append((_("SoftEmus"),"com_one", _("CamEmu start-stop, Test Emu Control, Info Emus"), onepng))
 		self.list.append((_("Services "),"com_two", _("Epg,Ntp,scripts,info ..."), twopng ))
 		self.list.append((_("System"),"com_six", _("Kernel modules,swap,ftp,samba,crond,usb"), sixpng ))
@@ -237,6 +240,8 @@ class LBPanel2(Screen):
 	def keyOK(self, returnValue = None):
 		if returnValue == None:
 			returnValue = self["menu"].getCurrent()[1]
+			if returnValue is "com_zero":
+				self.session.open(LBAbout.About)
 			if returnValue is "com_one":
 				self.session.open(LBCamEmu.CamEmuPanel)
 			elif returnValue is "com_two":
