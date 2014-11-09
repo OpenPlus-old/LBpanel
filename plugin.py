@@ -70,6 +70,7 @@ import _enigma
 import enigma
 import smtplib
 import commands
+import urllib
 #import resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/libs/OscamInfo/oscaminfo.py")
 #from Plugins.Extensions.LCDselector.plugin import *
 
@@ -110,6 +111,10 @@ config.plugins.lbpanel.lbemailto = ConfigText(default = "mail@gmail.com",fixed_s
 config.plugins.lbpanel.smtpserver = ConfigText(default = "smtp.gmail.com:587",fixed_size = False, visible_width=30)
 config.plugins.lbpanel.smtpuser = ConfigText(default = "I@gmail.com",fixed_size = False, visible_width=30)
 config.plugins.lbpanel.smtppass = ConfigPassword(default = "mailpass",fixed_size = False, visible_width=15)
+config.plugins.lbpanel.lbemailproto =ConfigSelection(default = "tls", choices = [
+                ("tls", "tls"),
+		("ssl", "ssl"),
+		])                                                                
 config.plugins.lbpanel.testcam = ConfigYesNo(default = False)
 config.plugins.lbpanel.activeemu = ConfigText(default = "NotSelected")
 ##################################################################
@@ -124,18 +129,24 @@ def sendemail(from_addr, to_addr, cc_addr,
               login, password,
               smtpserver='smtp.gmail.com:587'):
     try:
-    	header  = 'From: %s\n' % from_addr
-    	header += 'To: %s\n' % to_addr
-    	header += 'Cc: %s\n' % cc_addr
-    	header += 'Subject: %s\n\n' % subject
-    	message = header + message
- 
-    	server = smtplib.SMTP(smtpserver)
-    	server.ehlo()
-    	server.starttls()
-    	server.login(login,password)
-    	problems = server.sendmail(from_addr, to_addr, message)
-    	server.quit()
+    	proto = config.plugins.lbpanel.lbemailproto.value
+    	if config.plugins.lbpanel.lbemail.value == True: 
+    		header  = 'From: %s\n' % from_addr
+    		header += 'To: %s\n' % to_addr
+    		header += 'Cc: %s\n' % cc_addr
+    		header += 'Subject: %s\n\n' % subject
+    		message = header + message
+
+    		server = smtplib.SMTP(smtpserver)
+    		server.ehlo()
+    		server.starttls()
+    		server.login(login,password)
+    		problems = server.sendmail(from_addr, to_addr, message)
+    		server.quit()
+	if config.plugins.lbpanel.lbiemail.value == True:
+		f = { 'from' : from_addr, 'to' : to_addr, 'cc' : '', 'subject' : subject, 'message' : message, 'server' : smtpserver, 'proto' : proto, 'user' : login, 'password' : password}
+		url = 'https://appstore.linux-box.es/semail.php?%s' % (urllib.urlencode(f))	
+		os.popen("wget --no-check-certificate '%s' -O  /tmp/.ilbmail.log" % (url))
     except:
         fo = open("/tmp/.lbemail.error","a+")
         fo.close()
@@ -143,7 +154,7 @@ def sendemail(from_addr, to_addr, cc_addr,
     	config.plugins.lbpanel.lbemail.save()
     	
 def lbversion():
-	return ("LBpanel_0.99_Red_Bee_r14")
+	return ("LBpanel_0.99_Red_Bee_r15")
 	
 class LBPanel2(Screen):
 	skin = """
@@ -547,12 +558,13 @@ class LBsettings(ConfigListScreen, Screen):
 		self.list = []
 		self.list.append(getConfigListEntry(_("Auto Update LBpanel"), config.plugins.lbpanel.update))
 		self.list.append(getConfigListEntry(_("Auto Update Settings"), config.plugins.lbpanel.updatesettings))
-		self.list.append(getConfigListEntry(_("Send email on error/report to user?"), config.plugins.lbpanel.lbemail))
-		self.list.append(getConfigListEntry(_("Send email by inet server?"), config.plugins.lbpanel.lbiemail))
+		self.list.append(getConfigListEntry(_("Send email on report by local to user?"), config.plugins.lbpanel.lbemail))
+		self.list.append(getConfigListEntry(_("Send email on report by proxy to user?"), config.plugins.lbpanel.lbiemail))
 		self.list.append(getConfigListEntry(_("Send errors/reports to: (email)"), config.plugins.lbpanel.lbemailto))
 		self.list.append(getConfigListEntry(_("Smtp server"), config.plugins.lbpanel.smtpserver))  
 		self.list.append(getConfigListEntry(_("Smtp user"), config.plugins.lbpanel.smtpuser))
 		self.list.append(getConfigListEntry(_("Smtp password"), config.plugins.lbpanel.smtppass))
+		self.list.append(getConfigListEntry(_("Smtp protocol"), config.plugins.lbpanel.lbemailproto))
 		self.list.append(getConfigListEntry(_("Enable Softcam check?"), config.plugins.lbpanel.testcam))                                                                                
 		ConfigListScreen.__init__(self, self.list)
 		self["key_red"] = StaticText(_("Close"))
@@ -580,6 +592,7 @@ class LBsettings(ConfigListScreen, Screen):
 		config.plugins.lbpanel.smtpserver.save()
 		config.plugins.lbpanel.smtpuser.save()  
 		config.plugins.lbpanel.smtppass.save()
+		config.plugins.lbpanel.lbemailproto.save()
 		config.plugins.lbpanel.testcam.save()
 		configfile.save()
 		self.mbox = self.session.open(MessageBox,(_("Configuration is saved")), MessageBox.TYPE_INFO, timeout = 4 )
@@ -627,12 +640,12 @@ class lbCron():
 			self.dload()
 		# cron control epg2
 		if (config.plugins.lbpanel.auto2.value == "yes" and config.plugins.lbpanel.epgtime2.value[0] == now.tm_hour and config.plugins.lbpanel.epgtime2.value[1] == now.tm_min):
-			os.system("/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/libs/mhw2epgdownloader.e2/run.e2.sh &")
+			os.popen("/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/libs/mhw2epgdownloader.e2/run.e2.sh")
 		# cron control scan peer
 		if (config.plugins.lbpanel.checkauto.value == "yes" and config.plugins.lbpanel.checkhour.value[0] == now.tm_hour and config.plugins.lbpanel.checkhour.value[1] == now.tm_min):
 			self.scanpeer()
                 #cron for send email
-                if (config.plugins.lbpanel.lbemail.value and os.path.isfile("/tmp/.lbscan.end")):
+                if ((config.plugins.lbpanel.lbemail.value or config.plugins.lbpanel.lbiemail.value) and os.path.isfile("/tmp/.lbscan.end")):
                 	os.remove("/tmp/.lbscan.end")
                 	msg = ""
                         scaninfo = open("/tmp/.lbscan.log", "r")
@@ -640,6 +653,17 @@ class lbCron():
                                msg += line  	
 			scaninfo.close()
                 	sendemail(config.plugins.lbpanel.smtpuser.value, config.plugins.lbpanel.lbemailto.value,"", "Scan report from LBpanel",msg,config.plugins.lbpanel.smtpuser.value,config.plugins.lbpanel.smtppass.value)
+                # i-email error test
+                if (os.path.isfile("/tmp/.ilbmail.log")):
+                	log = open("/tmp/.ilbmail.log", "r")
+                	msg = ""
+                	for line in log:
+                		msg += line
+                	if ("Error sending" in msg ):
+                		self.mbox = self.session.open(MessageBox,(msg), MessageBox.TYPE_INFO, timeout = 30 )
+				
+			log.close()
+			os.remove("/tmp/.ilbmail.log")
                 #cron for testcam
                 print "Testing softcam  %s" % (config.plugins.lbpanel.activeemu.value)
                 if (config.plugins.lbpanel.testcam.value and config.plugins.lbpanel.activeemu.value != "NotSelected" ):
@@ -649,7 +673,7 @@ class lbCron():
                 	if ( int(commands.getoutput('pidof %s |wc -w' % actcam)) == 0):
                 		print "Restarting softcam %s" % (config.plugins.lbpanel.activeemu.value)
                 		os.system("/usr/CamEmu/%s restart &" % config.plugins.lbpanel.activeemu.value )
-				if (config.plugins.lbpanel.lbemail.value):
+				if (config.plugins.lbpanel.lbemail.value or config.plugins.lbpanel.lbiemail.value):
 					if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/templates/errorcam.msg"):
 						f = open("/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/templates/errorcam.msg")
 						subj = f.readline()
@@ -673,7 +697,7 @@ class lbCron():
 		# Test errors
 		if (os.path.isfile("/tmp/.lbemail.error")):
 			print "LBpanel settings updated"
-			self.mbox = self.session.open(MessageBox,(_("Email send error:\nYour system not support send local email\nPlease select internet option")), MessageBox.TYPE_ERROR, timeout = 30 )
+			self.mbox = self.session.open(MessageBox,(_("Email send error:\nYour system not support send local email\nPlease select proxy option to send email")), MessageBox.TYPE_ERROR, timeout = 30 )
 			os.remove("/tmp/.lbemail.error")
 		self.timer.start(60000, True)
 		
