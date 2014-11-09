@@ -1084,7 +1084,7 @@ class SystemScreen(Screen):
 		self.list.append((_("Cron Manager"),"5", _("Cron Manager"), fivepng))
 		self.list.append((_("Mount Manager"),"6", _("HArd Disc Manager"), seispng))
 		self.list.append((_("Swap Manager"),"4", _("Start, Stop, Create, Remove Swap Files"), fourpng ))
-		self.list.append((_("UnMount USB"),"3", _("Unmount usb devices"), treepng ))
+		self.list.append((_("My IP"),"3", _("Public IP"), treepng ))
 		self["menu"].setList(self.list)
 
 	def exit(self):
@@ -1094,14 +1094,18 @@ class SystemScreen(Screen):
 		os.system("passwd -d root")
 		self.mbox = self.session.open(MessageBox,_("Your password has been reset"), MessageBox.TYPE_INFO, timeout = 4 )
 
-
+	
 	def keyOK(self, returnValue = None):
 		if returnValue == None:
 			returnValue = self["menu"].getCurrent()[1]
 			if returnValue is "1":
 				self.session.openWithCallback(self.mList,KernelScreen)
 			elif returnValue is "3":
-				self.session.openWithCallback(self.mList,UsbScreen)
+				os.popen("wget -qO /tmp/.myip http://appstore.linux-box.es/myip.php")
+				f = open("/tmp/.myip")
+				myip = f.readline()
+				f.close()
+				self.mbox = self.session.open(MessageBox,_("Your public IP is: %s") % (myip), MessageBox.TYPE_INFO, timeout = 20 )
 			elif returnValue is "4":
 				self.session.openWithCallback(self.mList,SwapScreen2)
 			elif returnValue is "5":
