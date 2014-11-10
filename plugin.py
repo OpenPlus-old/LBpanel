@@ -59,7 +59,7 @@ import LBCamEmu
 import LBipk
 import LBtools
 import LBDaemonsList
-import LBAbout
+#import LBAbout
 from enigma import eEPGCache
 from types import *
 from enigma import *
