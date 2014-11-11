@@ -129,6 +129,8 @@ def sendemail(from_addr, to_addr, cc_addr,
               subject, message,
               login, password,
               smtpserver='smtp.gmail.com:587'):
+
+    print "ENVIANDO EMAIL"
     try:
     	proto = config.plugins.lbpanel.lbemailproto.value
     	if config.plugins.lbpanel.lbemail.value == True: 
@@ -155,7 +157,7 @@ def sendemail(from_addr, to_addr, cc_addr,
     	config.plugins.lbpanel.lbemail.save()
     	
 def lbversion():
-	return ("LBpanel_0.99_Red_Bee_r15")
+	return ("LBpanel_0.99_Red_Bee_r17")
 	
 class LBPanel2(Screen):
 	skin = """

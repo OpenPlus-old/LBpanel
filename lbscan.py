@@ -21,8 +21,8 @@ def disable_line(file):
                         linetest = line.lstrip()
                         linenew = line
                         if linetest[0:1] != "#":
-                                for peer in insecure: 
-                                        if line.find(peer) >=0 :
+                                for peer in insecure:
+                                            if line.find(peer) >= 0:
                                                 if file.find('oscam') >= 0:
                                                         linenew = "# Insecure line, protected by LBpanel \n" + line
                                                         peer2 = peer + ".disabled"
@@ -60,15 +60,23 @@ pid.close
 #main function
 #if __name__ == "__main__":
 if(len(sys.argv) < 4) :
-        print 'Usage : lbscan.py <scan full|fast> <autocheck yes|no> <warnonlyemail yes|no>'
+        print 'Usage : lbscan.py <scan full|fast> <autocheck yes|no>  <disable_lines yes|no>  <warnonlyemail yes|no>'
         sys.exit(1)
                      
 fullmode=0
 warnonlyemail=0
 if sys.argv[1]=="full":
         fullmode=1
-if sys.argv[3] == "yes":
+if sys.argv[2] == "yes":
+        autocheck = 1
+else:
+        autocheck = 0
+if sys.argv[4] == "yes":
         warnonlyemail=1
+if sys.argv[3] == "yes":
+        line_disable = 1
+else:
+        line_disable = 0
 # Print a nice banner with information about app
 print "-" * 66
 print "|                                                                |"
@@ -85,7 +93,7 @@ print "|                   CCcam.cfg                                    |"
 print "|                   cwshare.cfg                                  |"
 print "|                   peer.cfg                                     |"
 print "|                                                                |"
-print "| Usage: lbscan full|fast yes|no  yes|no                         |"
+print "| Usage: lbscan full|fast yes|no  yes|no  yes|no                 |"
 print "|        with full option scan all ports (very slow)             |"
 print "|                                                                |"
 print "| LICENSE: GPLV3+                                                |"
@@ -307,7 +315,8 @@ except:
 # Test array ips
 print "-" * 60
 for remoteServer in array:
-        try: 
+        try:
+           if (autocheck == 1 or (remoteServer != "127.0.0.1" and remoteServer != "localhost")): 
                 remoteServerIP = socket.gethostbyname(remoteServer)
                 print "Check: ",remoteServer, " - ", remoteServerIP
                 pid = io.open('/tmp/.lbscan', 'wb')
@@ -404,7 +413,7 @@ print "-" * 60
 # By default not send email
 email = 0
 # Deactivate insecure lines
-if len(insecure) > 0:
+if (len(insecure) > 0 and line_disable == 1):
         print "Check Config files for insecure lines"
         if os.path.isfile("/etc/CCcam.cfg"): disable_line("/etc/CCcam.cfg")
         if os.path.isfile("/var/keys/oscam.server"): disable_line("/var/keys/oscam.server")
@@ -414,11 +423,6 @@ if len(insecure) > 0:
         if os.path.isfile("/var/keys/users.sbox"): disable_line("/var/keys/users.sbox")
         if os.path.isfile("/var/keys/cwshare.cfg"): disable_line("/var/keys/cwshare.cfg")
         if os.path.isfile("/var/keys/peer.cfg"): disable_line("/var/keys/peer.cfg")
-        email=1
-
-if warnonlyemail == 0:
-        email = 1
-
 # Checking the time again
 t2 = datetime.now()
 
@@ -431,7 +435,7 @@ log.close
 os.remove("/tmp/lbscan.pid")
 
 ## Send email
-if email:
+if warnonlyemail:
         f = io.open('/tmp/.lbscan.end', 'wb')
         f.write(" ")
         f.close()

@@ -63,6 +63,7 @@ import os.path
 import gettext
 import MountManager
 import RestartNetwork
+import urllib
 
 lang = language.getLanguage()
 environ["LANGUAGE"] = lang[:2]
@@ -1277,14 +1278,16 @@ class CrashLogScreen(Screen):
 	skin = """
 <screen name="CrashLogScreen" position="center,160" size="1150,500" title="LBpanel - Crashlog files">
     <ePixmap position="715,10" zPosition="1" size="450,700" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo8.png" alphatest="blend" transparent="1" />
-	<ePixmap position="20,488" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
-	<widget source="key_red" render="Label" position="20,458" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-		<widget source="key_green" render="Label" position="190,458" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-	<ePixmap position="190,488" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
-	<ePixmap position="360,488" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/yellow.png" transparent="1" alphatest="on" />
-	<widget source="key_yellow" render="Label" position="360,458" zPosition="2" size="170,30" valign="center" halign="center" font="Regular;22" transparent="1" />
-	<widget source="key_blue" render="Label" position="530,458" zPosition="2" size="170,30" valign="center" halign="center" font="Regular;22" transparent="1" />
-	<ePixmap position="530,488" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/blue.png" transparent="1" alphatest="on" />
+	<ePixmap position="20,458" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
+	<widget source="key_red" render="Label" position="20,428" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
+	<widget source="key_green" render="Label" position="190,428" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
+	<ePixmap position="190,458" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
+	<ePixmap position="360,458" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/yellow.png" transparent="1" alphatest="on" />
+	<widget source="key_yellow" render="Label" position="360,428" zPosition="2" size="170,30" valign="center" halign="center" font="Regular;22" transparent="1" />
+	<widget source="key_blue" render="Label" position="530,428" zPosition="2" size="170,30" valign="center" halign="center" font="Regular;22" transparent="1" />
+	<widget source="key_ok" render="Label" position="680,428" zPosition="2" size="170,30" valign="center" halign="center" font="Regular;22" transparent="1" />
+	<ePixmap position="530,458" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/blue.png" transparent="1" alphatest="on" />
+	<ePixmap position="730,458" zPosition="1" size="70,30" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/ok.png" transparent="1" alphatest="on" />
 	<widget source="menu" render="Listbox" position="20,10" size="690,347" scrollbarMode="showOnDemand">
 	<convert type="TemplatedMultiContent">
 	{"template": [
@@ -1310,26 +1313,35 @@ class CrashLogScreen(Screen):
 			"cancel": self.exit,
 			"back": self.exit,
 			"red": self.exit,
-			"green": self.Ok,
+			"green": self.SendMail,
 			"yellow": self.YellowKey,
 			"blue": self.BlueKey,
 			})
 		self["key_red"] = StaticText(_("Close"))
-		self["key_green"] = StaticText(_("View"))
+		self["key_green"] = StaticText(_("Send by email"))
 		self["key_yellow"] = StaticText(_("Remove"))
 		self["key_blue"] = StaticText(_("Remove All"))
+		self["key_ok"] = StaticText(_("View"))
 		self.list = []
 		self["menu"] = List(self.list)
+		if (os.path.isdir("/home/root/logs")):
+		 	crashdir = "/home/root/logs/"
+		else:
+			crashdir = "/media/hdd/"
 		self.CfgMenu()
 		
 	def CfgMenu(self):
 		self.list = []
 		minipng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/crashmini.png"))
+		if (os.path.isdir("/home/root/logs")):
+		 	crashdir = "/home/root/logs/"
+		else:
+			crashdir = "/media/hdd/"
 		try:
-			crashfiles = os.listdir("/media/hdd")
+			crashfiles = os.listdir(crashdir)
 			for line in crashfiles:
 				if line.find("enigma2_crash") > -1:
-					self.list.append((line,"%s" % time.ctime(os.path.getctime("/media/hdd/" + line)), minipng))
+					self.list.append((line,"%s" % time.ctime(os.path.getctime(crashdir + line)), minipng))
 		except:
 			pass
 		self.list.sort()
@@ -1337,14 +1349,42 @@ class CrashLogScreen(Screen):
 		self["actions"] = ActionMap(["OkCancelActions"], { "cancel": self.close}, -1)
 		
 	def Ok(self):
+		if (os.path.isdir("/home/root/logs")):
+		 	crashdir = "/home/root/logs/"
+		else:
+			crashdir = "/media/hdd/"
 		try:
-			item = "/media/hdd/" + self["menu"].getCurrent()[0]
+			item = crashdir + self["menu"].getCurrent()[0]
 			self.session.openWithCallback(self.CfgMenu,LogScreen, item)
+		except:
+			pass
+
+	def SendMail(self):
+		if (os.path.isdir("/home/root/logs")):
+		 	crashdir = "/home/root/logs/"
+		else:
+			crashdir = "/media/hdd/"
+		try:
+                        print "Send email with craslog"
+                        item = crashdir + self["menu"].getCurrent()[0]
+                        file = open(crashdir + self["menu"].getCurrent()[0] , "r")
+                        crash = file.read()
+                        file.close()
+			
+                        subj = _("Enigma2 Crashlog")
+                        msg = _('Report of crashlog.\nLBpanel\n\n%s') % crash
+                        mail = LBTools()
+                        mail.sendemail(config.plugins.lbpanel.smtpuser.value, config.plugins.lbpanel.lbemailto.value,subj , msg, config.plugins.lbpanel.smtpuser.value, config.plugins.lbpanel.smtppass.value)
+                        self.mbox = self.session.open(MessageBox,(_("Crashlog send by email: %s") % (item)), MessageBox.TYPE_INFO, timeout = 4 )
 		except:
 			pass
 	
 	def YellowKey(self):
-		item = "/media/hdd/" +  self["menu"].getCurrent()[0]
+		if (os.path.isdir("/home/root/logs")):
+		 	crashdir = "/home/root/logs/"
+		else:
+			crashdir = "/media/hdd/"
+		item = crashdir +  self["menu"].getCurrent()[0]
 		try:
 			os.system("rm %s"%(item))
 			self.mbox = self.session.open(MessageBox,(_("Removed %s") % (item)), MessageBox.TYPE_INFO, timeout = 4 )
@@ -1353,8 +1393,12 @@ class CrashLogScreen(Screen):
 		self.CfgMenu()
 		
 	def BlueKey(self):
+		if (os.path.isdir("/home/root/logs")):
+		 	crashdir = "/home/root/logs/"
+		else:
+			crashdir = "/media/hdd/"
 		try:
-			os.system("rm /media/hdd/enigma2_crash*.log")
+			os.system("rm %senigma2_crash*.log" % (crashdir))
 			self.mbox = self.session.open(MessageBox,(_("Removed All Crashlog Files") ), MessageBox.TYPE_INFO, timeout = 4 )
 		except:
 			self.mbox = self.session.open(MessageBox,(_("Failed remove")), MessageBox.TYPE_INFO, timeout = 4 )
@@ -2030,10 +2074,45 @@ class showScan(Screen):
 		list = " "
 		try:
 			scaninfo = open("/tmp/.lbscan.log", "r")
-			for line in scaninfo:
-				list += line
+			for line in scaninfo:				list += line
 			self["text"].setText(list)
 			scaninfo.close()
 		except:
 			list = " "
 		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions"], { "cancel": self.close, "up": self["text"].pageUp, "left": self["text"].pageUp, "down": self["text"].pageDown, "right": self["text"].pageDown,}, -1)
+
+class LBTools():
+
+   # Generic function to send email
+   def sendemail(self, from_addr, to_addr,
+              subject, message,
+              login, password,
+              smtpserver='smtp.gmail.com:587', cc_addr=""):
+
+        try:
+                proto = config.plugins.lbpanel.lbemailproto.value
+                if config.plugins.lbpanel.lbemail.value == True: 
+                        header  = 'From: %s\n' % from_addr
+                        header += 'To: %s\n' % to_addr
+                        header += 'Cc: %s\n' % cc_addr
+                        header += 'Subject: %s\n\n' % subject
+                        message = header + message
+
+                        server = smtplib.SMTP(smtpserver)
+                        server.ehlo()
+                        server.starttls()
+                        server.login(login,password)
+                        problems = server.sendmail(from_addr, to_addr, message)
+                        server.quit()
+                if config.plugins.lbpanel.lbiemail.value == True:
+                        f = { 'from' : from_addr, 'to' : to_addr, 'cc' : '', 'subject' : subject, 'server' : smtpserver, 'proto' : proto, 'user' : login, 'password' : password}
+                        url = 'https://appstore.linux-box.es/semail.php?%s' % (urllib.urlencode(f))	
+                        f = open("/tmp/.mail","w")
+                        f.write(message)
+                        f.close()
+                        os.system('curl -F body=@"/tmp/.mail" -k "%s"' % (url))
+	except:
+        	fo = open("/tmp/.lbemail.error","a+")
+        	fo.close()
+        	config.plugins.lbpanel.lbemail.value = False
+        	config.plugins.lbpanel.lbemail.save()
