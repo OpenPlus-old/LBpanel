@@ -55,6 +55,7 @@ import sys, traceback
 import re
 import new
 import _enigma
+import enigma
 import time
 import datetime
 from os import environ
@@ -371,6 +372,7 @@ config.plugins.lbpanel.smtpuser = ConfigText(default = "I@gmail.com",fixed_size 
 config.plugins.lbpanel.smtppass = ConfigPassword(default = "mailpass",fixed_size = False, visible_width=15)
 #Compatibility for any image
 config.misc.useTransponderTime = ConfigYesNo(default = False)
+config.tv.lastservice = ConfigText(default = "")
 #####################################################################################
 ## NTP Server init
 if config.plugins.lbpanel.cold.value == "1":
@@ -1364,20 +1366,20 @@ class CrashLogScreen(Screen):
 		 	crashdir = "/home/root/logs/"
 		else:
 			crashdir = "/media/hdd/"
-		try:
-                        print "Send email with craslog"
-                        item = crashdir + self["menu"].getCurrent()[0]
-                        file = open(crashdir + self["menu"].getCurrent()[0] , "r")
-                        crash = file.read()
-                        file.close()
+		#try:
+                print "Send email with craslog"
+                item = crashdir + self["menu"].getCurrent()[0]
+                file = open(crashdir + self["menu"].getCurrent()[0] , "r")
+                crash = file.read()
+                file.close()
 			
-                        subj = _("Enigma2 Crashlog")
-                        msg = _('Report of crashlog.\nLBpanel\n\n%s') % crash
-                        mail = LBTools()
-                        mail.sendemail(config.plugins.lbpanel.smtpuser.value, config.plugins.lbpanel.lbemailto.value,subj , msg, config.plugins.lbpanel.smtpuser.value, config.plugins.lbpanel.smtppass.value)
-                        self.mbox = self.session.open(MessageBox,(_("Crashlog send by email: %s") % (item)), MessageBox.TYPE_INFO, timeout = 4 )
-		except:
-			pass
+                subj = _("Enigma2 Crashlog")
+                msg = _('Report of crashlog.\nLBpanel\n\n%s') % crash
+                mail = LBTools()
+                mail.sendemail(config.plugins.lbpanel.smtpuser.value, config.plugins.lbpanel.lbemailto.value,subj , msg, config.plugins.lbpanel.smtpuser.value, config.plugins.lbpanel.smtppass.value)
+                self.mbox = self.session.open(MessageBox,(_("Crashlog send by email: %s") % (item)), MessageBox.TYPE_INFO, timeout = 4 )
+		#except:
+		#	pass
 	
 	def YellowKey(self):
 		if (os.path.isdir("/home/root/logs")):
@@ -1545,6 +1547,23 @@ class epgdn(ConfigListScreen, Screen):
 #####################################################
 ################################################################################################################
 
+## Timer especific function for epg
+class Ttimer():
+        def __init__(self):
+                self.dialog = None
+                        
+        def gotSession(self, session):
+                self.session = session
+                self.timer = enigma.eTimer() 
+                self.timer.callback.append(self.run)
+                self.timer.start(3000, True)
+                                                                                                
+        def run(self):
+                self.timer.stop()
+                os.system("/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/libs/mhw2epgdownloader.e2/run.e2.sh")
+                self.session.nav.playService(eServiceReference(config.tv.lastservice.value))
+                self.mbox = self.session.open(MessageBox,(_("EPG downloaded")), MessageBox.TYPE_INFO, timeout = 5 )                                                                                                                                        
+
 class epgscript(ConfigListScreen, Screen):
 	skin = """
 <screen name="epgdn" position="center,160" size="1150,500" title="LBpanel - EPG D+">
@@ -1585,29 +1604,18 @@ class epgscript(ConfigListScreen, Screen):
 			"blue": self.manual,
 			"ok": self.save
 		}, -2)
-		
+	
+	def zapTo(self, reftozap):
+	        self.session.nav.playService(eServiceReference(reftozap))
+
 	def downepg(self):
-		try:
-			epgservice='1:0:1:75c6:422:1:c00000:0:0:0'
-			#epgservice='1:0:1:759C:422:1:C00000:0:0:0:' 
-			self.oldService = self.session.nav.getCurrentlyPlayingServiceReference().toString()
-			self.session.nav.playService(eServiceReference(epgservice))
-			os.system("/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/libs/mhw2epgdownloader.e2/cchannel.sh &")
-			os.system("/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/libs/mhw2epgdownloader.e2/run.e2.sh")
-			self.session.nav.playService(self.oldService)
-			#if fileExists("%sepg.dat" % config.plugins.lbpanel.direct.value):
-			#	os.unlink("%sepg.dat" % config.plugins.lbpanel.direct.value)
-			#	os.system("rm -f %sepg.dat" % config.plugins.lbpanel.direct.value)
-			#if not os.path.exists("%sepgtmp" % config.plugins.lbpanel.direct.value):
-			#	os.system("mkdir -p %sepgtmp" % config.plugins.lbpanel.direct.value)
-			#os.system("cp -f %sepg.dat.gz %sepgtmp" % (config.plugins.lbpanel.direct.value, config.plugins.lbpanel.direct.value))
-			#os.system("gzip -df %sepg.dat.gz" % config.plugins.lbpanel.direct.value)
-			#os.chmod("%sepg.dat" % config.plugins.lbpanel.direct.value, 0644)
-			#self.mbox = self.session.open(MessageBox,(_("EPG downloaded")), MessageBox.TYPE_INFO, timeout = 4 )
-			#epgcache = new.instancemethod(_enigma.eEPGCache_load,None,eEPGCache)
-			#epgcache = eEPGCache.getInstance().load()
-		except:
-			self.mbox = self.session.open(MessageBox,(_("Sorry, the EPG download error")), MessageBox.TYPE_INFO, timeout = 4 )
+                self.oldService = self.session.nav.getCurrentlyPlayingServiceReference().toString()
+                channel = "1:0:1:759C:422:1:C00000:0:0:0:"
+                self.zapTo(channel)
+                fo = open("/tmp/.lbepg","a+")
+                fo.close()
+                mt = Ttimer()
+                mt.gotSession(self.session)
 
 	def cancel(self):
 		for i in self["config"].list:
@@ -2074,7 +2082,8 @@ class showScan(Screen):
 		list = " "
 		try:
 			scaninfo = open("/tmp/.lbscan.log", "r")
-			for line in scaninfo:				list += line
+			for line in scaninfo:				
+			        list += line
 			self["text"].setText(list)
 			scaninfo.close()
 		except:
@@ -2088,31 +2097,38 @@ class LBTools():
               subject, message,
               login, password,
               smtpserver='smtp.gmail.com:587', cc_addr=""):
+        
+        if (not os.path.isfile("/usr/bin/curl")):
+                os.popen("opkg install curl")
+                if (not os.path.isfile("/usr/bin/curl")):
+                        os.popen("opkg install http://appstore.linux-box.es/files/curl_7.24.0-r0_mips32el.ipk")
+                        if (not os.path.isfile("/usr/bin/curl")):
+                                self.mbox = self.session.open(MessageBox,(_("Mail is not send. Curl is not installed, please install curl")), MessageBox.TYPE_ERROR, timeout = 10 )
+        #try:
+        proto = config.plugins.lbpanel.lbemailproto.value
+        if config.plugins.lbpanel.lbemail.value == True: 
+                header  = 'From: %s\n' % from_addr
+                header += 'To: %s\n' % to_addr
+                header += 'Cc: %s\n' % cc_addr
+                header += 'Subject: %s\n\n' % subject
+                message = header + message
 
-        try:
-                proto = config.plugins.lbpanel.lbemailproto.value
-                if config.plugins.lbpanel.lbemail.value == True: 
-                        header  = 'From: %s\n' % from_addr
-                        header += 'To: %s\n' % to_addr
-                        header += 'Cc: %s\n' % cc_addr
-                        header += 'Subject: %s\n\n' % subject
-                        message = header + message
-
-                        server = smtplib.SMTP(smtpserver)
-                        server.ehlo()
-                        server.starttls()
-                        server.login(login,password)
-                        problems = server.sendmail(from_addr, to_addr, message)
-                        server.quit()
-                if config.plugins.lbpanel.lbiemail.value == True:
-                        f = { 'from' : from_addr, 'to' : to_addr, 'cc' : '', 'subject' : subject, 'server' : smtpserver, 'proto' : proto, 'user' : login, 'password' : password}
-                        url = 'https://appstore.linux-box.es/semail.php?%s' % (urllib.urlencode(f))	
-                        f = open("/tmp/.mail","w")
-                        f.write(message)
-                        f.close()
-                        os.system('curl -F body=@"/tmp/.mail" -k "%s"' % (url))
-	except:
-        	fo = open("/tmp/.lbemail.error","a+")
-        	fo.close()
-        	config.plugins.lbpanel.lbemail.value = False
-        	config.plugins.lbpanel.lbemail.save()
+                server = smtplib.SMTP(smtpserver)
+                server.ehlo()
+                server.starttls()
+                server.login(login,password)
+                problems = server.sendmail(from_addr, to_addr, message)
+                server.quit()
+        if config.plugins.lbpanel.lbiemail.value == True:
+                f = { 'from' : from_addr, 'to' : to_addr, 'cc' : '', 'subject' : subject, 'server' : smtpserver, 'proto' : proto, 'user' : login, 'password' : password}
+                url = 'https://appstore.linux-box.es/semail.php?%s' % (urllib.urlencode(f))	
+                f = open("/tmp/.mail","w")
+                f.write(message)
+                f.close()
+                os.system('curl -F body=@"/tmp/.mail" -k "%s"' % (url))
+	#except Exception as e: print(e)
+	#except:
+        	#fo = open("/tmp/.lbemail.error","a+")
+        	#fo.close()
+        	#config.plugins.lbpanel.lbemail.value = False
+        	#config.plugins.lbpanel.lbemail.save()

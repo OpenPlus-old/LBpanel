@@ -240,19 +240,14 @@ class emuSel2(Screen):
 		
 	def start(self):
 		emutype = self["menu"].getCurrent()[3]
-		#if self.emuversion(emutype) != " ":
-		#if self["menu"].getCurrent()[1] != self.emuversion(emutype):
 		os.system("/usr/CamEmu/%s stop" % config.plugins.lbpanel.activeemu.value)
-			#if fileExists("/usr/CamEmu/%s" % emutype):
-			#	os.unlink("/usr/CamEmu/%s" % emutype)
-			#os.symlink("/usr/CamEmu/%s" % self["menu"].getCurrent()[0], "/usr/CamEmu/%s" % emutype)
-			#os.chmod("/usr/CamEmu//%s" % emutype, 0777)
-			#os.system("/usr/CamEmu/%s start" % config.plugins.lbpanel.activeemu.value)
-			#self.mbox = self.session.open(MessageBox, _("Please wait, starting %s") % self["menu"].getCurrent()[0], MessageBox.TYPE_INFO, timeout = 4 )
-			# Aqui
+		emuexec = self["menu"].getCurrent()[0]
+		emuexec = emuexec[7:]
+		print "Add execute permision to %s" % (emuexec)
+		if fileExists("/usr/bin/%s" % emuexec):
+			os.chmod("/usr/bin/%s" % emuexec, 0777)
 		config.plugins.lbpanel.activeemu.value = self["menu"].getCurrent()[0]
 		self.indexpos = self["menu"].getIndex()
-			#self.emuversion(emutype)
 		config.plugins.lbpanel.activeemu.save()
 		os.system("/usr/CamEmu/%s start" % config.plugins.lbpanel.activeemu.value)
 		self.mbox = self.session.open(MessageBox, _("Please wait, starting %s") % self["menu"].getCurrent()[0], MessageBox.TYPE_INFO, timeout = 4 )
@@ -261,13 +256,7 @@ class emuSel2(Screen):
 		
 	def stop(self):
 		emutype = self["menu"].getCurrent()[3]
-		#if self.emuversion(emutype) != " ":
 		os.system("/usr/CamEmu/%s stop" % config.plugins.lbpanel.activeemu.value)
-			#os.unlink("/usr/CamEmu/%s" % emutype)
-			#if not fileExists("/usr/CamEmu/%s.None" % emutype):
-			#	os.system("echo -e '# Placeholder for no cam' >> /usr/CamEmu/%s.None" % emutype)
-			#os.symlink("/usr/CamEmu/%s.None" % emutype, "/usr/CamEmu/%s" % emutype)
-			#os.chmod("/usr/CamEmu/%s" % emutype, 0777)
 		self.mbox = self.session.open(MessageBox, _("Please wait, stoping softcam or cardserver"), MessageBox.TYPE_INFO, timeout = 4 )
 		config.plugins.lbpanel.activeemu.value = "NotSelected"
 		config.plugins.lbpanel.activeemu.save()
@@ -286,8 +275,6 @@ class emuSel2(Screen):
 		self.session.openWithCallback(self.selemulist,installCam)
 		
 	def ok(self):
-		#emutype = self["menu"].getCurrent()[3]
-		#if self["menu"].getCurrent()[1] != self.emuversion(emutype):
 		self.start()
 		
 	def cancel(self):
@@ -352,6 +339,7 @@ class installCam(Screen):
 		
 	def setup(self):
 		os.system("opkg install -force-overwrite %s" % self["menu"].getCurrent()[0])
+		os.popen("chmod 777 /usr/CamEmu/camemu.*")	
 		self.mbox = self.session.open(MessageBox, _("%s is installed" % self["menu"].getCurrent()[0]), MessageBox.TYPE_INFO, timeout = 4 )
 		
 	def cancel(self):

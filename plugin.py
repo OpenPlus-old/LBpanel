@@ -157,7 +157,7 @@ def sendemail(from_addr, to_addr, cc_addr,
     	config.plugins.lbpanel.lbemail.save()
     	
 def lbversion():
-	return ("LBpanel_0.99_Red_Bee_r17")
+	return ("LBpanel_0.99_Red_Bee_r18")
 	
 class LBPanel2(Screen):
 	skin = """
@@ -641,13 +641,18 @@ class lbCron():
 			print "LBpanel settings updated"
 			self.mbox = self.session.open(MessageBox,(_("LBpanel settings has been updated, restart Enigma2 to activate your changes.")), MessageBox.TYPE_INFO, timeout = 30 )
 			os.remove("/tmp/.lbsettings.update")
-
 		# cron control epg
 		if (config.plugins.lbpanel.auto.value == "yes" and config.plugins.lbpanel.epgtime.value[0] == now.tm_hour and config.plugins.lbpanel.epgtime.value[1] == now.tm_min):
 			self.dload()
 		# cron control epg2
 		if (config.plugins.lbpanel.auto2.value == "yes" and config.plugins.lbpanel.epgtime2.value[0] == now.tm_hour and config.plugins.lbpanel.epgtime2.value[1] == now.tm_min):
-			os.popen("/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/libs/mhw2epgdownloader.e2/run.e2.sh")
+			myepg = LBtools.epgscript(self.session)
+			myepg.downepg()
+		# reload epg
+		if (os.path.isfile("/tmp/.epgreload")):
+			#epgreload = LBtools.epgdmanual(self.session)
+			#epgreload.reload()
+			os.remove("/tmp/.epgreload")
 		# cron control scan peer
 		if (config.plugins.lbpanel.checkauto.value == "yes" and config.plugins.lbpanel.checkhour.value[0] == now.tm_hour and config.plugins.lbpanel.checkhour.value[1] == now.tm_min):
 			self.scanpeer()
