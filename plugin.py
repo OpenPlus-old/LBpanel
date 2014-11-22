@@ -72,8 +72,6 @@ import enigma
 import smtplib
 import commands
 import urllib
-#import resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/libs/OscamInfo/oscaminfo.py")
-#from Plugins.Extensions.LCDselector.plugin import *
 
 global min
 min = 0
@@ -157,7 +155,7 @@ def sendemail(from_addr, to_addr, cc_addr,
     	config.plugins.lbpanel.lbemail.save()
     	
 def lbversion():
-	return ("LBpanel_0.99_Red_Bee_r18")
+	return ("LBpanel_0.99_Red_Bee_r19")
 	
 class LBPanel2(Screen):
 	skin = """
