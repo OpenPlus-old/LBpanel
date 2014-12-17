@@ -387,25 +387,38 @@ if config.plugins.lbpanel.cold.value == "1":
 
 class ToolsScreen(Screen):
 	skin = """
-		<screen name="ToolsScreen" position="center,center" size="1150,600" title="LBpanel - Services">
-		<ePixmap position="700,10" zPosition="1" size="450,590" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo7.png" alphatest="blend" transparent="1" />
-	<ePixmap position="705, 580" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
-	<widget source="key_red" render="Label" position="705, 550" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-	<widget source="key_green" render="Label" position="875, 550" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-	<ePixmap position="885, 580" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
-
-	<widget source="menu" render="Listbox" position="15,10" size="660,580" scrollbarMode="showOnDemand">
-	<convert type="TemplatedMultiContent">
-	{"template": [
-		MultiContentEntryText(pos = (200, 25), size = (600, 65), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 2 is the Menu Titel
-		MultiContentEntryText(pos = (210, 75), size = (600, 18), font=1, flags = RT_HALIGN_LEFT, text = 2), # index 3 is the Description
-		MultiContentEntryPixmapAlphaTest(pos = (7, 7), size = (105, 105), png = 3), # index 4 is the pixmap
-			],
-	"fonts": [gFont("Regular", 30),gFont("Regular", 16)],
-	"itemHeight": 105
-	}
-			</convert>
+		<screen name="ToolsScreen" position="0,0" size="1280,720" title="LBpanel - Services">
+		<eLabel text="LBpanel - Red Bee" position="460,30" size="400,65" font="Regular;45" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#0140b1"/>
+<widget source="Title" transparent="1" render="Label" zPosition="2" valign="center" halign="left" position="92,110" size="700,65" font="Regular; 30" foregroundColor="#ffffff" backgroundColor="#000000" noWrap="1" />
+<widget source="session.VideoPicture" render="Pig" position="53,133" size="420,236" backgroundColor="transparent" zPosition="-10" />
+<ePixmap position="910,652" zPosition="2" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
+<ePixmap position="60,410" zPosition="2" size="391,201" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/logo_ajustes.png" alphatest="blend" />
+<widget source="session.CurrentService" render="Label" position="100,650" size="410,25" font="Regular; 22" transparent="1" valign="center" zPosition="2" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" halign="left">
+			  <convert type="ServiceName">Name</convert>
+			</widget>
+<widget source="global.CurrentTime" render="Label" position="949,30" size="251,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;24" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Format:%-H:%M</convert> 
+		</widget> 
+		<widget source="global.CurrentTime" render="Label" position="900,50" size="300,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;16" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Date</convert>  
 		</widget>
+<widget source="key_red" render="Label" position="950,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f"  foregroundColor="#000000" transparent="1" />
+<ePixmap position="1030,652" zPosition="2" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
+<widget source="key_green" render="Label" position="1070,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+<ePixmap position="0,0" zPosition="-4" size="1281,721" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo_1_test3.png" alphatest="blend" />
+<eLabel text="Panel Services" position="45,490" size="400,65" font="Regular;30" zPosition="2" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="background"/>
+<widget source="menu" render="Listbox" position="592,191" scrollbarMode="showNever" foregroundColor="#ffffff" backgroundColor="#6e6e6e" backgroundColorSelected="#fd6502" transparent="1"
+size="628,350">
+<convert type="TemplatedMultiContent">
+	{"template": [
+		MultiContentEntryText(pos = (10, 10), size = (600, 65), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 2 is the Menu Titel
+		
+			],
+	"fonts": [gFont("Regular", 40),gFont("Regular", 16)],
+	"itemHeight": 70
+	}
+	</convert>
+	</widget>
 	</screen>"""
 
 	def __init__(self, session):
@@ -488,11 +501,26 @@ class ToolsScreen(Screen):
 ###############################################################################
 class SwapScreen2(Screen):
 	skin = """
-		<screen name="SwapScreen2" position="center,160" size="1150,500" title="LBpanel - Swap Manager">
-				  #<ePixmap position="700,10" zPosition="1" size="450,700" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo17.png" alphatest="blend" transparent="1" />
-	<ePixmap position="20,488" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
-	<widget source="key_red" render="Label" position="20,458" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-	<widget source="menu" render="Listbox" position="20,20" size="660,450" scrollbarMode="showOnDemand">
+		<screen name="SwapScreen2" position="0,0" size="1280,720" title="LBpanel - Swap Manager">
+				  <ePixmap position="0,0" zPosition="-4" size="1281,721" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo_1_test3.png" alphatest="blend" />
+<widget source="session.VideoPicture" render="Pig" position="53,133" size="420,236" backgroundColor="transparent" zPosition="-10" />
+<widget source="global.CurrentTime" render="Label" position="949,30" size="251,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;24" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Format:%-H:%M</convert> 
+		</widget> 
+		<widget source="global.CurrentTime" render="Label" position="900,50" size="300,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;16" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Date</convert>  
+		</widget>
+<ePixmap position="60,410" zPosition="2" size="391,201" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/logo_ajustes.png" alphatest="blend" />
+  <widget source="session.CurrentService" render="Label" position="100,650" size="410,25" font="Regular; 22" transparent="1" valign="center" zPosition="2" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" halign="left">
+			  <convert type="ServiceName">Name</convert>
+			</widget>
+  <eLabel text="System" position="460,30" size="400,65" font="Regular;45" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#0140b1"/>
+  <eLabel text="Swap Manager" position="45,490" size="400,65" font="Regular;30" zPosition="2" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#000000"/>
+  <widget source="Title" transparent="1" render="Label" zPosition="2" valign="center" halign="left" position="92,110" size="700,65" font="Regular; 30" foregroundColor="#ffffff" backgroundColor="#000000" noWrap="1" />
+	<ePixmap position="1060,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
+	<widget source="key_red" render="Label" position="1100,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f"  foregroundColor="#000000" transparent="1" />
+	<widget source="menu" render="Listbox" position="592,191" scrollbarMode="showNever" foregroundColor="#ffffff" backgroundColor="#6e6e6e" backgroundColorSelected="#fd6502" transparent="1"
+size="628,350">
 	<convert type="TemplatedMultiContent">
 	{"template": [
 		MultiContentEntryText(pos = (70, 2), size = (580, 25), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 2 is the Menu Titel
@@ -555,11 +583,26 @@ class SwapScreen2(Screen):
 ####################################################################
 class SwapScreen(Screen):
 	skin = """
-		<screen name="SwapScreen" position="center,160" size="1150,500" title="LBpanel - Swap Manager">
-		  #<ePixmap position="700,10" zPosition="1" size="450,700" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo17.png" alphatest="blend" transparent="1" />
-	<ePixmap position="20,488" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
-	<widget source="key_red" render="Label" position="20,458" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-	<widget source="menu" render="Listbox" position="20,20" size="660,450" scrollbarMode="showOnDemand">
+		<screen name="SwapScreen" position="0,0" size="1280,720" title="LBpanel - Swap Manager">
+		  <ePixmap position="0,0" zPosition="-4" size="1281,721" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo_1_test3.png" alphatest="blend" />
+	<widget source="session.VideoPicture" render="Pig" position="53,133" size="420,236" backgroundColor="transparent" zPosition="-10" />
+<widget source="global.CurrentTime" render="Label" position="949,30" size="251,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;24" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Format:%-H:%M</convert> 
+		</widget> 
+		<widget source="global.CurrentTime" render="Label" position="900,50" size="300,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;16" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Date</convert>  
+		</widget>
+<ePixmap position="60,410" zPosition="2" size="391,201" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/logo_ajustes.png" alphatest="blend" />
+  <widget source="session.CurrentService" render="Label" position="100,650" size="410,25" font="Regular; 22" transparent="1" valign="center" zPosition="2" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" halign="left">
+			  <convert type="ServiceName">Name</convert>
+			</widget>
+  <eLabel text="LBpanel - Swap Manager" position="360,30" size="550,65" font="Regular;45" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#0140b1"/>
+  <eLabel text="Add Swap" position="45,490" size="400,65" font="Regular;30" zPosition="2" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#000000"/>
+  <widget source="Title" transparent="1" render="Label" zPosition="2" valign="center" halign="left" position="92,110" size="700,65" font="Regular; 30" foregroundColor="#ffffff" backgroundColor="#000000" noWrap="1" />
+	<ePixmap position="1060,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
+	<widget source="key_red" render="Label" position="1100,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f"  foregroundColor="#000000" transparent="1" />
+	<widget source="menu" render="Listbox" position="592,191" scrollbarMode="showNever" foregroundColor="#ffffff" backgroundColor="#6e6e6e" backgroundColorSelected="#fd6502" transparent="1"
+size="628,350">
 	<convert type="TemplatedMultiContent">
 	{"template": [
 		MultiContentEntryText(pos = (70, 2), size = (580, 25), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 2 is the Menu Titel
@@ -577,7 +620,7 @@ class SwapScreen(Screen):
 		self.swapfile = swapdirect
 		self.session = session
 		Screen.__init__(self, session)
-		self.setTitle(_("LBpanel - Swap Manager"))
+		self.setTitle(_("Add Swap Manager"))
 		self["shortcuts"] = ActionMap(["ShortcutActions", "WizardActions"],
 		{
 			"ok": self.CfgMenuDo,
@@ -775,13 +818,27 @@ class UsbScreen(Screen):
 ####################################################################
 class ScriptScreen(Screen):
 	skin = """
-	<screen name="ScriptScreen" position="center,160" size="1150,500" title="LBpanel - User Script" >
-	    <ePixmap position="710,10" zPosition="1" size="450,700" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo11.png" alphatest="blend" transparent="1" />
-		<widget name="list" position="20,10" size="660,450" scrollbarMode="showOnDemand" />
-		<ePixmap position="20,488" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
-		<widget source="key_red" render="Label" position="20,458" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-		<ePixmap position="190,488" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
-		<widget source="key_green" render="Label" position="190,458" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
+	<screen name="ScriptScreen" position="0,0" size="1280,720" title="LBpanel - User Script" >
+	    <ePixmap position="0,0" zPosition="-4" size="1281,721" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo_1_test3.png" alphatest="blend" />
+		<widget name="list" position="592,191" size="628,350" foregroundColor="#ffffff" backgroundColor="#6e6e6e" backgroundColorSelected="#fd6502" transparent="1" scrollbarMode="showOnDemand" />
+  <widget source="session.VideoPicture" render="Pig" position="53,133" size="420,236" backgroundColor="transparent" zPosition="-10" />
+<widget source="global.CurrentTime" render="Label" position="949,30" size="251,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;24" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Format:%-H:%M</convert> 
+		</widget> 
+		<widget source="global.CurrentTime" render="Label" position="900,50" size="300,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;16" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Date</convert>  
+		</widget>
+<ePixmap position="60,410" zPosition="2" size="391,201" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/logo_ajustes.png" alphatest="blend" />
+  <widget source="session.CurrentService" render="Label" position="100,650" size="410,25" font="Regular; 22" transparent="1" valign="center" zPosition="2" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" halign="left">
+			  <convert type="ServiceName">Name</convert>
+			</widget>
+  <eLabel text="Servicios" position="460,30" size="400,65" font="Regular;45" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#0140b1"/>
+  <eLabel text="User Script" position="45,490" size="400,65" font="Regular;30" zPosition="2" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#000000"/>
+  <widget source="Title" transparent="1" render="Label" zPosition="2" valign="center" halign="left" position="92,110" size="700,65" font="Regular; 30" foregroundColor="#ffffff" backgroundColor="#000000" noWrap="1" />
+		<ePixmap position="940,652" zPosition="2" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
+		<widget source="key_red" render="Label" position="980,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f"  foregroundColor="#000000" transparent="1" />
+  <ePixmap position="1060,652" zPosition="2" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
+  <widget source="key_green" render="Label" position="1100,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
 	</screen>"""
 
 	def __init__(self, session):
@@ -818,12 +875,28 @@ class ScriptScreen(Screen):
 ########################################################################
 class ConfigScript(ConfigListScreen, Screen):
 	skin = """
-<screen name="ConfigScript" position="center,160" size="750,370" title="LBpanel - Config script Executer">
-		<widget position="15,10" size="720,300" name="config" scrollbarMode="showOnDemand" />
-		<ePixmap position="20,358" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
-		<widget source="key_red" render="Label" position="20,328" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-		<ePixmap position="190,358" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
-		<widget source="key_green" render="Label" position="190,328" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
+<screen name="ConfigScript" position="0,0" size="1280,720" title="LBpanel - Config script Executer">
+		<ePixmap position="0,0" zPosition="-4" size="1281,721" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo_1_test3.png" alphatest="blend" />
+		<widget name="config" position="592,191" size="628,350" foregroundColor="#ffffff" backgroundColor="#6e6e6e" backgroundColorSelected="#fd6502" transparent="1" scrollbarMode="showOnDemand" />
+<widget position="592,191" size="628,350" foregroundColor="#ffffff" backgroundColor="#6e6e6e" backgroundColorSelected="#fd6502" transparent="1" name="config" scrollbarMode="showOnDemand" />
+  <widget source="session.VideoPicture" render="Pig" position="53,133" size="420,236" backgroundColor="transparent" zPosition="-10" />
+<widget source="global.CurrentTime" render="Label" position="949,30" size="251,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;24" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Format:%-H:%M</convert> 
+		</widget> 
+		<widget source="global.CurrentTime" render="Label" position="900,50" size="300,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;16" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Date</convert>  
+		</widget>
+<ePixmap position="60,410" zPosition="2" size="391,201" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/logo_ajustes.png" alphatest="blend" />
+  <widget source="session.CurrentService" render="Label" position="100,650" size="410,25" font="Regular; 22" transparent="1" valign="center" zPosition="2" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" halign="left">
+			  <convert type="ServiceName">Name</convert>
+			</widget>
+  <eLabel text="LBpanel-User Script" position="460,30" size="400,65" font="Regular;45" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#0140b1"/>
+  <eLabel text="Config Script" position="45,490" size="400,65" font="Regular;30" zPosition="2" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#000000"/>
+  <widget source="Title" transparent="1" render="Label" zPosition="2" valign="center" halign="left" position="92,110" size="700,65" font="Regular; 30" foregroundColor="#ffffff" backgroundColor="#000000" noWrap="1" />
+		<ePixmap position="940,652" zPosition="2" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
+		<widget source="key_red" render="Label" position="980,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f"  foregroundColor="#000000" transparent="1" />
+  <ePixmap position="1060,652" zPosition="2" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
+  <widget source="key_green" render="Label" position="1100,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
 </screen>"""
 
 	def __init__(self, session):
@@ -858,17 +931,31 @@ class ConfigScript(ConfigListScreen, Screen):
 ########################################################################
 class NTPScreen(ConfigListScreen, Screen):
 	skin = """
-<screen name="NTPScreen" position="center,160" size="1150,500" title="LBpanel - NTP Sync">
-    #<ePixmap position="720,10" zPosition="1" size="450,700" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo14.png" alphatest="blend" transparent="1" />
-		<widget position="15,10" size="690,450" name="config" scrollbarMode="showOnDemand" />
-		<ePixmap position="10,488" zPosition="1" size="165,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
-		<widget source="key_red" render="Label" position="10,458" zPosition="2" size="165,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-		<ePixmap position="175,488" zPosition="1" size="165,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
-		<widget source="key_green" render="Label" position="175,458" zPosition="2" size="165,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-		<ePixmap position="340,488" zPosition="1" size="195,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/yellow.png" alphatest="blend" />
-		<widget source="key_yellow" render="Label" position="340,458" zPosition="2" size="195,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-		<ePixmap position="535,488" zPosition="1" size="195,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/blue.png" alphatest="blend" />
-		<widget source="key_blue" render="Label" position="535,458" zPosition="2" size="195,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
+<screen name="NTPScreen" position="0,0" size="1280,720" title="LBpanel - NTP Sync">
+    <ePixmap position="0,0" zPosition="-4" size="1281,721" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo_1_test3.png" alphatest="blend" />
+		<widget position="592,191" size="628,350" foregroundColor="#ffffff" backgroundColor="#6e6e6e" backgroundColorSelected="#fd6502" transparent="1" name="config" scrollbarMode="showOnDemand" />
+ <widget source="session.VideoPicture" render="Pig" position="53,133" size="420,236" backgroundColor="transparent" zPosition="-10" />
+<widget source="global.CurrentTime" render="Label" position="949,30" size="251,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;24" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Format:%-H:%M</convert> 
+		</widget> 
+		<widget source="global.CurrentTime" render="Label" position="900,50" size="300,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;16" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Date</convert>  
+		</widget>
+<ePixmap position="60,410" zPosition="2" size="391,201" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/logo_ajustes.png" alphatest="blend" />
+  <widget source="session.CurrentService" render="Label" position="100,650" size="410,25" font="Regular; 22" transparent="1" valign="center" zPosition="2" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" halign="left">
+			  <convert type="ServiceName">Name</convert>
+			</widget>
+  <eLabel text="Servicios" position="460,30" size="400,65" font="Regular;45" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#0140b1"/>
+  <eLabel text="Sincro NTP" position="45,490" size="400,65" font="Regular;30" zPosition="2" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#000000"/>
+  <widget source="Title" transparent="1" render="Label" zPosition="2" valign="center" halign="left" position="92,110" size="700,65" font="Regular; 30" foregroundColor="#ffffff" backgroundColor="#000000" noWrap="1" />
+		<ePixmap position="570,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
+  <widget source="key_red" render="Label" position="610,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+  <ePixmap position="700,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
+  <widget source="key_green" render="Label" position="740,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+  <ePixmap position="860,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/yellow.png" transparent="1" alphatest="on" />
+  <widget source="key_yellow" render="Label" position="900,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+	<ePixmap position="1060,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/blue.png" transparent="1" alphatest="on" />
+  <widget source="key_blue" render="Label" position="1100,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
 </screen>"""
 
 	def __init__(self, session):
@@ -1037,24 +1124,38 @@ class ManualSetTime(Screen):
 ####################################################################
 class SystemScreen(Screen):
 	skin = """
-		<screen name="SystemScreen" position="center,center" size="1150,600" title="LBpanel - System utils">
-	<ePixmap position="700,10" zPosition="1" size="450,590" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo13.png" alphatest="blend" transparent="1" />
-	<ePixmap position="705, 640" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
-	<widget source="key_green" render="Label" position="705, 550" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-	<ePixmap position="705, 580" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
-	<widget source="key_red" render="Label" position="705, 610" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-	<widget source="menu" render="Listbox" position="15,10" size="660,630" scrollbarMode="showOnDemand">
-	<convert type="TemplatedMultiContent">
+		<screen name="SystemScreen" position="0,0" size="1280,720" title="LBpanel - System utils">
+	<eLabel text="LBpanel - Red Bee" position="460,30" size="400,65" font="Regular;45" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#0140b1"/>
+<widget source="Title" transparent="1" render="Label" zPosition="2" valign="center" halign="left" position="92,110" size="700,65" font="Regular; 30" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" />
+<widget source="session.VideoPicture" render="Pig" position="53,133" size="420,236" backgroundColor="transparent" zPosition="-10" />
+<ePixmap position="900,652" zPosition="2" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
+<ePixmap position="60,410" zPosition="2" size="391,201" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/logo_ajustes.png" alphatest="blend" />
+<widget source="session.CurrentService" render="Label" position="100,650" size="410,25" font="Regular; 22" transparent="1" valign="center" zPosition="2" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" halign="left">
+			  <convert type="ServiceName">Name</convert>
+			</widget>
+<widget source="global.CurrentTime" render="Label" position="949,30" size="251,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;24" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Format:%-H:%M</convert> 
+		</widget> 
+		<widget source="global.CurrentTime" render="Label" position="900,50" size="300,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;16" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Date</convert>  
+		</widget>  
+<widget source="key_red" render="Label" position="940,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f"  foregroundColor="#000000" transparent="1" />
+<ePixmap position="1020,652" zPosition="2" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
+<widget source="key_green" render="Label" position="1060,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+<ePixmap position="0,0" zPosition="-4" size="1281,721" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo_1_test3.png" alphatest="blend" />
+<eLabel text="Panel System" position="45,490" size="400,65" font="Regular;30" zPosition="2" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#000000"/>
+<widget source="menu" render="Listbox" position="592,191" scrollbarMode="showNever" foregroundColor="#ffffff" backgroundColor="#6e6e6e" backgroundColorSelected="#fd6502" transparent="1"
+size="628,350">
+<convert type="TemplatedMultiContent">
 	{"template": [
-		MultiContentEntryText(pos = (200, 25), size = (600, 65), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 2 is the Menu Titel
-		MultiContentEntryText(pos = (210, 75), size = (600, 18), font=1, flags = RT_HALIGN_LEFT, text = 2), # index 3 is the Description
-		MultiContentEntryPixmapAlphaTest(pos = (7, 7), size = (105, 105), png = 3), # index 4 is the pixmap
+		MultiContentEntryText(pos = (10, 10), size = (600, 65), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 2 is the Menu Titel
+		
 			],
-	"fonts": [gFont("Regular", 30),gFont("Regular", 16)],
-	"itemHeight": 105
+	"fonts": [gFont("Regular", 40),gFont("Regular", 16)],
+	"itemHeight": 70
 	}
-			</convert>
-		</widget>
+	</convert>
+	</widget>
 	</screen>"""
 
 	def __init__(self, session):
@@ -1114,24 +1215,39 @@ class SystemScreen(Screen):
 			elif returnValue is "5":
 				self.session.openWithCallback(self.mList,CrontabMan)
 			elif returnValue is "6":
-				self.session.open(MountManager.HddMount)
+				self.session.open(MountManager.LBHddMount)
 			else:
 				print "\n[BackupSuite] cancel\n"
 				self.close(None)
 ###############################################################################
 class KernelScreen(Screen):
 	skin = """
-<screen name="KernelScreen" position="center,100" size="1150,500" title="LBpanel - Kernel Modules Manager">
-  #<ePixmap position="710,10" zPosition="1" size="450,700" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo15.png" alphatest="blend" transparent="1" />
-	<ePixmap position="20,488" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
-	<widget source="key_red" render="Label" position="20,458" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-	<widget source="key_green" render="Label" position="185,458" zPosition="2" size="210,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-	<ePixmap position="190,488" zPosition="1" size="200,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
-	<ePixmap position="390,488" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/yellow.png" transparent="1" alphatest="on" />
-	<widget source="key_yellow" render="Label" position="390,458" zPosition="2" size="170,30" valign="center" halign="center" font="Regular;22" transparent="1" />
-	<widget source="key_blue" render="Label" position="560,458" zPosition="2" size="170,30" valign="center" halign="center" font="Regular;22" transparent="1" />
-	<ePixmap position="560,488" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/blue.png" transparent="1" alphatest="on" />
-	<widget source="menu" render="Listbox" position="20,10" size="660,450" scrollbarMode="showOnDemand">
+<screen name="KernelScreen" position="0,0" size="1280,720" title="LBpanel - Kernel Modules Manager">
+<ePixmap position="0,0" zPosition="-4" size="1281,721" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo_1_test3.png" alphatest="blend" />
+<eLabel text="System" position="460,30" size="400,65" font="Regular;45" halign="center" transparent="1" foregroundColor="#ffffff" backgroundColor="#0140b1"/>
+<widget source="session.VideoPicture" render="Pig" position="53,133" size="420,236" backgroundColor="transparent" zPosition="-10" />
+   <ePixmap position="60,410" zPosition="2" size="391,201" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/logo_ajustes.png" alphatest="blend" />
+<widget source="global.CurrentTime" render="Label" position="949,30" size="251,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;24" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Format:%-H:%M</convert> 
+		</widget> 
+		<widget source="global.CurrentTime" render="Label" position="900,50" size="300,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;16" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Date</convert>  
+		</widget>
+  <widget source="session.CurrentService" render="Label" position="100,650" size="410,25" font="Regular; 22" transparent="1" valign="center" zPosition="2" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" halign="left">
+			  <convert type="ServiceName">Name</convert>
+			</widget>
+<eLabel text="Kernel Module" position="45,490" size="400,65" font="Regular;30" zPosition="2" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#000000"/>
+  <widget source="Title" transparent="1" render="Label" zPosition="2" valign="center" halign="left" position="92,110" size="700,65" font="Regular; 30" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" />
+  	<ePixmap position="570,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
+  <widget source="key_red" render="Label" position="610,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+  <ePixmap position="700,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
+  <widget source="key_green" render="Label" position="740,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+  <ePixmap position="910,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/yellow.png" transparent="1" alphatest="on" />
+  <widget source="key_yellow" render="Label" position="950,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+	<ePixmap position="1060,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/blue.png" transparent="1" alphatest="on" />
+  <widget source="key_blue" render="Label" position="1100,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+	<widget source="menu" render="Listbox" position="592,191" scrollbarMode="showNever" foregroundColor="#ffffff" backgroundColor="#6e6e6e" backgroundColorSelected="#fd6502" transparent="1"
+size="628,350">
 	<convert type="TemplatedMultiContent">
 	{"template": [
 		MultiContentEntryText(pos = (70, 2), size = (580, 25), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 2 is the Menu Titel
@@ -1227,10 +1343,26 @@ class KernelScreen(Screen):
 ####################################################################
 class lsmodScreen(Screen):
 	skin = """
-<screen name="lsmodScreen" position="center,100" size="750,570" title="LBpanel - List Kernel Drivers in Memory">
-	<ePixmap position="20,558" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
-	<widget source="key_red" render="Label" position="20,528" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-	<widget source="menu" render="Listbox" position="20,10" size="710,500" scrollbarMode="showOnDemand">
+<screen name="lsmodScreen" position="0,0" size="1280,720" title="LBpanel - List Kernel Drivers in Memory">
+<ePixmap position="0,0" zPosition="-4" size="1281,721" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo_1_test3.png" alphatest="blend" />
+  <widget source="session.VideoPicture" render="Pig" position="53,133" size="420,236" backgroundColor="transparent" zPosition="-10" />
+   <ePixmap position="60,410" zPosition="2" size="391,201" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/logo_ajustes.png" alphatest="blend" />
+<widget source="global.CurrentTime" render="Label" position="949,30" size="251,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;24" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Format:%-H:%M</convert> 
+		</widget> 
+		<widget source="global.CurrentTime" render="Label" position="900,50" size="300,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;16" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Date</convert>  
+		</widget>
+  <widget source="session.CurrentService" render="Label" position="100,650" size="410,25" font="Regular; 22" transparent="1" valign="center" zPosition="2" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" halign="left">
+			  <convert type="ServiceName">Name</convert>
+			</widget>
+  <eLabel text="LBpanel - Kernel Modules Manager" position="200,30" size="750,65" font="Regular;45" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#0140b1"/>
+<eLabel text="Driver List" position="45,490" size="400,65" font="Regular;30" zPosition="2" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#000000"/>
+  <widget source="Title" transparent="1" render="Label" zPosition="2" valign="center" halign="left" position="92,110" size="700,65" font="Regular; 30" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" />
+	<ePixmap position="1060,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
+	<widget source="key_red" render="Label" position="1100,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+	<widget source="menu" render="Listbox" position="592,191" scrollbarMode="showNever" foregroundColor="#ffffff" backgroundColor="#6e6e6e" backgroundColorSelected="#fd6502" transparent="1"
+size="628,350">
 	<convert type="TemplatedMultiContent">
 	{"template": [
 		MultiContentEntryText(pos = (70, 2), size = (580, 25), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 2 is the Menu Titel
@@ -1278,19 +1410,33 @@ class lsmodScreen(Screen):
 ####################################################################
 class CrashLogScreen(Screen):
 	skin = """
-<screen name="CrashLogScreen" position="center,160" size="1150,500" title="LBpanel - Crashlog files">
-    <ePixmap position="715,10" zPosition="1" size="450,700" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo8.png" alphatest="blend" transparent="1" />
-	<ePixmap position="20,458" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
-	<widget source="key_red" render="Label" position="20,428" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-	<widget source="key_green" render="Label" position="190,428" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-	<ePixmap position="190,458" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
-	<ePixmap position="360,458" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/yellow.png" transparent="1" alphatest="on" />
-	<widget source="key_yellow" render="Label" position="360,428" zPosition="2" size="170,30" valign="center" halign="center" font="Regular;22" transparent="1" />
-	<widget source="key_blue" render="Label" position="530,428" zPosition="2" size="170,30" valign="center" halign="center" font="Regular;22" transparent="1" />
-	<widget source="key_ok" render="Label" position="680,428" zPosition="2" size="170,30" valign="center" halign="center" font="Regular;22" transparent="1" />
-	<ePixmap position="530,458" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/blue.png" transparent="1" alphatest="on" />
-	<ePixmap position="730,458" zPosition="1" size="70,30" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/ok.png" transparent="1" alphatest="on" />
-	<widget source="menu" render="Listbox" position="20,10" size="690,347" scrollbarMode="showOnDemand">
+<screen name="CrashLogScreen" position="0,0" size="1280,720" title="LBpanel - Crashlog files">
+<eLabel text="Servicios" position="460,30" size="400,65" font="Regular;45" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#0140b1"/>
+    <ePixmap position="0,0" zPosition="-4" size="1281,721" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo_1_test3.png" alphatest="blend" />
+<widget source="Title" transparent="1" render="Label" zPosition="2" valign="center" halign="left" position="92,110" size="700,65" font="Regular; 30" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" />
+<widget source="session.VideoPicture" render="Pig" position="53,133" size="420,236" backgroundColor="transparent" zPosition="-10" />
+	<ePixmap position="560,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
+<ePixmap position="60,410" zPosition="2" size="391,201" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/logo_ajustes.png" alphatest="blend" />
+<widget source="global.CurrentTime" render="Label" position="949,30" size="251,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;24" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Format:%-H:%M</convert> 
+		</widget> 
+		<widget source="global.CurrentTime" render="Label" position="900,50" size="300,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;16" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Date</convert>  
+		</widget>
+<widget source="session.CurrentService" render="Label" position="100,650" size="410,25" font="Regular; 22" transparent="1" valign="center" zPosition="2" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" halign="left">
+			  <convert type="ServiceName">Name</convert>
+			</widget>
+<eLabel text="Tools Crashlog" position="45,490" size="400,65" font="Regular;30" zPosition="2" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#000000"/>
+	<widget source="key_red" render="Label" position="600,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+	<widget source="key_green" render="Label" position="720,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+	<ePixmap position="680,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
+	<ePixmap position="890,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/yellow.png" transparent="1" alphatest="on" />
+	<widget source="key_yellow" render="Label" position="930,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+	<widget source="key_blue" render="Label" position="1060,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+	<widget source="key_ok" render="Label" position="470,650" zPosition="2" size="170,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+	<ePixmap position="1020,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/blue.png" transparent="1" alphatest="on" />
+	<ePixmap position="430,652" zPosition="1" size="30,30" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/ok.png" transparent="1" alphatest="on" />
+	<widget source="menu" render="Listbox" position="592,191" size="628,350" foregroundColor="#ffffff" backgroundColor="#6e6e6e" scrollbarMode="showNever" backgroundColorSelected="#fd6502" transparent="1">
 	<convert type="TemplatedMultiContent">
 	{"template": [
 		MultiContentEntryText(pos = (70, 2), size = (580, 25), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 2 is the Menu Titel
@@ -1411,14 +1557,30 @@ class CrashLogScreen(Screen):
 ####################################################################
 class LogScreen(Screen):
 	skin = """
-<screen name="LogScreen" position="center,80" size="1170,600" title="LBpanel - View Crashlog file">
-	<ePixmap position="20,590" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
-	<widget source="key_red" render="Label" position="20,560" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-	<ePixmap position="190,590" zPosition="1" size="200,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
-	<widget source="key_green" render="Label" position="190,560" zPosition="2" size="200,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-	<ePixmap position="390,590" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/yellow.png" alphatest="blend" />
-	<widget source="key_yellow" render="Label" position="390,560" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-	<widget name="text" position="10,10" size="1150,542" font="Console;22" />
+<screen name="LogScreen" position="0,0" size="1280,720" title="LBpanel - View Crashlog file">
+<widget name="text" size="628,400" position="592,210" foregroundColor="#000000" backgroundColor="#d6d6d6" transparent="1" font="Console;16" />
+<ePixmap position="0,0" zPosition="-4" size="1281,721" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo_1_tesconsole.png" alphatest="blend" />
+<eLabel text="LBpanel - Crashlog files" position="360,30" size="600,65" font="Regular;45" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#0140b1"/>
+<widget source="Title" transparent="1" render="Label" zPosition="2" valign="center" halign="left" position="92,110" size="700,65" font="Regular; 30" foregroundColor="#ffffff" backgroundColor="#000000" noWrap="1" />
+<widget source="session.VideoPicture" render="Pig" position="53,133" size="420,236" backgroundColor="transparent" zPosition="-10" />
+<ePixmap position="60,410" zPosition="2" size="391,201" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/logo_ajustes.png" alphatest="blend" />
+<widget source="global.CurrentTime" render="Label" position="949,30" size="251,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;24" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Format:%-H:%M</convert> 
+		</widget> 
+		<widget source="global.CurrentTime" render="Label" position="900,50" size="300,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;16" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Date</convert>  
+		</widget>
+<widget source="session.CurrentService" render="Label" position="100,650" size="410,25" font="Regular; 22" transparent="1" valign="center" zPosition="2" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" halign="left">
+			  <convert type="ServiceName">Name</convert>
+			</widget>
+<eLabel text="View Crashlog" position="45,490" size="400,65" font="Regular;30" zPosition="2" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#000000"/>
+	<ePixmap position="720,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
+	<widget source="key_red" render="Label" position="760,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f"  foregroundColor="#000000" transparent="1" />
+	<ePixmap position="860,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
+	<widget source="key_green" render="Label" position="900,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+	<ePixmap position="1060,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/yellow.png" alphatest="blend" />
+	<widget source="key_yellow" render="Label" position="1100,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+	
 </screen>"""
 
 	def __init__(self, session, what):
@@ -1462,21 +1624,35 @@ class LogScreen(Screen):
 						break
 		self["text"].setText(list)
 		files.close()
-		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions"], { "cancel": self.close, "up": self["text"].pageUp, "left": self["text"].pageUp, "down": self["text"].pageDown, "right": self["text"].pageDown,}, -1)
+		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "CCcamInfoActions"], { "cancel": self.close, "up": self["text"].pageUp, "left": self["text"].pageUp, "down": self["text"].pageDown, "right": self["text"].pageDown,}, -1)
 ######################################################################################
 class epgdn(ConfigListScreen, Screen):
 	skin = """
-<screen name="epgdn" position="center,160" size="1150,500" title="LBpanel - EPG D+">
-    <ePixmap position="715,10" zPosition="1" size="450,700" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo9.png" alphatest="blend" transparent="1" />
-  <widget position="15,10" size="690,450" name="config" scrollbarMode="showOnDemand" />
-   <ePixmap position="10,488" zPosition="1" size="165,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
-  <widget source="key_red" render="Label" position="10,458" zPosition="2" size="165,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-  <ePixmap position="175,488" zPosition="1" size="165,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
-  <widget source="key_green" render="Label" position="175,458" zPosition="2" size="165,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-  <ePixmap position="340,488" zPosition="1" size="200,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/yellow.png" alphatest="blend" />
-  <widget source="key_yellow" render="Label" position="340,458" zPosition="2" size="200,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-	<ePixmap position="540,488" zPosition="1" size="200,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/blue.png" alphatest="blend" />
-  <widget source="key_blue" render="Label" position="540,458" zPosition="2" size="200,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
+<screen name="epgdn" position="0,0" size="1280,720" title="LBpanel - EPG D+">
+    <ePixmap position="0,0" zPosition="-4" size="1281,721" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo_1_test3.png" alphatest="blend" />
+  <widget position="592,191" size="628,350" foregroundColor="#ffffff" backgroundColor="#6e6e6e" backgroundColorSelected="#fd6502" transparent="1" name="config" scrollbarMode="showOnDemand" />
+<widget source="session.VideoPicture" render="Pig" position="53,133" size="420,236" backgroundColor="transparent" zPosition="-10" />
+   <ePixmap position="60,410" zPosition="2" size="391,201" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/logo_ajustes.png" alphatest="blend" />
+<widget source="global.CurrentTime" render="Label" position="949,30" size="251,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;24" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Format:%-H:%M</convert> 
+		</widget> 
+		<widget source="global.CurrentTime" render="Label" position="900,50" size="300,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;16" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Date</convert>  
+		</widget>
+  <widget source="session.CurrentService" render="Label" position="100,650" size="410,25" font="Regular; 22" transparent="1" valign="center" zPosition="2" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" halign="left">
+			  <convert type="ServiceName">Name</convert>
+			</widget>
+  <eLabel text="Servicios" position="460,30" size="400,65" font="Regular;45" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#0140b1"/>
+<eLabel text="Download Epg" position="45,490" size="400,65" font="Regular;30" zPosition="2" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#000000"/>
+  <widget source="Title" transparent="1" render="Label" zPosition="2" valign="center" halign="left" position="92,110" size="700,65" font="Regular; 30" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" />
+   <ePixmap position="570,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
+  <widget source="key_red" render="Label" position="610,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+  <ePixmap position="700,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
+  <widget source="key_green" render="Label" position="740,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+  <ePixmap position="860,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/yellow.png" transparent="1" alphatest="on" />
+  <widget source="key_yellow" render="Label" position="900,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+	<ePixmap position="1060,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/blue.png" transparent="1" alphatest="on" />
+  <widget source="key_blue" render="Label" position="1100,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
 </screen>"""
 
 	def __init__(self, session):
@@ -1566,17 +1742,31 @@ class Ttimer():
 
 class epgscript(ConfigListScreen, Screen):
 	skin = """
-<screen name="epgdn" position="center,160" size="1150,500" title="LBpanel - EPG D+">
-    <ePixmap position="715,10" zPosition="1" size="450,700" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo9.png" alphatest="blend" transparent="1" />
-  <widget position="15,10" size="690,450" name="config" scrollbarMode="showOnDemand" />
-   <ePixmap position="10,488" zPosition="1" size="165,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
-  <widget source="key_red" render="Label" position="10,458" zPosition="2" size="165,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-  <ePixmap position="175,488" zPosition="1" size="165,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
-  <widget source="key_green" render="Label" position="175,458" zPosition="2" size="165,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-  <ePixmap position="340,488" zPosition="1" size="200,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/yellow.png" alphatest="blend" />
-  <widget source="key_yellow" render="Label" position="340,458" zPosition="2" size="200,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-	<ePixmap position="540,488" zPosition="1" size="200,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/blue.png" alphatest="blend" />
-  <widget source="key_blue" render="Label" position="540,458" zPosition="2" size="200,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
+<screen name="epgdn" position="0,0" size="1280,720" title="LBpanel - EPG D+">
+    <ePixmap position="0,0" zPosition="-4" size="1281,721" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo_1_test3.png" alphatest="blend" />
+  <widget position="592,191" size="628,350" foregroundColor="#ffffff" backgroundColor="#6e6e6e" backgroundColorSelected="#fd6502" transparent="1" name="config" scrollbarMode="showOnDemand" />
+<widget source="session.VideoPicture" render="Pig" position="53,133" size="420,236" backgroundColor="transparent" zPosition="-10" />
+   <ePixmap position="60,410" zPosition="2" size="391,201" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/logo_ajustes.png" alphatest="blend" />
+<widget source="global.CurrentTime" render="Label" position="949,30" size="251,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;24" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Format:%-H:%M</convert> 
+		</widget> 
+		<widget source="global.CurrentTime" render="Label" position="900,50" size="300,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;16" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Date</convert>  
+		</widget>
+  <widget source="session.CurrentService" render="Label" position="100,650" size="410,25" font="Regular; 22" transparent="1" valign="center" zPosition="2" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" halign="left">
+			  <convert type="ServiceName">Name</convert>
+			</widget>
+  <eLabel text="Servicios" position="460,30" size="400,65" font="Regular;45" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#0140b1"/>
+<eLabel text="Download Sat Epg" position="45,490" size="400,65" font="Regular;30" zPosition="2" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#000000"/>
+  <widget source="Title" transparent="1" render="Label" zPosition="2" valign="center" halign="left" position="92,110" size="700,65" font="Regular; 30" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" />
+   <ePixmap position="570,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
+  <widget source="key_red" render="Label" position="610,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+  <ePixmap position="700,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
+  <widget source="key_green" render="Label" position="740,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+  <ePixmap position="860,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/yellow.png" transparent="1" alphatest="on" />
+  <widget source="key_yellow" render="Label" position="900,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+	<ePixmap position="1060,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/blue.png" transparent="1" alphatest="on" />
+  <widget source="key_blue" render="Label" position="1100,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
 </screen>"""
 
 	def __init__(self, session):
@@ -1698,15 +1888,30 @@ class epgdmanual(Screen):
 ##############################################################################
 class CrontabMan(Screen):
 	skin = """
-<screen name="CrontabMan" position="center,160" size="1150,500" title="LBpanel - Cron Manager">
-  #<ePixmap position="700,10" zPosition="1" size="450,700" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo16.png" alphatest="blend" transparent="1" />
-	<ePixmap position="20,488" zPosition="1" size="175,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
-	<widget source="key_red" render="Label" position="20,458" zPosition="2" size="175,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-	<widget source="key_green" render="Label" position="195,458" zPosition="2" size="175,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-	<ePixmap position="195,488" zPosition="1" size="175,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
-	<widget source="key_yellow" render="Label" position="370,458" zPosition="2" size="175,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-	<ePixmap position="370,488" zPosition="1" size="175,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/yellow.png" alphatest="blend" />
-	<widget source="menu" render="Listbox" position="15,15" size="660,450" scrollbarMode="showOnDemand">
+<screen name="CrontabMan" position="0,0" size="1280,720" title="LBpanel - Cron Manager">
+  <ePixmap position="0,0" zPosition="-4" size="1281,721" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo_1_test3.png" alphatest="blend" />
+<eLabel text="System" position="460,30" size="400,65" font="Regular;45" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#0140b1"/>
+<widget source="Title" transparent="1" render="Label" zPosition="2" valign="center" halign="left" position="92,110" size="700,65" font="Regular; 30" foregroundColor="#ffffff" backgroundColor="#000000" noWrap="1" />
+<widget source="session.VideoPicture" render="Pig" position="53,133" size="420,236" backgroundColor="transparent" zPosition="-10" />
+<ePixmap position="60,410" zPosition="2" size="391,201" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/logo_ajustes.png" alphatest="blend" />
+<widget source="global.CurrentTime" render="Label" position="949,30" size="251,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;24" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Format:%-H:%M</convert> 
+		</widget> 
+		<widget source="global.CurrentTime" render="Label" position="900,50" size="300,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;16" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Date</convert>  
+		</widget>
+<widget source="session.CurrentService" render="Label" position="100,650" size="410,25" font="Regular; 22" transparent="1" valign="center" zPosition="2" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" halign="left">
+			  <convert type="ServiceName">Name</convert>
+			</widget>
+<eLabel text="Cron Manager" position="45,490" size="400,65" font="Regular;30" zPosition="2" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#000000"/>
+	<ePixmap position="640,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
+	<widget source="key_red" render="Label" position="680,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f"  foregroundColor="#000000" transparent="1" />
+	<ePixmap position="760,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
+	<widget source="key_green" render="Label" position="800,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+	<ePixmap position="980,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/yellow.png" alphatest="blend" />
+	<widget source="key_yellow" render="Label" position="1020,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+	<widget source="menu" render="Listbox" position="592,191" scrollbarMode="showNever" foregroundColor="#ffffff" backgroundColor="#6e6e6e" backgroundColorSelected="#fd6502" transparent="1"
+size="628,350">
 		<convert type="TemplatedMultiContent">
 	{"template": [
 		MultiContentEntryText(pos = (10, 2), size = (580, 25), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 2 is the Menu Titel
@@ -1791,12 +1996,27 @@ class CrontabMan(Screen):
 ####################################################################
 class CrontabManAdd(ConfigListScreen, Screen):
 	skin = """
-<screen name="CrontabManAdd" position="center,160" size="750,370" title="LBpanel - Add tabs" >
-		<widget position="15,10" size="720,300" name="config" scrollbarMode="showOnDemand" />
-		<ePixmap position="10,358" zPosition="1" size="165,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
-		<widget source="key_red" render="Label" position="10,328" zPosition="2" size="165,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-		<ePixmap position="175,358" zPosition="1" size="165,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
-		<widget source="key_green" render="Label" position="175,328" zPosition="2" size="165,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
+<screen name="CrontabManAdd" position="0,0" size="1280,720" title="LBpanel - Add tabs" >
+		<widget position="592,191" size="628,350" foregroundColor="#ffffff" backgroundColor="#6e6e6e" backgroundColorSelected="#fd6502" transparent="1" name="config" scrollbarMode="showOnDemand" />
+<ePixmap position="0,0" zPosition="-4" size="1281,721" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo_1_test3.png" alphatest="blend" />
+<widget source="session.VideoPicture" render="Pig" position="53,133" size="420,236" backgroundColor="transparent" zPosition="-10" />
+<widget source="global.CurrentTime" render="Label" position="949,30" size="251,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;24" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Format:%-H:%M</convert> 
+		</widget> 
+		<widget source="global.CurrentTime" render="Label" position="900,50" size="300,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;16" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Date</convert>  
+		</widget>
+<ePixmap position="60,410" zPosition="2" size="391,201" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/logo_ajustes.png" alphatest="blend" />
+  <widget source="session.CurrentService" render="Label" position="100,650" size="410,25" font="Regular; 22" transparent="1" valign="center" zPosition="2" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" halign="left">
+			  <convert type="ServiceName">Name</convert>
+			</widget>
+  <eLabel text="LBpanel - Cron Manager" position="360,30" size="550,65" font="Regular;45" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#0140b1"/>
+  <eLabel text="Add tabs" position="45,490" size="400,65" font="Regular;30" zPosition="2" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#000000"/>
+  <widget source="Title" transparent="1" render="Label" zPosition="2" valign="center" halign="left" position="92,110" size="700,65" font="Regular; 30" foregroundColor="#ffffff" backgroundColor="#000000" noWrap="1" />
+		<ePixmap position="940,652" zPosition="2" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
+		<widget source="key_red" render="Label" position="980,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f"  foregroundColor="#000000" transparent="1" />
+  <ePixmap position="1060,652" zPosition="2" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
+  <widget source="key_green" render="Label" position="1100,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
 
 </screen>"""
 
@@ -1875,10 +2095,24 @@ class CrontabManAdd(ConfigListScreen, Screen):
 ###############################################################################
 class Info2Screen(Screen):
 	skin = """
-<screen name="Info2Screen" position="center,100" size="890,560" title="LBpanel - System Info">
-	<ePixmap position="20,548" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
-	<widget source="key_red" render="Label" position="20,518" zPosition="2" size="170,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-	<widget name="text" position="15,10" size="860,500" font="Console;20" />
+<screen name="Info2Screen" position="0,0" size="1280,720" title="LBpanel - System Info">
+<ePixmap position="0,0" zPosition="-4" size="1281,721" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo_1_test3.png" alphatest="blend" />
+<eLabel text="Servicios" position="460,30" size="400,65" font="Regular;45" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#0140b1"/>
+<widget source="Title" transparent="1" render="Label" zPosition="2" valign="center" halign="left" position="92,110" size="700,65" font="Regular; 30" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" />
+<widget source="session.VideoPicture" render="Pig" position="53,133" size="420,236" backgroundColor="transparent" zPosition="-10" />
+<ePixmap position="60,410" zPosition="2" size="391,201" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/logo_ajustes.png" alphatest="blend" />
+<widget source="global.CurrentTime" render="Label" position="949,30" size="251,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;24" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Format:%-H:%M</convert> 
+		</widget> 
+		<widget source="global.CurrentTime" render="Label" position="900,50" size="300,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;16" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Date</convert>  
+		</widget>
+<widget source="session.CurrentService" render="Label" position="100,650" size="410,25" font="Regular; 22" transparent="1" valign="center" zPosition="2" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" halign="left">
+			  <convert type="ServiceName">Name</convert>
+			</widget>
+<eLabel text="System Info" position="45,490" size="400,65" font="Regular;30" zPosition="2" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#000000"/>
+<eLabel text="PULSE EXIT PARA SALIR" position="210,648" size="600,65" font="Regular;30" zPosition="2" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#8f8f8f"/>
+	<widget name="text" position="595,215" size="628,400" zPosition="2" backgroundColor="#6e6e6e" foregroundColor="#ffffff" transparent="1" font="Console;15" />
 </screen>"""
 
 	def __init__(self, session):
@@ -1956,18 +2190,33 @@ class Info2Screen(Screen):
 ######################################################################################
 class scanhost(ConfigListScreen, Screen):
 	skin = """
-<screen name="scanhost" position="center,160" size="1150,500" title="LBpanel - Check Hosts">
-    <ePixmap position="715,10" zPosition="1" size="450,700" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo100.png" alphatest="blend" transparent="1" />
-  <widget position="15,10" size="690,450" name="config" scrollbarMode="showOnDemand" />
-   <ePixmap position="10,488" zPosition="1" size="165,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
-  <widget source="key_red" render="Label" position="10,458" zPosition="2" size="165,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-  <ePixmap position="175,488" zPosition="1" size="165,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
-  <widget source="key_green" render="Label" position="175,458" zPosition="2" size="165,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-  <ePixmap position="340,488" zPosition="1" size="200,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/yellow.png" alphatest="blend" />
-  <widget source="key_yellow" render="Label" position="340,458" zPosition="2" size="200,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-	<ePixmap position="540,488" zPosition="1" size="200,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/blue.png" alphatest="blend" />
-  <widget source="key_blue" render="Label" position="540,458" zPosition="2" size="200,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-  <widget name="LabelStatus" position="10,400" zPosition="2" size="400,40"  font="Regular;20"/>
+<screen name="scanhost" position="0,0" size="1280,720" title="LBpanel - Check Hosts">
+    <ePixmap position="0,0" zPosition="-4" size="1281,721" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo_1_test3.png" alphatest="blend" />
+  <widget position="592,191" size="628,350" foregroundColor="#ffffff" backgroundColor="#6e6e6e" backgroundColorSelected="#fd6502" transparent="1" name="config" scrollbarMode="showOnDemand" />
+<widget source="session.VideoPicture" render="Pig" position="53,133" size="420,236" backgroundColor="transparent" zPosition="-10" />
+<widget source="global.CurrentTime" render="Label" position="949,30" size="251,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;24" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Format:%-H:%M</convert> 
+		</widget> 
+		<widget source="global.CurrentTime" render="Label" position="900,50" size="300,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;16" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Date</convert>  
+		</widget>
+<ePixmap position="60,410" zPosition="2" size="391,201" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/logo_ajustes.png" alphatest="blend" />
+<eLabel text="Servicios" position="460,30" size="400,65" font="Regular;45" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#0140b1"/>
+  <eLabel text="Scan Peer" position="45,490" size="400,65" font="Regular;30" zPosition="2" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#000000"/>
+  <widget source="Title" transparent="1" render="Label" zPosition="2" valign="center" halign="left" position="92,110" size="700,65" font="Regular; 30" foregroundColor="#ffffff" backgroundColor="#000000" noWrap="1" />
+   <ePixmap position="660,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
+<widget source="session.CurrentService" render="Label" position="100,650" size="410,25" font="Regular; 22" transparent="1" valign="center" zPosition="2" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" halign="left">
+			  <convert type="ServiceName">Name</convert>
+			</widget>
+  <widget source="key_red" render="Label" position="700,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+  <ePixmap position="800,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
+  <widget source="key_green" render="Label" position="840,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+  <ePixmap position="960,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/yellow.png" transparent="1" alphatest="on" />
+  <widget source="key_yellow" render="Label" position="1000,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+	<ePixmap position="1070,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/blue.png" transparent="1" alphatest="on" />
+  <widget source="key_blue" render="Label" position="1110,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+  <widget name="LabelStatus" backgroundColor="#6e6e6e" foregroundColor="#ffffff" transparent="1" position="680,400" zPosition="2" size="550,40"  font="Regular;20"/>
+<ePixmap position="645,402" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/bomb.png" transparent="1" alphatest="on" />
 </screen>"""
 
 	def __init__(self, session):

@@ -16,18 +16,32 @@ from os import system, rename, path, mkdir, remove
 from time import sleep
 from re import search
 
-class HddMount(Screen):
+class LBHddMount(Screen):
 	skin = """
-	<screen position="center,center" size="640,460" title="Mount Manager">
-		<ePixmap pixmap="skin_default/buttons/red.png" position="25,0" size="140,40" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/green.png" position="175,0" size="140,40" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/yellow.png" position="325,0" size="140,40" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/blue.png" position="475,0" size="140,40" alphatest="on" />
-		<widget name="key_red" position="25,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
-		<widget name="key_green" position="175,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
-		<widget name="key_yellow" position="325,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" transparent="1" />
-		<widget name="key_blue" position="475,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#18188b" transparent="1" />
-		<widget source="list" render="Listbox" position="10,50" size="620,450" scrollbarMode="showOnDemand" >
+	<screen position="0,0" size="1280,720" title="Mount Manager">
+<ePixmap position="0,0" zPosition="-4" size="1281,721" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo_1_test3.png" alphatest="blend" />
+<eLabel text="System" position="460,30" size="400,65" font="Regular;45" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#0140b1"/>
+<widget source="Title" transparent="1" render="Label" zPosition="2" valign="center" halign="left" position="92,110" size="700,65" font="Regular; 30" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" />
+<widget source="session.VideoPicture" render="Pig" position="53,133" size="420,236" backgroundColor="transparent" zPosition="-10" />
+<ePixmap position="60,410" zPosition="2" size="391,201" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/logo_ajustes.png" alphatest="blend" />
+<widget source="session.CurrentService" render="Label" position="100,650" size="410,25" font="Regular; 22" transparent="1" valign="center" zPosition="2" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" halign="left">
+			  <convert type="ServiceName">Name</convert>
+			</widget>
+<widget source="global.CurrentTime" render="Label" position="949,30" size="251,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;24" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Format:%-H:%M</convert> 
+		</widget> 
+		<widget source="global.CurrentTime" render="Label" position="900,50" size="300,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;16" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Date</convert>  
+		</widget>
+<eLabel text="Panel Mount" position="45,490" size="400,65" font="Regular;30" zPosition="3" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#000000"/>
+		<ePixmap position="700,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
+  <eLabel text="Setup Mounts" position="740,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+  <ePixmap position="900,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/yellow.png" transparent="1" alphatest="on" />
+  <eLabel text="Unmounts" position="940,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+	<ePixmap position="1060,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/blue.png" transparent="1" alphatest="on" />
+  <eLabel text="Mounts" position="1100,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+		<widget source="list" render="Listbox" position="592,191" scrollbarMode="showNever" foregroundColor="#ffffff" backgroundColor="#6e6e6e" backgroundColorSelected="#fd6502" transparent="1"
+size="628,350">
 			<convert type="TemplatedMultiContent">
 				{"template": [
 				 MultiContentEntryText(pos = (90, 0), size = (600, 30), font=0, text = 0),
@@ -39,15 +53,11 @@ class HddMount(Screen):
 				}
 			</convert>
 		</widget>
-		<widget name="lab1" zPosition="2" position="50,90" size="600,40" font="Regular;22" halign="center" transparent="1"/>
+		<widget name="lab1" zPosition="2" position="600,400" size="600,40" font="Regular;22" halign="center" transparent="1"/>
 	</screen>"""
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		Screen.setTitle(self, _("Mount Manager"))
-		self['key_red'] = Label(" ")
-		self['key_green'] = Label(_("Setup Mounts"))
-		self['key_yellow'] = Label("Unmount")
-		self['key_blue'] = Label("Mount")
+		Screen.setTitle(self, _("Lbpanel-Mount Manager"))
 		self['lab1'] = Label()
 		self.onChangedEntry = [ ]
 		self.list = []
@@ -217,7 +227,7 @@ class HddMount(Screen):
 			self.list.append(res)
 
 	def SetupMounts(self):
-		self.session.openWithCallback(self.updateList, DevicePanelConf)
+		self.session.openWithCallback(self.updateList, lbDevicePanelConf)
 
 	def Mount(self):
 		sel = self['list'].getCurrent()
@@ -300,23 +310,36 @@ class HddMount(Screen):
 			self.updateList()
 			self.selectionChanged()
 
-class DevicePanelConf(Screen, ConfigListScreen):
+class lbDevicePanelConf(Screen, ConfigListScreen):
 	skin = """
-	<screen position="center,center" size="640,460" title="Choose where to mount your devices to:">
-		<ePixmap pixmap="skin_default/buttons/red.png" position="25,0" size="140,40" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/green.png" position="175,0" size="140,40" alphatest="on" />
-		<widget name="key_red" position="25,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
-		<widget name="key_green" position="175,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
-		<widget name="config" position="30,60" size="580,275" scrollbarMode="showOnDemand"/>
-		<widget name="Linconn" position="30,375" size="580,20" font="Regular;18" halign="center" valign="center" backgroundColor="#9f1313"/>
+	<screen position="0,0" size="1280,720" title="Choose where to mount your devices to:">
+<ePixmap position="0,0" zPosition="-4" size="1281,721" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo_1_test3.png" alphatest="blend" />
+<widget source="session.VideoPicture" render="Pig" position="53,133" size="420,236" backgroundColor="transparent" zPosition="-10" />
+   <ePixmap position="60,410" zPosition="2" size="391,201" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/logo_ajustes.png" alphatest="blend" />
+<widget source="global.CurrentTime" render="Label" position="949,30" size="251,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;24" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Format:%-H:%M</convert> 
+		</widget> 
+		<widget source="global.CurrentTime" render="Label" position="900,50" size="300,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;16" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Date</convert>  
+		</widget>
+  <widget source="session.CurrentService" render="Label" position="100,650" size="410,25" font="Regular; 22" transparent="1" valign="center" zPosition="2" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" halign="left">
+			  <convert type="ServiceName">Name</convert>
+			</widget>
+  <eLabel text="LBpanel Mount Manager" position="360,30" size="500,65" font="Regular;45" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#0140b1"/>
+<eLabel text="Mount Conf" position="45,490" size="400,65" font="Regular;30" zPosition="3" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#000000"/>
+  <widget source="Title" transparent="1" render="Label" zPosition="2" valign="center" halign="left" position="92,110" size="700,65" font="Regular; 30" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" />
+		<eLabel text="Cancel" position="950,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f"  foregroundColor="#000000" transparent="1" />
+<ePixmap position="1060,652" zPosition="2" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
+<ePixmap position="910,652" zPosition="2" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
+<eLabel text="Save" position="1100,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+		<widget position="592,191" size="628,350" foregroundColor="#ffffff" backgroundColor="#6e6e6e" backgroundColorSelected="#fd6502" transparent="1" name="config" scrollbarMode="showOnDemand" />
+		<widget name="Linconn" position="650,400" size="580,20" font="Regular;18" halign="center" valign="center" backgroundColor="#9f1313"/>
 	</screen>"""
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.list = []
 		ConfigListScreen.__init__(self, self.list)
 		Screen.setTitle(self, _("Choose where to mount your devices to:"))
-		self['key_green'] = Label(_("Save"))
-		self['key_red'] = Label(_("Cancel"))
 		self['Linconn'] = Label(_("Wait please while scanning your STB_BOX devices..."))
 		self['actions'] = ActionMap(['WizardActions', 'ColorActions'], {'green': self.saveMypoints, 'red': self.close, 'back': self.close})
 		self.updateList()

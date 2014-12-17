@@ -67,26 +67,34 @@ def _(txt):
 	
 class IPKToolsScreen(Screen):
 	skin = """
-	<screen name="IPKToolsScreen" position="center,center" size="1150,600" title="LBpanel Ipk Tools">
-	<ePixmap position="700,10" zPosition="1" size="450,590" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo19.png" alphatest="blend" transparent="1" />
-	<ePixmap position="705,580" zPosition="1" size="150,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" transparent="1" alphatest="on" />
-	<ePixmap position="855,580" zPosition="1" size="150,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" transparent="1" alphatest="on" />
-	<ePixmap position="1005,580" zPosition="1" size="150,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/yellow.png" transparent="1" alphatest="on" />
-	<widget source = "key_red" render="Label" position="705,530" zPosition="2" size="150,50" valign="center" halign="center" font="Regular;22" transparent="1" />
-	<widget source = "key_green" render="Label" position="855,530" zPosition="2" size="150,50" valign="center" halign="center" font="Regular;22" transparent="1" />
-	<widget source = "key_yellow" render="Label" position="1005,530" zPosition="2" size="150,50" valign="center" halign="center" font="Regular;22" transparent="1" />
-	<widget source="menu" render="Listbox" position="15,10" size="660,580" >
-	<convert type="TemplatedMultiContent">
+	<screen name="IPKToolsScreen" position="0,0" size="1280,720" title="LBpanel Ipk Tools">
+	<eLabel text="LBpanel - Red Bee" position="460,30" size="400,65" font="Regular;45" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="background"/>
+<widget source="Title" transparent="1" render="Label" zPosition="2" valign="center" halign="left" position="92,110" size="700,65" font="Regular; 30" foregroundColor="#ffffff" noWrap="1" />
+<widget source="session.VideoPicture" render="Pig" position="53,133" size="420,236" backgroundColor="transparent" zPosition="-10" />
+<ePixmap position="60,410" zPosition="2" size="391,201" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/logo_ajustes.png" alphatest="blend" />
+<widget source="session.CurrentService" render="Label" position="100,650" size="410,25" font="Regular; 22" transparent="1" valign="center" zPosition="2" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" halign="left">
+			  <convert type="ServiceName">Name</convert>
+			</widget>
+<ePixmap position="710,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
+	<widget source="key_red" render="Label" position="750,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f"  foregroundColor="#000000" transparent="1" />
+	<ePixmap position="830,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
+	<widget source="key_green" render="Label" position="870,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+	<ePixmap position="1020,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/yellow.png" alphatest="blend" />
+	<widget source="key_yellow" render="Label" position="1060,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+<ePixmap position="0,0" zPosition="-4" size="1281,721" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo_1_test3.png" alphatest="blend" />
+<eLabel text="Panel Ipk" position="45,490" size="400,65" font="Regular;30" zPosition="2" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="background"/>
+<widget source="menu" render="Listbox" position="592,191" scrollbarMode="showNever" backgroundColorSelected="#fd6502" transparent="1"
+size="628,350">
+<convert type="TemplatedMultiContent">
 	{"template": [
-		MultiContentEntryText(pos = (200, 25), size = (600, 65), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 2 is the Menu Titel
-		MultiContentEntryText(pos = (210, 75), size = (600, 18), font=1, flags = RT_HALIGN_LEFT, text = 2), # index 3 is the Description
-		MultiContentEntryPixmapAlphaTest(pos = (7, 7), size = (105, 105), png = 3), # index 4 is the pixmap
+		MultiContentEntryText(pos = (10, 10), size = (600, 65), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 2 is the Menu Titel
+		
 			],
-	"fonts": [gFont("Regular", 30),gFont("Regular", 16)],
-	"itemHeight": 105
+	"fonts": [gFont("Regular", 40),gFont("Regular", 16)],
+	"itemHeight": 70
 	}
-			</convert>
-		</widget>
+	</convert>
+	</widget>
 	</screen>"""
 	 
 	def __init__(self, session):
@@ -116,16 +124,16 @@ class IPKToolsScreen(Screen):
 		treepng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/ipk.png"))
 		sixpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/ipk.png"))
 		fivepng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/ipk.png"))
-		dospng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/ipk.png"))
-		cuatropng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/ipk.png"))
-		cincopng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/ipk.png"))
+		#dospng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/ipk.png"))
+		#cuatropng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/ipk.png"))
+		#cincopng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/ipk.png"))
 		self.list.append((_("IPK installer"),"one", _("Install ipk, bh.tgz, tar.gz, nab.tgz in /tmp"), onepng ))
 		self.list.append((_("Feed installer"),"six", _("Feed installer"), sixpng ))
 		self.list.append((_("Download extensions"),"five", _("Download feeds packages"), fivepng))
 		self.list.append((_("IPK delete packages"),"four", _("Delete IPK packages"), treepng ))
-		self.list.append((_("Sorys Channel List"),"dos", _("Download Sorys Channel List"), dospng ))
-		self.list.append((_("Download config emus"),"cuatro", _("Download Config Emus"), cuatropng ))
-		self.list.append((_("Download Picon"),"cinco", _("Download Picon"), cincopng ))
+		#self.list.append((_("Sorys Channel List"),"dos", _("Download Sorys Channel List"), dospng ))
+		#self.list.append((_("Download config emus"),"cuatro", _("Download Config Emus"), cuatropng ))
+		#self.list.append((_("Download Picon"),"cinco", _("Download Picon"), cincopng ))
 		self["menu"].setList(self.list)
 		
 	def exit(self):
@@ -148,35 +156,64 @@ class IPKToolsScreen(Screen):
 			self.session.openWithCallback(self.mList,DownloadFeed)
 		elif item is "six":
 			self.session.openWithCallback(self.mList,downfeed)
-		elif item is "dos":
-			self.session.openWithCallback(self.mList,installsorys)
-		elif item is "cuatro":
-			self.session.openWithCallback(self.mList,installconfigemus)
-		elif item is "cinco":
-			self.session.openWithCallback(self.mList,installpicon)
+		#elif item is "dos":
+			#self.session.openWithCallback(self.mList,installsorys)
+		#elif item is "cuatro":
+			#self.session.openWithCallback(self.mList,installconfigemus)
+		#elif item is "cinco":
+			#self.session.openWithCallback(self.mList,installpicon)
 			
 ###############################################
 class DownloadFeed(Screen):
 	skin = """
-<screen name="DownloadFeed" position="center,110" size="850,520" title="Download extensions from feed">
-<widget source="menu" render="Listbox" position="15,10" size="820,455" scrollbarMode="showOnDemand">
+<screen name="DownloadFeed" position="0,0" size="1280,720" title="Download extensions from feed">
+<ePixmap position="0,0" zPosition="-4" size="1281,721" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo_1_test3.png" alphatest="blend" />
+
+<eLabel text="LBpanel Ipk Tools" position="460,30" size="400,65" font="Regular;45" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#0140b1"/>
+
+<widget source="Title" transparent="1" render="Label" zPosition="2" valign="center" halign="left" position="92,110" size="730,65" font="Regular; 30" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" />
+
+<widget source="session.VideoPicture" render="Pig" position="53,133" size="420,236" backgroundColor="transparent" zPosition="-10" />
+<ePixmap position="60,410" zPosition="2" size="391,201" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/logo_ajustes.png" alphatest="blend" />
+
+<widget source="session.CurrentService" render="Label" position="100,650" size="410,25" font="Regular; 22" transparent="1" valign="center" zPosition="2" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" halign="left">
+			  <convert type="ServiceName">Name</convert>
+
+			</widget>
+<eLabel text="Feed Download" position="45,490" size="400,65" font="Regular;30" zPosition="2" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#000000"/>
+
+<widget source="global.CurrentTime" render="Label" position="949,30" size="251,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;24" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Format:%-H:%M</convert> 
+		</widget> 
+
+		<widget source="global.CurrentTime" render="Label" position="900,50" size="300,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;16" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Date</convert>  
+		</widget>
+<widget source="menu" render="Listbox" position="592,191" size="628,350" scrollbarMode="showNever" foregroundColor="#ffffff" backgroundColor="#6e6e6e" backgroundColorSelected="#fd6502" transparent="1">
 	<convert type="TemplatedMultiContent">
+
 		{"template": [
 			MultiContentEntryText(pos = (70, 2), size = (630, 25), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 2 is the Menu Titel
 			MultiContentEntryText(pos = (80, 29), size = (630, 18), font=1, flags = RT_HALIGN_LEFT, text = 1), # index 3 is the Description
+
 			MultiContentEntryPixmapAlphaTest(pos = (5, 5), size = (50, 40), png = 2), # index 4 is the pixmap
 				],
-	"fonts": [gFont("Regular", 23),gFont("Regular", 16)],
+	"fonts": [gFont("Regular", 21),gFont("Regular", 16)],
+
 	"itemHeight": 50
 	}
 	</convert>
+
 	</widget>
-	<ePixmap name="red" position="20,512" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" transparent="1" alphatest="on" />
-	<ePixmap name="green" position="190,512" zPosition="1" size="220,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" transparent="1" alphatest="on" />
-	<ePixmap name="yellow" position="410,512" zPosition="1" size="220,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/yellow.png" transparent="1" alphatest="on" />
-	<widget name="key_red" position="20,482" zPosition="2" size="170,30" valign="center" halign="center" font="Regular;22" transparent="1" />
-	<widget name="key_green" position="190,482" zPosition="2" size="220,30" valign="center" halign="center" font="Regular;22" transparent="1" />
-	<widget name="key_yellow" position="410,482" zPosition="2" size="220,30" valign="center" halign="center" font="Regular;22" transparent="1" />
+	<ePixmap position="740,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
+
+	<widget source="key_red" render="Label" position="780,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f"  foregroundColor="#000000" transparent="1" />
+	<ePixmap position="860,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
+	<widget source="key_green" render="Label" position="900,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+
+	<ePixmap position="980,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/yellow.png" alphatest="blend" />
+	<widget source="key_yellow" render="Label" position="1020,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+
 </screen>"""
 	  
 	def __init__(self, session):
@@ -243,234 +280,42 @@ class DownloadFeed(Screen):
 			os.chmod("/var/lib/opkg/status", 0644)
 		self.close()
 #####################################################################################################
-class installsorys(Screen):
-	skin = """
-<screen name="installsorys" position="center,160" size="1150,500" title="LBpanel-Download Sorys Settings">
-    <ePixmap position="715,10" zPosition="1" size="450,700" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo10.png" alphatest="blend" transparent="1" />
-<widget source="menu" render="Listbox" position="15,10" size="660,450" scrollbarMode="showOnDemand">
-	<convert type="TemplatedMultiContent">
-		{"template": [
-			MultiContentEntryText(pos = (70, 2), size = (630, 25), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 2 is the Menu Titel
-			MultiContentEntryText(pos = (80, 29), size = (630, 18), font=1, flags = RT_HALIGN_LEFT, text = 1), # index 3 is the Description
-			MultiContentEntryPixmapAlphaTest(pos = (5, 5), size = (50, 40), png = 2), # index 4 is the pixmap
-				],
-	"fonts": [gFont("Regular", 23),gFont("Regular", 16)],
-	"itemHeight": 50
-	}
-	</convert>
-	</widget>
-	<ePixmap name="red" position="20,488" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" transparent="1" alphatest="on" />
-	<ePixmap name="green" position="190,488" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" transparent="1" alphatest="on" />
-	<widget name="key_red" position="20,458" zPosition="2" size="170,30" valign="center" halign="center" font="Regular;22" transparent="1" />
-	<widget name="key_green" position="190,458" zPosition="2" size="170,30" valign="center" halign="center" font="Regular;22" transparent="1" />
-</screen>"""
-	  
-	def __init__(self, session):
-		Screen.__init__(self, session)
-		self.setTitle(_("LBpanel-Download Sorys Settings"))
-		self.session = session
-		self.list = []
-		self["menu"] = List(self.list)
-		self.feedlist()
-		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
-			{
-				"cancel": self.cancel,
-				"ok": self.ok,
-				"green": self.setup,
-				"red": self.cancel,
-			},-1)
-		self.list = [ ]
-		self["key_red"] = Label(_("Close"))
-		self["key_green"] = Label(_("Install"))
-		
-	def feedlist(self):
-		self.list = []
-		os.system("opkg update")
-		camdlist = os.popen("opkg list | grep sorys")
-		softpng = LoadPixmap(cached = True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/emumini.png"))
-		for line in camdlist.readlines():
-			try:
-				self.list.append(("%s %s" % (line.split(' - ')[0], line.split(' - ')[1]), line.split(' - ')[-1], softpng))
-			except:
-				pass
-		camdlist.close()
-		self["menu"].setList(self.list)
-		
-	def ok(self):
-		self.setup()
-		
-	def setup(self):
-		self.session.open(Console,title = _("Installing Sorys Settings"), cmdlist = ["opkg install -force-overwrite %s" % self["menu"].getCurrent()[0]])
-		
-		
-	def cancel(self):
-		self.close()
-#################################################
-class installconfigemus(Screen):
-	skin = """
-
-<screen name="installconfigemus" position="center,160" size="1150,500" title="LBpanel-Download Config-Emus">
-    <ePixmap position="715,10" zPosition="1" size="450,700" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo10.png" alphatest="blend" transparent="1" />
-<widget source="menu" render="Listbox" position="15,10" size="660,450" scrollbarMode="showOnDemand">
-
-	<convert type="TemplatedMultiContent">
-
-		{"template": [
-
-			MultiContentEntryText(pos = (70, 2), size = (630, 25), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 2 is the Menu Titel
-
-			MultiContentEntryText(pos = (80, 29), size = (630, 18), font=1, flags = RT_HALIGN_LEFT, text = 1), # index 3 is the Description
-
-			MultiContentEntryPixmapAlphaTest(pos = (5, 5), size = (50, 40), png = 2), # index 4 is the pixmap
-				],
-	"fonts": [gFont("Regular", 23),gFont("Regular", 16)],
-	"itemHeight": 50
-
-	}
-
-	</convert>
-
-	</widget>
-
-	<ePixmap name="red" position="20,488" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" transparent="1" alphatest="on" />
-
-	<ePixmap name="green" position="190,488" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" transparent="1" alphatest="on" />
-
-	<widget name="key_red" position="20,458" zPosition="2" size="170,30" valign="center" halign="center" font="Regular;22" transparent="1" />
-
-	<widget name="key_green" position="190,458" zPosition="2" size="170,30" valign="center" halign="center" font="Regular;22" transparent="1" />
-
-</screen>"""
-	  
-	def __init__(self, session):
-		Screen.__init__(self, session)
-		self.setTitle(_("LBpanel-Download Config Emus"))
-		self.session = session
-		self.list = []
-		self["menu"] = List(self.list)
-		self.feedlist()
-		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
-			{
-				"cancel": self.cancel,
-				"ok": self.ok,
-				"green": self.setup,
-				"red": self.cancel,
-			},-1)
-		self.list = [ ]
-		self["key_red"] = Label(_("Close"))
-		self["key_green"] = Label(_("Install"))
-		
-	def feedlist(self):
-		self.list = []
-		os.system("opkg update")
-		camdlist = os.popen("opkg list | grep emucfg")
-		softpng = LoadPixmap(cached = True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/emumini.png"))
-		for line in camdlist.readlines():
-			try:
-				self.list.append(("%s %s" % (line.split(' - ')[0], line.split(' - ')[1]), line.split(' - ')[-1], softpng))
-			except:
-				pass
-		camdlist.close()
-		self["menu"].setList(self.list)
-		
-	def ok(self):
-		self.setup()
-		
-	def setup(self):
-		os.system("opkg install -force-overwrite %s" % self["menu"].getCurrent()[0])
-		self.mbox = self.session.open(MessageBox, _("%s is installed" % self["menu"].getCurrent()[0]), MessageBox.TYPE_INFO, timeout = 4 )
-		
-		
-	def cancel(self):
-		self.close()
-#################################################
-class installpicon(Screen):
-	skin = """
-
-<screen name="installpicon" position="center,160" size="1150,500" title="LBpanel-Download Picon">
-    <ePixmap position="715,10" zPosition="1" size="450,700" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo10.png" alphatest="blend" transparent="1" />
-<widget source="menu" render="Listbox" position="15,10" size="660,450" scrollbarMode="showOnDemand">
-	<convert type="TemplatedMultiContent">
-		{"template": [
-			MultiContentEntryText(pos = (70, 2), size = (630, 25), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 2 is the Menu Titel
-			MultiContentEntryText(pos = (80, 29), size = (630, 18), font=1, flags = RT_HALIGN_LEFT, text = 1), # index 3 is the Description
-			MultiContentEntryPixmapAlphaTest(pos = (5, 5), size = (50, 40), png = 2), # index 4 is the pixmap
-				],
-	"fonts": [gFont("Regular", 23),gFont("Regular", 16)],
-	"itemHeight": 50
-	}
-	</convert>
-
-	</widget>
-	<ePixmap name="red" position="20,488" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" transparent="1" alphatest="on" />
-	<ePixmap name="green" position="190,488" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" transparent="1" alphatest="on" />
-
-	<widget name="key_red" position="20,458" zPosition="2" size="170,30" valign="center" halign="center" font="Regular;22" transparent="1" />
-	<widget name="key_green" position="190,458" zPosition="2" size="170,30" valign="center" halign="center" font="Regular;22" transparent="1" />
-</screen>"""
-	  
-	def __init__(self, session):
-		Screen.__init__(self, session)
-		self.setTitle(_("LBpanel-Download picon"))
-		self.session = session
-		self.list = []
-		self["menu"] = List(self.list)
-		self.feedlist()
-		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
-			{
-				"cancel": self.cancel,
-				"ok": self.ok,
-				"green": self.setup,
-				"red": self.cancel,
-			},-1)
-		self.list = [ ]
-		self["key_red"] = Label(_("Close"))
-		self["key_green"] = Label(_("Install"))
-		
-	def feedlist(self):
-		self.list = []
-		os.system("opkg update")
-		camdlist = os.popen("opkg list | grep piconLB")
-		softpng = LoadPixmap(cached = True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/emumini.png"))
-		for line in camdlist.readlines():
-			try:
-				self.list.append(("%s %s" % (line.split(' - ')[0], line.split(' - ')[1]), line.split(' - ')[-1], softpng))
-			except:
-				pass
-		camdlist.close()
-		self["menu"].setList(self.list)
-		
-	def ok(self):
-		self.setup()
-		
-	def setup(self):
-		os.system("opkg install -force-overwrite %s" % self["menu"].getCurrent()[0])
-		self.mbox = self.session.open(MessageBox, _("%s is installed" % self["menu"].getCurrent()[0]), MessageBox.TYPE_INFO, timeout = 4 )
-		
-	def cancel(self):
-		self.close()
-#################################################
 class InstallAll(Screen):
 	skin = """
-<screen name="InstallAll" position="center,160" size="750,370" title="LBpanel-Select files to install">
-<widget source="menu" render="Listbox" position="15,10" size="720,300" scrollbarMode="showOnDemand">
+<screen name="InstallAll" position="0,0" size="1280,720" title="LBpanel-Select files to install">
+<ePixmap position="0,0" zPosition="-4" size="1281,721" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo_1_test3.png" alphatest="blend" />
+<eLabel text="LBpanel Ipk Tools" position="460,30" size="400,65" font="Regular;45" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#0140b1"/>
+<widget source="Title" transparent="1" render="Label" zPosition="2" valign="center" halign="left" position="92,110" size="730,65" font="Regular; 30" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" />
+<widget source="session.VideoPicture" render="Pig" position="53,133" size="420,236" backgroundColor="transparent" zPosition="-10" />
+<ePixmap position="60,410" zPosition="2" size="391,201" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/logo_ajustes.png" alphatest="blend" />
+<widget source="session.CurrentService" render="Label" position="100,650" size="410,25" font="Regular; 22" transparent="1" valign="center" zPosition="2" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" halign="left">
+			  <convert type="ServiceName">Name</convert>
+			</widget>
+<eLabel text="Ipk Install" position="45,490" size="400,65" font="Regular;30" zPosition="2" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#000000"/>
+<widget source="global.CurrentTime" render="Label" position="949,30" size="251,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;24" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Format:%-H:%M</convert> 
+		</widget> 
+		<widget source="global.CurrentTime" render="Label" position="900,50" size="300,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;16" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Date</convert>  
+		</widget>
+<widget source="menu" render="Listbox" position="592,191" size="628,350" scrollbarMode="showNever" foregroundColor="#ffffff" backgroundColor="#6e6e6e" backgroundColorSelected="#fd6502" transparent="1">
 	<convert type="TemplatedMultiContent">
 		{"template": [
 			MultiContentEntryText(pos = (70, 2), size = (630, 25), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 2 is the Menu Titel
 			MultiContentEntryText(pos = (80, 29), size = (630, 18), font=1, flags = RT_HALIGN_LEFT, text = 1), # index 3 is the Description
 			MultiContentEntryPixmapAlphaTest(pos = (5, 5), size = (50, 40), png = 2), # index 4 is the pixmap
 				],
-	"fonts": [gFont("Regular", 23),gFont("Regular", 16)],
+	"fonts": [gFont("Regular", 21),gFont("Regular", 16)],
 	"itemHeight": 50
 	}
 	</convert>
 	</widget>
-	<ePixmap position="20,358" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" transparent="1" alphatest="on" />
-	<ePixmap position="190,358" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" transparent="1" alphatest="on" />
-	<widget source="key_red" render="Label" position="20,328" zPosition="2" size="170,30" valign="center" halign="center" font="Regular;22" transparent="1" />
-	<widget source="key_green" render="Label" position="190,328" zPosition="2" size="170,30" valign="center" halign="center" font="Regular;22" transparent="1" />
-	<ePixmap position="360,358" zPosition="1" size="250,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/yellow.png" transparent="1" alphatest="on" />
-	<widget source="key_yellow" render="Label" position="360,328" zPosition="2" size="250,30" valign="center" halign="center" font="Regular;22" transparent="1" />
+	<ePixmap position="740,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
+	<widget source="key_red" render="Label" position="780,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f"  foregroundColor="#000000" transparent="1" />
+	<ePixmap position="860,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
+	<widget source="key_green" render="Label" position="900,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+	<ePixmap position="980,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/yellow.png" alphatest="blend" />
+	<widget source="key_yellow" render="Label" position="1020,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
 </screen>"""
 	  
 	def __init__(self, session, args=None):
@@ -542,25 +387,54 @@ class InstallAll(Screen):
 ########################################################################################################
 class RemoveIPK(Screen):
 	skin = """
-<screen name="RemoveIPK" position="center,100" size="750,570" title="LBpanel - Ipk remove">
-<widget source="menu" position="15,10" render="Listbox" size="720,500">
+<screen name="RemoveIPK" position="0,0" size="1280,720" title="LBpanel - Ipk remove">
+<ePixmap position="0,0" zPosition="-4" size="1281,721" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo_1_test3.png" alphatest="blend" />
+
+<eLabel text="LBpanel Ipk Tools" position="460,30" size="400,65" font="Regular;45" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#0140b1"/>
+
+<widget source="Title" transparent="1" render="Label" zPosition="2" valign="center" halign="left" position="92,110" size="730,65" font="Regular; 30" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" />
+
+<widget source="session.VideoPicture" render="Pig" position="53,133" size="420,236" backgroundColor="transparent" zPosition="-10" />
+<ePixmap position="60,410" zPosition="2" size="391,201" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/logo_ajustes.png" alphatest="blend" />
+
+<widget source="session.CurrentService" render="Label" position="100,650" size="410,25" font="Regular; 22" transparent="1" valign="center" zPosition="2" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" halign="left">
+			  <convert type="ServiceName">Name</convert>
+
+			</widget>
+<eLabel text="Ipk Remove" position="45,490" size="400,65" font="Regular;30" zPosition="2" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#000000"/>
+
+<widget source="global.CurrentTime" render="Label" position="949,30" size="251,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;24" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Format:%-H:%M</convert> 
+		</widget> 
+
+		<widget source="global.CurrentTime" render="Label" position="900,50" size="300,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;16" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Date</convert>  
+		</widget>
+<widget source="menu" render="Listbox" position="592,191" size="628,350" scrollbarMode="showNever" foregroundColor="#ffffff" backgroundColor="#6e6e6e" backgroundColorSelected="#fd6502" transparent="1">
 	<convert type="TemplatedMultiContent">
+
 		{"template": [
 			MultiContentEntryText(pos = (70, 2), size = (630, 25), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 2 is the Menu Titel
 			MultiContentEntryText(pos = (80, 29), size = (630, 18), font=1, flags = RT_HALIGN_LEFT, text = 1), # index 3 is the Description
+
 			MultiContentEntryPixmapAlphaTest(pos = (5, 5), size = (50, 40), png = 2), # index 4 is the pixmap
 				],
-	"fonts": [gFont("Regular", 23),gFont("Regular", 16)],
+	"fonts": [gFont("Regular", 21),gFont("Regular", 16)],
+
 	"itemHeight": 50
 	}
 	</convert>
+
 	</widget>
-	<ePixmap position="20,558" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" transparent="1" alphatest="on" />
-	<ePixmap position="190,558" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" transparent="1" alphatest="on" />
-	<ePixmap position="360,558" zPosition="1" size="200,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/yellow.png" transparent="1" alphatest="on" />
-	<widget source="key_red" render="Label" position="20,528" zPosition="2" size="170,30" valign="center" halign="center" font="Regular;22" transparent="1" />
-	<widget source="key_green" render="Label" position="190,528" zPosition="2" size="170,30" valign="center" halign="center" font="Regular;22" transparent="1" />
-	<widget source="key_yellow" render="Label" position="360,528" zPosition="2" size="200,30" valign="center" halign="center" font="Regular;22" transparent="1" />
+	<ePixmap position="690,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
+
+	<widget source="key_red" render="Label" position="730,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f"  foregroundColor="#000000" transparent="1" />
+	<ePixmap position="810,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
+	<widget source="key_green" render="Label" position="850,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+
+	<ePixmap position="980,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/yellow.png" alphatest="blend" />
+	<widget source="key_yellow" render="Label" position="1020,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+
 </screen>"""
 	  
 	def __init__(self, session, args=None):
@@ -618,23 +492,50 @@ class RemoveIPK(Screen):
 #####################################################################################
 class downfeed(Screen):
 	skin = """
-<screen name="downfeed" position="center,110" size="850,520" title="LBpanel-Install extensions from feed">
-<widget source="menu" render="Listbox" position="15,10" size="820,455" scrollbarMode="showOnDemand">
+<screen name="downfeed" position="0,0" size="1280,720" title="LBpanel-Install extensions from feed">
+<ePixmap position="0,0" zPosition="-4" size="1281,721" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo_1_test3.png" alphatest="blend" />
+
+<eLabel text="LBpanel Ipk Tools" position="460,30" size="400,65" font="Regular;45" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#0140b1"/>
+
+<widget source="Title" transparent="1" render="Label" zPosition="2" valign="center" halign="left" position="92,110" size="730,65" font="Regular; 30" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" />
+
+<widget source="session.VideoPicture" render="Pig" position="53,133" size="420,236" backgroundColor="transparent" zPosition="-10" />
+<ePixmap position="60,410" zPosition="2" size="391,201" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/logo_ajustes.png" alphatest="blend" />
+
+<widget source="session.CurrentService" render="Label" position="100,650" size="410,25" font="Regular; 22" transparent="1" valign="center" zPosition="2" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" halign="left">
+			  <convert type="ServiceName">Name</convert>
+
+			</widget>
+<eLabel text="Feed Install" position="45,490" size="400,65" font="Regular;30" zPosition="2" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#000000"/>
+
+<widget source="global.CurrentTime" render="Label" position="949,30" size="251,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;24" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Format:%-H:%M</convert> 
+		</widget> 
+
+		<widget source="global.CurrentTime" render="Label" position="900,50" size="300,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;16" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Date</convert>  
+		</widget>
+<widget source="menu" render="Listbox" position="592,191" size="628,350" scrollbarMode="showNever" foregroundColor="#ffffff" backgroundColor="#6e6e6e" backgroundColorSelected="#fd6502" transparent="1">
 	<convert type="TemplatedMultiContent">
+
 		{"template": [
 			MultiContentEntryText(pos = (70, 2), size = (630, 25), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 2 is the Menu Titel
 			MultiContentEntryText(pos = (80, 29), size = (630, 18), font=1, flags = RT_HALIGN_LEFT, text = 1), # index 3 is the Description
+
 			MultiContentEntryPixmapAlphaTest(pos = (5, 5), size = (50, 40), png = 2), # index 4 is the pixmap
 				],
-	"fonts": [gFont("Regular", 23),gFont("Regular", 16)],
+	"fonts": [gFont("Regular", 21),gFont("Regular", 16)],
+
 	"itemHeight": 50
 	}
 	</convert>
+
 	</widget>
-	<ePixmap position="20,512" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" transparent="1" alphatest="on" />
-	<ePixmap position="190,512" zPosition="1" size="170,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" transparent="1" alphatest="on" />
-	<widget source="key_red" render="Label" position="20,482" zPosition="2" size="170,30" valign="center" halign="center" font="Regular;22" transparent="1" />
-	<widget source="key_green" render="Label" position="190,482" zPosition="2" size="170,30" valign="center" halign="center" font="Regular;22" transparent="1" />
+	<ePixmap position="940,652" zPosition="2" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
+	<ePixmap position="1060,652" zPosition="2" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
+	<widget source="key_red" render="Label" position="980,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f"  foregroundColor="#000000" transparent="1" />
+	<widget source="key_green" render="Label" position="1100,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+
 </screen>"""
 	  
 	def __init__(self, session, args=None):

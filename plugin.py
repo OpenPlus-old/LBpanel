@@ -156,25 +156,43 @@ def sendemail(from_addr, to_addr, cc_addr,
     	
 def lbversion():
 	return ("LBpanel_0.99_Red_Bee_r19")
-	
+
 class LBPanel2(Screen):
 	skin = """
-<screen name="LBPanel2" position="center,center" size="1150,600" >
-<ePixmap position="705,580" zPosition="2" size="165,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
-<widget source="key_red" render="Label" position="705,550" zPosition="2" size="165,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-<ePixmap position="885,580" zPosition="2" size="165,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
-<widget source="key_green" render="Label" position="875,550" zPosition="2" size="165,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-<ePixmap position="700,10" zPosition="1" size="450,590" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo.png" alphatest="blend" transparent="1" />
-<widget source="lb_version" render="Label" position="700,10" zPosition="2" size="450,30" font="Regular;15" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-<widget source="menu" render="Listbox" position="15,10" size="660,580" scrollbarMode="showOnDemand">
+<screen name="LBPanel2" position="0,0" size="1280,720" >
+<eLabel text="LBpanel - Red Bee" position="460,30" size="400,65" font="Regular;45" halign="center" transparent="1" foregroundColor="#ffffff" backgroundColor="#0140b1"/>
+<eLabel text="MENU PRINCIPAL" position="10,126" size="400,65" font="Regular;30" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#000000"/>
+<widget source="global.CurrentTime" render="Label" position="949,30" size="251,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;24" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Format:%-H:%M</convert> 
+		</widget> 
+		<widget source="global.CurrentTime" render="Label" position="900,50" size="300,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;16" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Date</convert>  
+		</widget>  
+<widget source="session.VideoPicture" render="Pig" position="53,133" size="420,236" backgroundColor="transparent" zPosition="-10" />
+<ePixmap position="660,652" zPosition="2" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
+<ePixmap position="60,410" zPosition="2" size="391,201" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/logo_menu.png" alphatest="blend" />
+<widget source="session.CurrentService" render="Label" position="100,650" size="410,25" font="Regular; 22" transparent="1" valign="center" zPosition="2" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" halign="left">
+			  <convert type="ServiceName">Name</convert>
+			</widget>
+<ePixmap position="400,648" zPosition="1" size="74,36" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/key_menu.png" transparent="1" alphatest="on" />
+<eLabel text="Cerrar" position="700,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f"  foregroundColor="#000000" transparent="1" />
+<ePixmap position="1060,652" zPosition="2" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
+<eLabel text="CamEmu" position="1100,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+<ePixmap position="0,0" zPosition="-4" size="1281,721" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo_1_test3.png" alphatest="blend" />
+<widget source="lb_version" render="Label" position="50,593" zPosition="2" size="450,30" font="Regular;15" halign="center" valign="center" backgroundColor="#d3d3d3" foregroundColor="#000000" transparent="1" />
+<eLabel text="Servicios" position="960,650" zPosition="3" size="200,30" font="Regular;20" backgroundColor="#8f8f8f"  foregroundColor="#000000" transparent="1" />
+<ePixmap position="920,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/yellow.png" transparent="1" alphatest="on" />
+<eLabel text="Ipk Tools" position="820,650" zPosition="3" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+<ePixmap position="780,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/blue.png" transparent="1" alphatest="on" />
+<widget source="menu" render="Listbox" position="592,191" scrollbarMode="showNever" foregroundColor="#ffffff" backgroundColor="#6e6e6e" backgroundColorSelected="#fd6502" transparent="1"
+size="628,350">
 <convert type="TemplatedMultiContent">
 	{"template": [
-		MultiContentEntryText(pos = (200, 25), size = (600, 65), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 2 is the Menu Titel
-		MultiContentEntryText(pos = (210, 75), size = (600, 18), font=1, flags = RT_HALIGN_LEFT, text = 2), # index 3 is the Description
-		MultiContentEntryPixmapAlphaTest(pos = (7, 7), size = (105, 105), png = 3), # index 4 is the pixmap
+		MultiContentEntryText(pos = (10, 10), size = (600, 65), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 2 is the Menu Titel
+		
 			],
-	"fonts": [gFont("Regular", 30),gFont("Regular", 16)],
-	"itemHeight": 105
+	"fonts": [gFont("Regular", 40),gFont("Regular", 16)],
+	"itemHeight": 70
 	}
 	</convert>
 	</widget>
@@ -195,13 +213,10 @@ class LBPanel2(Screen):
 			"green": self.keyGreen,
 			"yellow": self.keyYellow,
 			"blue": self.keyBlue,
+			"menu": self.keyMenu,
 			
 		})
 		self["lb_version"] = StaticText(_("Version: %s") % lbversion())
-		self["key_red"] = StaticText(_("Close"))
-		self["key_green"] = StaticText(_("CamEmu"))
-		self["key_yellow"] = StaticText(_("LBTools"))
-		self["key_blue"] = StaticText(_("Install"))
 		self.list = []
 		self["menu"] = List(self.list)
 		self.mList()
@@ -273,6 +288,9 @@ class LBPanel2(Screen):
 				
 	def keyYellow (self):
 		self.session.open(LBtools.ToolsScreen)
+
+	def keyMenu (self):
+		self.session.open(descargasScreen)
 		
 	def keyGreen (self):
 		self.session.open(LBCamEmu.emuSel2)
@@ -545,15 +563,439 @@ class ConfigExtentions(ConfigListScreen, Screen):
 
 
 ######################################################################################
+class descargasScreen(Screen):
+	skin = """
+	<screen name="descargasScreen" position="0,0" size="1280,720" title="LBpanel Download">
+	<eLabel text="LBpanel - Red Bee" position="460,30" size="400,65" font="Regular;45" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="background"/>
+<widget source="Title" transparent="1" render="Label" zPosition="2" valign="center" halign="left" position="92,110" size="700,65" font="Regular; 30" foregroundColor="#ffffff" noWrap="1" />
+<widget source="session.VideoPicture" render="Pig" position="53,133" size="420,236" backgroundColor="transparent" zPosition="-10" />
+<ePixmap position="60,410" zPosition="2" size="391,201" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/logo_ajustes.png" alphatest="blend" />
+<widget source="session.CurrentService" render="Label" position="100,650" size="410,25" font="Regular; 22" transparent="1" valign="center" zPosition="2" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" halign="left">
+			  <convert type="ServiceName">Name</convert>
+			</widget>
+<ePixmap position="770,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
+	<widget source="key_red" render="Label" position="810,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f"  foregroundColor="#000000" transparent="1" />
+	<ePixmap position="890,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
+	<widget source="key_green" render="Label" position="930,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+	<ePixmap position="1080,652" zPosition="1" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/yellow.png" alphatest="blend" />
+	<widget source="key_yellow" render="Label" position="1120,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+<ePixmap position="0,0" zPosition="-4" size="1281,721" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo_1_test3.png" alphatest="blend" />
+<eLabel text="Panel Download" position="45,490" size="400,65" font="Regular;30" zPosition="2" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="background"/>
+<widget source="menu" render="Listbox" position="592,191" scrollbarMode="showNever" backgroundColorSelected="#fd6502" transparent="1"
+size="628,350">
+<convert type="TemplatedMultiContent">
+	{"template": [
+		MultiContentEntryText(pos = (10, 10), size = (600, 65), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 2 is the Menu Titel
+		
+			],
+	"fonts": [gFont("Regular", 40),gFont("Regular", 16)],
+	"itemHeight": 70
+	}
+	</convert>
+	</widget>
+	</screen>"""
+	 
+	def __init__(self, session):
+		self.session = session
+		Screen.__init__(self, session)
+		self.setTitle(_("Download Bee"))
+		self["shortcuts"] = ActionMap(["ShortcutActions", "WizardActions"],
+
+		{
+			"ok": self.OK,
+			"cancel": self.exit,
+			"back": self.exit,
+			"red": self.exit,
+			"yellow": self.clear,
+			"green": self.restartGUI,
+		})
+		self["key_red"] = StaticText(_("Close"))
+		self["key_green"] = StaticText(_("Restart GUI"))
+		self["key_yellow"] = StaticText(_("Remove"))
+		self.list = []
+		self["menu"] = List(self.list)
+		self.mList()
+
+	def mList(self):
+		self.list = []
+		#onepng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/ipk.png"))
+		#treepng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/ipk.png"))
+		#sixpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/ipk.png"))
+		#fivepng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/ipk.png"))
+		dospng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/ipk.png"))
+		cuatropng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/ipk.png"))
+		cincopng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/ipk.png"))
+		#self.list.append((_("IPK installer"),"one", _("Install ipk, bh.tgz, tar.gz, nab.tgz in /tmp"), onepng ))
+		#self.list.append((_("Feed installer"),"six", _("Feed installer"), sixpng ))
+		#self.list.append((_("Download extensions"),"five", _("Download feeds packages"), fivepng))
+		#self.list.append((_("IPK delete packages"),"four", _("Delete IPK packages"), treepng ))
+		self.list.append((_("Sorys Channel List"),"dos", _("Download Sorys Channel List"), dospng ))
+		self.list.append((_("Download config emus"),"cuatro", _("Download Config Emus"), cuatropng ))
+		self.list.append((_("Download Picon"),"cinco", _("Download Picon"), cincopng ))
+		self["menu"].setList(self.list)
+		
+	def exit(self):
+		self.close()
+		
+	def clear(self):
+		self.session.open(installremove)
+		
+	def restartGUI(self):
+		self.session.open(TryQuitMainloop, 3)
+
+	def OK(self):
+		item = self["menu"].getCurrent()[1]
+		#if item is "one":
+			#self.session.openWithCallback(self.mList,InstallAll)
+		#elif item is "four":
+			#self.session.openWithCallback(self.mList,RemoveIPK)
+		#elif item is "five":
+			#self.session.openWithCallback(self.mList,DownloadFeed)
+		#elif item is "six":
+			#self.session.openWithCallback(self.mList,downfeed)
+		if item is "dos":
+			self.session.openWithCallback(self.mList,installsorys)
+		elif item is "cuatro":
+			self.session.openWithCallback(self.mList,installconfigemus)
+		elif item is "cinco":
+			self.session.openWithCallback(self.mList,installpicon)
+			
+###############################################
+class installsorys(Screen):
+	skin = """
+<screen name="installsorys" position="0,0" size="1280,720" title="LBpanel-Download Sorys Settings">
+    <ePixmap position="0,0" zPosition="-4" size="1281,721" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo_1_test3.png" alphatest="blend" />
+<eLabel text="Download Bee" position="460,30" size="400,65" font="Regular;45" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#0140b1"/>
+<widget source="Title" transparent="1" render="Label" zPosition="2" valign="center" halign="left" position="92,110" size="700,65" font="Regular;30" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" />
+<widget source="session.VideoPicture" render="Pig" position="53,133" size="420,236" backgroundColor="transparent" zPosition="-10" />
+<ePixmap position="60,410" zPosition="2" size="391,201" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/logo_ajustes.png" alphatest="blend" />
+<widget source="session.CurrentService" render="Label" position="100,650" size="410,25" font="Regular; 22" transparent="1" valign="center" zPosition="2" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" halign="left">
+			  <convert type="ServiceName">Name</convert>
+			</widget>
+<eLabel text="Channel Sorys" position="45,490" size="400,65" font="Regular;30" zPosition="2" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#000000"/>
+<widget source="global.CurrentTime" render="Label" position="949,30" size="251,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;24" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Format:%-H:%M</convert> 
+		</widget> 
+		<widget source="global.CurrentTime" render="Label" position="900,50" size="300,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;16" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Date</convert>  
+		</widget>
+<widget source="menu" render="Listbox" position="592,191" size="628,350" scrollbarMode="showNever" foregroundColor="#ffffff" backgroundColor="#6e6e6e" backgroundColorSelected="#fd6502" transparent="1">
+	<convert type="TemplatedMultiContent">
+		{"template": [
+			MultiContentEntryText(pos = (70, 2), size = (630, 25), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 2 is the Menu Titel
+			MultiContentEntryText(pos = (80, 29), size = (630, 18), font=1, flags = RT_HALIGN_LEFT, text = 1), # index 3 is the Description
+			MultiContentEntryPixmapAlphaTest(pos = (5, 5), size = (50, 40), png = 2), # index 4 is the pixmap
+				],
+	"fonts": [gFont("Regular", 23),gFont("Regular", 16)],
+	"itemHeight": 50
+	}
+	</convert>
+	</widget>
+	<ePixmap position="940,652" zPosition="2" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
+	<ePixmap position="1060,652" zPosition="2" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
+	<widget source="key_red" render="Label" position="980,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f"  foregroundColor="#000000" transparent="1" />
+	<widget source="key_green" render="Label" position="1100,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+</screen>"""
+	  
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		self.setTitle(_("LBpanel-Download Sorys Settings"))
+		self.session = session
+		self.list = []
+		self["menu"] = List(self.list)
+		self.feedlist()
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
+			{
+				"cancel": self.cancel,
+				"ok": self.ok,
+				"green": self.setup,
+				"red": self.cancel,
+			},-1)
+		self.list = [ ]
+		self["key_red"] = Label(_("Close"))
+		self["key_green"] = Label(_("Install"))
+		
+	def feedlist(self):
+		self.list = []
+		os.system("opkg update")
+		camdlist = os.popen("opkg list | grep sorys")
+		softpng = LoadPixmap(cached = True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/emumini.png"))
+		for line in camdlist.readlines():
+			try:
+				self.list.append(("%s %s" % (line.split(' - ')[0], line.split(' - ')[1]), line.split(' - ')[-1], softpng))
+			except:
+				pass
+		camdlist.close()
+		self["menu"].setList(self.list)
+		
+	def ok(self):
+		self.setup()
+		
+	def setup(self):
+		self.session.open(Console,title = _("Installing Sorys Settings"), cmdlist = ["opkg install -force-overwrite %s" % self["menu"].getCurrent()[0]])
+		
+		
+	def cancel(self):
+		self.close()
+#################################################
+class installconfigemus(Screen):
+	skin = """
+
+<screen name="installconfigemus" position="0,0" size="1280,720" title="LBpanel-Download Config-Emus">
+    <ePixmap position="0,0" zPosition="-4" size="1281,721" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo_1_test3.png" alphatest="blend" />
+<eLabel text="Download Bee" position="460,30" size="400,65" font="Regular;45" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#0140b1"/>
+<widget source="Title" transparent="1" render="Label" zPosition="2" valign="center" halign="left" position="92,110" size="700,65" font="Regular;30" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" />
+<widget source="session.VideoPicture" render="Pig" position="53,133" size="420,236" backgroundColor="transparent" zPosition="-10" />
+<ePixmap position="60,410" zPosition="2" size="391,201" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/logo_ajustes.png" alphatest="blend" />
+<widget source="session.CurrentService" render="Label" position="100,650" size="410,25" font="Regular; 22" transparent="1" valign="center" zPosition="2" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" halign="left">
+			  <convert type="ServiceName">Name</convert>
+			</widget>
+<eLabel text="Confg Emus" position="45,490" size="400,65" font="Regular;30" zPosition="2" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#000000"/>
+<widget source="global.CurrentTime" render="Label" position="949,30" size="251,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;24" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Format:%-H:%M</convert> 
+		</widget> 
+		<widget source="global.CurrentTime" render="Label" position="900,50" size="300,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;16" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Date</convert>  
+		</widget>
+<widget source="menu" render="Listbox" position="592,191" size="628,350" scrollbarMode="showNever" foregroundColor="#ffffff" backgroundColor="#6e6e6e" backgroundColorSelected="#fd6502" transparent="1">
+	<convert type="TemplatedMultiContent">
+		{"template": [
+			MultiContentEntryText(pos = (70, 2), size = (630, 25), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 2 is the Menu Titel
+			MultiContentEntryText(pos = (80, 29), size = (630, 18), font=1, flags = RT_HALIGN_LEFT, text = 1), # index 3 is the Description
+			MultiContentEntryPixmapAlphaTest(pos = (5, 5), size = (50, 40), png = 2), # index 4 is the pixmap
+				],
+	"fonts": [gFont("Regular", 23),gFont("Regular", 16)],
+	"itemHeight": 50
+	}
+	</convert>
+	</widget>
+	<ePixmap position="940,652" zPosition="2" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
+	<ePixmap position="1060,652" zPosition="2" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
+	<widget source="key_red" render="Label" position="980,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f"  foregroundColor="#000000" transparent="1" />
+	<widget source="key_green" render="Label" position="1100,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+</screen>"""
+	  
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		self.setTitle(_("LBpanel-Download Config Emus"))
+		self.session = session
+		self.list = []
+		self["menu"] = List(self.list)
+		self.feedlist()
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
+			{
+				"cancel": self.cancel,
+				"ok": self.ok,
+				"green": self.setup,
+				"red": self.cancel,
+			},-1)
+		self.list = [ ]
+		self["key_red"] = Label(_("Close"))
+		self["key_green"] = Label(_("Install"))
+		
+	def feedlist(self):
+		self.list = []
+		os.system("opkg update")
+		camdlist = os.popen("opkg list | grep emucfg")
+		softpng = LoadPixmap(cached = True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/emumini.png"))
+		for line in camdlist.readlines():
+			try:
+				self.list.append(("%s %s" % (line.split(' - ')[0], line.split(' - ')[1]), line.split(' - ')[-1], softpng))
+			except:
+				pass
+		camdlist.close()
+		self["menu"].setList(self.list)
+		
+	def ok(self):
+		self.setup()
+		
+	def setup(self):
+		os.system("opkg install -force-overwrite %s" % self["menu"].getCurrent()[0])
+		self.mbox = self.session.open(MessageBox, _("%s is installed" % self["menu"].getCurrent()[0]), MessageBox.TYPE_INFO, timeout = 4 )
+		
+		
+	def cancel(self):
+		self.close()
+#################################################
+class installpicon(Screen):
+	skin = """
+
+<screen name="installpicon" position="0,0" size="1280,720" title="LBpanel-Download Picon">
+    <ePixmap position="0,0" zPosition="-4" size="1281,721" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo_1_test3.png" alphatest="blend" />
+<eLabel text="Download Bee" position="460,30" size="400,65" font="Regular;45" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#0140b1"/>
+<widget source="Title" transparent="1" render="Label" zPosition="2" valign="center" halign="left" position="92,110" size="700,65" font="Regular;30" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" />
+<widget source="session.VideoPicture" render="Pig" position="53,133" size="420,236" backgroundColor="transparent" zPosition="-10" />
+<ePixmap position="60,410" zPosition="2" size="391,201" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/logo_ajustes.png" alphatest="blend" />
+<widget source="session.CurrentService" render="Label" position="100,650" size="410,25" font="Regular; 22" transparent="1" valign="center" zPosition="2" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" halign="left">
+			  <convert type="ServiceName">Name</convert>
+			</widget>
+<eLabel text="Picon Download" position="45,490" size="400,65" font="Regular;30" zPosition="2" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#000000"/>
+<widget source="global.CurrentTime" render="Label" position="949,30" size="251,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;24" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Format:%-H:%M</convert> 
+		</widget> 
+		<widget source="global.CurrentTime" render="Label" position="900,50" size="300,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;16" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Date</convert>  
+		</widget>
+<widget source="menu" render="Listbox" position="592,191" size="628,350" scrollbarMode="showNever" foregroundColor="#ffffff" backgroundColor="#6e6e6e" backgroundColorSelected="#fd6502" transparent="1">
+	<convert type="TemplatedMultiContent">
+		{"template": [
+			MultiContentEntryText(pos = (70, 2), size = (630, 25), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 2 is the Menu Titel
+			MultiContentEntryText(pos = (80, 29), size = (630, 18), font=1, flags = RT_HALIGN_LEFT, text = 1), # index 3 is the Description
+			MultiContentEntryPixmapAlphaTest(pos = (5, 5), size = (50, 40), png = 2), # index 4 is the pixmap
+				],
+	"fonts": [gFont("Regular", 23),gFont("Regular", 16)],
+	"itemHeight": 50
+	}
+	</convert>
+	</widget>
+	<ePixmap position="940,652" zPosition="2" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
+	<ePixmap position="1060,652" zPosition="2" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
+	<widget source="key_red" render="Label" position="980,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f"  foregroundColor="#000000" transparent="1" />
+	<widget source="key_green" render="Label" position="1100,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+</screen>"""
+	  
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		self.setTitle(_("LBpanel-Download picon"))
+		self.session = session
+		self.list = []
+		self["menu"] = List(self.list)
+		self.feedlist()
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
+			{
+				"cancel": self.cancel,
+				"ok": self.ok,
+				"green": self.setup,
+				"red": self.cancel,
+			},-1)
+		self.list = [ ]
+		self["key_red"] = Label(_("Close"))
+		self["key_green"] = Label(_("Install"))
+		
+	def feedlist(self):
+		self.list = []
+		os.system("opkg update")
+		camdlist = os.popen("opkg list | grep piconLB")
+		softpng = LoadPixmap(cached = True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/emumini.png"))
+		for line in camdlist.readlines():
+			try:
+				self.list.append(("%s %s" % (line.split(' - ')[0], line.split(' - ')[1]), line.split(' - ')[-1], softpng))
+			except:
+				pass
+		camdlist.close()
+		self["menu"].setList(self.list)
+		
+	def ok(self):
+		self.setup()
+		
+	def setup(self):
+		os.system("opkg install -force-overwrite %s" % self["menu"].getCurrent()[0])
+		self.mbox = self.session.open(MessageBox, _("%s is installed" % self["menu"].getCurrent()[0]), MessageBox.TYPE_INFO, timeout = 4 )
+		
+	def cancel(self):
+		self.close()
+#################################################
+class installremove(Screen):
+	skin = """
+
+<screen name="installremove" position="0,0" size="1280,720" title="lb_title">
+    <ePixmap position="0,0" zPosition="-4" size="1281,721" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo_1_test3.png" alphatest="blend" />
+<eLabel text="Download Bee" position="460,30" size="400,65" font="Regular;45" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#0140b1"/>
+<widget source="Title" transparent="1" render="Label" zPosition="2" valign="center" halign="left" position="92,110" size="700,65" font="Regular; 30" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" />
+<widget source="session.VideoPicture" render="Pig" position="53,133" size="420,236" backgroundColor="transparent" zPosition="-10" />
+<ePixmap position="60,410" zPosition="2" size="391,201" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/logo_ajustes.png" alphatest="blend" />
+<widget source="session.CurrentService" render="Label" position="100,650" size="410,25" font="Regular; 22" transparent="1" valign="center" zPosition="2" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" halign="left">
+			  <convert type="ServiceName">Name</convert>
+			</widget>
+<eLabel text="remove Bee" position="45,490" size="400,65" font="Regular;30" zPosition="2" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#000000"/>
+<widget source="global.CurrentTime" render="Label" position="949,30" size="251,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;24" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Format:%-H:%M</convert> 
+		</widget> 
+		<widget source="global.CurrentTime" render="Label" position="900,50" size="300,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;16" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Date</convert>  
+		</widget>
+<widget source="menu" render="Listbox" position="592,191" size="628,350" scrollbarMode="showNever" foregroundColor="#ffffff" backgroundColor="#6e6e6e" backgroundColorSelected="#fd6502" transparent="1">
+	<convert type="TemplatedMultiContent">
+		{"template": [
+			MultiContentEntryText(pos = (70, 2), size = (630, 25), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 2 is the Menu Titel
+			MultiContentEntryText(pos = (80, 29), size = (630, 18), font=1, flags = RT_HALIGN_LEFT, text = 1), # index 3 is the Description
+			MultiContentEntryPixmapAlphaTest(pos = (5, 5), size = (50, 40), png = 2), # index 4 is the pixmap
+				],
+	"fonts": [gFont("Regular", 23),gFont("Regular", 16)],
+	"itemHeight": 50
+	}
+	</convert>
+	</widget>
+	<ePixmap position="940,652" zPosition="2" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
+	<ePixmap position="1060,652" zPosition="2" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
+	<widget source="key_red" render="Label" position="980,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f"  foregroundColor="#000000" transparent="1" />
+	<widget source="key_green" render="Label" position="1100,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
+</screen>"""
+	  
+	skin = skin.replace("lb_title", _("LBpanel - Remove Bee installed"))  
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		self.session = session
+		self.list = []
+		self["menu"] = List(self.list)
+		self.feedlist()
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
+			{
+				"cancel": self.cancel,
+				"ok": self.ok,
+				"green": self.setup,
+				"red": self.cancel,
+			},-1)
+		self.list = [ ]
+		self["key_red"] = Label(_("Close"))
+		self["key_green"] = Label(_("remove"))
+		
+	def feedlist(self):
+		self.list = []
+		camdlist = os.popen("opkg list-installed | grep -e 'sorys' -e 'emucfg' -e 'piconLB'")
+		softpng = LoadPixmap(cached = True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/LBpanel/images/emumini1.png"))
+		for line in camdlist.readlines():
+			try:
+				self.list.append(("%s %s" % (line.split(' - ')[0], line.split(' - ')[1]), line.split(' - ')[-1], softpng))
+			except:
+				pass
+		camdlist.close()
+		self["menu"].setList(self.list)
+		
+	def ok(self):
+		self.setup()
+		
+	def setup(self):
+		os.system("opkg remove %s" % self["menu"].getCurrent()[0])
+		self.mbox = self.session.open(MessageBox, _("%s is remove" % self["menu"].getCurrent()[0]), MessageBox.TYPE_INFO, timeout = 4 )
+		
+
+	def cancel(self):
+		self.close()
+#################################################
 class LBsettings(ConfigListScreen, Screen):
 	skin = """
-<screen name="scanhost" position="center,160" size="1150,500" title="LBpanel - Config">
-    <ePixmap position="715,10" zPosition="1" size="450,700" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondosettings.png" alphatest="blend" transparent="1" />
-  <widget position="15,10" size="690,450" name="config" scrollbarMode="showOnDemand" />
-   <ePixmap position="10,488" zPosition="1" size="165,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
-  <widget source="key_red" render="Label" position="10,458" zPosition="2" size="165,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-  <ePixmap position="175,488" zPosition="1" size="165,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
-  <widget source="key_green" render="Label" position="175,458" zPosition="2" size="165,30" font="Regular;20" halign="center" valign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
+<screen name="scanhost" position="0,0" size="1280,720" title="LBpanel - Config">
+    <ePixmap position="0,0" zPosition="-4" size="1281,721" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/fondo_1_test3.png" alphatest="blend" />
+  <widget position="592,191" size="628,350" foregroundColor="#ffffff" backgroundColor="#6e6e6e" backgroundColorSelected="#fd6502" transparent="1" name="config" scrollbarMode="showOnDemand" />
+  <widget source="session.VideoPicture" render="Pig" position="53,133" size="420,236" backgroundColor="transparent" zPosition="-10" />
+<widget source="global.CurrentTime" render="Label" position="949,30" size="251,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;24" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Format:%-H:%M</convert> 
+		</widget> 
+		<widget source="global.CurrentTime" render="Label" position="900,50" size="300,55" backgroundColor="#0140b1" foregroundColor="#00ffffff" transparent="1" zPosition="2" font="Regular;16" valign="center" halign="right" shadowColor="#000000" shadowOffset="-2,-2"> 
+		<convert type="ClockToText">Date</convert>  
+		</widget>
+   <ePixmap position="940,652" zPosition="2" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/red.png" alphatest="blend" />
+  <ePixmap position="60,410" zPosition="2" size="391,201" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/logo_ajustes.png" alphatest="blend" />
+  <widget source="session.CurrentService" render="Label" position="100,650" size="410,25" font="Regular; 22" transparent="1" valign="center" zPosition="2" backgroundColor="#000000" foregroundColor="#ffffff" noWrap="1" halign="left">
+			  <convert type="ServiceName">Name</convert>
+			</widget>
+  <eLabel text="LBpanel - Red Bee" position="460,30" size="400,65" font="Regular;45" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#0140b1"/>
+  <eLabel text="Settings" position="45,490" size="400,65" font="Regular;30" zPosition="2" halign="center" noWrap="1" transparent="1" foregroundColor="#ffffff" backgroundColor="#000000"/>
+  <widget source="Title" transparent="1" render="Label" zPosition="2" valign="center" halign="left" position="92,110" size="700,65" font="Regular; 30" foregroundColor="#ffffff" backgroundColor="#000000" noWrap="1" />
+  <widget source="key_red" render="Label" position="980,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f"  foregroundColor="#000000" transparent="1" />
+  <ePixmap position="1060,652" zPosition="2" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/images/green.png" alphatest="blend" />
+  <widget source="key_green" render="Label" position="1100,650" zPosition="2" size="200,30" font="Regular;20" backgroundColor="#8f8f8f" foregroundColor="#000000" transparent="1" />
 </screen>"""
 
 	def __init__(self, session):
