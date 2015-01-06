@@ -1,0 +1,15 @@
+#!/bin/sh
+ echo " ----- script de control para emu oscam-svn9748 -----" 
+
+  while [ 1 ] ; do
+  pidof oscam-svn9748 >/dev/null
+  if [ $? -eq 0 ] ; then
+    echo " OK"
+  else
+    DATE=$(date) 
+    echo "Restarting oscam-svn9748 : " >> /tmp/check_oscam-svn9748.log
+    /usr/CamEmu/camemu.oscam-svn9748 restart
+ fi
+
+ sleep 60
+ done

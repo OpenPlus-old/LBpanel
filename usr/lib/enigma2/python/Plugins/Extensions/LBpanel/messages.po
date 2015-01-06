@@ -1,0 +1,2081 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#: LBAbout.py:115
+#, fuzzy
+msgid   ""
+msgstr  "Project-Id-Version: PACKAGE VERSION\n"
+        "Report-Msgid-Bugs-To: \n"
+        "POT-Creation-Date: 2014-11-15 22:07+0100\n"
+        "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+        "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+        "Language-Team: LANGUAGE <LL@li.org>\n"
+        "Language: \n"
+        "MIME-Version: 1.0\n"
+        "Content-Type: text/plain; charset=CHARSET\n"
+        "Content-Transfer-Encoding: 8bit\n"
+        "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: About.py:21 MountManager.py:179 MountManager.py:398
+msgid   "unavailable"
+msgstr  ""
+
+#: About.py:38 About.py:72
+msgid   "unknown"
+msgstr  ""
+
+#: About.py:47 About.py:64
+msgid   "undefined"
+msgstr  ""
+
+#: About.py:61 About.py:62
+#, python-format
+msgid   "%d core"
+msgid_plural    "%d cores"
+msgstr[0]       ""
+msgstr[1]       ""
+
+#: LBAbout.py:40
+msgid   "Hardware: "
+msgstr  ""
+
+#: LBAbout.py:41
+msgid   "Image: "
+msgstr  ""
+
+#: LBAbout.py:42
+msgid   "Kernel version: "
+msgstr  ""
+
+#: LBAbout.py:46
+msgid   "Last upgrade: "
+msgstr  ""
+
+#: LBAbout.py:53
+#, python-format
+msgid   "Frontprocessor version: %d"
+msgstr  ""
+
+#: LBAbout.py:56 LBAbout.py:57 plugin.py:350
+msgid   "Detected NIMs:"
+msgstr  ""
+
+#: LBAbout.py:66 LBAbout.py:67
+msgid   "Detected HDD:"
+msgstr  ""
+
+#: LBAbout.py:79 LBAbout.py:84
+msgid   "free"
+msgstr  ""
+
+#: LBAbout.py:87 LBtools.py:743 plugin.py:415
+msgid   "none"
+msgstr  ""
+
+#: LBAbout.py:91
+msgid   "Translations"
+msgstr  ""
+
+#: LBAbout.py:92
+msgid   "Latest Commits"
+msgstr  ""
+
+#: LBAbout.py:112
+msgid   "TRANSLATOR_INFO"
+msgstr  ""
+
+#: LBCamEmu.py:92 LBtools.py:233 LBtools.py:315 LBtools.py:330 LBtools.py:346
+#: LBtools.py:350 LBtools.py:362 LBtools.py:367
+msgid   "No"
+msgstr  ""
+
+#: LBCamEmu.py:93 LBtools.py:316 LBtools.py:331 LBtools.py:345 LBtools.py:349
+#: LBtools.py:361 LBtools.py:366
+msgid   "Yes"
+msgstr  ""
+
+#: LBCamEmu.py:139
+msgid   "LBpanel CamEmu"
+msgstr  ""
+
+#: LBCamEmu.py:142
+#, python-format
+msgid   "LBpanel CamEmu: %s"
+msgstr  ""
+
+#: LBCamEmu.py:158 LBCamEmu.py:1020 LBCamEmu.py:1108 LBDaemonsList.py:102
+msgid   "Stop"
+msgstr  ""
+
+#: LBCamEmu.py:159 LBCamEmu.py:1021 LBCamEmu.py:1109
+msgid   "Start"
+msgstr  ""
+
+#: LBCamEmu.py:160 LBCamEmu.py:1022 LBCamEmu.py:1110
+msgid   "ReStart"
+msgstr  ""
+
+#: LBCamEmu.py:161 LBCamEmu.py:322 LBDaemonsList.py:116 LBipk.py:284
+#: LBipk.py:361 LBipk.py:428 LBipk.py:493 LBipk.py:656 plugin.py:206
+msgid   "Install"
+msgstr  ""
+
+#: LBCamEmu.py:253
+#, python-format
+msgid   "Please wait, starting %s"
+msgstr  ""
+
+#: LBCamEmu.py:254 LBCamEmu.py:263
+#, python-format
+msgid   "Select SoftCam or CardServer: - %s"
+msgstr  ""
+
+#: LBCamEmu.py:260
+msgid   "Please wait, stoping softcam or cardserver"
+msgstr  ""
+
+#: LBCamEmu.py:271
+#, python-format
+msgid   "Please wait, restarting %s"
+msgstr  ""
+
+#: LBCamEmu.py:306
+msgid   "LBpanel - LinuxBox Feeds Download"
+msgstr  ""
+
+#: LBCamEmu.py:321 LBCamEmu.py:383 LBCamEmu.py:474 LBCamEmu.py:546
+#: LBCamEmu.py:616 LBCamEmu.py:714 LBCamEmu.py:782 LBCamEmu.py:882
+#: LBCamEmu.py:949 LBipk.py:106 LBipk.py:198 LBipk.py:283 LBipk.py:360
+#: LBipk.py:427 LBipk.py:492 LBipk.py:570 LBipk.py:655 LBtools.py:424
+#: LBtools.py:520 LBtools.py:588 LBtools.py:720 LBtools.py:792 LBtools.py:836
+#: LBtools.py:879 LBtools.py:1073 LBtools.py:1163 LBtools.py:1258
+#: LBtools.py:1322 LBtools.py:1437 LBtools.py:1494 LBtools.py:1594
+#: LBtools.py:1661 LBtools.py:1735 LBtools.py:1816 LBtools.py:1895
+#: LBtools.py:1990 LBtools.py:2074 plugin.py:203 plugin.py:337 plugin.py:515
+#: plugin.py:577
+msgid   "Close"
+msgstr  ""
+
+#: LBCamEmu.py:343 LBipk.py:381 LBipk.py:448 LBipk.py:679
+#, python-format
+msgid   "%s is installed"
+msgstr  ""
+
+#: LBCamEmu.py:373
+msgid   "LBpanel - SoftEmus"
+msgstr  ""
+
+#: LBCamEmu.py:384 LBtools.py:1166
+msgid   "Reboot"
+msgstr  ""
+
+#: LBCamEmu.py:400
+msgid   "Softcam"
+msgstr  ""
+
+#: LBCamEmu.py:400
+msgid   "Softcam Init, Stop and Restart"
+msgstr  ""
+
+#: LBCamEmu.py:403
+msgid   "CCcam Info"
+msgstr  ""
+
+#: LBCamEmu.py:403
+msgid   "Plugin CCcam Info"
+msgstr  ""
+
+#: LBCamEmu.py:404
+msgid   "Oscam Info"
+msgstr  ""
+
+#: LBCamEmu.py:404
+msgid   "Plugin Status emu Oscam"
+msgstr  ""
+
+#: LBCamEmu.py:405
+msgid   "Gbox Suite"
+msgstr  ""
+
+#: LBCamEmu.py:405
+msgid   "Plugin Status emu Gbox-Mbox"
+msgstr  ""
+
+#: LBCamEmu.py:406
+msgid   "Mbox scripts"
+msgstr  ""
+
+#: LBCamEmu.py:406
+msgid   "ACJ Mbox Script"
+msgstr  ""
+
+#: LBCamEmu.py:407
+msgid   "Mgcamd Info"
+msgstr  ""
+
+#: LBCamEmu.py:407
+msgid   "Mgcamd status information"
+msgstr  ""
+
+#: LBCamEmu.py:408
+msgid   "Mgcamd Editor"
+msgstr  ""
+
+#: LBCamEmu.py:408
+msgid   "Newcamd Line Editor"
+msgstr  ""
+
+#: LBCamEmu.py:450
+msgid   "Restarting ..."
+msgstr  ""
+
+#: LBCamEmu.py:465
+msgid   "LBpanel Sofcam Key Updater"
+msgstr  ""
+
+#: LBCamEmu.py:470
+msgid   "Path to save keyfile"
+msgstr  ""
+
+#: LBCamEmu.py:471
+msgid   "Name of keyfile"
+msgstr  ""
+
+#: LBCamEmu.py:472
+msgid   "Add own biss in keyfile"
+msgstr  ""
+
+#: LBCamEmu.py:475 LBtools.py:837 LBtools.py:880 LBtools.py:1439
+#: LBtools.py:1495 LBtools.py:1595 LBtools.py:1991 MountManager.py:318
+#: plugin.py:516 plugin.py:578
+msgid   "Save"
+msgstr  ""
+
+#: LBCamEmu.py:476
+msgid   "Download"
+msgstr  ""
+
+#: LBCamEmu.py:477 LBCamEmu.py:539
+msgid   "Changelog"
+msgstr  ""
+
+#: LBCamEmu.py:498 LBtools.py:857 LBtools.py:1540 LBtools.py:1635
+msgid   "configuration is saved"
+msgstr  ""
+
+#: LBCamEmu.py:523
+#, python-format
+msgid   "%s downloaded Successfull"
+msgstr  ""
+
+#: LBCamEmu.py:526
+#, python-format
+msgid   "%s downloaded UnSuccessfull"
+msgstr  ""
+
+#: LBCamEmu.py:565
+#, python-format
+msgid   "%s"
+msgstr  ""
+
+#: LBCamEmu.py:603
+#, python-format
+msgid   "LBpanel oscam.conf Switcher: - %s"
+msgstr  ""
+
+#: LBCamEmu.py:617
+msgid   "Restart Softcam"
+msgstr  ""
+
+#: LBCamEmu.py:665
+#, python-format
+msgid   "oscam.conf Switcher: - %s"
+msgstr  ""
+
+#: LBCamEmu.py:671
+#, python-format
+msgid   "%s oscam.conf"
+msgstr  ""
+
+#: LBCamEmu.py:678
+msgid   "Softcam Restarted"
+msgstr  ""
+
+#: LBCamEmu.py:706
+msgid   "LBpanel Mgcamd Info"
+msgstr  ""
+
+#: LBCamEmu.py:771
+msgid   "LBpanel newcamd.list editor"
+msgstr  ""
+
+#: LBCamEmu.py:783
+msgid   "Edit"
+msgstr  ""
+
+#: LBCamEmu.py:784 LBtools.py:1817
+msgid   "Add"
+msgstr  ""
+
+#: LBCamEmu.py:785 LBtools.py:1324
+msgid   "Remove"
+msgstr  ""
+
+#: LBCamEmu.py:786
+msgid   "press OK to enable/disable server"
+msgstr  ""
+
+#: LBCamEmu.py:869
+msgid   "LBpanel Server Edit"
+msgstr  ""
+
+#: LBCamEmu.py:877
+msgid   "Server (ip/host)"
+msgstr  ""
+
+#: LBCamEmu.py:878
+msgid   "Port"
+msgstr  ""
+
+#: LBCamEmu.py:879
+msgid   "User"
+msgstr  ""
+
+#: LBCamEmu.py:880
+msgid   "Password"
+msgstr  ""
+
+#: LBCamEmu.py:883 LBCamEmu.py:950
+msgid   "Update"
+msgstr  ""
+
+#: LBCamEmu.py:884
+msgid   "Global"
+msgstr  ""
+
+#: LBCamEmu.py:929
+msgid   "LBpanel Global Parameters"
+msgstr  ""
+
+#: LBCamEmu.py:935
+msgid   "CWS_CONNECT_TIMEOUT"
+msgstr  ""
+
+#: LBCamEmu.py:939
+msgid   "CWS_KEEPALIVE"
+msgstr  ""
+
+#: LBCamEmu.py:943
+msgid   "CWS_INCOMING_PORT"
+msgstr  ""
+
+#: LBCamEmu.py:947
+msgid   "CWS_DEBUG_PORT"
+msgstr  ""
+
+#: LBCamEmu.py:1010
+msgid   "LBpanel SoftEmu Control"
+msgstr  ""
+
+#: LBCamEmu.py:1037
+msgid   "TestOscam"
+msgstr  ""
+
+#: LBCamEmu.py:1038
+msgid   "TestSbox"
+msgstr  ""
+
+#: LBCamEmu.py:1039
+msgid   "TestMbox"
+msgstr  ""
+
+#: LBCamEmu.py:1040
+msgid   "TestCCcam"
+msgstr  ""
+
+#: LBCamEmu.py:1041
+msgid   "TestMgcamd"
+msgstr  ""
+
+#: LBCamEmu.py:1042
+msgid   "TestGbox"
+msgstr  ""
+
+#: LBCamEmu.py:1043
+msgid   "TestNcam"
+msgstr  ""
+
+#: LBCamEmu.py:1044
+msgid   "TestNewcs"
+msgstr  ""
+
+#: LBCamEmu.py:1051 LBCamEmu.py:1131
+#, python-format
+msgid   "Restarting %s service"
+msgstr  ""
+
+#: LBCamEmu.py:1053 LBCamEmu.py:1060 LBCamEmu.py:1067 LBCamEmu.py:1133
+#: LBCamEmu.py:1140 LBCamEmu.py:1147
+msgid   "UnSuccessfull"
+msgstr  ""
+
+#: LBCamEmu.py:1058 LBCamEmu.py:1138
+#, python-format
+msgid   "Starting %s service"
+msgstr  ""
+
+#: LBCamEmu.py:1065 LBCamEmu.py:1145
+#, python-format
+msgid   "Stoping %s service"
+msgstr  ""
+
+#: LBCamEmu.py:1098
+msgid   "LBpanel ACJ Mbox Script"
+msgstr  ""
+
+#: LBCamEmu.py:1121
+msgid   "waitpid0000"
+msgstr  ""
+
+#: LBCamEmu.py:1122
+msgid   "BorraFakes"
+msgstr  ""
+
+#: LBCamEmu.py:1123
+msgid   "BorraOffs"
+msgstr  ""
+
+#: LBCamEmu.py:1124
+msgid   "PeerResolver"
+msgstr  ""
+
+#: LBDaemonsList.py:83
+msgid   "Exit"
+msgstr  ""
+
+#: LBDaemonsList.py:104
+msgid   "Iniciar"
+msgstr  ""
+
+#: LBDaemonsList.py:107
+msgid   "Configure"
+msgstr  ""
+
+#: LBDaemonsList.py:121
+msgid   "Testing daemons status..."
+msgstr  ""
+
+#: LBDaemonsList.py:121 LBDaemonsList.py:178 LBDaemonsList.py:180
+msgid   "Daemons"
+msgstr  ""
+
+#: LBDaemonsList.py:178
+#, python-format
+msgid   "Stoping %s..."
+msgstr  ""
+
+#: LBDaemonsList.py:180
+#, python-format
+msgid   "Starting %s..."
+msgstr  ""
+
+#: LBipk.py:95
+msgid   "LBpanel Ipk Tools"
+msgstr  ""
+
+#: LBipk.py:107 LBtools.py:1438 plugin.py:517
+msgid   "Restart GUI"
+msgstr  ""
+
+#: LBipk.py:108
+msgid   "Clear /tmp"
+msgstr  ""
+
+#: LBipk.py:122
+msgid   "IPK installer"
+msgstr  ""
+
+#: LBipk.py:122
+msgid   "Install ipk, bh.tgz, tar.gz, nab.tgz in /tmp"
+msgstr  ""
+
+#: LBipk.py:123
+msgid   "Feed installer"
+msgstr  ""
+
+#: LBipk.py:124
+msgid   "Download extensions"
+msgstr  ""
+
+#: LBipk.py:124
+msgid   "Download feeds packages"
+msgstr  ""
+
+#: LBipk.py:125
+msgid   "IPK delete packages"
+msgstr  ""
+
+#: LBipk.py:125
+msgid   "Delete IPK packages"
+msgstr  ""
+
+#: LBipk.py:126
+msgid   "Sorys Channel List"
+msgstr  ""
+
+#: LBipk.py:126
+msgid   "Download Sorys Channel List"
+msgstr  ""
+
+#: LBipk.py:127
+msgid   "Download config emus"
+msgstr  ""
+
+#: LBipk.py:127
+msgid   "Download Config Emus"
+msgstr  ""
+
+#: LBipk.py:128
+msgid   "Download Picon"
+msgstr  ""
+
+#: LBipk.py:136
+msgid   "*.tar.gz & *.bh.tgz & *.ipk removed"
+msgstr  ""
+
+#: LBipk.py:184
+msgid   "Download extensions from feed"
+msgstr  ""
+
+#: LBipk.py:199
+msgid   "Download -nodeps"
+msgstr  ""
+
+#: LBipk.py:200
+msgid   "Download -deps"
+msgstr  ""
+
+#: LBipk.py:231 LBipk.py:235
+#, python-format
+msgid   "%s is downloaded"
+msgstr  ""
+
+#: LBipk.py:270
+msgid   "LBpanel-Download Sorys Settings"
+msgstr  ""
+
+#: LBipk.py:303
+msgid   "Installing Sorys Settings"
+msgstr  ""
+
+#: LBipk.py:347
+msgid   "LBpanel-Download Config Emus"
+msgstr  ""
+
+#: LBipk.py:414
+msgid   "LBpanel-Download picon"
+msgstr  ""
+
+#: LBipk.py:478
+msgid   "LBpanel - Select files to install from /tmp"
+msgstr  ""
+
+#: LBipk.py:494
+msgid   "Forced Install"
+msgstr  ""
+
+#: LBipk.py:519 LBipk.py:531
+msgid   "Install packets"
+msgstr  ""
+
+#: LBipk.py:524 LBipk.py:536
+msgid   "Install tar.gz, bh.tgz, nab.tgz"
+msgstr  ""
+
+#: LBipk.py:568
+msgid   "LBpanel - Ipk Remove"
+msgstr  ""
+
+#: LBipk.py:571
+msgid   "UnInstall"
+msgstr  ""
+
+#: LBipk.py:572
+msgid   "Adv. UnInstall"
+msgstr  ""
+
+#: LBipk.py:606 LBipk.py:614
+#, python-format
+msgid   "%s is UnInstalled"
+msgstr  ""
+
+#: LBipk.py:608 LBipk.py:616
+#, python-format
+msgid   "%s is Error UnInstalled"
+msgstr  ""
+
+#: LBipk.py:642
+msgid   "LBpanel-Install extensions from feed"
+msgstr  ""
+
+#: LBtools.py:92
+msgid   "/usr/CamEmu/script/"
+msgstr  ""
+
+#: LBtools.py:93 LBtools.py:98
+msgid   "/media/hdd/script/"
+msgstr  ""
+
+#: LBtools.py:94 LBtools.py:99
+msgid   "/media/usb/script/"
+msgstr  ""
+
+#: LBtools.py:97
+msgid   "/usr/script/"
+msgstr  ""
+
+#: LBtools.py:102
+msgid   "/media/hdd/"
+msgstr  ""
+
+#: LBtools.py:103
+msgid   "/media/usb/"
+msgstr  ""
+
+#: LBtools.py:104
+msgid   "/usr/share/enigma2/"
+msgstr  ""
+
+#: LBtools.py:105
+msgid   "/media/cf/"
+msgstr  ""
+
+#: LBtools.py:108 LBtools.py:112
+msgid   "no"
+msgstr  ""
+
+#: LBtools.py:109 LBtools.py:113
+msgid   "yes"
+msgstr  ""
+
+#: LBtools.py:117
+msgid   "spain d+"
+msgstr  ""
+
+#: LBtools.py:208
+msgid   "Jan."
+msgstr  ""
+
+#: LBtools.py:209
+msgid   "Feb."
+msgstr  ""
+
+#: LBtools.py:210
+msgid   "Mar."
+msgstr  ""
+
+#: LBtools.py:211
+msgid   "Apr."
+msgstr  ""
+
+#: LBtools.py:212
+msgid   "May"
+msgstr  ""
+
+#: LBtools.py:213
+msgid   "Jun."
+msgstr  ""
+
+#: LBtools.py:214
+msgid   "Jul"
+msgstr  ""
+
+#: LBtools.py:215
+msgid   "Aug."
+msgstr  ""
+
+#: LBtools.py:216
+msgid   "Sep."
+msgstr  ""
+
+#: LBtools.py:217
+msgid   "Oct."
+msgstr  ""
+
+#: LBtools.py:218
+msgid   "Nov."
+msgstr  ""
+
+#: LBtools.py:219
+msgid   "Dec."
+msgstr  ""
+
+#: LBtools.py:223
+msgid   "Su"
+msgstr  ""
+
+#: LBtools.py:224
+msgid   "Mo"
+msgstr  ""
+
+#: LBtools.py:225
+msgid   "Tu"
+msgstr  ""
+
+#: LBtools.py:226
+msgid   "We"
+msgstr  ""
+
+#: LBtools.py:227
+msgid   "Th"
+msgstr  ""
+
+#: LBtools.py:228
+msgid   "Fr"
+msgstr  ""
+
+#: LBtools.py:229
+msgid   "Sa"
+msgstr  ""
+
+#: LBtools.py:234 LBtools.py:1808
+msgid   "Min"
+msgstr  ""
+
+#: LBtools.py:235 LBtools.py:1809 LBtools.py:1979
+msgid   "Hour"
+msgstr  ""
+
+#: LBtools.py:236 LBtools.py:1810
+msgid   "Day of month"
+msgstr  ""
+
+#: LBtools.py:237 LBtools.py:1811
+msgid   "Month"
+msgstr  ""
+
+#: LBtools.py:238 LBtools.py:1812
+msgid   "Day of week"
+msgstr  ""
+
+#: LBtools.py:242
+msgid   "Auto"
+msgstr  ""
+
+#: LBtools.py:243 LBtools.py:882 LBtools.py:1497 LBtools.py:1597
+msgid   "Manual"
+msgstr  ""
+
+#: LBtools.py:247
+msgid   "Angola"
+msgstr  ""
+
+#: LBtools.py:248
+msgid   "Madagascar"
+msgstr  ""
+
+#: LBtools.py:249
+msgid   "South Africa"
+msgstr  ""
+
+#: LBtools.py:250
+msgid   "Tanzania"
+msgstr  ""
+
+#: LBtools.py:251
+msgid   "Bangladesh"
+msgstr  ""
+
+#: LBtools.py:252
+msgid   "China"
+msgstr  ""
+
+#: LBtools.py:253
+msgid   "Hong Kong"
+msgstr  ""
+
+#: LBtools.py:254
+msgid   "India"
+msgstr  ""
+
+#: LBtools.py:255
+msgid   "Indonesia"
+msgstr  ""
+
+#: LBtools.py:256
+msgid   "Iran"
+msgstr  ""
+
+#: LBtools.py:257
+msgid   "Japan"
+msgstr  ""
+
+#: LBtools.py:258
+msgid   "Kazakhstan"
+msgstr  ""
+
+#: LBtools.py:259
+msgid   "Korea"
+msgstr  ""
+
+#: LBtools.py:260
+msgid   "Malaysia"
+msgstr  ""
+
+#: LBtools.py:261
+msgid   "Pakistan"
+msgstr  ""
+
+#: LBtools.py:262
+msgid   "Philippines"
+msgstr  ""
+
+#: LBtools.py:263
+msgid   "Singapore"
+msgstr  ""
+
+#: LBtools.py:264
+msgid   "Taiwan"
+msgstr  ""
+
+#: LBtools.py:265
+msgid   "Thailand"
+msgstr  ""
+
+#: LBtools.py:266
+msgid   "Turkey"
+msgstr  ""
+
+#: LBtools.py:267
+msgid   "United Arab Emirates"
+msgstr  ""
+
+#: LBtools.py:268
+msgid   "Uzbekistan"
+msgstr  ""
+
+#: LBtools.py:269
+msgid   "Vietnam"
+msgstr  ""
+
+#: LBtools.py:270
+msgid   "Austria"
+msgstr  ""
+
+#: LBtools.py:271
+msgid   "Belarus"
+msgstr  ""
+
+#: LBtools.py:272
+msgid   "Belgium"
+msgstr  ""
+
+#: LBtools.py:273
+msgid   "Bulgaria"
+msgstr  ""
+
+#: LBtools.py:274
+msgid   "Czech Republic"
+msgstr  ""
+
+#: LBtools.py:275
+msgid   "Denmark"
+msgstr  ""
+
+#: LBtools.py:276
+msgid   "Estonia"
+msgstr  ""
+
+#: LBtools.py:277
+msgid   "Finland"
+msgstr  ""
+
+#: LBtools.py:278
+msgid   "France"
+msgstr  ""
+
+#: LBtools.py:279
+msgid   "Germany"
+msgstr  ""
+
+#: LBtools.py:280
+msgid   "Greece"
+msgstr  ""
+
+#: LBtools.py:281
+msgid   "Hungary"
+msgstr  ""
+
+#: LBtools.py:282
+msgid   "Ireland"
+msgstr  ""
+
+#: LBtools.py:283
+msgid   "Italy"
+msgstr  ""
+
+#: LBtools.py:284
+msgid   "Latvia"
+msgstr  ""
+
+#: LBtools.py:285
+msgid   "Lithuania"
+msgstr  ""
+
+#: LBtools.py:286
+msgid   "Luxembourg"
+msgstr  ""
+
+#: LBtools.py:287
+msgid   "Macedonia"
+msgstr  ""
+
+#: LBtools.py:288
+msgid   "Moldova"
+msgstr  ""
+
+#: LBtools.py:289
+msgid   "Netherlands"
+msgstr  ""
+
+#: LBtools.py:290
+msgid   "Norway"
+msgstr  ""
+
+#: LBtools.py:291
+msgid   "Poland"
+msgstr  ""
+
+#: LBtools.py:292
+msgid   "Portugal"
+msgstr  ""
+
+#: LBtools.py:293
+msgid   "Romania"
+msgstr  ""
+
+#: LBtools.py:294
+msgid   "Russian Federation"
+msgstr  ""
+
+#: LBtools.py:295
+msgid   "Slovakia"
+msgstr  ""
+
+#: LBtools.py:296
+msgid   "Slovenia"
+msgstr  ""
+
+#: LBtools.py:297
+msgid   "Spain"
+msgstr  ""
+
+#: LBtools.py:298
+msgid   "Sweden"
+msgstr  ""
+
+#: LBtools.py:299
+msgid   "Switzerland"
+msgstr  ""
+
+#: LBtools.py:300
+msgid   "Ukraine"
+msgstr  ""
+
+#: LBtools.py:301
+msgid   "United Kingdom"
+msgstr  ""
+
+#: LBtools.py:302
+msgid   "Bahamas"
+msgstr  ""
+
+#: LBtools.py:303
+msgid   "Canada"
+msgstr  ""
+
+#: LBtools.py:304
+msgid   "Guatemala"
+msgstr  ""
+
+#: LBtools.py:305
+msgid   "Mexico"
+msgstr  ""
+
+#: LBtools.py:306
+msgid   "Panama"
+msgstr  ""
+
+#: LBtools.py:307
+msgid   "United States"
+msgstr  ""
+
+#: LBtools.py:308
+msgid   "Australia"
+msgstr  ""
+
+#: LBtools.py:309
+msgid   "New Zealand"
+msgstr  ""
+
+#: LBtools.py:310
+msgid   "Argentina"
+msgstr  ""
+
+#: LBtools.py:311
+msgid   "Brazil"
+msgstr  ""
+
+#: LBtools.py:312
+msgid   "Chile"
+msgstr  ""
+
+#: LBtools.py:319 LBtools.py:335
+msgid   "30 min"
+msgstr  ""
+
+#: LBtools.py:320 LBtools.py:336
+msgid   "60 min"
+msgstr  ""
+
+#: LBtools.py:321 LBtools.py:337
+msgid   "120 min"
+msgstr  ""
+
+#: LBtools.py:322 LBtools.py:338
+msgid   "180 min"
+msgstr  ""
+
+#: LBtools.py:323 LBtools.py:339
+msgid   "240 min"
+msgstr  ""
+
+#: LBtools.py:326 LBtools.py:334
+msgid   "Off"
+msgstr  ""
+
+#: LBtools.py:327
+msgid   "On"
+msgstr  ""
+
+#: LBtools.py:354
+msgid   "Fast"
+msgstr  ""
+
+#: LBtools.py:355
+msgid   "Full"
+msgstr  ""
+
+#: LBtools.py:414
+msgid   "LBpanel - Services"
+msgstr  ""
+
+#: LBtools.py:425
+msgid   "HDD sleep"
+msgstr  ""
+
+#: LBtools.py:440
+msgid   "Tools Crashlog"
+msgstr  ""
+
+#: LBtools.py:440
+msgid   "Manage crashlog files"
+msgstr  ""
+
+#: LBtools.py:441
+msgid   "System Info"
+msgstr  ""
+
+#: LBtools.py:441
+msgid   "System info (free, dh -f)"
+msgstr  ""
+
+#: LBtools.py:442 LBtools.py:443
+msgid   "Download D+ EPG"
+msgstr  ""
+
+#: LBtools.py:443
+msgid   "SAT Down D+ EPG"
+msgstr  ""
+
+#: LBtools.py:444
+msgid   "Scan Peer Security"
+msgstr  ""
+
+#: LBtools.py:444
+msgid   "Check host security"
+msgstr  ""
+
+#: LBtools.py:445
+msgid   "NTP Sync"
+msgstr  ""
+
+#: LBtools.py:445
+msgid   "Ntp sync: 30 min,60 min,120 min, 240"
+msgstr  ""
+
+#: LBtools.py:446
+msgid   "User Scripts"
+msgstr  ""
+
+#: LBtools.py:447 LBtools.py:480
+msgid   "Free Memory"
+msgstr  ""
+
+#: LBtools.py:447
+msgid   "Launcher free memory"
+msgstr  ""
+
+#: LBtools.py:448
+msgid   "Network"
+msgstr  ""
+
+#: LBtools.py:448
+msgid   "Restart network"
+msgstr  ""
+
+#: LBtools.py:460
+msgid   "HDD go sleep"
+msgstr  ""
+
+#: LBtools.py:512 LBtools.py:580
+msgid   "LBpanel - Swap Manager"
+msgstr  ""
+
+#: LBtools.py:533 LBtools.py:535 LBtools.py:537
+#, python-format
+msgid   "Manage Swap on %s"
+msgstr  ""
+
+#: LBtools.py:533 LBtools.py:535 LBtools.py:537
+msgid   "Start, Stop, Create, Remove Swap file"
+msgstr  ""
+
+#: LBtools.py:623
+msgid   "Swap file created"
+msgstr  ""
+
+#: LBtools.py:635
+msgid   "Swap off"
+msgstr  ""
+
+#: LBtools.py:635
+#, python-format
+msgid   "Swap on %s off (%s)"
+msgstr  ""
+
+#: LBtools.py:637
+msgid   "Swap on"
+msgstr  ""
+
+#: LBtools.py:637
+#, python-format
+msgid   "Swap on %s on (%s)"
+msgstr  ""
+
+#: LBtools.py:638
+msgid   "Remove swap"
+msgstr  ""
+
+#: LBtools.py:638
+#, python-format
+msgid   "Remove swap on %s (%s)"
+msgstr  ""
+
+#: LBtools.py:640 LBtools.py:641 LBtools.py:642
+msgid   "Make swap"
+msgstr  ""
+
+#: LBtools.py:640
+#, python-format
+msgid   "Make swap on %s (128MB)"
+msgstr  ""
+
+#: LBtools.py:641
+#, python-format
+msgid   "Make swap on %s (256MB)"
+msgstr  ""
+
+#: LBtools.py:642
+#, python-format
+msgid   "Make swap on %s (512MB)"
+msgstr  ""
+
+#: LBtools.py:658
+msgid   "Swap file started"
+msgstr  ""
+
+#: LBtools.py:663
+msgid   "Swap file stoped"
+msgstr  ""
+
+#: LBtools.py:676
+msgid   "Swap file removed"
+msgstr  ""
+
+#: LBtools.py:709
+msgid   "LBpanel - Unmount manager"
+msgstr  ""
+
+#: LBtools.py:721
+msgid   "UnMount"
+msgstr  ""
+
+#: LBtools.py:722
+msgid   "reFresh"
+msgstr  ""
+
+#: LBtools.py:751
+#, python-format
+msgid   "Unmounted %s"
+msgstr  ""
+
+#: LBtools.py:790
+msgid   "LBpanel - User Script"
+msgstr  ""
+
+#: LBtools.py:793
+msgid   "Config"
+msgstr  ""
+
+#: LBtools.py:832
+msgid   "LBpanel - Config script Executer"
+msgstr  ""
+
+#: LBtools.py:834
+msgid   "Set script path"
+msgstr  ""
+
+#: LBtools.py:877
+msgid   "LBpanel - NTP Sync"
+msgstr  ""
+
+#: LBtools.py:881
+msgid   "Update Now"
+msgstr  ""
+
+#: LBtools.py:895
+msgid   "Sync NTP"
+msgstr  ""
+
+#: LBtools.py:896
+msgid   "Set time of upgrade"
+msgstr  ""
+
+#: LBtools.py:897
+msgid   "Set time of transponder"
+msgstr  ""
+
+#: LBtools.py:898
+msgid   "Sync on boot"
+msgstr  ""
+
+#: LBtools.py:899
+msgid   "Server mode"
+msgstr  ""
+
+#: LBtools.py:900
+msgid   "Select time zone"
+msgstr  ""
+
+#: LBtools.py:901
+msgid   "Select ntp server"
+msgstr  ""
+
+#: LBtools.py:974 LBtools.py:2048 plugin.py:546 plugin.py:605
+msgid   "Configuration is saved"
+msgstr  ""
+
+#: LBtools.py:995
+msgid   "new time not available"
+msgstr  ""
+
+#: LBtools.py:997
+msgid   "bad format"
+msgstr  ""
+
+#: LBtools.py:1015
+#, python-format
+msgid   "bad year %s"
+msgstr  ""
+
+#: LBtools.py:1017
+#, python-format
+msgid   "bad month %s"
+msgstr  ""
+
+#: LBtools.py:1019
+#, python-format
+msgid   "bad day %s"
+msgstr  ""
+
+#: LBtools.py:1021
+#, python-format
+msgid   "bad hour %s"
+msgstr  ""
+
+#: LBtools.py:1023
+#, python-format
+msgid   "bad minute %s"
+msgstr  ""
+
+#: LBtools.py:1026
+msgid   "Apply the new System time?"
+msgstr  ""
+
+#: LBtools.py:1032
+msgid   "not confirmed"
+msgstr  ""
+
+#: LBtools.py:1035
+#, python-format
+msgid   "Change system time was canceled, because %s"
+msgstr  ""
+
+#: LBtools.py:1063
+msgid   "LBpanel - System Utils"
+msgstr  ""
+
+#: LBtools.py:1074
+msgid   "Reset Passwd"
+msgstr  ""
+
+#: LBtools.py:1086
+msgid   "Manager Kernel Modules"
+msgstr  ""
+
+#: LBtools.py:1086
+msgid   "Load & unload Kernel Modules"
+msgstr  ""
+
+#: LBtools.py:1087
+msgid   "Cron Manager"
+msgstr  ""
+
+#: LBtools.py:1088 MountManager.py:46
+msgid   "Mount Manager"
+msgstr  ""
+
+#: LBtools.py:1088
+msgid   "HArd Disc Manager"
+msgstr  ""
+
+#: LBtools.py:1089
+msgid   "Swap Manager"
+msgstr  ""
+
+#: LBtools.py:1089
+msgid   "Start, Stop, Create, Remove Swap Files"
+msgstr  ""
+
+#: LBtools.py:1090
+msgid   "My IP"
+msgstr  ""
+
+#: LBtools.py:1090
+msgid   "Public IP"
+msgstr  ""
+
+#: LBtools.py:1098
+msgid   "Your password has been reset"
+msgstr  ""
+
+#: LBtools.py:1111
+#, python-format
+msgid   "Your public IP is: %s"
+msgstr  ""
+
+#: LBtools.py:1151
+msgid   "LBpanel - Kernel Modules Manager"
+msgstr  ""
+
+#: LBtools.py:1164
+msgid   "Load/UnLoad"
+msgstr  ""
+
+#: LBtools.py:1165
+msgid   "LsMod"
+msgstr  ""
+
+#: LBtools.py:1214
+#, python-format
+msgid   "Loaded %s"
+msgstr  ""
+
+#: LBtools.py:1222
+#, python-format
+msgid   "UnLoaded %s"
+msgstr  ""
+
+#: LBtools.py:1250
+msgid   "LBpanel - List Kernel Drivers in Memory"
+msgstr  ""
+
+#: LBtools.py:1272
+#, python-format
+msgid   "size: %s  %s"
+msgstr  ""
+
+#: LBtools.py:1310
+msgid   "LBpanel - Crashlog files"
+msgstr  ""
+
+#: LBtools.py:1323
+msgid   "Send by email"
+msgstr  ""
+
+#: LBtools.py:1325
+msgid   "Remove All"
+msgstr  ""
+
+#: LBtools.py:1326 LBtools.py:1992
+msgid   "View"
+msgstr  ""
+
+#: LBtools.py:1376
+msgid   "Enigma2 Crashlog"
+msgstr  ""
+
+#: LBtools.py:1377
+#, python-format
+msgid   "Report of crashlog.\n"
+        "LBpanel\n"
+        "\n"
+        "%s"
+msgstr  ""
+
+#: LBtools.py:1380
+#, python-format
+msgid   "Crashlog send by email: %s"
+msgstr  ""
+
+#: LBtools.py:1392
+#, python-format
+msgid   "Removed %s"
+msgstr  ""
+
+#: LBtools.py:1394 LBtools.py:1406
+msgid   "Failed remove"
+msgstr  ""
+
+#: LBtools.py:1404
+msgid   "Removed All Crashlog Files"
+msgstr  ""
+
+#: LBtools.py:1428
+msgid   "LBpanel - View Crashlog file"
+msgstr  ""
+
+#: LBtools.py:1452
+#, python-format
+msgid   "%s.gz created in /tmp"
+msgstr  ""
+
+#: LBtools.py:1485
+msgid   "LBpanel - D+ EPG"
+msgstr  ""
+
+#: LBtools.py:1487 LBtools.py:1587
+msgid   "Select where to save epg.dat"
+msgstr  ""
+
+#: LBtools.py:1488 LBtools.py:1588
+msgid   "Select D+ epg"
+msgstr  ""
+
+#: LBtools.py:1489 LBtools.py:1589
+msgid   "Auto download epg.dat"
+msgstr  ""
+
+#: LBtools.py:1490 LBtools.py:1590
+msgid   "Auto download hour"
+msgstr  ""
+
+#: LBtools.py:1491 LBtools.py:1591
+msgid   "Auto load and save EPG"
+msgstr  ""
+
+#: LBtools.py:1492 LBtools.py:1592
+msgid   "Save copy in ../epgtmp.gz"
+msgstr  ""
+
+#: LBtools.py:1496 LBtools.py:1596
+msgid   "EPG Download"
+msgstr  ""
+
+#: LBtools.py:1519 LBtools.py:1565 plugin.py:739
+msgid   "EPG downloaded"
+msgstr  ""
+
+#: LBtools.py:1523
+msgid   "Sorry, the EPG download error"
+msgstr  ""
+
+#: LBtools.py:1585
+msgid   "LBpanel - D+ SAT EPG"
+msgstr  ""
+
+#: LBtools.py:1660
+msgid   "LBpanel - EPG D+"
+msgstr  ""
+
+#: LBtools.py:1662
+msgid   "Save epg.dat"
+msgstr  ""
+
+#: LBtools.py:1663
+msgid   "Restore epg.dat"
+msgstr  ""
+
+#: LBtools.py:1664
+msgid   "Reload epg.dat"
+msgstr  ""
+
+#: LBtools.py:1682
+msgid   "epg.dat reloaded"
+msgstr  ""
+
+#: LBtools.py:1684
+msgid   "reload epg.dat failed"
+msgstr  ""
+
+#: LBtools.py:1689
+msgid   "epg.dat saved"
+msgstr  ""
+
+#: LBtools.py:1694
+msgid   "epg.dat restored"
+msgstr  ""
+
+#: LBtools.py:1724
+msgid   "LBpanel - Cron Manager"
+msgstr  ""
+
+#: LBtools.py:1736
+msgid   "Add tabs"
+msgstr  ""
+
+#: LBtools.py:1737
+msgid   "Remove tabs"
+msgstr  ""
+
+#: LBtools.py:1806
+msgid   "LBpanel - Add tabs"
+msgstr  ""
+
+#: LBtools.py:1813
+msgid   "Command"
+msgstr  ""
+
+#: LBtools.py:1814
+msgid   "Every"
+msgstr  ""
+
+#: LBtools.py:1887
+msgid   "LBpanel - System Info"
+msgstr  ""
+
+#: LBtools.py:1976
+msgid   "LBpanel - Check Host"
+msgstr  ""
+
+#: LBtools.py:1978
+msgid   "Auto Daily Test"
+msgstr  ""
+
+#: LBtools.py:1980
+msgid   "Disable Faulty Lines?"
+msgstr  ""
+
+#: LBtools.py:1981
+msgid   "Scan type"
+msgstr  ""
+
+#: LBtools.py:1982
+msgid   "Auto scan localhost"
+msgstr  ""
+
+#: LBtools.py:1984
+msgid   "Send email only in danger lines?"
+msgstr  ""
+
+#: LBtools.py:1993
+msgid   "Run"
+msgstr  ""
+
+#: LBtools.py:2003
+msgid   "Configure and press blue key to check"
+msgstr  ""
+
+#: LBtools.py:2012 LBtools.py:2023
+msgid   "Sorry, I can not find lbscan.py"
+msgstr  ""
+
+#: LBtools.py:2017
+msgid   "Scan peer"
+msgstr  ""
+
+#: LBtools.py:2028
+msgid   "Sorry, I can not find scan data, scan first"
+msgstr  ""
+
+#: LBtools.py:2051
+msgid   "Scaning hosts, please wait"
+msgstr  ""
+
+#: LBtools.py:2066
+msgid   "LBpanel - Scan Results"
+msgstr  ""
+
+#: LBtools.py:2106
+msgid   "Mail is not send. Curl is not installed, please install curl"
+msgstr  ""
+
+#: MountManager.py:48
+msgid   "Setup Mounts"
+msgstr  ""
+
+#: MountManager.py:74
+msgid   "Use as HDD"
+msgstr  ""
+
+#: MountManager.py:93
+msgid   "Wait please while scanning for devices..."
+msgstr  ""
+
+#: MountManager.py:147 MountManager.py:385
+msgid   "HARD DISK: "
+msgstr  ""
+
+#: MountManager.py:172 MountManager.py:174 MountManager.py:178
+#: MountManager.py:180 MountManager.py:397
+msgid   "None"
+msgstr  ""
+
+#: MountManager.py:188 MountManager.py:190 MountManager.py:192
+#: MountManager.py:201 MountManager.py:203 MountManager.py:205
+#: MountManager.py:406 MountManager.py:408 MountManager.py:410
+#: MountManager.py:419 MountManager.py:421 MountManager.py:423
+msgid   "Size: "
+msgstr  ""
+
+#: MountManager.py:188 MountManager.py:201 MountManager.py:406
+#: MountManager.py:419
+msgid   "TB"
+msgstr  ""
+
+#: MountManager.py:190 MountManager.py:203 MountManager.py:408
+#: MountManager.py:421
+msgid   "GB"
+msgstr  ""
+
+#: MountManager.py:192 MountManager.py:205 MountManager.py:410
+#: MountManager.py:423
+msgid   "MB"
+msgstr  ""
+
+#: MountManager.py:214 MountManager.py:228 MountManager.py:246
+msgid   "Mount: "
+msgstr  ""
+
+#: MountManager.py:214 MountManager.py:229 MountManager.py:247
+msgid   "Device: "
+msgstr  ""
+
+#: MountManager.py:214
+msgid   "Type: "
+msgstr  ""
+
+#: MountManager.py:237
+msgid   "Mount failed"
+msgstr  ""
+
+#: MountManager.py:258
+msgid   "Can't unmount partiton, make sure it is not being used for swap or "
+        "record/timeshift paths"
+msgstr  ""
+
+#: MountManager.py:272
+msgid   "This Device is already mounted as HDD."
+msgstr  ""
+
+#: MountManager.py:317
+msgid   "Choose where to mount your devices to:"
+msgstr  ""
+
+#: MountManager.py:319
+msgid   "Cancel"
+msgstr  ""
+
+#: MountManager.py:320
+msgid   "Wait please while scanning your STB_BOX devices..."
+msgstr  ""
+
+#: MountManager.py:452
+msgid   "Updating mount locations."
+msgstr  ""
+
+#: MountManager.py:454
+msgid   "Please wait."
+msgstr  ""
+
+#: MountManager.py:457
+msgid   "Changes need a system restart to take effect.\n"
+        "Restart your STB_BOX now?"
+msgstr  ""
+
+#: MountManager.py:459
+msgid   "Restart STB_BOX."
+msgstr  ""
+
+#: plugin.py:188 plugin.py:798
+msgid   "LBpanel - Red Bee"
+msgstr  ""
+
+#: plugin.py:202
+#, python-format
+msgid   "Version: %s"
+msgstr  ""
+
+#: plugin.py:204
+msgid   "CamEmu"
+msgstr  ""
+
+#: plugin.py:205
+msgid   "LBTools"
+msgstr  ""
+
+#: plugin.py:227
+msgid   "SoftEmus"
+msgstr  ""
+
+#: plugin.py:227
+msgid   "CamEmu start-stop, Test Emu Control, Info Emus"
+msgstr  ""
+
+#: plugin.py:228
+msgid   "Services "
+msgstr  ""
+
+#: plugin.py:228
+msgid   "Epg,Ntp,scripts,info ..."
+msgstr  ""
+
+#: plugin.py:229
+msgid   "System"
+msgstr  ""
+
+#: plugin.py:229
+msgid   "Kernel modules,swap,ftp,samba,crond,usb"
+msgstr  ""
+
+#: plugin.py:231
+msgid   "Package install"
+msgstr  ""
+
+#: plugin.py:231
+msgid   "Install /uninstall ipk,tar.gz en /tmp"
+msgstr  ""
+
+#: plugin.py:232
+msgid   "Settings"
+msgstr  ""
+
+#: plugin.py:232
+msgid   "Settings of LBpanel"
+msgstr  ""
+
+#: plugin.py:233
+msgid   "Add-ons"
+msgstr  ""
+
+#: plugin.py:233
+msgid   "Plugins"
+msgstr  ""
+
+#: plugin.py:325
+msgid   "Linux Box Panel Red Bee Edition"
+msgstr  ""
+
+#: plugin.py:329 plugin.py:773 plugin.py:800
+msgid   "LBpanel"
+msgstr  ""
+
+#: plugin.py:338
+msgid   "Memory:"
+msgstr  ""
+
+#: plugin.py:339
+msgid   "Swap:"
+msgstr  ""
+
+#: plugin.py:340
+msgid   "Flash:"
+msgstr  ""
+
+#: plugin.py:345
+msgid   "Devices:"
+msgstr  ""
+
+#: plugin.py:352
+msgid   "Hardware:"
+msgstr  ""
+
+#: plugin.py:353
+msgid   "Image:"
+msgstr  ""
+
+#: plugin.py:354
+msgid   "Kernel Version:"
+msgstr  ""
+
+#: plugin.py:355
+msgid   "Last Upgrade:"
+msgstr  ""
+
+#: plugin.py:357
+msgid   "Driver Version:"
+msgstr  ""
+
+#: plugin.py:358
+msgid   "LBpanel Ver: 1.1"
+msgstr  ""
+
+#: plugin.py:360
+msgid   "Softcam:"
+msgstr  ""
+
+#: plugin.py:362
+msgid   "Cardserver:"
+msgstr  ""
+
+#: plugin.py:389 plugin.py:399
+msgid   "Not Active"
+msgstr  ""
+
+#: plugin.py:391 plugin.py:401
+msgid   "Not Installed"
+msgstr  ""
+
+#: plugin.py:411
+#, python-format
+msgid   "%s  %s  (%d.%03d GB free)\n"
+msgstr  ""
+
+#: plugin.py:413
+#, python-format
+msgid   "%s  %s  (%03d MB free)\n"
+msgstr  ""
+
+#: plugin.py:454 plugin.py:455 plugin.py:463
+#, python-format
+msgid   "Total: %s Kb  Free: %s Kb"
+msgstr  ""
+
+#: plugin.py:497
+msgid   "LBpanel Menu/Extension Menu Config"
+msgstr  ""
+
+#: plugin.py:501
+msgid   "LBpanel Menu/Extensionmenu config"
+msgstr  ""
+
+#: plugin.py:503
+msgid   "Show LBPanel in Main Menu"
+msgstr  ""
+
+#: plugin.py:504
+msgid   "Show LBPanel in Extension Menu"
+msgstr  ""
+
+#: plugin.py:505
+msgid   "Show CamEmu Manager in Extension Menu"
+msgstr  ""
+
+#: plugin.py:506
+msgid   "Show LB-NewCamd.list switcher in Extension Menu"
+msgstr  ""
+
+#: plugin.py:507
+msgid   "Show LB-Wicardd.conf switcher in Extension Menu"
+msgstr  ""
+
+#: plugin.py:508
+msgid   "Show LB-CrashLog viewr in ExtensionMenu"
+msgstr  ""
+
+#: plugin.py:509
+msgid   "Show LB-Script Executter in Extension Menu"
+msgstr  ""
+
+#: plugin.py:510
+msgid   "Show LB-Usb Unmount in Extension Menu"
+msgstr  ""
+
+#: plugin.py:511
+msgid   "Show LB-Installer in Extension Menu"
+msgstr  ""
+
+#: plugin.py:512
+msgid   "Show PluginBrowser in LBPanel Main Menu"
+msgstr  ""
+
+#: plugin.py:513
+msgid   "Filter by Name in download extentions"
+msgstr  ""
+
+#: plugin.py:564
+msgid   "LBpanel - Configuration"
+msgstr  ""
+
+#: plugin.py:566
+msgid   "Auto Update LBpanel"
+msgstr  ""
+
+#: plugin.py:567
+msgid   "Auto Update Settings"
+msgstr  ""
+
+#: plugin.py:568
+msgid   "Send email on report by local to user?"
+msgstr  ""
+
+#: plugin.py:569
+msgid   "Send email on report by proxy to user?"
+msgstr  ""
+
+#: plugin.py:570
+msgid   "Send errors/reports to: (email)"
+msgstr  ""
+
+#: plugin.py:571
+msgid   "Smtp server"
+msgstr  ""
+
+#: plugin.py:572
+msgid   "Smtp user"
+msgstr  ""
+
+#: plugin.py:573
+msgid   "Smtp password"
+msgstr  ""
+
+#: plugin.py:574
+msgid   "Smtp protocol"
+msgstr  ""
+
+#: plugin.py:575
+msgid   "Enable Softcam check?"
+msgstr  ""
+
+#: plugin.py:637
+msgid   "LBpanel has been updated, restart Enigma2 to activate your changes."
+msgstr  ""
+
+#: plugin.py:642
+msgid   "LBpanel settings has been updated, restart Enigma2 to activate your "
+        "changes."
+msgstr  ""
+
+#: plugin.py:697
+msgid   "Softcam error"
+msgstr  ""
+
+#: plugin.py:698
+#, python-format
+msgid   "The cam %s appears to malfunction.\n"
+        "Service has been restarted.\n"
+        "LBpanel\n"
+msgstr  ""
+
+#: plugin.py:712
+msgid   "Email send error:\n"
+        "Your system not support send local email\n"
+        "Please select proxy option to send email"
+msgstr  ""
+
+#: plugin.py:757
+msgid   "Sorry, EPG download error"
+msgstr  ""
+
+#: plugin.py:773
+msgid   "Linux_Box_Panel"
+msgstr  ""
+
+#: plugin.py:798
+msgid   "Linux-Box Panel by LBTEAM"
+msgstr  ""
+
+#: plugin.py:800
+msgid   "Linux-Box Panel"
+msgstr  ""
+
+#: plugin.py:802
+msgid   "CamEmu Manager"
+msgstr  ""
+
+#: plugin.py:802
+msgid   "Start, Stop, Restart Sofcam/Cardserver"
+msgstr  ""
+
+#: plugin.py:804
+msgid   "LB-Newcamd.list switcher"
+msgstr  ""
+
+#: plugin.py:804 plugin.py:808
+msgid   "Switch newcamd.list with remote conrol"
+msgstr  ""
+
+#: plugin.py:806
+msgid   "LB-Wicardd.conf switcher"
+msgstr  ""
+
+#: plugin.py:806
+msgid   "Switch wicardd.conf with remote conrol"
+msgstr  ""
+
+#: plugin.py:808
+msgid   "LB-Crashlog viewer"
+msgstr  ""
+
+#: plugin.py:810
+msgid   "LB-Script Executer"
+msgstr  ""
+
+#: plugin.py:810
+msgid   "Start scripts from /usr/script"
+msgstr  ""
+
+#: plugin.py:812
+msgid   "LB-Unmount USB"
+msgstr  ""
+
+#: plugin.py:812
+msgid   "Unmount usb devices"
+msgstr  ""
+
+#: plugin.py:814
+msgid   "LB-Installer"
+msgstr  ""
+
+#: plugin.py:814
+msgid   "install & forced install ipk, bh.tgz, tar.gz, nab.tgz from /tmp"
+msgstr  ""
+
+#: plugin.py:816 plugin.py:817
+msgid   "LBPanel"
+msgstr  ""
+
+#: plugin.py:816 plugin.py:817
+msgid   "LBTeam Panel Plugin"
+msgstr  ""
+
+#: RestartNetwork.py:14
+msgid   "Please wait while your network is restarting..."
+msgstr  ""
+
+#: RestartNetwork.py:19
+msgid   "LBpanel - Restart Network Adapter"
+msgstr  ""
