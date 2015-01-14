@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: lbpanel 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-10-30 21:26+0100\n"
-"PO-Revision-Date: 2014-11-19 18:19+0100\n"
+"PO-Revision-Date: 2014-12-17 21:57+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1055,7 +1055,7 @@ msgstr "Scripts de usuario"
 
 #: LBtools.py:432
 msgid "Free Memory"
-msgstr "Memoia libre"
+msgstr "Memoria libre"
 
 #: LBtools.py:432
 msgid "Launcher free memory"
