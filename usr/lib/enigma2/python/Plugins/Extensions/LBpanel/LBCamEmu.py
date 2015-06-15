@@ -77,7 +77,7 @@ def _(txt):
 ####################################################################
 config.plugins.lbpanel.activeserver = ConfigText(default = "NotSelected")
 config.plugins.lbpanel.activeconf = ConfigText(default = "NotSelected")
-config.plugins.lbpanel.activeemu = ConfigText(default = "NotSelected")
+config.plugins.lbpanel.activeemu = ConfigText(default = "No EMU activada")
 ####################################################################
 config.plugins.lbpanel.serveredit = ConfigText(default="xxx.xxx.xxx.xxx", visible_width = 200, fixed_size = False)
 config.plugins.lbpanel.port = ConfigText(default="00000", visible_width = 200, fixed_size = False)
@@ -290,7 +290,7 @@ size="628,350">
 		emutype = self["menu"].getCurrent()[3]
 		os.system("/usr/CamEmu/%s stop" % config.plugins.lbpanel.activeemu.value)
 		self.mbox = self.session.open(MessageBox, _("Please wait, stoping softcam or cardserver"), MessageBox.TYPE_INFO, timeout = 4 )
-		config.plugins.lbpanel.activeemu.value = "NotSelected"
+		config.plugins.lbpanel.activeemu.value = "No EMU activada"
 		config.plugins.lbpanel.activeemu.save()
 		self.setTitle(_("Select SoftCam or CardServer: - %s") % config.plugins.lbpanel.activeemu.value)
 		self.indexpos = self["menu"].getIndex()
