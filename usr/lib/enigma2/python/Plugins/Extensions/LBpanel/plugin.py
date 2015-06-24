@@ -115,7 +115,7 @@ config.plugins.lbpanel.lbemailproto =ConfigSelection(default = "tls", choices = 
 		("ssl", "ssl"),
 		])                                                                
 config.plugins.lbpanel.testcam = ConfigYesNo(default = False)
-config.plugins.lbpanel.activeemu = ConfigText(default = "NotSelected")
+config.plugins.lbpanel.activeemu = ConfigText(default = "No EMU Selecionada")
 ##################################################################
 
 # Check if feed is active
