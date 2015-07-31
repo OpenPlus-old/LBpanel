@@ -106,7 +106,7 @@ print "-" * 66
 # Passwords
 passwd = []
 try:
-         with io.open('/usr/lib/enigma2/python/Plugins/SystemPlugins/LBpanel/lbpanel.passwd', 'rb') as fp:
+         with io.open('/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/lbpanel.passwd', 'rb') as fp:
                 print "Reading password file"
                 for line in fp:
                         passwd.append(line)
