@@ -106,7 +106,7 @@ print "-" * 66
 # Passwords
 passwd = []
 try:
-         with io.open('/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/lbpanel.passwd', 'rb') as fp:
+         with io.open('/usr/lib/enigma2/python/Plugins/SystemPlugins/LBpanel/lbpanel.passwd', 'rb') as fp:
                 print "Reading password file"
                 for line in fp:
                         passwd.append(line)
@@ -141,7 +141,7 @@ if sys.argv[2]=="yes":
                 
 # Load oscam settings        
 try:
-        with io.open('/var/keys/oscam.server', 'r', encoding='utf_8_sig') as fp:
+        with io.open('/var/tuxbox/config/oscam.server', 'r', encoding='utf_8_sig') as fp:
                 print "Procesing: oscam.server"
                 for line in fp:
                         line = line.lstrip()
@@ -158,7 +158,7 @@ except:
         print "*Notice*: oscam.server not found!"
 
 try:
-        with io.open('/var/keys/oscam.user', 'r', encoding='utf_8_sig') as fp:
+        with io.open('/var/tuxbox/config/oscam.user', 'r', encoding='utf_8_sig') as fp:
                 print "Procesing: oscam.user"
                 for line in fp:
                         line = line.lstrip()
@@ -351,7 +351,7 @@ for remoteServer in array:
                                         print "        Checking ssh passwords -|",
                                         for login in passwd:
                                                 try:
-                                                        if (os.system('/usr/lib/enigma2/python/Plugins/Extensions/LBpanel/sshpass -p "' + login.rstrip('\n') + '" ssh -y root@' + remoteServerIP + ' exit > /dev/null 2>&1')) == 0:
+                                                        if (os.system('/usr/bin/sshpass -p "' + login.rstrip('\n') + '" ssh -y root@' + remoteServerIP + ' exit > /dev/null 2>&1')) == 0:
                                                                 print "SSH PORT INSECURE PASSWORD - SECURITY WARNING!!!",
                                                                 log.write(remoteServer + ": SSH PORT INSECURE PASSWORD - SECURITY WARNING!!!\n")
                                                                 insecure.append(remoteServer)
@@ -416,8 +416,8 @@ email = 0
 if (len(insecure) > 0 and line_disable == 1):
         print "Check Config files for insecure lines"
         if os.path.isfile("/etc/CCcam.cfg"): disable_line("/etc/CCcam.cfg")
-        if os.path.isfile("/var/keys/oscam.server"): disable_line("/var/keys/oscam.server")
-        if os.path.isfile("/var/keys/oscam.user"): disable_line("/var/keys/oscam.user")
+        if os.path.isfile("/var/tuxbox/config/oscam.server"): disable_line("/var/tuxbox/config/oscam.server")
+        if os.path.isfile("/var/tuxbox/config/oscam.user"): disable_line("/var/tuxbox/config/oscam.user")
         if os.path.isfile("/var/keys/newcamd.list"): disable_line("/var/keys/newcamd.list")
         if os.path.isfile("/var/keys/ccamd.list"): disable_line("/var/keys/ccamd.list")
         if os.path.isfile("/var/keys/users.sbox"): disable_line("/var/keys/users.sbox")
